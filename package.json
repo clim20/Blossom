@@ -1,0 +1,27 @@
+{
+  "name": "training1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node index",
+    "start": "node index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/schema": "^8.2.0",
+    "apollo-server": "^2.5.0",
+    "apollo-server-express": "^3.3.0",
+    "bcryptjs": "^2.4.3",
+    "google-auth-library": "^7.10.0",
+    "graphql": "^15.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.8",
+    "npx": "^10.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
+  }
+}
