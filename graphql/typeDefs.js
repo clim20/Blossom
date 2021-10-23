@@ -10,17 +10,11 @@ module.exports = gql`
         createdAt: String!
     }
 
-    input RegisterInput {
-        username: String!
-        email: String!
-    }
-
     type Query {
         findUserById(id: ID!): User!
     }
 
     type Mutation {
-        register(registerInput: RegisterInput): User!
         login(username: String!, email: String!): User!
         updateScore(id: ID!, score: Int!): User!
     }
