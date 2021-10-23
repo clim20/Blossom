@@ -11,6 +11,7 @@ module.exports = gql`
     }
 
     type Query {
+        getUsers: [User]
         findUserById(id: ID!): User!
     }
 
