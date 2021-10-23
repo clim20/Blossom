@@ -1,8 +1,6 @@
 const ObjectId = require('mongoose').Types.ObjectId;
 const jwt = require('jsonwebtoken');
-const { UserInputError } = require('apollo-server');
 
-const { validateRegisterInput, validateLoginInput } = require('../../util/validators');
 const { SECRET_KEY } = require('../../config');
 const User = require('../../models/User');
 
@@ -17,6 +15,11 @@ function generateToken(user) {
 
 module.exports = {
   Query: {
+    async getUsers() {
+      const users = await User.find().sort({ createdAt: -1 });
+      if (users) return users;
+      return [];
+    },
     async findUserById(_, { id }) {
       const user = await User.findById(new ObjectId(id));
 

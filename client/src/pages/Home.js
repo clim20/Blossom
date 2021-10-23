@@ -2,10 +2,15 @@ import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { AuthContext } from '../context/auth';
-import { FIND_USER_BY_ID } from '../cache/queries';
+import * as queries from '../cache/queries';
 import { UPDATE_SCORE } from '../cache/mutations';
 
 function Home() {
+    var users = [];
+
+    const { data: usersData } = useQuery(queries.FETCH_USERS);
+	if(usersData) { users = usersData.getUsers; }
+
 	const questions = [
 		{
 			questionText: 'What is the capital of France?',
@@ -47,7 +52,7 @@ function Home() {
 
     const { user } = useContext(AuthContext);
     const id = user? user.id : '';
-    const { data } = useQuery(FIND_USER_BY_ID, {
+    const { data } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
             id: id
         }
