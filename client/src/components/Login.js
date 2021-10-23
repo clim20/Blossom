@@ -32,7 +32,7 @@ function Login() {
         alert(`Logged in as ${res.profileObj.name}`);
         const user = res.profileObj;
         setValues({
-            username: user.name,
+            username: user.email,
             email: user.email
         });
         loginUserCallback();

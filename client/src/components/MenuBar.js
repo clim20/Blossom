@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../context/auth';
 import Login from './Login';
-import Register from './Register';
 import Logout from './Logout';
 
 const MenuBar = () => {
@@ -21,8 +20,9 @@ const MenuBar = () => {
                 name={user.username}
                 active
                 as={Link}
-                to='/'
-            />
+                to='/'>
+                    {user.username}
+            </Menu.Item>
             <Menu.Menu position='right'>
                 <Logout/>
             </Menu.Menu>
@@ -38,7 +38,6 @@ const MenuBar = () => {
             />
             <Menu.Menu position='right'>
                 <Login/>
-                <Register/>
             </Menu.Menu>
         </Menu>
     );
