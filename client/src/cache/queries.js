@@ -6,7 +6,14 @@ export const FETCH_USERS = gql`
             id
             username
             email
-            scores
+            profileId
+            quests {
+                questId
+                isCompleted
+                image {
+                    id
+                }
+            }
             createdAt
         }
     }
@@ -18,7 +25,14 @@ export const FIND_USER_BY_ID = gql`
             id
             username
             email
-            scores
+            profileId
+            quests {
+                questId
+                isCompleted
+                image {
+                    id
+                }
+            }
             createdAt
         }
     }

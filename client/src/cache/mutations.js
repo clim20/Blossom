@@ -6,7 +6,14 @@ export const LOGIN_USER = gql`
             id
             username
             email
-            scores
+            profileId
+            quests {
+                questId
+                isCompleted
+                image {
+                    id
+                }
+            }
             createdAt
             token
         }
