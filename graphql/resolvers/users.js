@@ -34,9 +34,11 @@ module.exports = {
       // If user not found, register user
       if (!user) {
         const newUser = new User({
+          id: new ObjectId(),
           email,
           username,
-          score: [],
+          profileId: new ObjectId(),
+          quests: [],
           createdAt: new Date().toISOString()
         });
 
