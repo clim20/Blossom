@@ -36,15 +36,6 @@ const MenuBar = () => {
                 as={Link}
                 to='/'
             />
-            <Menu.Menu position='left'>
-                <Menu.Item
-                    name='profile'
-                    active={activeItem === 'profile'}
-                    onClick={handleItemClick}
-                    as={Link}
-                    to='/profile/:profileId'
-                />
-            </Menu.Menu>
             <Menu.Menu position='right'>
                 <Login/>
             </Menu.Menu>
