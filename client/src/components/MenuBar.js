@@ -9,7 +9,7 @@ import Logout from './Logout';
 const MenuBar = () => {
     const { user } = useContext(AuthContext);
     const pathname = window.location.pathname;
-    const path = pathname === '/' ? 'home' : pathname.substr(1)
+    const path = pathname === '/' ? 'home' : pathname.substr(1);
     const [activeItem, setActiveItem] = useState(path);
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
@@ -18,11 +18,21 @@ const MenuBar = () => {
         <Menu pointing secondary size="massive" color="teal">
             <Menu.Item
                 name={user.username}
-                active
+                active={activeItem === 'home'}
+                onClick={() => setActiveItem('home')}
                 as={Link}
                 to='/'>
                     {user.username}
             </Menu.Item>
+            <Menu.Menu position='left'>
+                <Menu.Item
+                    name='profile'
+                    active={activeItem === 'profile'}
+                    onClick={handleItemClick}
+                    as={Link}
+                    to={'/profile/' + user.profileId}
+                />
+            </Menu.Menu>
             <Menu.Menu position='right'>
                 <Logout/>
             </Menu.Menu>
@@ -36,15 +46,6 @@ const MenuBar = () => {
                 as={Link}
                 to='/'
             />
-            <Menu.Menu position='left'>
-                <Menu.Item
-                    name='profile'
-                    active={activeItem === 'profile'}
-                    onClick={handleItemClick}
-                    as={Link}
-                    to='/profile/:profileId'
-                />
-            </Menu.Menu>
             <Menu.Menu position='right'>
                 <Login/>
             </Menu.Menu>

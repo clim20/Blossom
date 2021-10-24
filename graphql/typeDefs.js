@@ -3,10 +3,10 @@ const { gql } = require('apollo-server');
 module.exports = gql`
     # TODO: add ! back to profileId and id!
     type User {
-        id: ID
+        id: ID!
         username: String!
         email: String!
-        profileId: String
+        profileId: String!
         quests: [Quest]
         token: String!
         createdAt: String!
@@ -20,7 +20,7 @@ module.exports = gql`
 
     type Profile {
         id: ID!
-        user: User
+        user: User!
         profileImg: Image
         bannerImg: Image
         badges: [Badge]
@@ -112,8 +112,10 @@ module.exports = gql`
     }
 
     type Query {
-        getUsers: [User]
+        getPopularUsers: [User!]!
         findUserById(id: ID!): User!
+        getProfiles: [Profile!]!
+        findProfileById(id: ID!): Profile!
     }
 
     type Mutation {

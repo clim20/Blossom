@@ -3,20 +3,30 @@ const jwt = require('jsonwebtoken');
 
 const { SECRET_KEY } = require('../../config');
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 function generateToken(user) {
   return jwt.sign({
     id: user.id,
     email: user.email,
     username: user.username,
-    score: user.score
+    profileId: user.profileId,
+    quests: user.quests,
   }, SECRET_KEY, { expiresIn: '1h' })
 }
 
 module.exports = {
   Query: {
-    async getUsers() {
-      const users = await User.find().sort({ createdAt: -1 });
+    async getPopularUsers() {
+      const profiles = await Profile.find().sort({ followerCount: -1 });
+
+      var users = [];
+      for(let i = 0; i < 5; i++) {
+        if (profiles[i]) {
+          users.push(profiles[i].user);
+        }
+      }
+
       if (users) return users;
       return [];
     },
@@ -33,15 +43,33 @@ module.exports = {
 
       // If user not found, register user
       if (!user) {
+        const profileId = new ObjectId();
         const newUser = new User({
           id: new ObjectId(),
           email,
           username,
-          profileId: new ObjectId(),
+          profileId: profileId,
           quests: [],
           createdAt: new Date().toISOString()
         });
 
+        const newProfile = new Profile({
+          id: profileId,
+          user: newUser,
+          profileImg: {},
+          bannerImg: {},
+          badges: [],
+          description: "",
+          contact: "",
+          followerCount: 0,
+          usersFollowing: [],
+          platformsFollowing: [],
+          quizzes: [],
+          collections: [],
+          platforms: []
+        });
+
+        await newProfile.save();
         const res = await newUser.save();
 
         // Create an auth token
@@ -54,6 +82,7 @@ module.exports = {
         }
       }
 
+      // Create an auth token
       const token = generateToken(user);
 
       return {

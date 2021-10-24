@@ -1,6 +1,6 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Collection = require('./Collection');
-const Image = require('./Image');
+const Collection = require('./Collection').schema;
+const Image = require('./Image').schema;
 const Quiz = require('./Quiz').schema;
 const User = require('./User').schema;
 
