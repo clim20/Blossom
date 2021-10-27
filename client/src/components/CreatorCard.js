@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
-import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 
 function CreatorCard(props) {
     const history = useHistory();
-    const { user } = useContext(AuthContext);
 
     const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
@@ -16,8 +14,10 @@ function CreatorCard(props) {
     });
 
     var profile = {};
+    var followerCount = 0;
     if (data) { 
 		profile = data.findProfileById;
+        followerCount = profile.followerCount;
     }
 
     const handleClick = () => {
@@ -25,16 +25,16 @@ function CreatorCard(props) {
     }
 
     return (
-        <div className="item" style={{ textAlign: "center" }} onClick={handleClick}>
-            <img className="creator-circle ui avatar image"
-                style={{ width: "8rem", height: "8rem" }}
+        <div className="item text-align-center cursor-pointer" onClick={handleClick}>
+            <img className="card-image creator-circle ui avatar image"
                 src="https://image.pngaaa.com/477/46477-middle.png"
+                alt="creator profile"
             />
             <br/>
             <br/>
-            <a className="header">{props.user.username}</a>
+            <div className="header">{props.user.username}</div>
             <br/>
-            <a className="header">{profile.followerCount} followers</a>
+            <div className="header">{followerCount} followers</div>
         </div>    
     );
 }

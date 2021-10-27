@@ -11,7 +11,7 @@ module.exports = {
         return [];
     },
     async findProfileById(_, { id }) {
-        const profile = await Profile.find({id});
+        const profile = await Profile.findOne({id});
         
         if (profile) return profile;
         return {};
