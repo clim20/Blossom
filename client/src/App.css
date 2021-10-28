@@ -104,6 +104,10 @@ button svg {
   margin-right: 5px;
 }
 
+.display-inline-block {
+  display: inline-block;
+}
+
 .text-align-center {
   text-align: center;
 }
@@ -113,26 +117,70 @@ button svg {
 }
 
 .card-image {
-  width: 8rem !important;
-  height: 8rem !important;
+  width: 9rem !important;
+  height: 9rem !important;
 }
 
 .creator-circle {
-  background-color: #fff;
   border: 3px solid #c883ff;
-  border-radius: 100%;
-  -moz-border-radius: 100%;
-  -webkit-border-radius: 100%;    
-  height: 100px;
-  width: 100px;
 }
 
 .platform-circle {
-  background-color: #fff;
   border: 3px solid #c5ffbb;    
-  border-radius: 100%;
-  -moz-border-radius: 100%;
-  -webkit-border-radius: 100%;    
-  height: 100px;
-  width: 100px;
+}
+
+.banner-header {
+  position: relative;
+  height: 20rem;
+  text-align: left;
+}
+
+.banner-info {
+  position: absolute;
+  left: 5rem;
+  bottom: -6rem;
+}
+
+.banner-text {
+  position: absolute;
+  left: 11rem;
+  bottom: 1rem;
+  display: inline-block;
+}
+
+.profile-section {
+  position: relative;
+  top: 7rem;
+}
+
+.active-tab {
+  background: #fed3db !important;
+}
+
+.inactive-tab {
+  background: #e2e2e2 !important;
+  margin-bottom: -1px;
+  box-shadow: none;
+  border-radius: .28571429rem .28571429rem 0 0!important;
+}
+
+.profile-tab {
+  width: 14.29%;
+  justify-content: center;
+  border-bottom: 1px solid transparent !important;
+  border-color: black !important;
+}
+
+.profile-content {
+  border-bottom: 1px solid transparent !important;
+  border-color: black !important;
+}
+
+.follow-button {
+  position: absolute;
+  right: 5rem;
+  bottom: -4.6rem;
+  width: 10%;
+  height: 3rem;
+  background-color: #fed3db !important;
 }

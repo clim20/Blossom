@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
-function Update() {
+import MenuBar from '../components/MenuBar';
+
+const Update = () => {
 
     return (
         <div>

@@ -24,7 +24,6 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Container>
-          <MenuBar/>
           <Route exact path='/' component={Home}/>
           <Route exact path="/search" component={Search}/>
           <Route exact path="/profile/:profileId" component={Profile}/>

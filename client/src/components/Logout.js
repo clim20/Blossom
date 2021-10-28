@@ -4,7 +4,7 @@ import { Menu } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
 
-function Logout() {
+const Logout = () => {
     const clientId = '509289158854-coj9gmcounfv962huma48rn4c6cgg278.apps.googleusercontent.com';
     
     const { user, logout } = useContext(AuthContext);

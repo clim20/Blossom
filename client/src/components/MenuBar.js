@@ -9,7 +9,8 @@ import Logout from './Logout';
 const MenuBar = () => {
     const { user } = useContext(AuthContext);
     const pathname = window.location.pathname;
-    const path = pathname === '/' ? 'home' : pathname.substr(1);
+    const path = pathname === '/' ? 'home' : pathname.split('/')[1];
+    const profileId = pathname.split('/')[2];
     const [activeItem, setActiveItem] = useState(path);
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
@@ -27,7 +28,7 @@ const MenuBar = () => {
             <Menu.Menu position='left'>
                 <Menu.Item
                     name='profile'
-                    active={activeItem === 'profile'}
+                    active={activeItem === 'profile' && profileId === user.profileId}
                     onClick={handleItemClick}
                     as={Link}
                     to={'/profile/' + user.profileId}
