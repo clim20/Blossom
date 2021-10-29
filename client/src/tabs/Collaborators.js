@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
-const About = () => {
+const Collaborators = () => {
 
     return (
         <div>

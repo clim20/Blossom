@@ -122,11 +122,11 @@ button svg {
 }
 
 .creator-circle {
-  border: 3px solid #c883ff;
+  border: 4px solid #c883ff;
 }
 
 .platform-circle {
-  border: 3px solid #c5ffbb;    
+  border: 4px solid #89df79;    
 }
 
 .banner-header {
@@ -148,7 +148,7 @@ button svg {
   display: inline-block;
 }
 
-.profile-section {
+.profile-section, .platform-section {
   position: relative;
   top: 7rem;
 }
@@ -171,7 +171,14 @@ button svg {
   border-color: black !important;
 }
 
-.profile-content {
+.platform-tab {
+  width: 20%;
+  justify-content: center;
+  border-bottom: 1px solid transparent !important;
+  border-color: black !important;
+}
+
+.profile-content, .platform-content {
   border-bottom: 1px solid transparent !important;
   border-color: black !important;
 }
