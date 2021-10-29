@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
 import CreatorCards from '../components/CreatorCards';
+import PlatformCards from '../components/PlatformCards';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -15,6 +16,10 @@ const Home = () => {
 	if(usersData) { users = usersData.getPopularUsers; }
 
     const { user } = useContext(AuthContext);
+
+    var platforms = [];
+    const { data: platformsData } = useQuery(queries.FETCH_POPULAR_PLATFORMS);
+    if(platformsData) { platforms = platformsData.getPopularPlatforms; }
 
 	// const questions = [
 	// 	{
@@ -188,6 +193,7 @@ const Home = () => {
             {users && <CreatorCards users={users} />}
             <div className="ui hidden divider"></div>
             <h3 className="ui header">Popular Platforms</h3>
+            {platforms && <PlatformCards platforms={platforms} />}
         </div>
 	);
 }

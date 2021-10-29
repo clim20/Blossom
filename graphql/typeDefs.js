@@ -35,6 +35,7 @@ module.exports = gql`
 
     type Platform {
         id: ID!
+        name: String!
         owner: User!
         platformImg: Image
         bannerImg: Image
@@ -115,10 +116,14 @@ module.exports = gql`
         findUserById(id: ID!): User!
         getProfiles: [Profile!]!
         findProfileById(id: ID!): Profile!
+        getPopularPlatforms: [Platform!]!
+        getPlatforms: [Platform!]!
+        findPlatformById(id: ID!): Platform!
     }
 
     type Mutation {
         login(username: String!, email: String!): User!
         updateScore(id: ID!, score: Int!): User!
+        createPlatform(owner: String!, name: String!): Platform! 
     }
 `

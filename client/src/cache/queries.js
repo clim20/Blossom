@@ -133,3 +133,141 @@ export const FIND_PROFILE_BY_ID = gql`
         }
     }
 `;
+
+export const FETCH_POPULAR_PLATFORMS = gql`
+    query getPopularPlatforms {
+        getPopularPlatforms {
+            id
+            name
+            owner {
+                id
+                username
+                email
+                profileId
+                quests {
+                    questId
+                    isCompleted
+                }
+                createdAt
+            }
+            # platformImg {
+            #     id
+            #     data
+            #     contentType
+            # }
+            # bannerImg {
+            #     id
+            #     data
+            #     contentType
+            # }
+            description
+            contact
+            collaborators {
+                id
+            }
+            requests {
+                id
+            }
+            followerCount
+            quizzes {
+                id
+            }
+            collections {
+                id
+            }
+            createdAt
+        }
+    }
+`;
+
+export const FETCH_PLATFORMS = gql`
+    query getPlatforms {
+        getPlatforms {
+            id
+            name
+            owner {
+                id
+                username
+                email
+                profileId
+                quests {
+                    questId
+                    isCompleted
+                }
+                createdAt
+            }
+            # platformImg {
+            #     id
+            #     data
+            #     contentType
+            # }
+            # bannerImg {
+            #     id
+            #     data
+            #     contentType
+            # }
+            description
+            contact
+            collaborators {
+                id
+            }
+            requests {
+                id
+            }
+            followerCount
+            quizzes {
+                id
+            }
+            collections {
+                id
+            }
+            createdAt
+        }
+    }
+`;
+
+export const FIND_PLATFORM_BY_ID = gql`
+    query findPlatformById($id: ID!) {
+        findPlatformById(id: $id) {
+            id
+            name
+            owner {
+                id
+                username
+                email
+                profileId
+                quests {
+                    questId
+                    isCompleted
+                }
+                createdAt
+            }
+            # platformImg {
+            #     id
+            #     data
+            #     contentType
+            # }
+            # bannerImg {
+            #     id
+            #     data
+            #     contentType
+            # }
+            description
+            contact
+            collaborators {
+                id
+            }
+            requests {
+                id
+            }
+            followerCount
+            quizzes {
+                id
+            }
+            collections {
+                id
+            }
+            createdAt
+        }
+    }
+`;
