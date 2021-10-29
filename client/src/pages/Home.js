@@ -2,148 +2,153 @@ import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { AuthContext } from '../context/auth';
-import { FIND_USER_BY_ID } from '../cache/queries';
+import * as queries from '../cache/queries';
 import { UPDATE_SCORE } from '../cache/mutations';
 
 function Home() {
-	const questions = [
-		{
-			questionText: 'What is the capital of France?',
-			answerOptions: [
-				{ answerText: 'New York', isCorrect: false },
-				{ answerText: 'London', isCorrect: false },
-				{ answerText: 'Paris', isCorrect: true },
-				{ answerText: 'Dublin', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'Who is CEO of Tesla?',
-			answerOptions: [
-				{ answerText: 'Jeff Bezos', isCorrect: false },
-				{ answerText: 'Elon Musk', isCorrect: true },
-				{ answerText: 'Bill Gates', isCorrect: false },
-				{ answerText: 'Tony Stark', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'The iPhone was created by which company?',
-			answerOptions: [
-				{ answerText: 'Apple', isCorrect: true },
-				{ answerText: 'Intel', isCorrect: false },
-				{ answerText: 'Amazon', isCorrect: false },
-				{ answerText: 'Microsoft', isCorrect: false },
-			],
-		},
-		{
-			questionText: 'How many Harry Potter books are there?',
-			answerOptions: [
-				{ answerText: '1', isCorrect: false },
-				{ answerText: '4', isCorrect: false },
-				{ answerText: '6', isCorrect: false },
-				{ answerText: '7', isCorrect: true },
-			],
-		},
-	];
+    var users = [];
 
-    const { user } = useContext(AuthContext);
-    const id = user? user.id : '';
-    const { data } = useQuery(FIND_USER_BY_ID, {
-        variables: {
-            id: id
-        }
-    });
+    const { data: usersData } = useQuery(queries.FETCH_USERS);
+	if(usersData) { users = usersData.getUsers; }
 
-    let currentUser = {};
-    if (data) { 
-		currentUser = data.findUserById;
-    }
+	// const questions = [
+	// 	{
+	// 		questionText: 'What is the capital of France?',
+	// 		answerOptions: [
+	// 			{ answerText: 'New York', isCorrect: false },
+	// 			{ answerText: 'London', isCorrect: false },
+	// 			{ answerText: 'Paris', isCorrect: true },
+	// 			{ answerText: 'Dublin', isCorrect: false },
+	// 		],
+	// 	},
+	// 	{
+	// 		questionText: 'Who is CEO of Tesla?',
+	// 		answerOptions: [
+	// 			{ answerText: 'Jeff Bezos', isCorrect: false },
+	// 			{ answerText: 'Elon Musk', isCorrect: true },
+	// 			{ answerText: 'Bill Gates', isCorrect: false },
+	// 			{ answerText: 'Tony Stark', isCorrect: false },
+	// 		],
+	// 	},
+	// 	{
+	// 		questionText: 'The iPhone was created by which company?',
+	// 		answerOptions: [
+	// 			{ answerText: 'Apple', isCorrect: true },
+	// 			{ answerText: 'Intel', isCorrect: false },
+	// 			{ answerText: 'Amazon', isCorrect: false },
+	// 			{ answerText: 'Microsoft', isCorrect: false },
+	// 		],
+	// 	},
+	// 	{
+	// 		questionText: 'How many Harry Potter books are there?',
+	// 		answerOptions: [
+	// 			{ answerText: '1', isCorrect: false },
+	// 			{ answerText: '4', isCorrect: false },
+	// 			{ answerText: '6', isCorrect: false },
+	// 			{ answerText: '7', isCorrect: true },
+	// 		],
+	// 	},
+	// ];
 
-    const previousScores = currentUser && currentUser.scores ? currentUser.scores : [];
-    const lastAttempt = previousScores && previousScores.length > 0 ? previousScores.at(-1) : 0;
-    const bestAttempt = previousScores && previousScores.length > 0 ? Math.max(...previousScores) : 0;
+    // const { user } = useContext(AuthContext);
+    // const id = user? user.id : '';
+    // const { data } = useQuery(queries.FIND_USER_BY_ID, {
+    //     variables: {
+    //         id: id
+    //     }
+    // });
 
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [score, setScore] = useState(0);
-    const [showAnswer, setShowAnswer] = useState(false);
-    const [showScore, setShowScore] = useState(false);
+    // let currentUser = {};
+    // if (data) { 
+	// 	currentUser = data.findUserById;
+    // }
 
-    const [updateScore] = useMutation(UPDATE_SCORE, {
-        variables: {
-            id: id,
-            score: score
-        }
-    });
+    // const previousScores = currentUser && currentUser.scores ? currentUser.scores : [];
+    // const lastAttempt = previousScores && previousScores.length > 0 ? previousScores.at(-1) : 0;
+    // const bestAttempt = previousScores && previousScores.length > 0 ? Math.max(...previousScores) : 0;
 
-    const handleAnswer = (answerOption) => {
-        if (answerOption.isCorrect) {
-            setScore(score + 1);
-        }
-        setShowAnswer(true);
-    };
+    // const [currentQuestion, setCurrentQuestion] = useState(0);
+    // const [score, setScore] = useState(0);
+    // const [showAnswer, setShowAnswer] = useState(false);
+    // const [showScore, setShowScore] = useState(false);
 
-    const incrementNextQuestion = () => {
-        const nextQuestion = currentQuestion + 1;
-        if (nextQuestion < questions.length) {
-            setCurrentQuestion(nextQuestion);
-            setShowAnswer(false);
-        } else {
-            setShowScore(true);
-            if (user) {
-                updateScore(score);
-            }
-        }
-    };
+    // const [updateScore] = useMutation(UPDATE_SCORE, {
+    //     variables: {
+    //         id: id,
+    //         score: score
+    //     }
+    // });
 
-    const resetQuiz = () => {
-        setScore(0);
-        setCurrentQuestion(0);
-        setShowAnswer(false);
-        setShowScore(false);
-    }
+    // const handleAnswer = (answerOption) => {
+    //     if (answerOption.isCorrect) {
+    //         setScore(score + 1);
+    //     }
+    //     setShowAnswer(true);
+    // };
 
-    const markup = showAnswer ?  
-        <>
-            <div className='question-section'>
-                <div className='question-count'>
-                    <span>Question {currentQuestion + 1}</span>/{questions.length}
-                </div>
-                <div className='question-text'>{questions[currentQuestion].questionText}</div>
-            </div>
-            <div className='answer-section'>
-                {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-                    <button 
-                        onClick={() => incrementNextQuestion()}
-                        className={answerOption.isCorrect ? 'correct' : 'incorrect'}
-                        key={index}
-                    >
-                        {answerOption.answerText}
-                    </button>
-                ))}
-            </div>
-        </> : 
-        <>
-            <div className='question-section'>
-                <div className='question-count'>
-                    <span>Question {currentQuestion + 1}</span>/{questions.length}
-                </div>
-                <div className='question-text'>{questions[currentQuestion].questionText}</div>
-            </div>
-            <div className='answer-section'>
-                {questions[currentQuestion].answerOptions.map((answerOption, index) => (
-                    <button
-                        onClick={() => handleAnswer(answerOption)}
-                        key={index}
-                    >
-                        {answerOption.answerText}
-                    </button>
-                ))}
-            </div>
-        </>
-    ;
+    // const incrementNextQuestion = () => {
+    //     const nextQuestion = currentQuestion + 1;
+    //     if (nextQuestion < questions.length) {
+    //         setCurrentQuestion(nextQuestion);
+    //         setShowAnswer(false);
+    //     } else {
+    //         setShowScore(true);
+    //         if (user) {
+    //             updateScore(score);
+    //         }
+    //     }
+    // };
+
+    // const resetQuiz = () => {
+    //     setScore(0);
+    //     setCurrentQuestion(0);
+    //     setShowAnswer(false);
+    //     setShowScore(false);
+    // }
+
+    // const markup = showAnswer ?  
+    //     <>
+    //         <div className='question-section'>
+    //             <div className='question-count'>
+    //                 <span>Question {currentQuestion + 1}</span>/{questions.length}
+    //             </div>
+    //             <div className='question-text'>{questions[currentQuestion].questionText}</div>
+    //         </div>
+    //         <div className='answer-section'>
+    //             {questions[currentQuestion].answerOptions.map((answerOption, index) => (
+    //                 <button 
+    //                     onClick={() => incrementNextQuestion()}
+    //                     className={answerOption.isCorrect ? 'correct' : 'incorrect'}
+    //                     key={index}
+    //                 >
+    //                     {answerOption.answerText}
+    //                 </button>
+    //             ))}
+    //         </div>
+    //     </> : 
+    //     <>
+    //         <div className='question-section'>
+    //             <div className='question-count'>
+    //                 <span>Question {currentQuestion + 1}</span>/{questions.length}
+    //             </div>
+    //             <div className='question-text'>{questions[currentQuestion].questionText}</div>
+    //         </div>
+    //         <div className='answer-section'>
+    //             {questions[currentQuestion].answerOptions.map((answerOption, index) => (
+    //                 <button
+    //                     onClick={() => handleAnswer(answerOption)}
+    //                     key={index}
+    //                 >
+    //                     {answerOption.answerText}
+    //                 </button>
+    //             ))}
+    //         </div>
+    //     </>
+    // ;
 
 	return (
         <>
-            {user && 
+            {/* {user && 
                 <div style={{ marginBottom: 10 }}>
                     <div>Previous Attempts: {previousScores.join(", ")}</div>
                     <div>Best Attempt: {bestAttempt}</div>
@@ -161,7 +166,7 @@ function Home() {
                 ) : (
                     markup
                 )}
-            </div>
+            </div> */}
         </>
 	);
 }

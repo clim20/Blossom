@@ -1,10 +1,20 @@
-const { model, Schema } = require('mongoose');
-
+const { model, Schema, ObjectId } = require('mongoose');
+const Image = require('./Image').schema;
+ 
 const userSchema = new Schema({
+    id: ObjectId,
     username: String,
     email: String,
-    scores: [Number],
+    profileId: String,
+    quests: [
+        {
+            questId: String,
+            isCompleted: Boolean,
+            image: Image
+        }
+    ],
     createdAt: String
 })
 
-module.exports = model('User', userSchema);
+const User = model('User', userSchema);
+module.exports = User;
