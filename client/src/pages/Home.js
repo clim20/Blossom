@@ -1,15 +1,25 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
+import MenuBar from '../components/MenuBar';
+import CreatorCards from '../components/CreatorCards';
+import PlatformCards from '../components/PlatformCards';
+
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import { UPDATE_SCORE } from '../cache/mutations';
 
-function Home() {
+const Home = () => {
     var users = [];
 
-    const { data: usersData } = useQuery(queries.FETCH_USERS);
-	if(usersData) { users = usersData.getUsers; }
+    const { data: usersData } = useQuery(queries.FETCH_POPULAR_USERS);
+	if(usersData) { users = usersData.getPopularUsers; }
+
+    const { user } = useContext(AuthContext);
+
+    var platforms = [];
+    const { data: platformsData } = useQuery(queries.FETCH_POPULAR_PLATFORMS);
+    if(platformsData) { platforms = platformsData.getPopularPlatforms; }
 
 	// const questions = [
 	// 	{
@@ -58,7 +68,7 @@ function Home() {
     //     }
     // });
 
-    // let currentUser = {};
+    // var currentUser = {};
     // if (data) { 
 	// 	currentUser = data.findUserById;
     // }
@@ -147,27 +157,44 @@ function Home() {
     // ;
 
 	return (
-        <>
-            {/* {user && 
-                <div style={{ marginBottom: 10 }}>
-                    <div>Previous Attempts: {previousScores.join(", ")}</div>
-                    <div>Best Attempt: {bestAttempt}</div>
-                    <div>Last Attempt: {lastAttempt}</div>
-                </div>            
+        // <>
+        //     {user && 
+        //         <div style={{ marginBottom: 10 }}>
+        //             <div>Previous Attempts: {previousScores.join(", ")}</div>
+        //             <div>Best Attempt: {bestAttempt}</div>
+        //             <div>Last Attempt: {lastAttempt}</div>
+        //         </div>            
+        //     }
+        //     <div className='app'>
+        //         {showScore ? (
+        //             <div>
+        //                 <div className='score-section'>You scored {score} out of {questions.length}</div>
+        //                 <button style={{ display: 'block', marginTop: 20}} onClick={() => resetQuiz()}>
+        //                     Retry
+        //                 </button>
+        //             </div>
+        //         ) : (
+        //             markup
+        //         )}
+        //     </div>
+        // </>
+        <div>
+            <MenuBar/>
+            {user &&
+                <div>
+                    <h3 className="ui header">For You</h3>
+                    <div className="ui hidden divider"></div>
+                </div>
             }
-            <div className='app'>
-                {showScore ? (
-                    <div>
-                        <div className='score-section'>You scored {score} out of {questions.length}</div>
-                        <button style={{ display: 'block', marginTop: 20}} onClick={() => resetQuiz()}>
-                            Retry
-                        </button>
-                    </div>
-                ) : (
-                    markup
-                )}
-            </div> */}
-        </>
+
+            <h3 className="ui header">Trending</h3>
+            <div className="ui hidden divider"></div>
+            <h3 className="ui header">Popular Creators</h3>
+            {users && <CreatorCards users={users} />}
+            <div className="ui hidden divider"></div>
+            <h3 className="ui header">Popular Platforms</h3>
+            {platforms && <PlatformCards platforms={platforms} />}
+        </div>
 	);
 }
 

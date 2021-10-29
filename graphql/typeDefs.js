@@ -6,7 +6,7 @@ module.exports = gql`
         id: ID
         username: String!
         email: String!
-        profileId: String
+        profileId: String!
         quests: [Quest]
         token: String!
         createdAt: String!
@@ -20,7 +20,7 @@ module.exports = gql`
 
     type Profile {
         id: ID!
-        user: User
+        user: User!
         profileImg: Image
         bannerImg: Image
         badges: [Badge]
@@ -36,6 +36,7 @@ module.exports = gql`
 
     type Platform {
         id: ID!
+        name: String!
         owner: User!
         platformImg: Image
         bannerImg: Image
@@ -112,12 +113,18 @@ module.exports = gql`
     }
 
     type Query {
-        getUsers: [User]
+        getPopularUsers: [User!]!
         findUserById(id: ID!): User!
+        getProfiles: [Profile!]!
+        findProfileById(id: ID!): Profile!
+        getPopularPlatforms: [Platform!]!
+        getPlatforms: [Platform!]!
+        findPlatformById(id: ID!): Platform!
     }
 
     type Mutation {
         login(username: String!, email: String!): User!
         updateScore(id: ID!, score: Int!): User!
+        createPlatform(owner: String!, name: String!): Platform! 
     }
 `

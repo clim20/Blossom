@@ -1,15 +1,12 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
-import MenuBar from '../components/MenuBar';
-
-const Collection = () => {
+const Collections = () => {
 
     return (
         <div>
-            <MenuBar/>
-            Collection Page
+            Collections Tab
         </div>
     );
 }
-export default Collection;
+export default Collections;

@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
-function Quest() {
+import MenuBar from '../components/MenuBar';
+
+const Quest = () => {
 
     return (
         <div>
+            <MenuBar/>
             Quest Page
         </div>
     );
