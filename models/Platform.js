@@ -6,6 +6,7 @@ const User = require('./User').schema;
 
 const platformSchema = new Schema({
     id: ObjectId,
+    name: String,
 	owner: User,
     platformImg: Image,
     bannerImg: Image,
