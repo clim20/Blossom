@@ -1,8 +1,11 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+
 import image1 from '../testpic/seal.jpg';
 
 import MenuBar from '../components/MenuBar';
+import QuizStart from './QuizStart';
 
 const styles = {
     button : {
@@ -24,7 +27,11 @@ const Quiz = () =>{
     const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200],["E",100]]);
     const [score, setScore] = useState(0);
 
-    const handleStart = event =>{};
+    const [redirect, setRedirect] = useState(false);
+
+    const handleStart = event =>{
+        setRedirect(true);
+    };
     const gotoEdit = event =>{}; 
     const handleFollow = event => {};
     const handleCreateCollection = event => {};
@@ -46,39 +53,55 @@ const Quiz = () =>{
         
     };
 
-    return(
-        
-        <div style={{textAlign: 'center'}}>
-            <MenuBar></MenuBar>
-            <h1 style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
-            <button onClick = {() => handleFollow()} style = {styles.button}>
-                <p style={{textAlign: 'center'}}>
-                    {currentQuiz.author}
-                </p>
-                <p style={{textAlign: 'center'}}> 
-                    {currentQuiz.followers + " Followers"}
-                </p>
-            </button>
-            <img src={image1}/>
-            <p style={{textAlign: 'center'}}>{currentQuiz.questions}</p>
-            <p>{currentQuiz.description}</p>
-
-            <button onClick = {() => handleStart()} style = {styles.button}>
-                Start
-            </button>
-
-            <div>
-                <button style = {styles.button}>
-                    LEADERBOARDS
-                </button>
-                <table>
-                    {highestScores.splice(0,5).map(displayTopScores)}
-                </table>
+    if(redirect == false){
+        return(
+            
+            <div style={{textAlign: 'center'}}>
                 
+                <MenuBar></MenuBar>
+                <h1 style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
+                <button onClick = {() => handleFollow()} style = {styles.button}>
+                    <p style={{textAlign: 'center'}}>
+                        {currentQuiz.author}
+                    </p>
+                    <p style={{textAlign: 'center'}}> 
+                        {currentQuiz.followers + " Followers"}
+                    </p>
+                </button>
+                <img src={image1}/>
+                <p style={{textAlign: 'center'}}>{currentQuiz.questions}</p>
+                <p>{currentQuiz.description}</p>
+    
+                <button onClick = {() => handleStart()} style = {styles.button}>
+                    Start
+                </button>
+    
+                <div>
+                    <button style = {styles.button}>
+                        LEADERBOARDS
+                    </button>
+                    <table>
+                        {highestScores.splice(0,5).map(displayTopScores)}
+                    </table>
+                    
+                </div>
             </div>
-        </div>
+            
+        );
+
+    }else{
+        return(
+            <QuizStart currentQuiz = {currentQuiz}></QuizStart>
+        );
         
-    );
+       
+    }
+
+    //<Redirect to={{
+    //    pathname: '/quiz/start/:quizId',
+    //    state: { currentQuiz: currentQuiz }
+    //  }} />
+    
 
 }
 export default Quiz;
