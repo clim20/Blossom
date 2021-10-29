@@ -21,14 +21,14 @@ function PlatformCard(props) {
     }
 
     const handleClick = () => {
-        history.push("/platform/:" + props.platform.id);
+        history.push("/platform/" + props.platform.id);
     }
 
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
-            <img className="card-image creator-circle ui avatar image"
+            <img className="card-image platform-circle ui avatar image"
                 src="https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg"
-                alt="popular platform"
+                alt="platform"
             />
             <br/>
             <br/>
