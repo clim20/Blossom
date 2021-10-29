@@ -25,6 +25,7 @@ const MenuBar = () => {
                 to='/'>
                     {user.username}
             </Menu.Item>
+
             <Menu.Menu position='left'>
                 <Menu.Item
                     name='profile'
@@ -34,6 +35,7 @@ const MenuBar = () => {
                     to={'/profile/' + user.profileId}
                 />
             </Menu.Menu>
+
             <Menu.Menu position='right'>
                 <Logout/>
             </Menu.Menu>
@@ -47,6 +49,15 @@ const MenuBar = () => {
                 as={Link}
                 to='/'
             />
+            <Menu.Menu position='left'>
+                <Menu.Item
+                    name='profile'
+                    active={activeItem === 'profile'}
+                    onClick={handleItemClick}
+                    as={Link}
+                    to='/profile/:profileId'
+                />
+            </Menu.Menu>
             <Menu.Menu position='right'>
                 <Login/>
             </Menu.Menu>

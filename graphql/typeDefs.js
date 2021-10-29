@@ -1,8 +1,9 @@
 const { gql } = require('apollo-server');
 
 module.exports = gql`
+    # TODO: add ! back to profileId and id!
     type User {
-        id: ID!
+        id: ID
         username: String!
         email: String!
         profileId: String!

@@ -5,7 +5,7 @@ const User = require('./User').schema;
 
 const quizSchema = new Schema({
     id: ObjectId,
-	title: String,
+	  title: String,
     description: String,
     titleImg: Image,  
     creator: User,
