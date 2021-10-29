@@ -8,7 +8,7 @@ import { refreshTokenSetup } from '../util/refreshToken';
 
 const clientId = '509289158854-coj9gmcounfv962huma48rn4c6cgg278.apps.googleusercontent.com';
 
-function Login() {
+const Login = () => {
     const context = useContext(AuthContext);
 
     const [values, setValues] = useState({

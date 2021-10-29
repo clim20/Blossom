@@ -2,7 +2,7 @@ import React from 'react';
 
 import CreatorCard from './CreatorCard';
 
-function CreatorCards(props) {  
+const CreatorCards = (props) => {  
     return (
         <div className="ui very relaxed horizontal list big">
             {

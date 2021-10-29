@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
 
-function CreatorCard(props) {
+const CreatorCard = (props) => {
     const history = useHistory();
 
     const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
@@ -14,14 +14,12 @@ function CreatorCard(props) {
     });
 
     var profile = {};
-    var followerCount = 0;
     if (data) { 
 		profile = data.findProfileById;
-        followerCount = profile.followerCount;
     }
 
     const handleClick = () => {
-        history.push("/profile/:" + props.user.profileId);
+        history.push("/profile/" + props.user.profileId);
     }
 
     return (
@@ -32,9 +30,13 @@ function CreatorCard(props) {
             />
             <br/>
             <br/>
-            <div className="header">{props.user.username}</div>
+            <div className="header">
+                {props.user.username}
+            </div>
             <br/>
-            <div className="header">{followerCount} followers</div>
+            <div className="header">
+                {profile && profile.followerCount && profile.followerCount} followers
+            </div>
         </div>    
     );
 }

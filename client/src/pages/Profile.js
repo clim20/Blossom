@@ -1,12 +1,120 @@
-import React, { useContext, useState } from 'react';
-//import { useMutation, useQuery } from '@apollo/react-hooks';
+import React, { useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from '@apollo/react-hooks';
 
-function Profile() {
+import MenuBar from '../components/MenuBar';
+import Home from '../tabs/Home';
+import Quizzes from '../tabs/Quizzes';
+import Platforms from '../tabs/Platforms';
+import Collections from '../tabs/Collections';
+import Following from '../tabs/Following';
+import Badges from '../tabs/Badges';
+import About from '../tabs/About';
+
+import { AuthContext } from '../context/auth';
+import * as queries from '../cache/queries';
+
+const Profile = () => {
+    const { user } = useContext(AuthContext);
+
+    const [activeTab, setActiveTab] = useState('home');
+    const params = useParams();
+    const profileId = params ? params.profileId : 'could not get params';
+
+    const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: profileId
+        }
+    });
+
+    var profile = {};
+    if (data) { 
+		profile = data.findProfileById;
+    }
+
+    const handleTabClick = (name) => {
+        setActiveTab(name);
+    }
 
     return (
         <div>
-            Profile Page
+            <MenuBar/>
+            <div className="ui container banner-header"
+                style={{ backgroundImage: `url(https://wallpaperaccess.com/full/5163061.jpg)` }}
+            >
+                <div className="banner-info">
+                    <div className="display-inline-block">
+                        <img className="card-image creator-circle ui avatar image"
+                            src="https://image.pngaaa.com/477/46477-middle.png"
+                            alt="creator profile"
+                        />
+                    </div>
+                    {profile && profile.user && 
+                        <div className="banner-text">
+                            <h2 style={{ marginBottom: '0' }}>{profile.user.username}</h2>
+                            <div>{profile.followerCount} followers</div>
+                        </div>
+                    }
+                </div>
+
+                {profile && profile.user.username !== user.username && 
+                    <button className="ui button follow-button">
+                        Follow
+                    </button>
+                }
+            </div>
+
+            <div className="ui container profile-section">
+                <div className="ui top attached tabular menu profile-tab">
+                    <div className={`${activeTab === 'home' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('home')}
+                    >
+                        HOME
+                    </div>
+                    <div className={`${activeTab === 'quizzes' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('quizzes')}
+                    >
+                        QUIZZES
+                    </div>
+                    <div className={`${activeTab === 'platforms' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('platforms')}
+                    >
+                        PLATFORMS
+                    </div>
+                    <div className={`${activeTab === 'collections' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('collections')}
+                    >
+                        COLLECTIONS
+                    </div>
+                    <div className={`${activeTab === 'following' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('following')}
+                    >
+                        FOLLOWING
+                    </div>
+                    <div className={`${activeTab === 'badges' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('badges')}
+                    >
+                        BADGES
+                    </div>
+                    <div className={`${activeTab === 'about' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('about')}
+                    >
+                        ABOUT
+                    </div>
+                </div>
+
+                <div className="ui bottom attached active tab segment profile-content">
+                    {activeTab === 'home' && <Home/>}
+                    {activeTab === 'quizzes' && <Quizzes/>}
+                    {activeTab === 'platforms' && <Platforms/>}
+                    {activeTab === 'collections' && <Collections/>}
+                    {activeTab === 'following' && <Following/>}
+                    {activeTab === 'badges' && <Badges/>}
+                    {activeTab === 'about' && <About/>}
+                </div>
+            </div>
         </div>
-    );
+  );
 }
+
 export default Profile;

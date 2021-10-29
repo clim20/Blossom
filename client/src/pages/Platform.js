@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
-function Platform() {
+import MenuBar from '../components/MenuBar';
+
+const Platform = () => {
 
     return (
         <div>
+            <MenuBar/>
             Platform Page
         </div>
     );

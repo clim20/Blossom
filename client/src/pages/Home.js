@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
-import { AuthContext } from '../context/auth';
+import MenuBar from '../components/MenuBar';
 import CreatorCards from '../components/CreatorCards';
 
+import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import { UPDATE_SCORE } from '../cache/mutations';
 
-function Home() {
+const Home = () => {
     var users = [];
 
     const { data: usersData } = useQuery(queries.FETCH_POPULAR_USERS);
@@ -173,6 +174,7 @@ function Home() {
         //     </div>
         // </>
         <div>
+            <MenuBar/>
             {user &&
                 <div>
                     <h3 className="ui header">For You</h3>
