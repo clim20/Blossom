@@ -47,13 +47,15 @@ const Quiz = () =>{
     };
 
     return(
+        
         <div style={{textAlign: 'center'}}>
+            <MenuBar></MenuBar>
             <h1 style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
             <button onClick = {() => handleFollow()} style = {styles.button}>
-                <p>
-                    {currentQuiz.author + "\n"}
+                <p style={{textAlign: 'center'}}>
+                    {currentQuiz.author}
                 </p>
-                <p>
+                <p style={{textAlign: 'center'}}> 
                     {currentQuiz.followers + " Followers"}
                 </p>
             </button>
