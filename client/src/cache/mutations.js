@@ -20,6 +20,18 @@ export const LOGIN_USER = gql`
     }
 `;
 
+export const UPDATE_USERNAME = gql`
+    mutation updateUsername($id: ID!, $username: String!){
+        updateUsername(id: $id, username: $username){
+            id
+            username
+            email 
+            profileId 
+            createdAt
+        }
+    }
+`;
+
 export const UPDATE_SCORE = gql`
     mutation updateScore($id: ID!, $score: Int!) {
         updateScore(id: $id, score: $score) {
