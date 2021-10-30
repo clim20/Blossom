@@ -21,7 +21,7 @@ const QuizEnd = (props) =>{
         setIsRetrying(true);
     };
     const handleFollow = event =>{
-        props.handleFollow(event);
+        //props.handleFollow(event);
     };
     const handleCreateCollection = event =>{
         props.handleCreateCollection(event);
