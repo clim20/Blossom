@@ -57,7 +57,7 @@ const Profile = () => {
                     }
                 </div>
 
-                {profile && user && profile.user.username !== user.username && 
+                {profile && user && profile.user && user.username && profile.user.username !== user.username && 
                     <button className="ui button follow-button">
                         Follow
                     </button>

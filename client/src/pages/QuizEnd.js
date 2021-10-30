@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import image1 from '../testpic/seal.jpg';
 
 import MenuBar from '../components/MenuBar';
+import QuizStart from './QuizStart';
 
 const styles = {
     button : {
@@ -12,11 +13,15 @@ const styles = {
     }
 }
 
-const QuizEnd = ({currentQuiz}) =>{
+const QuizEnd = (props) =>{
+
+    const [isRetrying, setIsRetrying] = useState(false);
     
-    const handleRetry = event =>{};
+    const handleRetry = event =>{
+        setIsRetrying(true);
+    };
     const handleFollow = event =>{
-        props.handleFollow(event);
+        //props.handleFollow(event);
     };
     const handleCreateCollection = event =>{
         props.handleCreateCollection(event);
@@ -38,39 +43,51 @@ const QuizEnd = ({currentQuiz}) =>{
         
     };
 
-    return(
+    if(isRetrying == false){
+        return(
         
-        <div style={{textAlign: 'center'}}>
-            <MenuBar></MenuBar>
-            <h1 style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
-            <button onClick = {() => handleFollow()} style = {styles.button}>
-                <p style={{textAlign: 'center'}}>
-                    {currentQuiz.author}
-                </p>
-                <p style={{textAlign: 'center'}}> 
-                    {currentQuiz.followers + " Followers"}
-                </p>
-            </button>
-            
-            
-
-            <button onClick = {() => handleRetry()} style = {styles.button}>
-                RETRY
-            </button>
-            <p>*Only first scores are posted to the leaderboards</p>
-
-            <div>
-                <button style = {styles.button}>
-                    LEADERBOARDS
+            <div style={{textAlign: 'center'}}>
+                <MenuBar></MenuBar>
+                <h1 style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
+                <button onClick = {() => handleFollow()} style = {styles.button}>
+                    <p style={{textAlign: 'center'}}>
+                        {props.currentQuiz.author}
+                    </p>
+                    <p style={{textAlign: 'center'}}> 
+                        {props.currentQuiz.followers + " Followers"}
+                    </p>
                 </button>
-                <table>
-                    {props.highestScores.splice(0,5).map(displayTopScores)}
-                </table>
                 
+                <div>
+                    <header>Congratulations</header>
+                    <header>
+                    {props.score} pts
+                    </header>
+                </div>
+    
+                <button onClick = {() => handleRetry()} style = {styles.button}>
+                    RETRY
+                </button>
+                <p>*Only first scores are posted to the leaderboards</p>
+    
+                <div>
+                    <button style = {styles.button}>
+                        LEADERBOARDS
+                    </button>
+                    <table>
+                        {props.highestScores.splice(0,5).map(displayTopScores)}
+                    </table>
+                    
+                </div>
             </div>
-        </div>
-        
-    );
+            
+        );    
+    }else{
+        return(
+            <QuizStart currentQuiz = {props.currentQuiz} highestScores = {props.highestScores}></QuizStart>
+        );
+    }
+    
 
 }
 export default QuizEnd;
