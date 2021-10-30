@@ -9,29 +9,22 @@ module.exports = {
 
             if (users) return users;
             return [];
-        },
-        async findUserById(_, { id }){
-            const user = await User.findOne({id});
-            
-            if (user) return user;
-            return {};
         }
     },
     Mutation: {
-        async updateUsername(_, { id, newUsername }){
-            const user = await User.findOne({id});
-            const users = User.find();
+        async updateUsername(_, { id, name }){
+            const user = await User.findOne({id: id});
+            const usernameExist = await User.findOne({username: name});
 
-            var lists = [];
-            for(let i = 0; i < users.length; i++){
-                lists.push(users[i].id);
-            }
+            if(!usernameExist){
+                const updated = await User.updateOne({id: user.id}, {username: name});
 
-            if(!lists.includes(user.id)){
-                this.updateUsername(id, newUsername);
-            }else{
-                return false;
+                if (updated) {
+                    const newUser = await User.findOne({id: id});
+                    return newUser;
+                }
             }
+            return user;
         }
     },
 };

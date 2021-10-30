@@ -120,11 +120,13 @@ module.exports = gql`
         getPopularPlatforms: [Platform!]!
         getPlatforms: [Platform!]!
         findPlatformById(id: ID!): Platform!
+        getUsers: [User!]!
     }
 
     type Mutation {
         login(username: String!, email: String!): User!
         updateScore(id: ID!, score: Int!): User!
         createPlatform(owner: String!, name: String!): Platform! 
+        updateUsername(id: ID!, name: String!): User!
     }
 `
