@@ -15,7 +15,7 @@ const Home = () => {
     const { user } = useContext(AuthContext);
 
     var users = [];
-    const { data: usersData, refetch: usersRefetch } = useQuery(queries.FETCH_POPULAR_USERS, {pollInterval: 500});
+    const { data: usersData, refetch: usersRefetch } = useQuery(queries.FETCH_POPULAR_USERS);
 	if(usersData) { users = usersData.getPopularUsers; }
 
     console.log(users);
