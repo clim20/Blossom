@@ -24,7 +24,7 @@ const MenuBar = () => {
     const menuBar = user ? (
         <Menu pointing secondary size="massive" color="teal">
             <Menu.Item
-                name={users.username}
+                name={user.username}
                 active={activeItem === 'home'}
                 onClick={() => setActiveItem('home')}
                 as={Link}
