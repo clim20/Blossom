@@ -38,6 +38,25 @@ export const FIND_USER_BY_ID = gql`
     }
 `;
 
+export const GET_USERS = gql`
+    query getUsers {
+        getUsers {
+            id
+            username
+            email
+            profileId
+            quests {
+                questId
+                isCompleted
+                image {
+                    id
+                }
+            }
+            createdAt
+        }
+    }
+`;
+
 export const FETCH_PROFILES = gql`
     query getProfiles {
         getProfiles {
