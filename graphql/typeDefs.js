@@ -6,7 +6,7 @@ module.exports = gql`
         id: ID
         username: String!
         email: String!
-        profileId: String!
+        profileId: ID!
         quests: [Quest]
         token: String!
         createdAt: String!
@@ -20,33 +20,33 @@ module.exports = gql`
 
     type Profile {
         id: ID!
-        user: User!
+        user: ID!
         profileImg: Image
         bannerImg: Image
-        badges: [Badge]
+        badges: [ID]
         description: String
         contact: String
         followerCount: Int!
-        usersFollowing: [User]
-        platformsFollowing: [Platform]
-        quizzes: [Quiz]
-        collections: [Collection]
-        platforms: [Platform]
+        usersFollowing: [ID]
+        platformsFollowing: [ID]
+        quizzes: [ID]
+        collections: [ID]
+        platforms: [ID]
     }
 
     type Platform {
         id: ID!
         name: String!
-        owner: User!
+        owner: ID!
         platformImg: Image
         bannerImg: Image
         description: String
         contact: String
-        collaborators: [User!]!
-        requests: [User]
+        collaborators: [ID!]!
+        requests: [ID]
         followerCount: Int!
-        quizzes: [Quiz]
-        collections: [Collection]
+        quizzes: [ID]
+        collections: [ID]
         createdAt: String!
     }
 
@@ -90,10 +90,10 @@ module.exports = gql`
 
     type Collection {
         id: ID!
-        creator: User!
+        creator: ID!
         img: Image
         description: String
-        quizzes: [Quiz]
+        quizzes: [ID]
         createdAt: String!
     }
 
@@ -126,7 +126,7 @@ module.exports = gql`
     type Mutation {
         login(username: String!, email: String!): User!
         updateScore(id: ID!, score: Int!): User!
-        createPlatform(owner: String!, name: String!): Platform! 
+        createPlatform(owner: ID!, name: String!): Platform! 
         updateUsername(id: ID!, name: String!): User!
     }
 `

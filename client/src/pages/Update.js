@@ -25,7 +25,7 @@ const Update = () => {
     const handleSubmit = async () => {
         console.log(inputUsername.name);
         const { data } = await UpdateUsername({variables: { id: user.id, name: inputUsername.name }});
-		return data;
+		history.push({ pathname: '/'});
     }
 
     return (

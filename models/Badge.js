@@ -4,7 +4,7 @@ const Quiz = require('./Quiz').schema;
 
 const badgeSchema = new Schema({
     id: ObjectId,
-    quiz: Quiz,
+    quiz: ObjectId,
     rank: Number,
     image: Image
 });

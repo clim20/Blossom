@@ -8,18 +8,18 @@ const User = require('./User').schema;
 
 const profileSchema = new Schema({
     id: ObjectId,
-	user: User,
+	user: ObjectId,
 	profileImg: Image,
 	bannerImg: Image,
-    badges: [Badge],
+    badges: [ObjectId],
     description: String,
     contact: String,
     followerCount: Number,
-    usersFollowing: [User],
-    platformsFollowing: [Platform],
-    quizzes: [Quiz],
-    collections: [Collection],
-    platforms: [Platform]
+    usersFollowing: [ObjectId],
+    platformsFollowing: [ObjectId],
+    quizzes: [ObjectId],
+    collections: [ObjectId],
+    platforms: [ObjectId]
 });
 
 const Profile = model('Profile', profileSchema);

@@ -32,6 +32,17 @@ const Profile = () => {
 		profile = data.findProfileById;
     }
 
+    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: profile.user
+        }
+    });
+
+    var userObject = {};
+    if (userData) { 
+		userObject = userData.findUserById;
+    }
+
     const handleTabClick = (name) => {
         setActiveTab(name);
     }
@@ -51,13 +62,13 @@ const Profile = () => {
                     </div>
                     {profile && profile.user && 
                         <div className="banner-text">
-                            <h2 style={{ marginBottom: '0' }}>{profile.user.username}</h2>
+                            <h2 style={{ marginBottom: '0' }}>{userObject.username}</h2>
                             <div>{profile.followerCount} followers</div>
                         </div>
                     }
                 </div>
 
-                {profile && user && profile.user && user.username && profile.user.username !== user.username && 
+                {profile && user && user.username && userObject.username !== user.username && 
                     <button className="ui button follow-button">
                         Follow
                     </button>

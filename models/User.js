@@ -5,7 +5,7 @@ const userSchema = new Schema({
     id: ObjectId,
     username: String,
     email: String,
-    profileId: String,
+    profileId: ObjectId,
     quests: [
         {
             questId: String,

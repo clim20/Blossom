@@ -10,12 +10,13 @@ import * as queries from '../cache/queries';
 import { UPDATE_SCORE } from '../cache/mutations';
 
 const Home = () => {
-    var users = [];
+    const { user } = useContext(AuthContext);
 
+    var users = [];
     const { data: usersData } = useQuery(queries.FETCH_POPULAR_USERS);
 	if(usersData) { users = usersData.getPopularUsers; }
 
-    const { user } = useContext(AuthContext);
+    console.log(users);
 
     var platforms = [];
     const { data: platformsData } = useQuery(queries.FETCH_POPULAR_PLATFORMS);

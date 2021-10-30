@@ -6,7 +6,6 @@ import * as queries from '../cache/queries';
 
 const CreatorCard = (props) => {
     const history = useHistory();
-
     const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: props.user.profileId

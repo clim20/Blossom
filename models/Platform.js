@@ -7,16 +7,16 @@ const User = require('./User').schema;
 const platformSchema = new Schema({
     id: ObjectId,
     name: String,
-	  owner: User,
+	owner: ObjectId,
     platformImg: Image,
     bannerImg: Image,
     description: String,
     contact: String,
-    collaborators: [User],
-    requests: [User],
+    collaborators: [ObjectId],
+    requests: [ObjectId],
     followerCount: Number,
-    quizzes: [Quiz],
-    collections: [Collection],
+    quizzes: [ObjectId],
+    collections: [ObjectId],
     createdAt: String
 });
     

@@ -8,7 +8,7 @@ const collectionSchema = new Schema({
 	creator: User, 
 	img: Image,
 	description: String,
-	quizzes: [Quiz],
+	quizzes: [ObjectId],
 	createdAt: String
 });
 

@@ -61,12 +61,7 @@ export const FETCH_PROFILES = gql`
     query getProfiles {
         getProfiles {
             id
-            user {
-                id
-                username
-                email
-                profileId
-            }
+            user
             # profileImg {
             #     id
             #     data
@@ -77,30 +72,15 @@ export const FETCH_PROFILES = gql`
             #     data
             #     contentType
             # }
-            badges {
-                id
-            }
+            badges
             description
             contact
             followerCount
-            usersFollowing {
-                id
-                username
-                email
-                profileId
-            }
-            platformsFollowing {
-                id
-            }
-            quizzes {
-                id
-            }
-            collections {
-                id
-            }
-            platforms {
-                id
-            }
+            usersFollowing 
+            platformsFollowing
+            quizzes
+            collections
+            platforms
         }
     }
 `;
@@ -109,12 +89,7 @@ export const FIND_PROFILE_BY_ID = gql`
     query findProfileById($id: ID!) {
         findProfileById(id: $id) {
             id
-            user {
-                id
-                username
-                email
-                profileId
-            }
+            user
             # profileImg {
             #     id
             #     data
@@ -125,30 +100,15 @@ export const FIND_PROFILE_BY_ID = gql`
             #     data
             #     contentType
             # }
-            badges {
-                id
-            }
+            badges
             description
             contact
             followerCount
-            usersFollowing {
-                id
-                username
-                email
-                profileId
-            }
-            platformsFollowing {
-                id
-            }
-            quizzes {
-                id
-            }
-            collections {
-                id
-            }
-            platforms {
-                id
-            }
+            usersFollowing
+            platformsFollowing
+            quizzes
+            collections
+            platforms
         }
     }
 `;
@@ -158,17 +118,7 @@ export const FETCH_POPULAR_PLATFORMS = gql`
         getPopularPlatforms {
             id
             name
-            owner {
-                id
-                username
-                email
-                profileId
-                quests {
-                    questId
-                    isCompleted
-                }
-                createdAt
-            }
+            owner
             # platformImg {
             #     id
             #     data
@@ -181,19 +131,11 @@ export const FETCH_POPULAR_PLATFORMS = gql`
             # }
             description
             contact
-            collaborators {
-                id
-            }
-            requests {
-                id
-            }
+            collaborators
+            requests
             followerCount
-            quizzes {
-                id
-            }
-            collections {
-                id
-            }
+            quizzes
+            collections
             createdAt
         }
     }
@@ -204,17 +146,7 @@ export const FETCH_PLATFORMS = gql`
         getPlatforms {
             id
             name
-            owner {
-                id
-                username
-                email
-                profileId
-                quests {
-                    questId
-                    isCompleted
-                }
-                createdAt
-            }
+            owner
             # platformImg {
             #     id
             #     data
@@ -227,19 +159,11 @@ export const FETCH_PLATFORMS = gql`
             # }
             description
             contact
-            collaborators {
-                id
-            }
-            requests {
-                id
-            }
+            collaborators
+            requests
             followerCount
-            quizzes {
-                id
-            }
-            collections {
-                id
-            }
+            quizzes
+            collections
             createdAt
         }
     }
@@ -250,17 +174,7 @@ export const FIND_PLATFORM_BY_ID = gql`
         findPlatformById(id: $id) {
             id
             name
-            owner {
-                id
-                username
-                email
-                profileId
-                quests {
-                    questId
-                    isCompleted
-                }
-                createdAt
-            }
+            owner
             # platformImg {
             #     id
             #     data
@@ -273,19 +187,11 @@ export const FIND_PLATFORM_BY_ID = gql`
             # }
             description
             contact
-            collaborators {
-                id
-            }
-            requests {
-                id
-            }
+            collaborators
+            requests
             followerCount
-            quizzes {
-                id
-            }
-            collections {
-                id
-            }
+            quizzes
+            collections
             createdAt
         }
     }

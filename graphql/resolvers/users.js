@@ -23,7 +23,10 @@ module.exports = {
       var users = [];
       for(let i = 0; i < 5; i++) {
         if (profiles[i]) {
-          users.push(profiles[i].user);
+          var userObject = await User.findOne({_id: profiles[i].user});
+
+          if(userObject)
+            users.push(userObject);
         }
       }
 

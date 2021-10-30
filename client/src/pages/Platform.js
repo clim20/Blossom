@@ -30,6 +30,18 @@ const Platform = () => {
 		platform = data.findPlatformById;
     }
 
+    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: platform.owner
+        }
+    });
+
+    var userObject = {};
+    if (userData) { 
+		userObject = userData.findUserById;
+    }
+    console.log(userObject);
+
     const handleTabClick = (name) => {
         setActiveTab(name);
     }
@@ -55,7 +67,7 @@ const Platform = () => {
                     }
                 </div>
 
-                {platform && user && platform.owner.username !== user.username && 
+                {platform && user && userObject.username !== user.username && 
                     <button className="ui button follow-button">
                         Follow
                     </button>
