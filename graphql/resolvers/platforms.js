@@ -41,7 +41,7 @@ module.exports = {
       const newPlatform = new Platform({
         id: new ObjectId(),
         name,
-        owner: user,
+        owner: user.id,
         platformImg: {},
         bannerImg: {},
         description: "",

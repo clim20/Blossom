@@ -58,7 +58,7 @@ module.exports = {
 
         const newProfile = new Profile({
           id: profileId,
-          user: newUser,
+          user: newUser.id,
           profileImg: {},
           bannerImg: {},
           badges: [],
