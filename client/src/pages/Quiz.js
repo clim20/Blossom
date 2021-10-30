@@ -21,7 +21,41 @@ const Quiz = () =>{
         author: "Joe Shmo",
         followers: 114,
         questions: 24,
-        description: "test description"
+        description: "test description",
+        cards: [
+            {
+                cardNum: 0,
+                question: "0",
+                choices: ["0", "1", "2", "3"],
+                answer: 0,
+                answerExplanation: "it is 0",
+    
+            },
+            {
+                cardNum: 1,
+                question: "1",
+                choices: ["0", "1", "2", "3"],
+                answer: 1,
+                answerExplanation: "it is 1",
+    
+            },
+            {
+                cardNum: 2,
+                question: "2",
+                choices: ["0", "1", "2", "3"],
+                answer: 2,
+                answerExplanation: "it is 2",
+    
+            },
+            {
+                cardNum: 3,
+                question: "3",
+                choices: ["0", "1", "2", "3"],
+                answer: 3,
+                answerExplanation: "it is 3",
+    
+            }
+        ]
 
     });
     const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200],["E",100]]);
@@ -54,6 +88,7 @@ const Quiz = () =>{
     };
 
     if(redirect == false){
+        console.log(highestScores)
         return(
             
             <div style={{textAlign: 'center'}}>
@@ -90,8 +125,9 @@ const Quiz = () =>{
         );
 
     }else{
+        
         return(
-            <QuizStart currentQuiz = {currentQuiz}></QuizStart>
+            <QuizStart currentQuiz = {currentQuiz} highestScores = {highestScores}></QuizStart>
         );
         
        
