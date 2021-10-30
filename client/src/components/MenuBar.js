@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { AuthContext } from '../context/auth';
+import * as queries from '../cache/queries';
 import Login from './Login';
 import Logout from './Logout';
 
@@ -13,12 +15,16 @@ const MenuBar = () => {
     const profileId = pathname.split('/')[2];
     const [activeItem, setActiveItem] = useState(path);
 
+    // var users = [];
+    // const { data } = useQuery(queries.FIND_USER_BY_ID);
+	// if(data) { users = data.findUserById; }
+
     const handleItemClick = (e, { name }) => setActiveItem(name);
 
     const menuBar = user ? (
         <Menu pointing secondary size="massive" color="teal">
             <Menu.Item
-                name={user.username}
+                name={users.username}
                 active={activeItem === 'home'}
                 onClick={() => setActiveItem('home')}
                 as={Link}
@@ -50,13 +56,6 @@ const MenuBar = () => {
                 to='/'
             />
             <Menu.Menu position='left'>
-                <Menu.Item
-                    name='profile'
-                    active={activeItem === 'profile'}
-                    onClick={handleItemClick}
-                    as={Link}
-                    to='/profile/:profileId'
-                />
             </Menu.Menu>
             <Menu.Menu position='right'>
                 <Login/>
