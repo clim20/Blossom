@@ -1,45 +1,64 @@
 import React, { useContext, useState } from 'react';
+import { Button, Input } from 'semantic-ui-react'
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 import { AuthContext } from '../context/auth';
+import { useHistory } from 'react-router-dom';
 
 import MenuBar from '../components/MenuBar';
 
 const Update = () => {
-    let userRef = React.useRef();
-    let inputRef = React.useRef('');
-
+    const history = useHistory();
     const { user } = useContext(AuthContext);
-    const params = useParams();
-    const userId = params ? params.userId : 'could not get params';
 
-    const { data } = useQuery(queries.GET_USERS);
-
-    var user = {};
-    if (data) {
-        user = data.findUserById;
-    }
+    const [UpdateUsername] 			        = useMutation(mutations.UPDATE_USERNAME);
+    const [inputUsername, setInputUsername] = useState({ name: user.username });
     
-    const handleChange = (newUsername) => {
-        if(data.includes(user.id)){
-            console.log('The username is already taken')
-        }else{
-            useMutation(mutations.UPDATE_USERNAME(user.id, newUsername));
-        }
+    const setUsername = async (e) => {
+		const { name, value } = e.target;
+        const updated = { ...inputUsername, [name]: value };
+		setInputUsername(updated);
+	}
+
+    const handleSubmit = async () => {
+        console.log(inputUsername.name);
+        const { data } = await UpdateUsername({variables: { id: user.id, name: inputUsername.name }});
+		return data;
     }
 
     return (
+        user ? <div>
+            <MenuBar/>
+            <div>
+                Username:
+            </div>
+            <div>
+                {user.username}
+            </div>
+            <div>
+                New Username:
+            </div>
+            <Input 
+                onKeyDown={(e) => {if(e.keyCode === 13) handleSubmit(e)}}
+                name='name' onBlur={setUsername} autoFocus={false} defaultValue={"New username..."}
+                inputType="text"
+            />
+            <Button
+                onClick={handleSubmit}
+            >
+                Confirm
+            </Button>
+            <Button
+                onClick={() => history.push({ pathname: '/'})}
+            >
+                Cancel
+            </Button>
+        </div>
+        :
         <div>
             <MenuBar/>
-            <div className="update-account">Update Account</div>
-            <div className="username">Username</div>
-            <div className="username-1"></div>
-            <div className="new-username">New Username</div>
-            <input type="text" ref={inputRef}/>
-            <button onClick={() => handleChange}>Update Username</button>
-            <Username ref={userRef}/>
         </div>
     );
 }
