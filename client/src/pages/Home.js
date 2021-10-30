@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 import MenuBar from '../components/MenuBar';
 import CreatorCards from '../components/CreatorCards';
@@ -10,6 +11,7 @@ import * as queries from '../cache/queries';
 import { UPDATE_SCORE } from '../cache/mutations';
 
 const Home = () => {
+    const history = useHistory();
     const { user } = useContext(AuthContext);
 
     var users = [];
@@ -189,6 +191,22 @@ const Home = () => {
             }
 
             <h3 className="ui header">Trending</h3>
+            {/* TEMP BUTTON TO TEST QUIZ */}
+                <div className="item cursor-pointer" onClick={() => history.push("/quiz/" + 123)}>
+                <img className="card-image ui avatar image"
+                    src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
+                    alt="quiz"
+                />
+                <br/>
+                <br/>
+                <div className="header">
+                    What's The Deal With Seals?
+                </div>
+                <div>
+                    Joe Shmo
+                </div>
+                <br/>
+                </div>    
             <div className="ui hidden divider"></div>
             <h3 className="ui header">Popular Creators</h3>
             {users && <CreatorCards users={users} />}
