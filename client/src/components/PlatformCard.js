@@ -9,7 +9,7 @@ function PlatformCard(props) {
 
     const { data } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
-            id: props.platform.id
+            id: props.platform._id
         }
     });
 
@@ -21,7 +21,7 @@ function PlatformCard(props) {
     }
 
     const handleClick = () => {
-        history.push("/platform/" + props.platform.id);
+        history.push("/platform/" + props.platform._id);
     }
 
     return (

@@ -1,9 +1,8 @@
 const { gql } = require('apollo-server');
 
 module.exports = gql`
-    # TODO: add ! back to profileId and id!
     type User {
-        id: ID
+        _id: ID!
         username: String!
         email: String!
         profileId: ID!
@@ -13,29 +12,29 @@ module.exports = gql`
     }
 
     type Quest {
-        questId: ID!
+        _id: ID!
         isCompleted: Boolean!
         image: Image!
     }
 
     type Profile {
-        id: ID!
+        _id: ID!
         user: ID!
         profileImg: Image
         bannerImg: Image
-        badges: [ID]
+        badges: [ID!]
         description: String
         contact: String
         followerCount: Int!
-        usersFollowing: [ID]
-        platformsFollowing: [ID]
-        quizzes: [ID]
-        collections: [ID]
-        platforms: [ID]
+        usersFollowing: [ID!]
+        platformsFollowing: [ID!]
+        quizzes: [ID!]
+        collections: [ID!]
+        platforms: [ID!]
     }
 
     type Platform {
-        id: ID!
+        _id: ID!
         name: String!
         owner: ID!
         platformImg: Image
@@ -43,20 +42,20 @@ module.exports = gql`
         description: String
         contact: String
         collaborators: [ID!]!
-        requests: [ID]
+        requests: [ID!]
         followerCount: Int!
-        quizzes: [ID]
-        collections: [ID]
+        quizzes: [ID!]
+        collections: [ID!]
         createdAt: String!
     }
 
     type Quiz {
-        id: ID!
+        _id: ID!
         title: String!
         description: String!
         titleImg: Image
-        creator: User!
-        platform: Platform
+        creator: ID!
+        platform: ID!
         quizHits: Int!
         quizLikes: Int!
         quizDislikes: Int!
@@ -72,7 +71,7 @@ module.exports = gql`
     }
 
     type Score {
-        user: User!
+        user: ID!
         userScore: Int!
         bestScore: Int!
     }
@@ -89,25 +88,25 @@ module.exports = gql`
     }
 
     type Collection {
-        id: ID!
+        _id: ID!
         creator: ID!
         img: Image
         description: String
-        quizzes: [ID]
+        quizzes: [ID!]
         createdAt: String!
     }
 
     type Image {
-        id: ID!
+        _id: ID!
     }
 
     type Drawing {
-        id: ID!
+        _id: ID!
     }
 
     type Badge {
-        id: ID!
-        quiz: Quiz!
+        _id: ID!
+        quiz: ID!
         rank: Int!
         image: Image!
     }
@@ -125,7 +124,6 @@ module.exports = gql`
 
     type Mutation {
         login(username: String!, email: String!): User!
-        updateScore(id: ID!, score: Int!): User!
         createPlatform(owner: ID!, name: String!): Platform! 
         updateUsername(id: ID!, name: String!): User!
     }

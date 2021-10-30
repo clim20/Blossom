@@ -4,8 +4,8 @@ const Image = require('./Image').schema;
 const User = require('./User').schema;
 
 const quizSchema = new Schema({
-    id: ObjectId,
-	  title: String,
+    _id: ObjectId,
+	title: String,
     description: String,
     titleImg: Image,  
     creator: User,
@@ -21,7 +21,7 @@ const quizSchema = new Schema({
     ],
     scores: [
         {
-            user: User,
+            user: ObjectId,
             userScore: Number,
             bestScore: Number,
         }

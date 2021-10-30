@@ -3,15 +3,15 @@ import gql from 'graphql-tag';
 export const FETCH_POPULAR_USERS = gql`
     query getPopularUsers {
         getPopularUsers {
-            id
+            _id
             username
             email
             profileId
             quests {
-                questId
+                _id
                 isCompleted
                 image {
-                    id
+                    _id
                 }
             }
             createdAt
@@ -22,15 +22,15 @@ export const FETCH_POPULAR_USERS = gql`
 export const FIND_USER_BY_ID = gql`
     query findUserById($id: ID!) {
         findUserById(id: $id) {
-            id
+            _id
             username
             email
             profileId
             quests {
-                questId
+                _id
                 isCompleted
                 image {
-                    id
+                    _id
                 }
             }
             createdAt
@@ -41,15 +41,15 @@ export const FIND_USER_BY_ID = gql`
 export const GET_USERS = gql`
     query getUsers {
         getUsers {
-            id
+            _id
             username
             email
             profileId
             quests {
-                questId
+                _id
                 isCompleted
                 image {
-                    id
+                    _id
                 }
             }
             createdAt
@@ -60,15 +60,15 @@ export const GET_USERS = gql`
 export const FETCH_PROFILES = gql`
     query getProfiles {
         getProfiles {
-            id
+            _id
             user
             # profileImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
             # bannerImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
@@ -88,15 +88,15 @@ export const FETCH_PROFILES = gql`
 export const FIND_PROFILE_BY_ID = gql`
     query findProfileById($id: ID!) {
         findProfileById(id: $id) {
-            id
+            _id
             user
             # profileImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
             # bannerImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
@@ -116,16 +116,16 @@ export const FIND_PROFILE_BY_ID = gql`
 export const FETCH_POPULAR_PLATFORMS = gql`
     query getPopularPlatforms {
         getPopularPlatforms {
-            id
+            _id
             name
             owner
             # platformImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
             # bannerImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
@@ -144,16 +144,16 @@ export const FETCH_POPULAR_PLATFORMS = gql`
 export const FETCH_PLATFORMS = gql`
     query getPlatforms {
         getPlatforms {
-            id
+            _id
             name
             owner
             # platformImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
             # bannerImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
@@ -172,16 +172,16 @@ export const FETCH_PLATFORMS = gql`
 export const FIND_PLATFORM_BY_ID = gql`
     query findPlatformById($id: ID!) {
         findPlatformById(id: $id) {
-            id
+            _id
             name
             owner
             # platformImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }
             # bannerImg {
-            #     id
+            #     _id
             #     data
             #     contentType
             # }

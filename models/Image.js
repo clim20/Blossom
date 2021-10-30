@@ -1,7 +1,7 @@
 const { model, Schema, ObjectId } = require('mongoose');
  
 const imageSchema = new Schema({
-    id: ObjectId,
+    _id: ObjectId,
 	data: Buffer, 
     contentType: String
 });

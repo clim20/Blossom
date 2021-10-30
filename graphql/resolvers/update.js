@@ -13,14 +13,14 @@ module.exports = {
     },
     Mutation: {
         async updateUsername(_, { id, name }){
-            const user = await User.findOne({id: id});
+            const user = await User.findOne({_id: id});
             const usernameExist = await User.findOne({username: name});
 
             if(!usernameExist){
-                const updated = await User.updateOne({id: user.id}, {username: name});
+                const updated = await User.updateOne({id: user._id}, {username: name});
 
                 if (updated) {
-                    const newUser = await User.findOne({id: id});
+                    const newUser = await User.findOne({_id: id});
                     return newUser;
                 }
             }

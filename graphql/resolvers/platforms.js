@@ -13,7 +13,7 @@ module.exports = {
         return [];
     },
     async findPlatformById(_, { id }) {
-        const platform = await Platform.findOne({id});
+        const platform = await Platform.findOne({_id: id});
         
         if (platform) return platform;
         return {};
@@ -36,12 +36,12 @@ module.exports = {
     async createPlatform(_, { owner, name }) {
         
       const ownerId = new ObjectId(owner);
-      const user = await User.findOne({id: ownerId});
+      const user = await User.findOne({_id: ownerId});
 
       const newPlatform = new Platform({
-        id: new ObjectId(),
+        _id: new ObjectId(),
         name,
-        owner: user.id,
+        owner: user._id,
         platformImg: {},
         bannerImg: {},
         description: "",
@@ -56,10 +56,10 @@ module.exports = {
 
       const updated = await newPlatform.save();
 
-      const profile = await Profile.findOne({id: new ObjectId(user.profileId)});
+      const profile = await Profile.findOne(new ObjectId(user.profileId));
       let platforms = profile.platforms;
       platforms.push(newPlatform);
-      const updated2 = await Profile.updateOne({id: profile.id}, {platforms: platforms});
+      const updated2 = await Profile.updateOne({id: profile._id}, {platforms: platforms});
 
       if(updated && updated2) {
         console.log(newPlatform);

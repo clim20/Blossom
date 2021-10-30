@@ -7,7 +7,7 @@ const Profile = require('../../models/Profile');
 
 function generateToken(user) {
   return jwt.sign({
-    id: user.id,
+    _id: user._id,
     email: user.email,
     username: user.username,
     profileId: user.profileId,
@@ -48,7 +48,7 @@ module.exports = {
       if (!user) {
         const profileId = new ObjectId();
         const newUser = new User({
-          id: new ObjectId(),
+          _id: new ObjectId(),
           email,
           username,
           profileId: profileId,
@@ -57,8 +57,8 @@ module.exports = {
         });
 
         const newProfile = new Profile({
-          id: profileId,
-          user: newUser.id,
+          _id: profileId,
+          user: newUser._id,
           profileImg: {},
           bannerImg: {},
           badges: [],
@@ -93,19 +93,6 @@ module.exports = {
         id: user._id,
         token
       };
-    },
-    async updateScore(_, { id, score }) {
-      let user = await User.findById(new ObjectId(id));
-
-      if (!user) {
-        return {};
-      }
-
-      const updatedScores = [...user.scores, score];
-      await User.updateOne({ _id: id }, { scores: updatedScores });
-      user = await User.findById(new ObjectId(id));
-
-      return user;
     }
   },
 };

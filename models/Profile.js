@@ -1,13 +1,8 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Badge = require('./Badge').schema;
-const Collection = require('./Collection').schema;
 const Image = require('./Image').schema;
-const Platform = require('./Platform').schema;
-const Quiz = require('./Quiz').schema;
-const User = require('./User').schema;
 
 const profileSchema = new Schema({
-    id: ObjectId,
+    _id: ObjectId,
 	user: ObjectId,
 	profileImg: Image,
 	bannerImg: Image,
