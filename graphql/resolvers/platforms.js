@@ -18,6 +18,20 @@ module.exports = {
         if (platform) return platform;
         return {};
     },
+    async findPlatformsByIds(_, { ids }) {
+      console.log("ids", ids)
+      var platforms = []
+      for(let i = 0; i < ids.length; i++) {
+        const platform = await Platform.findOne({_id: ids[i]});
+        if (platform) {
+          platforms.push(platform);
+        }
+      }
+      
+      console.log(platforms);
+      if (platforms) return platforms;
+      return [];
+    },
     async getPopularPlatforms() {
         const platforms = await Platform.find().sort({ followerCount: -1 });
       
@@ -58,7 +72,7 @@ module.exports = {
 
       const profile = await Profile.findOne(new ObjectId(user.profileId));
       let platforms = profile.platforms;
-      platforms.push(newPlatform);
+      platforms.push(newPlatform._id);
       const updated2 = await Profile.updateOne({id: profile._id}, {platforms: platforms});
 
       if(updated && updated2) {

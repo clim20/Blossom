@@ -8,7 +8,6 @@ import PlatformCards from '../components/PlatformCards';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
-import { UPDATE_SCORE } from '../cache/mutations';
 
 const Home = () => {
     const history = useHistory();
@@ -16,13 +15,17 @@ const Home = () => {
 
     var users = [];
     const { data: usersData, refetch: usersRefetch } = useQuery(queries.FETCH_POPULAR_USERS);
-	if(usersData) { users = usersData.getPopularUsers; }
+	if(usersData) {
+        users = usersData.getPopularUsers;
+    }
 
     console.log(users);
 
     var platforms = [];
     const { data: platformsData } = useQuery(queries.FETCH_POPULAR_PLATFORMS);
-    if(platformsData) { platforms = platformsData.getPopularPlatforms; }
+    if(platformsData) { 
+        platforms = platformsData.getPopularPlatforms; 
+    }
 
     console.log(platforms);
 

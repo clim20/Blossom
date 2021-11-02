@@ -196,3 +196,18 @@ export const FIND_PLATFORM_BY_ID = gql`
         }
     }
 `;
+
+export const FIND_PLATFORMS_BY_IDS = gql`
+    query findPlatformsByIds($ids: [ID!]!) {
+        findPlatformsByIds(ids: $ids) {
+            _id
+            name
+            # platformImg {
+            #     _id
+            #     data
+            #     contentType
+            # }
+            followerCount
+        }
+    }
+`;

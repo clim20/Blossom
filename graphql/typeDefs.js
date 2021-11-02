@@ -119,6 +119,7 @@ module.exports = gql`
         getPopularPlatforms: [Platform!]!
         getPlatforms: [Platform!]!
         findPlatformById(id: ID!): Platform!
+        findPlatformsByIds(ids: [ID!]!): [Platform!]!
         getUsers: [User!]!
     }
 
