@@ -116,12 +116,12 @@ const Profile = () => {
 
                 <div className="ui bottom attached active tab segment profile-content">
                     {activeTab === 'home' && <Home/>}
-                    {activeTab === 'quizzes' && <Quizzes/>}
+                    {activeTab === 'quizzes' && <Quizzes profile={profile}/>}
                     {activeTab === 'platforms' && <Platforms profile={profile}/>}
-                    {activeTab === 'collections' && <Collections/>}
-                    {activeTab === 'following' && <Following/>}
-                    {activeTab === 'badges' && <Badges/>}
-                    {activeTab === 'about' && <About/>}
+                    {activeTab === 'collections' && <Collections profile={profile}/>}
+                    {activeTab === 'following' && <Following profile={profile}/>}
+                    {activeTab === 'badges' && <Badges profile={profile}/>}
+                    {activeTab === 'about' && <About profile={profile}/>}
                 </div>
             </div>
         </div>
