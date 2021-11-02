@@ -1,14 +1,11 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Drawing = require('./Drawing').schema;
-const Image = require('./Image').schema;
-const User = require('./User').schema;
 
 const quizSchema = new Schema({
     _id: ObjectId,
 	title: String,
     description: String,
-    titleImg: Image,  
-    creator: User,
+    titleImg: String,  
+    creator: ObjectId,
     platformId: String,
     quizHits: Number,
     quizLikes: Number,
@@ -16,7 +13,7 @@ const quizSchema = new Schema({
     badges: [
         {
             rank: Number,
-            image: Image
+            image: String
         }
     ],
     scores: [
@@ -33,9 +30,9 @@ const quizSchema = new Schema({
             choices: [String],
             answer: Number,
             answerExplanation: String,
-            questionImg: Image,
-            answerImg: Image,
-            drawing: Drawing
+            questionImg: String,
+            answerImg: String,
+            drawing: ObjectId
         }
     ],
     createdAt: String

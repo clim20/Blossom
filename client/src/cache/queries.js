@@ -10,9 +10,7 @@ export const FETCH_POPULAR_USERS = gql`
             quests {
                 _id
                 isCompleted
-                image {
-                    _id
-                }
+                image
             }
             createdAt
         }
@@ -29,9 +27,7 @@ export const FIND_USER_BY_ID = gql`
             quests {
                 _id
                 isCompleted
-                image {
-                    _id
-                }
+                image
             }
             createdAt
         }
@@ -48,9 +44,7 @@ export const GET_USERS = gql`
             quests {
                 _id
                 isCompleted
-                image {
-                    _id
-                }
+                image
             }
             createdAt
         }
@@ -62,16 +56,8 @@ export const FETCH_PROFILES = gql`
         getProfiles {
             _id
             user
-            # profileImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
+            profileImg
+            bannerImg
             badges
             description
             contact
@@ -90,16 +76,8 @@ export const FIND_PROFILE_BY_ID = gql`
         findProfileById(id: $id) {
             _id
             user
-            # profileImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
+            profileImg
+            bannerImg
             badges
             description
             contact
@@ -119,16 +97,8 @@ export const FETCH_POPULAR_PLATFORMS = gql`
             _id
             name
             owner
-            # platformImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
+            platformImg
+            bannerImg
             description
             contact
             collaborators
@@ -147,16 +117,8 @@ export const FETCH_PLATFORMS = gql`
             _id
             name
             owner
-            # platformImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
+            platformImg
+            bannerImg
             description
             contact
             collaborators
@@ -175,16 +137,8 @@ export const FIND_PLATFORM_BY_ID = gql`
             _id
             name
             owner
-            # platformImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
+            platformImg
+            bannerImg
             description
             contact
             collaborators
@@ -202,11 +156,7 @@ export const FIND_PLATFORMS_BY_IDS = gql`
         findPlatformsByIds(ids: $ids) {
             _id
             name
-            # platformImg {
-            #     _id
-            #     data
-            #     contentType
-            # }
+            platformImg
             followerCount
         }
     }

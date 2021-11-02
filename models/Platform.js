@@ -1,12 +1,11 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Image = require('./Image').schema;
 
 const platformSchema = new Schema({
     _id: ObjectId,
     name: String,
 	owner: ObjectId,
-    platformImg: Image,
-    bannerImg: Image,
+    platformImg: String,
+    bannerImg: String,
     description: String,
     contact: String,
     collaborators: [ObjectId],

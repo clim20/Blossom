@@ -1,10 +1,9 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Image = require('./Image').schema;
 
 const collectionSchema = new Schema({
     _id: ObjectId,
 	creator: ObjectId, 
-	img: Image,
+	img: String,
 	description: String,
 	quizzes: [ObjectId],
 	createdAt: String

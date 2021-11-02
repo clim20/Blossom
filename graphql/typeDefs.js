@@ -14,14 +14,14 @@ module.exports = gql`
     type Quest {
         _id: ID!
         isCompleted: Boolean!
-        image: Image!
+        image: String!
     }
 
     type Profile {
         _id: ID!
         user: ID!
-        profileImg: Image
-        bannerImg: Image
+        profileImg: String
+        bannerImg: String
         badges: [ID!]
         description: String
         contact: String
@@ -37,8 +37,8 @@ module.exports = gql`
         _id: ID!
         name: String!
         owner: ID!
-        platformImg: Image
-        bannerImg: Image
+        platformImg: String
+        bannerImg: String
         description: String
         contact: String
         collaborators: [ID!]!
@@ -53,7 +53,7 @@ module.exports = gql`
         _id: ID!
         title: String!
         description: String!
-        titleImg: Image
+        titleImg: String
         creator: ID!
         platform: ID!
         quizHits: Int!
@@ -67,7 +67,7 @@ module.exports = gql`
 
     type quizBadge {
         rank: Int
-        image: Image
+        image: String
     }
 
     type Score {
@@ -82,22 +82,18 @@ module.exports = gql`
         choices: [String!]!
         answer: Int!
         answerExplanation: String!
-        questionImg: Image
-        answerImg: Image
+        questionImg: String
+        answerImg: String
         drawing: Drawing
     }
 
     type Collection {
         _id: ID!
         creator: ID!
-        img: Image
+        img: String
         description: String
         quizzes: [ID!]
         createdAt: String!
-    }
-
-    type Image {
-        _id: ID!
     }
 
     type Drawing {
@@ -108,7 +104,7 @@ module.exports = gql`
         _id: ID!
         quiz: ID!
         rank: Int!
-        image: Image!
+        image: String!
     }
 
     type Query {

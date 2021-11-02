@@ -1,5 +1,4 @@
 const { model, Schema, ObjectId } = require('mongoose');
-const Image = require('./Image').schema;
  
 const userSchema = new Schema({
     _id: ObjectId,
@@ -8,9 +7,9 @@ const userSchema = new Schema({
     profileId: ObjectId,
     quests: [
         {
-            _id: String,
+            _id: ObjectId,
             isCompleted: Boolean,
-            image: Image
+            image: String
         }
     ],
     createdAt: String

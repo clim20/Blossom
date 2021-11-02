@@ -10,9 +10,7 @@ export const LOGIN_USER = gql`
             quests {
                 _id
                 isCompleted
-                image {
-                   _id
-                }
+                image
             }
             createdAt
             token
