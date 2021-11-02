@@ -120,7 +120,7 @@ module.exports = gql`
     }
 
     type Mutation {
-        login(username: String!, email: String!): User!
+        login(username: String!, email: String!, profileImg: String!): User!
         createPlatform(owner: ID!, name: String!): Platform! 
         updateUsername(id: ID!, name: String!): User!
     }

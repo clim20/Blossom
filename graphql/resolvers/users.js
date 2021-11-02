@@ -41,7 +41,7 @@ module.exports = {
     }
   },
   Mutation: {
-    async login(_, { username, email }) {
+    async login(_, { username, email, profileImg }) {
       const user = await User.findOne({ email });
 
       // If user not found, register user
@@ -59,8 +59,8 @@ module.exports = {
         const newProfile = new Profile({
           _id: profileId,
           user: newUser._id,
-          profileImg: {},
-          bannerImg: {},
+          profileImg: profileImg,
+          bannerImg: "https://wallpaperaccess.com/full/5163061.jpg",
           badges: [],
           description: "",
           contact: "",

@@ -51,12 +51,12 @@ const Profile = () => {
         <div>
             <MenuBar/>
             <div className="ui container banner-header"
-                style={{ backgroundImage: `url(https://wallpaperaccess.com/full/5163061.jpg)` }}
+                style={{ backgroundImage: `url(${profile.bannerImg})` }}
             >
                 <div className="banner-info">
                     <div className="display-inline-block">
                         <img className="card-image creator-circle ui avatar image"
-                            src="https://image.pngaaa.com/477/46477-middle.png"
+                            src={profile.profileImg}
                             alt="creator profile"
                         />
                     </div>
