@@ -50,12 +50,12 @@ const Platform = () => {
         <div>
             <MenuBar/>
             <div className="ui container banner-header"
-                style={{ backgroundImage: `url(https://img.wallpapersafari.com/desktop/1024/576/75/50/m1YVTq.jpg)` }}
+                style={{ backgroundImage: `url(${platform.bannerImg})` }}
             >
                 <div className="banner-info">
                     <div className="display-inline-block">
-                        <img className="card-image creator-circle ui avatar image"
-                            src="https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg"
+                        <img className="card-image platform-circle ui avatar image"
+                            src={platform.platformImg}
                             alt="platform"
                         />
                     </div>
