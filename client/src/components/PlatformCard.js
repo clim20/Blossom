@@ -27,7 +27,7 @@ function PlatformCard(props) {
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
             <img className="card-image platform-circle ui avatar image"
-                src="https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg"
+                src={platform.platformImg}
                 alt="platform"
             />
             <br/>
