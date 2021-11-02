@@ -26,8 +26,7 @@ module.exports = gql`
         description: String
         contact: String
         followerCount: Int!
-        usersFollowing: [ID!]
-        platformsFollowing: [ID!]
+        following: [ID!]
         quizzes: [ID!]
         collections: [ID!]
         platforms: [ID!]
@@ -107,11 +106,14 @@ module.exports = gql`
         image: String!
     }
 
+    union Following = User | Platform
+
     type Query {
         getPopularUsers: [User!]!
         findUserById(id: ID!): User!
         getProfiles: [Profile!]!
         findProfileById(id: ID!): Profile!
+        findFollowingByIds(ids: [ID!]!): [Following!]!
         getPopularPlatforms: [Platform!]!
         getPlatforms: [Platform!]!
         findPlatformById(id: ID!): Platform!

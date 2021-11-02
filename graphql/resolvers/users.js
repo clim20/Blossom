@@ -65,8 +65,7 @@ module.exports = {
           description: "",
           contact: "",
           followerCount: 0,
-          usersFollowing: [],
-          platformsFollowing: [],
+          following: [],
           quizzes: [],
           collections: [],
           platforms: []

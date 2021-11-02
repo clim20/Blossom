@@ -9,8 +9,7 @@ const profileSchema = new Schema({
     description: String,
     contact: String,
     followerCount: Number,
-    usersFollowing: [ObjectId],
-    platformsFollowing: [ObjectId],
+    following: [ObjectId],
     quizzes: [ObjectId],
     collections: [ObjectId],
     platforms: [ObjectId]

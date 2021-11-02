@@ -62,8 +62,7 @@ export const FETCH_PROFILES = gql`
             description
             contact
             followerCount
-            usersFollowing 
-            platformsFollowing
+            following
             quizzes
             collections
             platforms
@@ -82,11 +81,29 @@ export const FIND_PROFILE_BY_ID = gql`
             description
             contact
             followerCount
-            usersFollowing
-            platformsFollowing
+            following
             quizzes
             collections
             platforms
+        }
+    }
+`;
+
+export const FIND_FOLLOWING_BY_IDS = gql`
+    query findFollowingByIds($ids: [ID!]!) {
+        findFollowingByIds(ids: $ids) {
+            __typename
+            ... on User {
+                _id
+                username
+                profileId
+            }
+            ... on Platform {
+                _id
+                name
+                platformImg
+                followerCount
+            }
         }
     }
 `;
