@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
@@ -21,13 +21,19 @@ const Profile = () => {
     const params = useParams();
     const profileId = params ? params.profileId : 'could not get params';
 
+    useEffect(() => {
+        if (params) {
+            setActiveTab('home');
+        }
+    }, [params]);
+
     const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: profileId
         }
     });
 
-    var profile = {};
+    var profile = { user: '' };
     if (data) { 
 		profile = data.findProfileById;
     }
@@ -115,7 +121,7 @@ const Profile = () => {
                 </div>
 
                 <div className="ui bottom attached active tab segment profile-content">
-                    {activeTab === 'home' && <Home/>}
+                    {activeTab === 'home' && <Home profile={profile}/>}
                     {activeTab === 'quizzes' && <Quizzes profile={profile}/>}
                     {activeTab === 'platforms' && <Platforms profile={profile}/>}
                     {activeTab === 'collections' && <Collections profile={profile}/>}
