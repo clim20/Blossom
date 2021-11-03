@@ -33,11 +33,19 @@ const Following = (props) => {
 
     return (
         <div>
-            <h3 className="ui header">Users</h3>
-            {users && <CreatorCards users={users} />}
+            {users.length > 0 && 
+                <div>
+                    <h3 className="ui header">Users</h3>
+                    <CreatorCards users={users} />
+                </div>
+            }
             <div className="ui hidden divider"></div>
-            <h3 className="ui header">Platforms</h3>
-            {platforms && <PlatformCards platforms={platforms} />}
+            {platforms.length > 0 &&
+                <div>
+                    <h3 className="ui header">Platforms</h3>
+                    {platforms && <PlatformCards platforms={platforms} />}
+                </div>
+            }            
         </div>
     );
 }
