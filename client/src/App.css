@@ -150,6 +150,7 @@ button svg {
 
 .profile-section, .platform-section {
   position: relative;
+  padding-bottom: 3rem;
   top: 7rem;
 }
 

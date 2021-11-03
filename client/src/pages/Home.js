@@ -30,7 +30,7 @@ const Home = () => {
     console.log(platforms);
 
 	return (
-        <div>
+        <div style={{ paddingBottom: '3rem' }}>
             <MenuBar/>
             {user &&
                 <div>
