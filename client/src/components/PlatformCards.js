@@ -4,7 +4,7 @@ import PlatformCard from './PlatformCard';
 
 function PlatformCards(props) {  
     return (
-        <div className="ui very relaxed horizontal list big">
+        <div className="ui very relaxed horizontal list medium">
             {
                 props.platforms.map((entry, index) => (
                     <PlatformCard
