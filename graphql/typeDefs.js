@@ -127,5 +127,9 @@ module.exports = gql`
         followPlatform(userId: ID!, platformId: ID!): Boolean!
         createPlatform(owner: ID!, name: String!): Platform! 
         updateUsername(id: ID!, name: String!): User!
+        addCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
+        addCollaborator(platformId: ID!, userId: ID!): Platform!
+        removeCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
+        removeCollaborator(platformId: ID!, userId: ID!): Platform!
     }
 `
