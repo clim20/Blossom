@@ -70,16 +70,65 @@ module.exports = {
 
       const updated = await newPlatform.save();
 
-      const profile = await Profile.findOne(new ObjectId(user.profileId));
+      const profile = await Profile.findOne({_id: user.profileId});
       let platforms = profile.platforms;
       platforms.push(newPlatform._id);
-      const updated2 = await Profile.updateOne({id: profile._id}, {platforms: platforms});
+      const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
 
       if(updated && updated2) {
         console.log(newPlatform);
         return newPlatform;
       }
       else return false;
-    }
-  },
+    },
+    async addCollaboratorRequest(_, { platformId, userId }) {
+      const platform = await Platform.findOne({_id: platformId});
+  
+      console.log(platform);
+      let requests = platform.requests;
+      requests.push(userId);
+      const updated = await Platform.updateOne({_id: platform._id}, {requests: requests});
+  
+      if(updated){
+        return platform;
+      }
+      return platform;
+    },
+    async addCollaborator(_, { platformId, userId }) {
+      const platform = await Platform.findOne({_id: platformId});
+  
+      let collaborators = platform.collaborators;
+      collaborators.push(userId);
+      const list = platform.requests.filter(id => id.toString() !== new ObjectId(userId).toString());
+      const updated = await Platform.updateOne({_id: platform._id}, {collaborators: collaborators, requests: list});
+
+      if(updated){
+        return platform;
+      }
+      return platform;
+    },
+    async removeCollaboratorRequest(_, { platformId, userId }) {
+      const platform = await Platform.findOne({_id: platformId});
+  
+      const list = platform.requests.filter(id => id.toString() !== new ObjectId(userId).toString());
+      const updated = await Platform.updateOne({_id: platform._id}, {requests: list});
+
+      if(updated){
+        return platform;
+      }
+      return platform;
+    },
+    async removeCollaborator(_, { platformId, userId }) {
+      const platform = await Platform.findOne({_id: platformId});
+  
+      let list = platform.collaborators.filter(id => id.toString() !== new ObjectId(userId).toString());
+      const updated = await Platform.updateOne({_id: platform._id}, {collaborators: list});
+      
+      if(updated){
+        return platform;
+      }
+      return platform;
+    },
+
+  }
 };

@@ -125,5 +125,9 @@ module.exports = gql`
         login(username: String!, email: String!, profileImg: String!): User!
         createPlatform(owner: ID!, name: String!): Platform! 
         updateUsername(id: ID!, name: String!): User!
+        addCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
+        addCollaborator(platformId: ID!, userId: ID!): Platform!
+        removeCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
+        removeCollaborator(platformId: ID!, userId: ID!): Platform!
     }
 `
