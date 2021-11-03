@@ -29,3 +29,15 @@ export const UPDATE_USERNAME = gql`
         }
     }
 `;
+
+export const FOLLOW_PROFILE = gql`
+    mutation followProfile($userId: ID!, $profileId: ID!){
+        followProfile(userId: $userId, profileId: $profileId)
+    }    
+`;
+
+export const FOLLOW_PLATFORM = gql`
+    mutation followPlatform($userId: ID!, $platformId: ID!){
+        followPlatform(userId: $userId, platformId: $platformId)
+    }
+`;

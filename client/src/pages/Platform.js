@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
 import Home from '../tabs/Home';
@@ -11,25 +11,29 @@ import About from '../tabs/About';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 
 const Platform = () => {
     const { user } = useContext(AuthContext);
 
     const [activeTab, setActiveTab] = useState('home');
+    const [followed, setFollowed ] = useState(false);
     const params = useParams();
     const platformId = params ? params.platformId : 'could not get params';
 
-    const { data } = useQuery(queries.FIND_PLATFORM_BY_ID, {
+    // Platform page user is on
+    const { data: PlatformData, refetch: refetchPlatformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
             id: platformId
         }
     });
 
     var platform = {};
-    if (data) { 
-		platform = data.findPlatformById;
+    if (PlatformData) { 
+		platform = PlatformData.findPlatformById;
     }
 
+    // User's own User and Profile
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
             id: platform.owner
@@ -42,8 +46,44 @@ const Platform = () => {
     }
     console.log(userObject);
 
+    const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: user.profileId
+        }
+    });
+
+    var userProfile = { following: [] };
+    if (userProfileData) { 
+        userProfile = userProfileData.findProfileById;
+    }
+
     const handleTabClick = (name) => {
         setActiveTab(name);
+    }
+
+    var isOwnPlatform = platform && user && platform.owner === user._id;
+
+    useEffect(() => {
+        if (userProfile && platform && userProfile.following.find(id => id.toString() === platform._id.toString())) {
+            setFollowed(true);
+        } else {
+            setFollowed(false);
+        }
+    }, [userProfile, platform]);
+    
+    const [followPlatform] = useMutation(mutations.FOLLOW_PLATFORM, {
+        variables: {
+            userId: user._id,
+            platformId: platform._id
+        }
+    });
+
+    const handleFollow = () => {
+        followPlatform();
+        setTimeout(() => {
+            refetchPlatformData();
+            refetchUserProfileData();
+        }, 300);
     }
 
     return (
@@ -67,9 +107,9 @@ const Platform = () => {
                     }
                 </div>
 
-                {platform && user && userObject.username !== user.username && 
-                    <button className="ui button follow-button">
-                        Follow
+                {!isOwnPlatform && 
+                    <button className="ui button follow-button" onClick={handleFollow}>
+                        {followed ? 'Unfollow' : 'Follow'}
                     </button>
                 }
             </div>

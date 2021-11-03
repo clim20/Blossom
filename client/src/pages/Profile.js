@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
 import Home from '../tabs/Home';
@@ -13,11 +13,13 @@ import About from '../tabs/About';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 
 const Profile = () => {
     const { user } = useContext(AuthContext);
 
     const [activeTab, setActiveTab] = useState('home');
+    const [followed, setFollowed ] = useState(false);
     const params = useParams();
     const profileId = params ? params.profileId : 'could not get params';
 
@@ -27,17 +29,19 @@ const Profile = () => {
         }
     }, [params]);
 
-    const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    // Profile Page user is on
+    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: profileId
         }
     });
 
     var profile = { user: '' };
-    if (data) { 
-		profile = data.findProfileById;
+    if (profileData) { 
+		profile = profileData.findProfileById;
     }
 
+    // User's own User and Profile
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
             id: profile.user
@@ -49,8 +53,44 @@ const Profile = () => {
 		userObject = userData.findUserById;
     }
 
+    const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: user.profileId
+        }
+    });
+
+    var userProfile = { following: [] };
+    if (userProfileData) { 
+        userProfile = userProfileData.findProfileById;
+    }
+
     const handleTabClick = (name) => {
         setActiveTab(name);
+    }
+
+    const isOwnProfile = profile && user && profile.user === user._id;
+
+    useEffect(() => {
+        if (userProfile && profile && userProfile.following.find(id => id.toString() === profile.user.toString())) {
+            setFollowed(true);
+        } else {
+            setFollowed(false);
+        }
+    }, [userProfile, profile]);
+    
+    const [followProfile] = useMutation(mutations.FOLLOW_PROFILE, {
+        variables: {
+            userId: user._id,
+            profileId: profile._id
+        }
+    });
+
+    const handleFollow = () => {
+        followProfile();
+        setTimeout(() => {
+            refetchProfileData();
+            refetchUserProfileData();
+        }, 300);
     }
 
     return (
@@ -74,9 +114,9 @@ const Profile = () => {
                     }
                 </div>
 
-                {profile && user && user.username && userObject.username !== user.username && 
-                    <button className="ui button follow-button">
-                        Follow
+                {!isOwnProfile &&
+                    <button className="ui button follow-button" onClick={handleFollow}>
+                        {followed ? 'Unfollow' : 'Follow'}
                     </button>
                 }
             </div>

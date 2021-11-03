@@ -37,6 +37,27 @@ module.exports = {
     },
   },
   Mutation: {
+    async followProfile(_, { userId, profileId }) {
+      const user = await User.findOne({_id: userId});
+      const userProfile = await Profile.findOne({_id: new ObjectId(user.profileId)});
+      const profile = await Profile.findOne({_id: new ObjectId(profileId)});
+      
+      // Update user's following and +-1 to the profile followerCount
+      if (userProfile.following.find(id => id.toString() === profile.user.toString())){
+        // Already following, unfollow
+        userProfile.following = userProfile.following.filter(id => id.toString() !== profile.user.toString());
+        profile.followerCount -= 1;
+      } else {
+        // Not following, follow
+        userProfile.following.push(profile.user);
+        profile.followerCount += 1;
+      }
 
+      const userUpdated = await userProfile.save();
+      const profileUpdated = await profile.save();
+
+      if (profileUpdated && userUpdated) return true;
+      return false;
+    }
   },
 };

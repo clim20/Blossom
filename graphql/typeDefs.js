@@ -123,6 +123,8 @@ module.exports = gql`
 
     type Mutation {
         login(username: String!, email: String!, profileImg: String!): User!
+        followProfile(userId: ID!, profileId: ID!): Boolean!
+        followPlatform(userId: ID!, platformId: ID!): Boolean!
         createPlatform(owner: ID!, name: String!): Platform! 
         updateUsername(id: ID!, name: String!): User!
     }

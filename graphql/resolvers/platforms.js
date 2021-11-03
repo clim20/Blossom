@@ -19,7 +19,6 @@ module.exports = {
         return {};
     },
     async findPlatformsByIds(_, { ids }) {
-      console.log("ids", ids)
       var platforms = []
       for(let i = 0; i < ids.length; i++) {
         const platform = await Platform.findOne({_id: ids[i]});
@@ -28,7 +27,6 @@ module.exports = {
         }
       }
       
-      console.log(platforms);
       if (platforms) return platforms;
       return [];
     },
@@ -80,6 +78,28 @@ module.exports = {
         return newPlatform;
       }
       else return false;
+    },
+    async followPlatform(_, { userId, platformId }) {
+      const user = await User.findOne({_id: userId});
+      const userProfile = await Profile.findOne({_id: new ObjectId(user.profileId)});
+      const platform = await Platform.findOne({_id: new ObjectId(platformId)});
+      
+      // Update user's following and +-1 to the platform followerCount
+      if (userProfile.following.find(id => id.toString() === platformId.toString())){
+        // Already following, unfollow
+        userProfile.following = userProfile.following.filter(id => id.toString() !== platformId.toString());
+        platform.followerCount -= 1;
+      } else {
+        // Not following, follow
+        userProfile.following.push(platformId);
+        platform.followerCount += 1;
+      }
+
+      const userUpdated = await userProfile.save();
+      const platformUpdated = await platform.save();
+
+      if (platformUpdated && userUpdated) return true;
+      return false;
     }
   },
 };
