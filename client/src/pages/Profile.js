@@ -9,7 +9,7 @@ import Platforms from '../tabs/Platforms';
 import Collections from '../tabs/Collections';
 import Following from '../tabs/Following';
 import Badges from '../tabs/Badges';
-import About from '../tabs/About';
+import ProfileAbout from '../tabs/ProfileAbout';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -68,8 +68,6 @@ const Profile = () => {
         setActiveTab(name);
     }
 
-    const isOwnProfile = profile && user && profile.user === user._id;
-
     useEffect(() => {
         if (userProfile && profile && userProfile.following.find(id => id.toString() === profile.user.toString())) {
             setFollowed(true);
@@ -92,6 +90,8 @@ const Profile = () => {
             refetchUserProfileData();
         }, 300);
     }
+
+    const isOwnProfile = profile && user && profile.user === user._id;
 
     return (
         <div>
@@ -167,7 +167,7 @@ const Profile = () => {
                     {activeTab === 'collections' && <Collections profile={profile}/>}
                     {activeTab === 'following' && <Following profile={profile}/>}
                     {activeTab === 'badges' && <Badges profile={profile}/>}
-                    {activeTab === 'about' && <About profile={profile}/>}
+                    {activeTab === 'about' && <ProfileAbout profile={profile} refetchProfileData={refetchProfileData}/>}
                 </div>
             </div>
         </div>

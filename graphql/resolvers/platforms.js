@@ -149,5 +149,16 @@ module.exports = {
       }
       return platform;
     },
+    async editPlatform(_, { id, updatedPlatform }) {
+      const platform = await Platform.findOne({_id: new ObjectId(id)});
+
+      const updated = await Platform.updateOne({_id: new ObjectId(id)}, {
+        description: updatedPlatform.description, 
+        contact: updatedPlatform.contact
+      });
+
+      if (updated) return platform;
+      return platform;
+    }
   }
 };

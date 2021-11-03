@@ -106,6 +106,28 @@ module.exports = gql`
         image: String!
     }
 
+    input ProfileInput {
+        # profileImg: String
+        # bannerImg: String
+        description: String
+        contact: String
+        # following: [ID!]
+        # quizzes: [ID!]
+        # collections: [ID!]
+        # platforms: [ID!]
+    }
+
+    input PlatformInput {
+        # name: String!
+        # platformImg: String
+        # bannerImg: String
+        description: String
+        contact: String
+        # collaborators: [ID!]!
+        # quizzes: [ID!]
+        # collections: [ID!]
+    }
+
     union Following = User | Platform
 
     type Query {
@@ -131,5 +153,7 @@ module.exports = gql`
         addCollaborator(platformId: ID!, userId: ID!): Platform!
         removeCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
         removeCollaborator(platformId: ID!, userId: ID!): Platform!
+        editProfile(id: ID!, updatedProfile: ProfileInput!): Profile!
+        editPlatform(id: ID!, updatedPlatform: PlatformInput!): Platform!
     }
 `

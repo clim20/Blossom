@@ -41,3 +41,42 @@ export const FOLLOW_PLATFORM = gql`
         followPlatform(userId: $userId, platformId: $platformId)
     }
 `;
+
+export const EDIT_PROFILE = gql`
+    mutation editProfile($id: ID!, $updatedProfile: ProfileInput!){
+        editProfile(id: $id, updatedProfile: $updatedProfile) {
+            _id
+            user
+            profileImg
+            bannerImg
+            badges
+            description
+            contact
+            followerCount
+            following
+            quizzes
+            collections
+            platforms
+        }
+    }
+`;
+
+export const EDIT_PLATFORM = gql`
+    mutation editPlatform($id: ID!, $updatedPlatform: PlatformInput!){
+        editPlatform(id: $id, updatedPlatform: $updatedPlatform) {
+            _id
+            name
+            owner
+            platformImg
+            bannerImg
+            description
+            contact
+            collaborators
+            requests
+            followerCount
+            quizzes
+            collections
+            createdAt
+        }
+    }
+`;

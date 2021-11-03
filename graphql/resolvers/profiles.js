@@ -58,6 +58,17 @@ module.exports = {
 
       if (profileUpdated && userUpdated) return true;
       return false;
+    },
+    async editProfile(_, { id, updatedProfile }) {
+      const profile = await Profile.findOne({_id: new ObjectId(id)});
+
+      const updated = await Profile.updateOne({_id: new ObjectId(id)}, {
+        description: updatedProfile.description, 
+        contact: updatedProfile.contact
+      });
+
+      if (updated) return profile;
+      return profile;
     }
   },
 };

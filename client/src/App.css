@@ -108,6 +108,10 @@ button svg {
   display: inline-block;
 }
 
+.display-flex {
+  display: flex;
+}
+
 .text-align-center {
   text-align: center;
 }
@@ -188,7 +192,31 @@ button svg {
   position: absolute;
   right: 5rem;
   bottom: -4.6rem;
-  width: 10%;
+  width: 8rem;
   height: 3rem;
   background-color: #fed3db !important;
+}
+
+.edit-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: #fed3db !important;
+}
+
+.save-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: #8bd784 !important;
+}
+
+.cancel-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: #f85b5b !important;
+}
+
+.edit-box {
+  margin: 0px;
+  width: 400px;
+  height: 100px;
 }

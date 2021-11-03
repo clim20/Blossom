@@ -7,7 +7,7 @@ import Home from '../tabs/Home';
 import Quizzes from '../tabs/Quizzes';
 import Collections from '../tabs/Collections';
 import Collaborators from '../tabs/Collaborators';
-import About from '../tabs/About';
+import PlatformAbout from '../tabs/PlatformAbout';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -61,8 +61,6 @@ const Platform = () => {
         setActiveTab(name);
     }
 
-    var isOwnPlatform = platform && user && platform.owner === user._id;
-
     useEffect(() => {
         if (userProfile && platform && userProfile.following.find(id => id.toString() === platform._id.toString())) {
             setFollowed(true);
@@ -85,6 +83,8 @@ const Platform = () => {
             refetchUserProfileData();
         }, 300);
     }
+
+    const isOwnPlatform = platform && user && platform.owner === user._id;
 
     return (
         <div>
@@ -148,7 +148,7 @@ const Platform = () => {
                     {activeTab === 'quizzes' && <Quizzes/>}
                     {activeTab === 'collections' && <Collections/>}
                     {activeTab === 'collaborators' && <Collaborators/>}
-                    {activeTab === 'about' && <About/>}
+                    {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>
             </div>
         </div>
