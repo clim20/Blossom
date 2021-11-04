@@ -29,6 +29,19 @@ module.exports = {
             if (quizzes) return quizzes;
             return [];
         },
+        async getPopularQuizzes() {
+            const quizzes = await Quiz.find().sort({ quizLikes: -1 });
+          
+            var res = [];
+            for(let i = 0; i < 5; i++) {
+              if (quizzes[i]) {
+                res.push(quizzes[i]);
+              }
+            }
+    
+            if (res) return res;
+            return [];
+        },
     },
     Mutation: {
         async createQuiz(_, { owner, tempquiz }) {

@@ -27,7 +27,7 @@ const Quiz = () =>{
     const params = useParams();
     const quizId = params ? params.quizId : 'could not get params';
 
-    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_Quiz_BY_ID, {
+    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
         variables: {
             id: quizId
         }

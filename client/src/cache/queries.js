@@ -179,9 +179,29 @@ export const FIND_PLATFORMS_BY_IDS = gql`
     }
 `;
 
-export const FIND_Quiz_BY_ID = gql`
+export const FIND_QUIZ_BY_ID = gql`
     query findQuizById($id: ID!) {
         findQuizById(id: $id) {
+            _id
+            title
+            description
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+            quizDislikes
+            badges
+            scores
+            cards
+            createdAt
+        }
+    }
+`;
+
+export const FETCH_POPULAR_QUIIZZES = gql`
+    query getPopularQuizzes {
+        getPopularQuizzes {
             _id
             title
             description
