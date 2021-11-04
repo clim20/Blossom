@@ -36,6 +36,12 @@ const CreatorCard = (props) => {
             <div className="header">
                 {profile && profile.followerCount && profile.followerCount} followers
             </div>
+            <div>
+                {props.activeTab === "collaborators" && props.user._id === props.platform.owner && <div> Owner </div>} 
+            </div>
+            <div>
+                {props.activeTab === "collaborators" && props.user._id !== props.platform.owner && <div> Collaborator </div>}
+            </div>
         </div>    
     );
 }

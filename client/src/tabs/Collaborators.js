@@ -7,7 +7,7 @@ import CreatorCards from '../components/CreatorCards';
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 
-const Collaborators = () => {
+const Collaborators = (props) => {
     const { user } = useContext(AuthContext);
     const [showCollaboratorRequests, setShowCollaboratorRequests] = useState(false);
     const [isEditing, setEditing] = useState(false);
@@ -43,7 +43,7 @@ const Collaborators = () => {
                         Join
                     </button>
                 }
-            {collaborators && <CreatorCards users={collaborators} />}
+            {collaborators && <CreatorCards users={collaborators} activeTab={props.activeTab} platform={platform} />}
         </div>
     );
 }

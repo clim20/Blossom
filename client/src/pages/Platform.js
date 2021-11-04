@@ -147,7 +147,7 @@ const Platform = () => {
                     {activeTab === 'home' && <Home/>}
                     {activeTab === 'quizzes' && <Quizzes/>}
                     {activeTab === 'collections' && <Collections/>}
-                    {activeTab === 'collaborators' && <Collaborators/>}
+                    {activeTab === 'collaborators' && <Collaborators activeTab={activeTab}/>}
                     {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>
             </div>
