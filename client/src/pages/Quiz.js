@@ -1,6 +1,12 @@
 import React, { useContext, useState } from 'react';
-//import { useMutation, useQuery } from '@apollo/react-hooks';
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useParams } from "react-router-dom";
+
+//import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+
+import { AuthContext } from '../context/auth';
+import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 
 import image1 from '../testpic/seal.jpg';
 
@@ -16,6 +22,34 @@ const styles = {
 }
 
 const Quiz = () =>{
+    const { user } = useContext(AuthContext);
+
+    const params = useParams();
+    const quizId = params ? params.quizId : 'could not get params';
+
+    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_Quiz_BY_ID, {
+        variables: {
+            id: quizId
+        }
+    });
+
+    var currentQuiz = {};
+    if (quizData) { 
+		currentQuiz = quizData.findQuizById;
+    }
+
+    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: currentQuiz.creator
+        }
+    });
+
+    var userObject = {};
+    if (userData) { 
+		userObject = userData.findUserById;
+    }
+
+    /*
     const [currentQuiz, setCurrentQuiz] = useState({
         title: "What's The Deal With Seals?",
         author: "Joe Shmo",
@@ -58,6 +92,7 @@ const Quiz = () =>{
         ]
 
     });
+    */
     const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200],["E",100]]);
     const [score, setScore] = useState(0);
 
@@ -97,14 +132,14 @@ const Quiz = () =>{
                 <h1 style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
                 <button onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>
-                        {currentQuiz.author}
+                        {"Joe Shmo"}
                     </p>
                     <p style={{textAlign: 'center'}}> 
-                        {currentQuiz.followers + " Followers"}
+                        {"114" + " Followers"}
                     </p>
                 </button>
                 <img src={image1}/>
-                <p style={{textAlign: 'center'}}>{currentQuiz.questions}</p>
+                <p style={{textAlign: 'center'}}>{currentQuiz.cards}</p>
                 <p>{currentQuiz.description}</p>
     
                 <button onClick = {() => handleStart()} style = {styles.button}>
