@@ -12,7 +12,7 @@ module.exports = {
             if (quizzes) return quizzes;
             return [];
         },
-        async getQuizById (_, { id }){
+        async findQuizById (_, { id }){
             const quiz= await Quiz.findOne({_id: id});
             console.log(quiz);
             if (quiz) return quiz;
@@ -44,32 +44,32 @@ module.exports = {
         },
     },
     Mutation: {
-        async createQuiz(_, { owner, tempquiz }) {
+        async createQuiz(_, { owner, newQuiz }) {
         
             const ownerId = new ObjectId(owner);
             const user = await User.findOne({_id: ownerId});
       
-            const newQuiz = new Quiz({
+            const retQuiz = new Quiz({
               _id:  new ObjectId(),
-                title: tempquiz.title,
-                description: tempquiz.description,
-                titleImg: tempquiz.titleImg,  
+                title: newQuiz.title,
+                description: newQuiz.description,
+                titleImg: newQuiz.titleImg,  
                 creator: user._id,
-                platformId: tempquiz.platformId,
+                platformId: newQuiz.platformId,
                 quizHits: 0,
                 quizLikes: 0,
                 quizDislikes: 0,
-                badges: tempquiz.badges,
+                badges: newQuiz.badges,
                 scores: [],
-                cards: tempquiz.cards,
+                cards: newQuiz.cards,
                 createdAt: new Date().toISOString()
             });
       
-            const updated = await newQuiz.save();
+            const updated = await retQuiz.save();
       
             if(updated) {
-              console.log(newQuiz);
-              return newQuiz;
+              console.log(retQuiz);
+              return retQuiz;
             }
             else return false;
           },
