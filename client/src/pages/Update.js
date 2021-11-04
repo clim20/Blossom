@@ -15,6 +15,8 @@ const Update = () => {
 
     const [UpdateUsername] 			        = useMutation(mutations.UPDATE_USERNAME);
     const [inputUsername, setInputUsername] = useState({ name: user.username });
+
+    const [disable, setDisable] = useState(false);
     
     const setUsername = async (e) => {
 		const { name, value } = e.target;
@@ -25,32 +27,57 @@ const Update = () => {
     const handleSubmit = async () => {
         console.log(inputUsername.name);
         const { data } = await UpdateUsername({variables: { id: user.id, name: inputUsername.name }});
+        if (data === user){
+            setDisable(false);
+            //error message
+        }else{
+            setDisable(true);
+           //let user know the username has been changed and go back to homepage
+        }
 		history.push({ pathname: '/'});
     }
 
     return (
-        user ? <div>
+        user ? <div className="update">
             <MenuBar/>
-            <div>
+            <div className="update-account">
+                Update Account 
+            </div>
+            <div className="update-username-placeholder1">
                 Username:
             </div>
-            <div>
+            <div className="update-username">
                 {user.username}
             </div>
-            <div>
+            <div className="update-username-placeholder2">
                 New Username:
             </div>
             <Input 
+                className="input-box"
                 onKeyDown={(e) => {if(e.keyCode === 13) handleSubmit(e)}}
                 name='name' onBlur={setUsername} autoFocus={false} defaultValue={"New username..."}
                 inputType="text"
             />
-            <Button
+
+            <Button 
+                className="save-button"
                 onClick={handleSubmit}
+                disable={disable}
+                //labelStyle={{ color: disable ? 'red' : 'gray'}}
             >
-                Confirm
+                Save
             </Button>
+
+            {Boolean(disable)} ? <div className="suc-msg">
+                Successfully updated!
+            </div>
+            :
+            <div className="err-msg">
+                *The username is already taken
+            </div>
+
             <Button
+                className="cancel-button"
                 onClick={() => history.push({ pathname: '/'})}
             >
                 Cancel
