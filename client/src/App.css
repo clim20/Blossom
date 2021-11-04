@@ -191,3 +191,161 @@ button svg {
   height: 3rem;
   background-color: #fed3db !important;
 }
+
+.update {
+  background-color: #e3eefb;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 768px;
+  width: 1024px;
+}
+
+.update-account {
+  color: var(--black);
+  font-family: var(--font-family-puritan-bold);
+  font-size: var(--font-size-l);
+  font-weight: 700;
+  height: 54px;
+  line-height: 48px;
+  margin-right: 1.0px;
+  margin-top: 141px;
+  min-width: 321px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.update-username-placeholder1 {
+  height: 21px;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin-left: 379px;
+  margin-top: 285px;
+  min-width: 82px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.update-username-placeholder2 {
+  height: 21px;
+  letter-spacing: 0;
+  line-height: 18px;
+  margin-left: 379px;
+  margin-top: 383px;
+  min-width: 82px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.update-username {
+  color: var(--black);
+  font-family: var(--font-family-roboto-bold);
+  font-size: var(--font-size-m);
+  font-weight: 700;
+  height: 33px;
+  line-height: 24px;
+  margin-top: 321px;
+  margin-left: 449px;
+  width: 126px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.save-button {
+  height: 48px;
+  width: 138px;
+  background-color: #8bd784;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  font-family: var(--font-family-roboto-bold);
+  font-size: 24px;
+  margin-top: 542px;
+  margin-left: 138px;
+}
+
+.cancel-button {
+  height: 48px;
+  width: 139px;
+  background-color: #f85b5b;
+  border-radius: 8px;
+  color: white;
+  text-align: center;
+  font-family: var(--font-family-roboto-bold);
+  font-size: 24px;
+  margin-top: 542px;
+  margin-left: 529px;
+}
+
+.input-box {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 35px;
+  width: 264px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.suc-msg {
+  color: green;
+  font-family: var(--font-family-roboto-regular);
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 23px;
+  margin-top: 453px;
+  margin-left: 374px;
+}
+
+.err-msg {
+  color: red;
+  font-family: var(--font-family-roboto-regular);
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 23px;
+  margin-top:453px;
+  margin-left: 374px;
+}
+
+.quests {
+  font-family: var(--font-family-puritan-bold);
+  font-size: 48px;
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 58px;
+  margin-top: 49px;
+}
+
+.quests-rectangle {
+  background-color: #fed3db;
+  height: 523px;
+  width: 919px;
+  margin-top: 184px;
+  margin-left: 54px;
+}
+
+.quest-lists {
+  font-family: var(--font-family-puritan-regular);
+  color: black;
+  font-size: 30px;
+}
+
+.checkBox {
+  background-color: #ff98ac;
+  color: white;
+  margin-left: 789px;
+  height: 37px;
+  width: 139.23px;
+  border-radius: 8px;
+}
