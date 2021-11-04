@@ -52,7 +52,7 @@ function QuizCard(props) {
                 <br/>
         </div>
     );
-    
+    /*
     (
         
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
@@ -67,6 +67,7 @@ function QuizCard(props) {
             <div className="header"> {followerCount} followers</div>
         </div>    
     );
+    */
 }
 
 export default QuizCard;

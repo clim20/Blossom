@@ -16,4 +16,4 @@ function QuizCards(props) {
     );
 }
 
-export default PlatformCards;
+export default QuizCards;
