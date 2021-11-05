@@ -62,7 +62,7 @@ const QuizStart = (props) => {
                     <QuizCard showAnswer={showAnswer} currentQuestion={props.currentQuiz.cards[questionNumber] } score={questionScore} handleSetQuestionNumber={handleSetQuestionNumber}  handleSetShowAnswer={handleSetShowAnswer} handleAnswerOptionsClick={handleAnswerOptionsClick}></QuizCard>
                 </div>
 
-                <button className="quiz-finish-button" onClick = {() => handleFinish()}>
+                <button onClick = {() => handleFinish()}>
                     Finish
                 </button>
     

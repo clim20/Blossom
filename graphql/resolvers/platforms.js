@@ -42,22 +42,7 @@ module.exports = {
 
         if (res) return res;
         return [];
-    },
-    async findCollaboratorsByIds(_, { ids }){
-      var collaborators = []
-
-      for(let i = 0; i < ids.length; i++) {
-        const user = await User.findOne({_id: new ObjectId(ids[i])});
-
-        if (user) {
-          collaborators.push(user);
-        }
-      }
-
-      console.log(collaborators);
-      
-      return collaborators;
-    },
+    }
   },
   Mutation: {
     async createPlatform(_, { owner, name }) {

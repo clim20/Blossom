@@ -15,37 +15,30 @@ const MenuBar = () => {
     const profileId = pathname.split('/')[2];
     const [activeItem, setActiveItem] = useState(path);
 
-    var userObject = {};
-    const { data } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            id: user ? user._id : ''
-        }
-    });
-
-	if(data) {
-        userObject = data.findUserById;
-    }
+    // var users = [];
+    // const { data } = useQuery(queries.FIND_USER_BY_ID);
+	// if(data) { users = data.findUserById; }
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
 
     const menuBar = user ? (
         <Menu pointing secondary size="massive" color="teal">
             <Menu.Item
-                name={userObject.username}
+                name={user.username}
                 active={activeItem === 'home'}
                 onClick={() => setActiveItem('home')}
                 as={Link}
                 to='/'>
-                    {userObject.username}
+                    {user.username}
             </Menu.Item>
 
             <Menu.Menu position='left'>
                 <Menu.Item
                     name='profile'
-                    active={activeItem === 'profile' && profileId === userObject.profileId}
+                    active={activeItem === 'profile' && profileId === user.profileId}
                     onClick={handleItemClick}
                     as={Link}
-                    to={'/profile/' + userObject.profileId}
+                    to={'/profile/' + user.profileId}
                 />
             </Menu.Menu>
 

@@ -94,8 +94,8 @@ const Quiz = () =>{
             <div style={{textAlign: 'center'}}>
                 
                 <MenuBar></MenuBar>
-                <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
-                <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
+                <h1 style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
+                <button onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>
                         {currentQuiz.author}
                     </p>
@@ -107,12 +107,12 @@ const Quiz = () =>{
                 <p style={{textAlign: 'center'}}>{currentQuiz.questions}</p>
                 <p>{currentQuiz.description}</p>
     
-                <button className="quiz-start-end-button" onClick = {() => handleStart()} style = {styles.button}>
+                <button onClick = {() => handleStart()} style = {styles.button}>
                     Start
                 </button>
     
                 <div>
-                    <button className="quizLeaderboard" style = {styles.button}>
+                    <button style = {styles.button}>
                         LEADERBOARDS
                     </button>
                     <table>
