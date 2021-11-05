@@ -30,6 +30,10 @@ const App = () => {
           <Route exact path="/profile/:profileId" component={Profile}/>
           <Route exact path="/platform/:platformId" component={Platform}/>
           <Route exact path="/quiz/:quizId" component={Quiz}/>
+          <Route
+                path="/quiz/start/:quizId"
+                component={QuizStart}
+                />
           <Route exact path="/quiz/edit/:quizId" component={QuizEdit}/>
           <Route exact path="/collection/:collectionId" component={Collection}/>
           <Route exact path="/update" component={Update}/>

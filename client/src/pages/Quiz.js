@@ -1,12 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useParams } from "react-router-dom";
-
-//import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
-
-import { AuthContext } from '../context/auth';
-import * as queries from '../cache/queries';
-import * as mutations from '../cache/mutations';
+//import { useMutation, useQuery } from '@apollo/react-hooks';
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 
 import image1 from '../testpic/seal.jpg';
 
@@ -22,56 +16,6 @@ const styles = {
 }
 
 const Quiz = () =>{
-    const { user } = useContext(AuthContext);
-
-    const params = useParams();
-    const quizId = params ? params.quizId : 'could not get params';
-
-    const { data: quizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
-        variables: {
-            id: quizId
-        }
-    });
-
-    var currentQuiz = {};
-    var cards = [];
-    if (quizData) { 
-		currentQuiz = quizData.findQuizById;
-        cards = currentQuiz.cards
-    }
-
-    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            id: currentQuiz.creator
-        }
-    });
-
-    var userObject = {};
-    var username = "";
-    if (userData) { 
-		userObject = userData.findUserById;
-        username = userObject.username;
-    }
-
-    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
-        variables: {
-            id: userObject.profileId
-        }
-    });
-
-    var profileObject = {};
-    var followers = 0;
-    if (profileData) { 
-		profileObject = profileData.findProfileById;
-        followers = profileObject.followerCount;
-    }
-
-
-
-    console.log(username)
-    console.log(followers)
-
-    /*
     const [currentQuiz, setCurrentQuiz] = useState({
         title: "What's The Deal With Seals?",
         author: "Joe Shmo",
@@ -114,8 +58,7 @@ const Quiz = () =>{
         ]
 
     });
-    */
-    const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200]]);
+    const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200],["E",100]]);
     const [score, setScore] = useState(0);
 
     const [redirect, setRedirect] = useState(false);
@@ -154,14 +97,14 @@ const Quiz = () =>{
                 <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
                 <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>
-                        {username}
+                        {currentQuiz.author}
                     </p>
                     <p style={{textAlign: 'center'}}> 
-                        {followers + " Followers"}
+                        {currentQuiz.followers + " Followers"}
                     </p>
                 </button>
                 <img src={image1}/>
-                <p style={{textAlign: 'center'}}>{cards.length + " Questions"}</p>
+                <p style={{textAlign: 'center'}}>{currentQuiz.questions}</p>
                 <p>{currentQuiz.description}</p>
     
                 <button className="quiz-start-end-button" onClick = {() => handleStart()} style = {styles.button}>
@@ -184,7 +127,7 @@ const Quiz = () =>{
     }else{
         
         return(
-            <QuizStart currentQuiz = {currentQuiz} author = {username}></QuizStart>
+            <QuizStart currentQuiz = {currentQuiz} highestScores = {highestScores}></QuizStart>
         );
         
        
