@@ -203,10 +203,55 @@ button svg {
   background-color: #fed3db !important;
 }
 
+.update-account {
+  margin-top: 141px;
+  margin-left: 351px;
+  font-size: 48px;
+  font-family: var(--font-family-puritan-bold);
+}
+.update-username-placeholder1 {
+  margin-top: 285px;
+  margin-left: 379px;
+  font-size: 18px;
+}
+
+.update-username-placeholder1 {
+  margin-top: 383px;
+  margin-left: 379px;
+  font-size: 18px;
+}
+
+.update-username {
+  margin-top: 321px;
+  margin-left: 449px;
+  font-size: 24px;
+  font-family: var(--font-family-roboto-bold);
+}
+
+.input-box {
+  margin-top: 417px;
+  margin-left: 380px;
+  width: 264px;
+  height: 35px;
+  border-radius: 5px;
+}
+
 .save-button {
   width: 8rem;
   height: 3rem;
   background-color: #8bd784 !important;
+}
+
+.suc-msg {
+  color: green;
+  font-size: 20px;
+  text-align: center;
+}
+
+.err-msg {
+  color: red;
+  font-size: 20px;
+  text-align: center;
 }
 
 .cancel-button {
