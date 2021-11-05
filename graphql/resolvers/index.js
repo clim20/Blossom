@@ -1,7 +1,7 @@
 const usersResolvers = require('./users');
 const profilesResolvers = require('./profiles');
 const platformsResolvers = require('./platforms');
-const updateResolvers = require('./update');
+const quizResolvers = require('./quiz')
 
 module.exports = {
     Following: {
@@ -19,12 +19,12 @@ module.exports = {
         ...usersResolvers.Query,
         ...profilesResolvers.Query,
         ...platformsResolvers.Query,
-        ...updateResolvers.Query
+        ...quizResolvers.Query
     },
     Mutation: {
         ...usersResolvers.Mutation,
         ...profilesResolvers.Mutation,
         ...platformsResolvers.Mutation,
-        ...updateResolvers.Mutation
+        ...quizResolvers.Mutation
     }
 }

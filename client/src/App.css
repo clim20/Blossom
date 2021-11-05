@@ -220,11 +220,3 @@ button svg {
   width: 400px;
   height: 100px;
 }
-
-.request-button {
-  position: absolute;
-  right: 3rem;
-  width: 10%;
-  height: 2.5rem;
-  background-color: #fed3db !important;
-}
