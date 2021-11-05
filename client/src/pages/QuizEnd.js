@@ -82,8 +82,8 @@ const QuizEnd = (props) =>{
         
             <div style={{textAlign: 'center'}}>
                 <MenuBar></MenuBar>
-                <h1 className="quiz-title" style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
-                <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
+                <h1 style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
+                <button onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>
                         {username}
                     </p>
@@ -99,13 +99,13 @@ const QuizEnd = (props) =>{
                     </header>
                 </div>
     
-                <button className="quiz-start-end-button" onClick = {() => handleRetry()} style = {styles.button}>
+                <button onClick = {() => handleRetry()} style = {styles.button}>
                     RETRY
                 </button>
                 <p>*Only first scores are posted to the leaderboards</p>
     
                 <div>
-                    <button className="quizLeaderboard" style = {styles.button}>
+                    <button style = {styles.button}>
                         LEADERBOARDS
                     </button>
                     <table>

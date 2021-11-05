@@ -13,23 +13,8 @@ const Update = () => {
     const history = useHistory();
     const { user } = useContext(AuthContext);
 
-    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            id: user ? user._id : ''
-        }
-    });
-
-    var userObject = {};
-    if (userData) { 
-		userObject = userData.findUserById;
-    }
-    console.log(userObject);
-
-    const [UpdateUsername] = useMutation(mutations.UPDATE_USERNAME);
-    const [inputUsername, setInputUsername] = useState({ name: '' });
-
-    const [disabled, setDisable] = useState(false);
-    const [submitted, setSubmit] = useState(false);
+    const [UpdateUsername] 			        = useMutation(mutations.UPDATE_USERNAME);
+    const [inputUsername, setInputUsername] = useState({ name: user.username });
     
     const setUsername = async (e) => {
 		const { name, value } = e.target;
@@ -38,87 +23,38 @@ const Update = () => {
 	}
 
     const handleSubmit = async () => {
-        if (inputUsername.name !== '') {
-            setSubmit(true);
-            const { data } = await UpdateUsername({
-                variables: { 
-                    id: user ? user._id : '', 
-                    name: inputUsername.name
-                }
-            });
-            
-            var returnedUser = {};
-            if (data) { 
-                returnedUser = data.updateUsername;
-            }
-
-            console.log(returnedUser.username, user.username);
-
-            if (returnedUser.username === userObject.username) {
-                console.log("disable false")
-                setDisable(false);
-                // error message
-            } else{
-                console.log("disable true")
-                setDisable(true);
-
-                setTimeout(() => {
-                    history.push({ pathname: '/'});
-                }, 300);
-            // let user know the username has been changed and go back to homepage
-            } 
-        }
+        console.log(inputUsername.name);
+        const { data } = await UpdateUsername({variables: { id: user.id, name: inputUsername.name }});
+		history.push({ pathname: '/'});
     }
 
-    const message = disabled ? 
-        <div className="suc-msg">
-            Successfully updated!
-        </div>
-    :
-        <div className="err-msg">
-            The username is already taken
-        </div>
-    ;
-
     return (
-        user ? <div className="update">
+        user ? <div>
             <MenuBar/>
-            <div className="update-account">
-                Update Account 
-            </div>
-            <div className="update-username-placeholder1">
+            <div>
                 Username:
             </div>
-            <div className="update-username">
-                {userObject.username}
+            <div>
+                {user.username}
             </div>
-            <div className="update-username-placeholder2">
+            <div>
                 New Username:
             </div>
             <Input 
-                className="input-box"
-                name='name' onBlur={setUsername} autoFocus={false} placeholder={"New username..."}
-                inputtype="text"
+                onKeyDown={(e) => {if(e.keyCode === 13) handleSubmit(e)}}
+                name='name' onBlur={setUsername} autoFocus={false} defaultValue={"New username..."}
+                inputType="text"
             />
-
-            {submitted && message}
-
-            <div style={{ marginTop: '20px' }}>
-                <Button 
-                    className="save-button"
-                    onClick={handleSubmit}
-                    disable={inputUsername.name === userObject.username || inputUsername.name === ''}
-                >
-                    Save
-                </Button>
-
-                <Button
-                    className="cancel-button"
-                    onClick={() => history.push({ pathname: '/'})}
-                >
-                    Cancel
-                </Button>
-            </div>
+            <Button
+                onClick={handleSubmit}
+            >
+                Confirm
+            </Button>
+            <Button
+                onClick={() => history.push({ pathname: '/'})}
+            >
+                Cancel
+            </Button>
         </div>
         :
         <div>
