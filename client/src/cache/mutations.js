@@ -80,3 +80,83 @@ export const EDIT_PLATFORM = gql`
         }
     }
 `;
+
+export const ADD_COLLABORATOR = gql`
+    mutation addCollaborator($platformId: ID!, $userId: ID!) {
+        addCollaborator(platformId: $platformId, userId: $userId) {
+            _id
+            name
+            owner
+            platformImg
+            bannerImg
+            description
+            contact
+            collaborators
+            requests
+            followerCount
+            quizzes
+            collections
+            createdAt
+        }
+    }
+`;
+
+export const REMOVE_COLLABORATOR = gql`
+    mutation removeCollaborator($platformId: ID!, $userId: ID!) {
+        removeCollaborator(platformId: $platformId, userId: $userId) {
+            _id
+            name
+            owner
+            platformImg
+            bannerImg
+            description
+            contact
+            collaborators
+            requests
+            followerCount
+            quizzes
+            collections
+            createdAt
+        }
+    }
+`;
+
+export const ADD_COLLABORATOR_REQUEST = gql`
+    mutation addCollaboratorRequest($platformId: ID!, $userId: ID!) {
+        addCollaboratorRequest(platformId: $platformId, userId: $userId) {
+            _id
+            name
+            owner
+            platformImg
+            bannerImg
+            description
+            contact
+            collaborators
+            requests
+            followerCount
+            quizzes
+            collections
+            createdAt
+        }
+    }
+`;
+
+export const REMOVE_COLLABORATOR_REQUEST = gql`
+    mutation removeCollaboratorRequest($platformId: ID!, $userId: ID!) {
+        removeCollaboratorRequest(platformId: $platformId, userId: $userId) {
+            _id
+            name
+            owner
+            platformImg
+            bannerImg
+            description
+            contact
+            collaborators
+            requests
+            followerCount
+            quizzes
+            collections
+            createdAt
+        }
+    }
+`;

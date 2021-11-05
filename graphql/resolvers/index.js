@@ -1,6 +1,7 @@
 const usersResolvers = require('./users');
 const profilesResolvers = require('./profiles');
 const platformsResolvers = require('./platforms');
+const quizResolvers = require('./quiz');
 
 module.exports = {
     Following: {
