@@ -319,3 +319,28 @@ button svg {
   background-color: #f85b5b;
   color: white;
 }
+
+.quests {
+  margin-top: 100px;
+  margin-left: 58px;
+  font-size: 48px;
+  font-family: var(--font-family-puritan-bold);
+}
+
+.quests-rectangle {
+  margin-top: 184px;
+  margin-left: 54px;
+  width: 919px;
+  height: 523px;
+  background-color: #fed3db;
+}
+
+.checkBox {
+  width: 139.23px;
+  height: 37px;
+  border-radius: 8px;
+  background-color: #ff98ac;
+  color: white;
+  font-size: 25px;
+  font-family: var(--font-family-puritan-regular);
+}
