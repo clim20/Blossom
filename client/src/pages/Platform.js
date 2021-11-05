@@ -36,7 +36,7 @@ const Platform = () => {
     // User's own User and Profile
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
-            id: platform.owner
+            id: platform ? platform.owner : ''
         }
     });
 
@@ -71,8 +71,8 @@ const Platform = () => {
     
     const [followPlatform] = useMutation(mutations.FOLLOW_PLATFORM, {
         variables: {
-            userId: user._id,
-            platformId: platform._id
+            userId: user ? user._id : '',
+            platformId: platform ? platform._id : ''
         }
     });
 
@@ -107,7 +107,7 @@ const Platform = () => {
                     }
                 </div>
 
-                {!isOwnPlatform && 
+                {user && !isOwnPlatform && 
                     <button className="ui button follow-button" onClick={handleFollow}>
                         {followed ? 'Unfollow' : 'Follow'}
                     </button>
@@ -147,7 +147,7 @@ const Platform = () => {
                     {activeTab === 'home' && <Home/>}
                     {activeTab === 'quizzes' && <Quizzes/>}
                     {activeTab === 'collections' && <Collections/>}
-                    {activeTab === 'collaborators' && <Collaborators/>}
+                    {activeTab === 'collaborators' && <Collaborators activeTab={activeTab}/>}
                     {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>
             </div>
