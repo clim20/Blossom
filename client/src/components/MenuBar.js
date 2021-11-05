@@ -1,15 +1,18 @@
 import React, { useContext, useState } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Input, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useHistory } from "react-router-dom";
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import Login from './Login';
 import Logout from './Logout';
+import Blossom from '../Blossom.png';
 
 const MenuBar = () => {
     const { user } = useContext(AuthContext);
+    const history = useHistory();
     const pathname = window.location.pathname;
     const path = pathname === '/' ? 'home' : pathname.split('/')[1];
     const profileId = pathname.split('/')[2];
@@ -26,20 +29,23 @@ const MenuBar = () => {
         userObject = data.findUserById;
     }
 
+    const options = [
+        { key: 1, text: 'Choice 1', value: 1 },
+        { key: 2, text: 'Choice 2', value: 2 },
+    ]
+
     const handleItemClick = (e, { name }) => setActiveItem(name);
 
+    const blossom = '\xa0\xa0\xa0'+ 'Blossom';
     const menuBar = user ? (
         <Menu pointing secondary size="massive" color="teal">
-            <Menu.Item
-                name={userObject.username}
-                active={activeItem === 'home'}
-                onClick={() => setActiveItem('home')}
-                as={Link}
-                to='/'>
-                    {userObject.username}
-            </Menu.Item>
-
             <Menu.Menu position='left'>
+                <Menu.Item style={{ height: "97%" }}>
+                    <a href="/" className='logo'>
+                        <img class="ui bottom aligned mini image" src={Blossom}/>
+                        {blossom}
+                    </a>
+                </Menu.Item>
                 <Menu.Item
                     name='profile'
                     active={activeItem === 'profile' && profileId === userObject.profileId}
@@ -47,10 +53,19 @@ const MenuBar = () => {
                     as={Link}
                     to={'/profile/' + userObject.profileId}
                 />
+                <Menu.Item
+                    name='random'
+                    onClick={()=>{}}
+                />
             </Menu.Menu>
-
+            <Menu.Item className='search-bar'>
+                    <Input icon='search' placeholder='Search...' />
+            </Menu.Item>
             <Menu.Menu position='right'>
-                <Logout/>
+                <Menu.Item>
+                    <Dropdown text={userObject.username} options={options} />
+                </Menu.Item>
+                {/* <Logout/> */}
             </Menu.Menu>
         </Menu>
         ) : (
