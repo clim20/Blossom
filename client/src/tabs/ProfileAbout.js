@@ -102,7 +102,7 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     !editingDescription && !editingMode && <div>{profile.description}</div>
                 }
                 {
-                    editingDescription && <textarea className="edit-box" defaultValue={profile.description} onBlur={handleDescriptionEdit}></textarea>
+                    editingDescription && <textarea className="edit-box" defaultValue={updatedProfile.description} onBlur={handleDescriptionEdit}></textarea>
                 }
                 {
                     !editingDescription && editingMode && <div>{updatedProfile.description}</div>
@@ -124,7 +124,7 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     !editingContact && !editingMode && <div>{profile.contact}</div>
                 }
                 {
-                    editingContact && <textarea className="edit-box" defaultValue={profile.contact} onBlur={handleContactEdit}></textarea>
+                    editingContact && <textarea className="edit-box" defaultValue={updatedProfile.contact} onBlur={handleContactEdit}></textarea>
                 }
                 {
                     !editingContact && editingMode && <div>{updatedProfile.contact}</div>

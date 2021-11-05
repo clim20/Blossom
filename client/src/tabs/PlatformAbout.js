@@ -104,7 +104,7 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                     !editingDescription && !editingMode && <div>{platform.description}</div>
                 }
                 {
-                    editingDescription && <textarea className="edit-box" defaultValue={platform.description} onBlur={handleDescriptionEdit}></textarea>
+                    editingDescription && <textarea className="edit-box" defaultValue={updatedPlatform.description} onBlur={handleDescriptionEdit}></textarea>
                 }
                 {
                     !editingDescription && editingMode && <div>{updatedPlatform.description}</div>
@@ -126,7 +126,7 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                     !editingContact && !editingMode && <div>{platform.contact}</div>
                 }
                 {
-                    editingContact && <textarea className="edit-box" defaultValue={platform.contact} onBlur={handleContactEdit}></textarea>
+                    editingContact && <textarea className="edit-box" defaultValue={updatedPlatform.contact} onBlur={handleContactEdit}></textarea>
                 }
                 {
                     !editingContact && editingMode && <div>{updatedPlatform.contact}</div>
