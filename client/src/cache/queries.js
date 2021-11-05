@@ -179,7 +179,6 @@ export const FIND_PLATFORMS_BY_IDS = gql`
     }
 `;
 
-
 export const GET_QUIZZES = gql`
     query getQuizzes{
         getQuizzes {
