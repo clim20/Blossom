@@ -255,3 +255,12 @@ button svg {
   font-family: var(--font-family-puritan-bold);
   font-size: 36px;
 }
+
+.quiz-creator-follow {
+  margin-top: 113px;
+  margin-left: 402px;
+  border-radius: 10px;
+  width: 224px;
+  height: 54px;
+  background-color: #c883ff;
+}
