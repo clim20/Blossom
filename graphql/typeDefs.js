@@ -166,6 +166,7 @@ module.exports = gql`
         getPlatforms: [Platform!]!
         findPlatformById(id: ID!): Platform!
         findPlatformsByIds(ids: [ID!]!): [Platform!]!
+        findCollaboratorsByIds(ids: [ID!]!): [User!]!
         getUsers: [User!]!
         getQuizzes: [Quiz!]!
         findQuizById(id: ID!): Quiz!
