@@ -1,47 +1,63 @@
-import React, { useContext, useState } from 'react';
-//import { useMutation, useQuery } from '@apollo/react-hooks';
+import React from 'react';
+import { useHistory } from "react-router-dom";
+import { useQuery } from '@apollo/react-hooks';
 
+import * as queries from '../cache/queries';
 
-const QuizCard = (props) => {
+function QuizCard(props) {
+    const history = useHistory();
+    /*
+    const { quizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
+        variables: {
+            id: props.quiz._id
+        }
+    });
 
-    const nextQuestion = () =>{
-        props.handleSetQuestionNumber();
-        props.handleSetShowAnswer();
-    }
-
-    const createQuestion = (choice, index) =>{
-        return(
-            <button onClick = {() => answerQuestion(index==props.currentQuestion.answer)}>{choice}</button>
-        );
-        
-    };
-
-    const answerQuestion = (isCorrect) =>{
-        props.handleSetShowAnswer();
-        props.handleAnswerOptionsClick(isCorrect)
-    };
-
-    if(props.showAnswer == true){
-        return( 
-            <div>
-                <button onClick = {() => nextQuestion()}>
-                    <h>Correct Answer: {String.fromCharCode('A'.charCodeAt(0)+props.currentQuestion.answer)}</h>
-                    <h>{props.score} pts</h>
-                    <p>{props.currentQuestion.answerExplanation}</p>
-                </button>
-            </div>
-        );
-    }else{
-        return (
-            <div>
-                <p>{props.currentQuestion.question}</p>
-                <div>
-                    {props.currentQuestion.choices.map(createQuestion)}
-                </div>
-            </div>
-        );
-    }
+    var quiz = {};
+    var title = "";
     
+    if (quizData) { 
+		quiz = quizData.getQuizById;
+        title = props.quiz.title;
+        
+    }
+    */
+    
+    const { data } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            
+            id: props.quiz.creator
+        }
+    });
+    console.log(data)
+    //id: props.quiz.creator
+    //console.log(quizData)
+    var user = {};
+    if(data){
+        user = data.findUserById;
+    }
 
+    const handleClick = () => {
+        history.push("/quiz/" + props.quiz._id);
+    }
+
+    return (
+        <div className="item text-align-center cursor-pointer" onClick={handleClick}>
+                <img className="card-image ui avatar image"
+                    src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
+                    alt="quiz"
+                />
+                <br/>
+                <br/>
+                <div className="header">
+                    {props.quiz.title}
+                </div>
+                <div>
+                    {user.username}
+                </div>
+                <br/>
+        </div>
+    );
 }
+
 export default QuizCard;
