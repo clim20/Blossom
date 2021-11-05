@@ -298,11 +298,35 @@ export const FETCH_POPULAR_QUIIZZES = gql`
         getPopularQuizzes {
             _id
             title
+            description
             titleImg
             creator
             platform
             quizHits
             quizLikes
+            quizDislikes
+            badges{
+                rank
+                image
+            }
+            scores{
+                user
+                userScore
+                bestScore
+            }
+            cards{
+                cardNum
+                question
+                choices
+                answer
+                answerExplanation
+                questionImg
+                answerImg
+                drawing{
+                    _id
+                }
+            }
+            createdAt
         }
     }
 
