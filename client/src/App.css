@@ -264,3 +264,13 @@ button svg {
   height: 54px;
   background-color: #c883ff;
 }
+
+.quiz-finish-button {
+  margin-top: 690px;
+  margin-left: 869px;
+  width: 98.47px;
+  height: 52px;
+  border-radius: 8px;
+  background-color: #f85b5b;
+  color: white;
+}
