@@ -306,3 +306,20 @@ export const FETCH_POPULAR_QUIIZZES = gql`
         }
     }
 `;
+
+export const FIND_COLLABORATORS_BY_IDS = gql`
+    query findCollaboratorsByIds($ids: [ID!]!) {
+        findCollaboratorsByIds(ids: $ids) {
+            _id
+            username
+            email
+            profileId
+            # quests {
+            #     _id
+            #     isCompleted
+            #     image
+            # }
+            createdAt
+        }
+    }
+`;
