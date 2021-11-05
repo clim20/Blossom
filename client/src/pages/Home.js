@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import MenuBar from '../components/MenuBar';
 import CreatorCards from '../components/CreatorCards';
 import PlatformCards from '../components/PlatformCards';
+import QuizCards from '../components/QuizCards'
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -27,7 +28,13 @@ const Home = () => {
         platforms = platformsData.getPopularPlatforms; 
     }
 
-    console.log(platforms);
+    var quizzes = [];
+    const {data: quizzesData} = useQuery(queries.FETCH_POPULAR_QUIIZZES);
+    if(quizzesData) { 
+        quizzes = quizzesData.getPopularQuizzes; 
+    }
+
+    console.log(quizzes);
 
 	return (
         <div style={{ paddingBottom: '3rem' }}>
@@ -41,7 +48,7 @@ const Home = () => {
 
             <h3 className="ui header">Trending</h3>
             {/* TEMP BUTTON TO TEST QUIZ */}
-                <div className="item cursor-pointer" onClick={() => history.push("/quiz/" + 123)}>
+               {/* <div className="item cursor-pointer" onClick={() => history.push("/quiz/" + 123)}>
                 <img className="card-image ui avatar image"
                     src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
                     alt="quiz"
@@ -55,7 +62,8 @@ const Home = () => {
                     Joe Shmo
                 </div>
                 <br/>
-                </div>    
+                </div>   */} 
+            {quizzes && <QuizCards quizzes={quizzes}/>}
             <div className="ui hidden divider"></div>
             <h3 className="ui header">Popular Creators</h3>
             {users && <CreatorCards users={users} />}
