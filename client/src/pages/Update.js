@@ -81,7 +81,7 @@ const Update = () => {
     ;
 
     return (
-        user ? <div className="update">
+        user ? <div>
             <MenuBar/>
             <div className="update-account">
                 Update Account 

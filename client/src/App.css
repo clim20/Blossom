@@ -203,38 +203,39 @@ button svg {
   background-color: #fed3db !important;
 }
 
-.update-account {
+/* .update-account {
   margin-top: 141px;
   margin-left: 351px;
   font-size: 48px;
   font-family: var(--font-family-puritan-bold);
-}
-.update-username-placeholder1 {
+} */
+
+/* .update-username-placeholder1 {
   margin-top: 285px;
   margin-left: 379px;
   font-size: 18px;
-}
+} */
 
-.update-username-placeholder1 {
+/* .update-username-placeholder1 {
   margin-top: 383px;
   margin-left: 379px;
   font-size: 18px;
-}
+} */
 
-.update-username {
+/* .update-username {
   margin-top: 321px;
   margin-left: 449px;
   font-size: 24px;
   font-family: var(--font-family-roboto-bold);
-}
+} */
 
-.input-box {
+/* .input-box {
   margin-top: 417px;
   margin-left: 380px;
   width: 264px;
   height: 35px;
   border-radius: 5px;
-}
+} */
 
 .save-button {
   width: 8rem;
@@ -244,14 +245,14 @@ button svg {
 
 .suc-msg {
   color: green;
-  font-size: 20px;
-  text-align: center;
+  /* font-size: 20px; */
+  /* text-align: center; */
 }
 
 .err-msg {
   color: red;
-  font-size: 20px;
-  text-align: center;
+  /* font-size: 20px; */
+  /* text-align: center; */
 }
 
 .cancel-button {
@@ -274,7 +275,7 @@ button svg {
   background-color: #fed3db !important;
 }
 
-.quiz-start-end-button {
+/* .quiz-start-end-button {
   margin-top:509px;
   margin-left:464px;
   text-align: center;
@@ -282,9 +283,9 @@ button svg {
   background-color: #ff98ac;
   width: 98.47px;
   height: 37px;
-}
+} */
 
-.quizLeaderboard {
+/* .quizLeaderboard {
   margin-top: 599px;
   margin-left: 249px;
   text-align: center;
@@ -292,25 +293,25 @@ button svg {
   background-color: #ffcaca;
   width: 523px;
   height: 30px;
-}
+} */
 
-.quiz-title {
+/* .quiz-title {
   margin-top: 70px;
   margin-left: 303px;
   font-family: var(--font-family-puritan-bold);
   font-size: 36px;
-}
+} */
 
-.quiz-creator-follow {
+/* .quiz-creator-follow {
   margin-top: 113px;
   margin-left: 402px;
   border-radius: 10px;
   width: 224px;
   height: 54px;
   background-color: #c883ff;
-}
+} */
 
-.quiz-finish-button {
+/* .quiz-finish-button {
   margin-top: 690px;
   margin-left: 869px;
   width: 98.47px;
@@ -318,7 +319,7 @@ button svg {
   border-radius: 8px;
   background-color: #f85b5b;
   color: white;
-}
+} */
 
 .quests {
   margin-top: 100px;
