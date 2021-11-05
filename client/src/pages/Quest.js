@@ -12,30 +12,40 @@ const Quest = () => {
                 Quests
             </div>
             <div className="quests-rectangle">
-                <span className="quest-lists">
+                <p>
                     Be 1st place on the leaderboard once!
                     <span className="checkBox">Incomplete</span>
+                </p>
                     <br />
                     <br />
+                <p>
                     Maintain 1st place on a leaderboard for a week!
                     <span className="checkBox">Incomplete</span>
+                </p>
                     <br />
                     <br />
+                <p>
                     Have 100 people take one of your quiz.
                     <span className="checkBox">Incomplete</span>
+                </p>
                     <br />
                     <br />
+                <p>
                     Make 10 Quizzes!
                     <span className="checkBox">Incomplete</span>
+                </p>
                     <br />
                     <br />
+                <p>
                     Make your first quiz!
                     <span className="checkBox">Incomplete</span>
+                </p>
                     <br />
                     <br />
+                <p>
                     Take you first quiz!
                     <span className="checkBox">Incomplete</span>
-                </span>
+                </p>
             </div>
         </div>
     );
