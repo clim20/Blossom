@@ -47,7 +47,7 @@ const QuizStart = (props) => {
 
     if(isFinished == true || questionNumber == props.currentQuiz.cards.length){
         return( 
-            <QuizQuesAns score = {totalScore} currentQuiz = {props.currentQuiz } highestScores = {props.highestScores}></QuizQuesAns>
+            <QuizEnd score = {totalScore} currentQuiz = {props.currentQuiz } highestScores = {props.highestScores}></QuizEnd>
         );
     }else{
         return (

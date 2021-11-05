@@ -16,34 +16,6 @@ const styles = {
 }
 
 const Quiz = () =>{
-    const { user } = useContext(AuthContext);
-
-    const params = useParams();
-    const quizId = params ? params.quizId : 'could not get params';
-
-    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
-        variables: {
-            id: quizId
-        }
-    });
-
-    var currentQuiz = {};
-    if (quizData) { 
-		currentQuiz = quizData.findQuizById;
-    }
-
-    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            id: currentQuiz.creator
-        }
-    });
-
-    var userObject = {};
-    if (userData) { 
-		userObject = userData.findUserById;
-    }
-
-    /*
     const [currentQuiz, setCurrentQuiz] = useState({
         title: "What's The Deal With Seals?",
         author: "Joe Shmo",
@@ -86,7 +58,6 @@ const Quiz = () =>{
         ]
 
     });
-    */
     const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200],["E",100]]);
     const [score, setScore] = useState(0);
 
@@ -126,14 +97,14 @@ const Quiz = () =>{
                 <h1 style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
                 <button onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>
-                        {"Joe Shmo"}
+                        {currentQuiz.author}
                     </p>
                     <p style={{textAlign: 'center'}}> 
-                        {"114" + " Followers"}
+                        {currentQuiz.followers + " Followers"}
                     </p>
                 </button>
                 <img src={image1}/>
-                <p style={{textAlign: 'center'}}>{currentQuiz.cards}</p>
+                <p style={{textAlign: 'center'}}>{currentQuiz.questions}</p>
                 <p>{currentQuiz.description}</p>
     
                 <button onClick = {() => handleStart()} style = {styles.button}>
