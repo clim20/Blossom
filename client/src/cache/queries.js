@@ -34,7 +34,7 @@ export const FIND_USER_BY_ID = gql`
     }
 `;
 
-export const GET_USERS = gql`
+export const FETCH_USERS = gql`
     query getUsers {
         getUsers {
             _id
