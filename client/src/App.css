@@ -228,3 +228,30 @@ button svg {
   height: 2.5rem;
   background-color: #fed3db !important;
 }
+
+.quiz-start-end-button {
+  margin-top:509px;
+  margin-left:464px;
+  text-align: center;
+  color: white;
+  background-color: #ff98ac;
+  width: 98.47px;
+  height: 37px;
+}
+
+.quizLeaderboard {
+  margin-top: 599px;
+  margin-left: 249px;
+  text-align: center;
+  color: black;
+  background-color: #ffcaca;
+  width: 523px;
+  height: 30px;
+}
+
+.quiz-title {
+  margin-top: 70px;
+  margin-left: 303px;
+  font-family: var(--font-family-puritan-bold);
+  font-size: 36px;
+}
