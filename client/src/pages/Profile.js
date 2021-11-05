@@ -36,7 +36,7 @@ const Profile = () => {
         }
     });
 
-    var profile = { user: '' };
+    var profile = {};
     if (profileData) { 
 		profile = profileData.findProfileById;
     }
@@ -44,7 +44,7 @@ const Profile = () => {
     // User's own User and Profile
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
-            id: profile.user
+            id: profile ? profile.user : ''
         }
     });
 
@@ -55,7 +55,7 @@ const Profile = () => {
 
     const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
-            id: user.profileId
+            id: user ? user.profileId : ''
         }
     });
 
@@ -78,8 +78,8 @@ const Profile = () => {
     
     const [followProfile] = useMutation(mutations.FOLLOW_PROFILE, {
         variables: {
-            userId: user._id,
-            profileId: profile._id
+            userId: user ? user._id : '',
+            profileId: profile ? profile._id : ''
         }
     });
 
@@ -114,7 +114,7 @@ const Profile = () => {
                     }
                 </div>
 
-                {!isOwnProfile &&
+                {user && !isOwnProfile &&
                     <button className="ui button follow-button" onClick={handleFollow}>
                         {followed ? 'Unfollow' : 'Follow'}
                     </button>
