@@ -54,7 +54,7 @@ module.exports = gql`
         description: String!
         titleImg: String
         creator: ID!
-        platform: ID!
+        platform: ID
         quizHits: Int!
         quizLikes: Int!
         quizDislikes: Int!

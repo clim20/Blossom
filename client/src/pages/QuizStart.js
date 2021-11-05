@@ -46,16 +46,18 @@ const QuizStart = (props) => {
     };
 
     if(isFinished == true || questionNumber == props.currentQuiz.cards.length){
+        console.log(props.currentQuiz.cards.length)
         return( 
-            <QuizQuesAns score = {totalScore} currentQuiz = {props.currentQuiz } highestScores = {props.highestScores}></QuizQuesAns>
+            <QuizEnd score = {totalScore} currentQuiz = {props.currentQuiz } highestScores = {props.highestScores}></QuizEnd>
         );
     }else{
+        console.log(props.currentQuiz.cards.length)
         return (
             <div>
                 <header>{(questionNumber+1)+ " of "+(props.currentQuiz.cards.length)}</header>
                 <header>
                     <p>{props.currentQuiz.title}</p>
-                    <p>{"Created by "+props.currentQuiz.author}</p>
+                    <p>{"Created by "+props.author}</p>
        
                 </header>
                 <div>

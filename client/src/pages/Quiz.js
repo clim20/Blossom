@@ -27,15 +27,17 @@ const Quiz = () =>{
     const params = useParams();
     const quizId = params ? params.quizId : 'could not get params';
 
-    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
+    const { data: quizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
         variables: {
             id: quizId
         }
     });
 
     var currentQuiz = {};
+    var cards = [];
     if (quizData) { 
 		currentQuiz = quizData.findQuizById;
+        cards = currentQuiz.cards
     }
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
@@ -45,9 +47,29 @@ const Quiz = () =>{
     });
 
     var userObject = {};
+    var username = "";
     if (userData) { 
 		userObject = userData.findUserById;
+        username = userObject.username;
     }
+
+    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: userObject.profileId
+        }
+    });
+
+    var profileObject = {};
+    var followers = 0;
+    if (profileData) { 
+		profileObject = profileData.findProfileById;
+        followers = profileObject.followerCount;
+    }
+
+
+
+    console.log(username)
+    console.log(followers)
 
     /*
     const [currentQuiz, setCurrentQuiz] = useState({
@@ -93,7 +115,7 @@ const Quiz = () =>{
 
     });
     */
-    const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200],["E",100]]);
+    const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200]]);
     const [score, setScore] = useState(0);
 
     const [redirect, setRedirect] = useState(false);
@@ -132,14 +154,14 @@ const Quiz = () =>{
                 <h1 style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
                 <button onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>
-                        {"Joe Shmo"}
+                        {username}
                     </p>
                     <p style={{textAlign: 'center'}}> 
-                        {"114" + " Followers"}
+                        {followers + " Followers"}
                     </p>
                 </button>
                 <img src={image1}/>
-                <p style={{textAlign: 'center'}}>{currentQuiz.cards}</p>
+                <p style={{textAlign: 'center'}}>{cards.length + " Questions"}</p>
                 <p>{currentQuiz.description}</p>
     
                 <button onClick = {() => handleStart()} style = {styles.button}>
@@ -162,7 +184,7 @@ const Quiz = () =>{
     }else{
         
         return(
-            <QuizStart currentQuiz = {currentQuiz} highestScores = {highestScores}></QuizStart>
+            <QuizStart currentQuiz = {currentQuiz} author = {username}></QuizStart>
         );
         
        

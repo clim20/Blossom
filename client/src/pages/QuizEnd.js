@@ -1,6 +1,13 @@
 import React, { useContext, useState } from 'react';
-//import { useMutation, useQuery } from '@apollo/react-hooks';
-import image1 from '../testpic/seal.jpg';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+
+//import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+
+import { AuthContext } from '../context/auth';
+import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
+
+
 
 import MenuBar from '../components/MenuBar';
 import QuizStart from './QuizStart';
@@ -14,6 +21,33 @@ const styles = {
 }
 
 const QuizEnd = (props) =>{
+
+    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: props.currentQuiz.creator
+        }
+    });
+
+    var userObject = {};
+    var username = "";
+    if (userData) { 
+		userObject = userData.findUserById;
+        username = userObject.username;
+    }
+
+    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: userObject.profileId
+        }
+    });
+
+    var profileObject = {};
+    var followers = 0;
+    if (profileData) { 
+		profileObject = profileData.findProfileById;
+        followers = profileObject.followerCount;
+    }
+
 
     const [isRetrying, setIsRetrying] = useState(false);
     
@@ -51,10 +85,10 @@ const QuizEnd = (props) =>{
                 <h1 style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
                 <button onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>
-                        {props.currentQuiz.author}
+                        {username}
                     </p>
                     <p style={{textAlign: 'center'}}> 
-                        {props.currentQuiz.followers + " Followers"}
+                        {followers + " Followers"}
                     </p>
                 </button>
                 
@@ -75,7 +109,7 @@ const QuizEnd = (props) =>{
                         LEADERBOARDS
                     </button>
                     <table>
-                        {props.highestScores.splice(0,5).map(displayTopScores)}
+                        {/*props.highestScores.splice(0,5).map(displayTopScores)*/}
                     </table>
                     
                 </div>
