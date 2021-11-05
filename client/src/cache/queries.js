@@ -329,6 +329,7 @@ export const FETCH_POPULAR_QUIIZZES = gql`
             createdAt
         }
     }
+`;
 
 export const FIND_COLLABORATORS_BY_IDS = gql`
     query findCollaboratorsByIds($ids: [ID!]!) {
