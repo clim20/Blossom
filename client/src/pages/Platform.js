@@ -48,7 +48,7 @@ const Platform = () => {
 
     const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
-            id: user.profileId //this is the logged in user which could be null
+            id: user ? user.profileId : ''
         }
     });
 
