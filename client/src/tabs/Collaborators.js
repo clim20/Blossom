@@ -18,6 +18,7 @@ const Collaborators = (props) => {
     const [RemoveCollaborator] 			        = useMutation(mutations.REMOVE_COLLABORATOR);
 
     var platform;
+
     const { data, refetch: refetchPlatformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
             id: platformId
@@ -54,6 +55,7 @@ const Collaborators = (props) => {
            case "Join": 
                 const { data: joinData } = await AddCollaboratorRequest({variables: { platformId: platform._id, userId: user._id }});
                 setButtonText("Pending...");
+                refetchPlatformData();
                 break;
            case "Requests": 
                 setShowCollaboratorRequests(true);
@@ -61,6 +63,7 @@ const Collaborators = (props) => {
             case "Leave":
                 const { data: leaveData } = await RemoveCollaborator({variables: { platformId: platform._id, userId: user._id }});
                 setButtonText("Join");
+                refetchPlatformData();
                 break;
             case "Pending...":
                 alert("Join request already sent");
@@ -73,6 +76,10 @@ const Collaborators = (props) => {
                                         : (isCollaborator ? setButtonText("Leave") 
                                         : setButtonText("Join"))) : setButtonText("Requests")) 
                                         : setButtonText(""))
+    }, [user, platform]);
+
+    useEffect(() => {
+        refetchPlatformData();
     }, [user, platform]);
 
     return (
