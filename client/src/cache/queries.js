@@ -179,6 +179,134 @@ export const FIND_PLATFORMS_BY_IDS = gql`
     }
 `;
 
+
+export const GET_QUIZZES = gql`
+    query getQuizzes{
+        getQuizzes {
+            _id
+            title
+            description
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+            quizDislikes
+            badges{
+                rank
+                image
+            }
+            scores{
+                user
+                userScore
+                bestScore
+            }
+            cards{
+                cardNum
+                question
+                choices
+                answer
+                answerExplanation
+                questionImg
+                answerImg
+                drawing{
+                    _id
+                }
+            }
+            createdAt
+        }
+    }
+`;
+
+export const GET_QUIZZES_BY_IDS = gql`
+    query getQuizzesByIds($ids: [ID!]!) {
+        getQuizzesByIds(ids: $ids) {
+            _id
+            title
+            description
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+            quizDislikes
+            badges{
+                rank
+                image
+            }
+            scores{
+                user
+                userScore
+                bestScore
+            }
+            cards{
+                cardNum
+                question
+                choices
+                answer
+                answerExplanation
+                questionImg
+                answerImg
+                drawing{
+                    _id
+                }
+            }
+            createdAt
+        }
+    }
+`;
+
+export const FIND_QUIZ_BY_ID = gql`
+    query findQuizById($id: ID!) {
+        findQuizById(id: $id) {
+            _id
+            title
+            description
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+            quizDislikes
+            badges{
+                rank
+                image
+            }
+            scores{
+                user
+                userScore
+                bestScore
+            }
+            cards{
+                cardNum
+                question
+                choices
+                answer
+                answerExplanation
+                questionImg
+                answerImg
+                drawing{
+                    _id
+                }
+            }
+            createdAt
+        }
+    }
+`;
+
+export const FETCH_POPULAR_QUIIZZES = gql`
+    query getPopularQuizzes {
+        getPopularQuizzes {
+            _id
+            title
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+        }
+    }
+
 export const FIND_COLLABORATORS_BY_IDS = gql`
     query findCollaboratorsByIds($ids: [ID!]!) {
         findCollaboratorsByIds(ids: $ids) {
@@ -194,4 +322,5 @@ export const FIND_COLLABORATORS_BY_IDS = gql`
             createdAt
         }
     }
+
 `;
