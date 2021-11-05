@@ -54,7 +54,7 @@ module.exports = gql`
         description: String!
         titleImg: String
         creator: ID!
-        platform: ID!
+        platform: ID
         quizHits: Int!
         quizLikes: Int!
         quizDislikes: Int!
@@ -128,6 +128,32 @@ module.exports = gql`
         # collections: [ID!]
     }
 
+    input QuizInput {
+        title: String!
+        description: String!
+        titleImg: String
+        #creator: ID!
+        #platform: ID!
+        #quizHits: Int!
+        #quizLikes: Int!
+        #quizDislikes: Int!
+        #badges: [quizBadge],
+        #scores: [Score],
+        cards: [CardInput!]!,
+        createdAt: String!
+    }
+
+    input CardInput{
+        cardNum: Int!
+        question: String!
+        choices: [String!]!
+        answer: Int!
+        answerExplanation: String!
+        #questionImg: String
+        #answerImg: String
+        #drawing: Drawing
+    }
+
     union Following = User | Platform
 
     type Query {
@@ -141,6 +167,10 @@ module.exports = gql`
         findPlatformById(id: ID!): Platform!
         findPlatformsByIds(ids: [ID!]!): [Platform!]!
         getUsers: [User!]!
+        getQuizzes: [Quiz!]!
+        findQuizById(id: ID!): Quiz!
+        getQuizzesByIds(ids: [ID!]!): [Quiz!]!
+        getPopularQuizzes: [Quiz!]!
     }
 
     type Mutation {
@@ -155,5 +185,8 @@ module.exports = gql`
         removeCollaborator(platformId: ID!, userId: ID!): Platform!
         editProfile(id: ID!, updatedProfile: ProfileInput!): Profile!
         editPlatform(id: ID!, updatedPlatform: PlatformInput!): Platform!
+        createQuiz(owner: ID!, newQuiz: QuizInput!): Quiz!
+        updateQuiz(quizId: ID!, tempQuiz: QuizInput!): Quiz!
+        deleteQuiz(deletedQuiz: ID!): Boolean!
     }
 `
