@@ -104,10 +104,10 @@ module.exports = {
       const usernameExist = await User.findOne({username: name});
 
       if(!usernameExist){
-          const updated = await User.updateOne({id: user._id}, {username: name});
+          const updated = await User.updateOne({_id: id}, {username: name});
 
           if (updated) {
-              const newUser = await User.findOne({_id: id});
+              const newUser = await User.findOne({_id: user._id});
               return newUser;
           }
       }
