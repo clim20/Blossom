@@ -34,7 +34,7 @@ export const FIND_USER_BY_ID = gql`
     }
 `;
 
-export const GET_USERS = gql`
+export const FETCH_USERS = gql`
     query getUsers {
         getUsers {
             _id
@@ -179,6 +179,7 @@ export const FIND_PLATFORMS_BY_IDS = gql`
     }
 `;
 
+
 export const GET_QUIZZES = gql`
     query getQuizzes{
         getQuizzes {
@@ -306,6 +307,7 @@ export const FETCH_POPULAR_QUIIZZES = gql`
         }
     }
 `;
+
 
 export const FIND_COLLABORATORS_BY_IDS = gql`
     query findCollaboratorsByIds($ids: [ID!]!) {
