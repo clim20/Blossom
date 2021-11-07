@@ -21,7 +21,7 @@ const Platforms = (props) => {
 
     return (
         <div>
-            {platforms && <PlatformCards platforms={platforms} />}
+            {platforms && <PlatformCards platforms={platforms} profile={props.profile} activeTab={props.activeTab}/>}
         </div>
     );
 }

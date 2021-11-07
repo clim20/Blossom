@@ -130,13 +130,19 @@ module.exports = {
     },
     async addCollaborator(_, { platformId, userId }) {
       const platform = await Platform.findOne({_id: platformId});
-  
+      const user = await User.findOne({_id: userId});
+      const profile = await Profile.findOne({_id: user.profileId});
+
       let collaborators = platform.collaborators;
       collaborators.push(userId);
       const list = platform.requests.filter(id => id.toString() !== new ObjectId(userId).toString());
       const updated = await Platform.updateOne({_id: platform._id}, {collaborators: collaborators, requests: list});
 
-      if(updated){
+      let platforms = profile.platforms;
+      platforms.push(platformId);
+      const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
+
+      if(updated && updated2){
         return platform;
       }
       return platform;
@@ -154,11 +160,16 @@ module.exports = {
     },
     async removeCollaborator(_, { platformId, userId }) {
       const platform = await Platform.findOne({_id: platformId});
-  
+      const user = await User.findOne({_id: userId});
+      const profile = await Profile.findOne({_id: user.profileId});
+
       let list = platform.collaborators.filter(_id => _id.toString() !== new ObjectId(userId).toString());
       const updated = await Platform.updateOne({_id: platform._id}, {collaborators: list});
       
-      if(updated){
+      let list2 = profile.platforms.filter(_id => _id.toString() !== new ObjectId(platformId).toString());
+      const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: list2});
+      
+      if(updated & updated2){
         return platform;
       }
       return platform;
