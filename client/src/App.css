@@ -1,3 +1,9 @@
+:root {
+  --pink: #fed3db;
+  --platformBorder: #89df79;
+  --profileBorder: #c883ff;
+}
+
 .page-title {
     display: block !important;
     text-align: center;
@@ -41,7 +47,6 @@ body {
 }
 .search-bar {
   width: 40%;
-
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
@@ -136,11 +141,11 @@ button svg {
 }
 
 .creator-circle {
-  border: 4px solid #c883ff;
+  border: 4px solid var(--profileBorder);
 }
 
 .platform-circle {
-  border: 4px solid #89df79;    
+  border: 4px solid var(--platformBorder);    
 }
 
 .banner-header {
@@ -169,7 +174,7 @@ button svg {
 }
 
 .active-tab {
-  background: #fed3db !important;
+  background: var(--pink) !important;
 }
 
 .inactive-tab {
@@ -204,13 +209,13 @@ button svg {
   bottom: -4.6rem;
   width: 8rem;
   height: 3rem;
-  background-color: #fed3db !important;
+  background-color: var(--pink) !important;
 }
 
 .edit-button {
   width: 8rem;
   height: 3rem;
-  background-color: #fed3db !important;
+  background-color: var(--pink) !important;
 }
 
 /* .update-account {
@@ -282,7 +287,7 @@ button svg {
   right: 3rem;
   width: 10%;
   height: 2.5rem;
-  background-color: #fed3db !important;
+  background-color: var(--pink) !important;
 }
 
 /* .quiz-start-end-button {
@@ -343,7 +348,7 @@ button svg {
   margin-left: 54px;
   width: 919px;
   height: 523px;
-  background-color: #fed3db;
+  background-color: var(--pink);
 }
 
 .checkBox {
