@@ -55,11 +55,9 @@ const Login = () => {
     });
 
     return (
-        <div>
-            <Menu.Item onClick={signIn} className="button">
-                <span className="buttonText">Login</span>
-            </Menu.Item>
-        </div>
+        <Menu.Item onClick={signIn} className="button">
+            <span className="buttonText">Login</span>
+        </Menu.Item>
     );
 }
 
