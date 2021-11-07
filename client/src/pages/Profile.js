@@ -91,6 +91,10 @@ const Profile = () => {
         }, 300);
     }
 
+    useEffect(() => {
+        refetchProfileData();
+    }, [user, profile]);
+
     const isOwnProfile = profile && user && profile.user === user._id;
 
     return (

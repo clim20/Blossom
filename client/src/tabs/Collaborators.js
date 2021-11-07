@@ -18,7 +18,6 @@ const Collaborators = (props) => {
     const [RemoveCollaborator] 			        = useMutation(mutations.REMOVE_COLLABORATOR);
 
     var platform;
-
     const { data, refetch: refetchPlatformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
             id: platformId
