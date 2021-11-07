@@ -2,6 +2,8 @@
   --pink: #fed3db;
   --platformBorder: #89df79;
   --profileBorder: #c883ff;
+  --cancelRed: #f85b5b;
+  --saveGreen: #8bd784;
 }
 
 .page-title {
@@ -255,7 +257,7 @@ button svg {
 .save-button {
   width: 8rem;
   height: 3rem;
-  background-color: #8bd784 !important;
+  background-color: var(--saveGreen) !important;
 }
 
 .suc-msg {
@@ -273,7 +275,7 @@ button svg {
 .cancel-button {
   width: 8rem;
   height: 3rem;
-  background-color: #f85b5b !important;
+  background-color: var(--cancelRed) !important;
 }
 
 .edit-box {
@@ -283,10 +285,8 @@ button svg {
 }
 
 .request-button {
-  position: absolute;
-  right: 3rem;
-  width: 10%;
-  height: 2.5rem;
+  width: 8rem;
+  height: 3rem;
   background-color: var(--pink) !important;
 }
 

@@ -18,15 +18,23 @@ const CreatorCard = (props) => {
     }
 
     const handleClick = () => {
-        history.push("/profile/" + props.user.profileId);
+        if(!props.editingMode)
+            history.push("/profile/" + props.user.profileId);
     }
 
+    const onCollaboratorTab = props.activeTab === "collaborators";
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
             <img className="card-image creator-circle ui avatar image"
                 src={profile.profileImg}
                 alt="creator profile"
             />
+            {
+                onCollaboratorTab && props.editingMode && props.user._id !== props.platform.owner &&
+                <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                    onClick={() => props.removeCollaborator(props.user._id)}
+                />
+            }
             <br/>
             <br/>
             <div className="header">
@@ -37,10 +45,10 @@ const CreatorCard = (props) => {
                 {profile && profile.followerCount && profile.followerCount} followers
             </div>
             <div>
-                {props.activeTab === "collaborators" && props.user._id === props.platform.owner && <div> Owner </div>} 
+                {onCollaboratorTab && props.user._id === props.platform.owner && <div> Owner </div>} 
             </div>
             <div>
-                {props.activeTab === "collaborators" && props.user._id !== props.platform.owner && <div> Collaborator </div>}
+                {onCollaboratorTab && props.user._id !== props.platform.owner && <div> Collaborator </div>}
             </div>
         </div>    
     );

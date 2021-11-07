@@ -119,7 +119,6 @@ module.exports = {
     async addCollaboratorRequest(_, { platformId, userId }) {
       const platform = await Platform.findOne({_id: platformId});
   
-      console.log(platform);
       let requests = platform.requests;
       requests.push(userId);
       const updated = await Platform.updateOne({_id: platform._id}, {requests: requests});
@@ -156,7 +155,7 @@ module.exports = {
     async removeCollaborator(_, { platformId, userId }) {
       const platform = await Platform.findOne({_id: platformId});
   
-      let list = platform.collaborators.filter(id => id.toString() !== new ObjectId(userId).toString());
+      let list = platform.collaborators.filter(_id => _id.toString() !== new ObjectId(userId).toString());
       const updated = await Platform.updateOne({_id: platform._id}, {collaborators: list});
       
       if(updated){
