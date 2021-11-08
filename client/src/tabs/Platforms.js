@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import PlatformCards from '../components/PlatformCards';
 import PlatformCreationModal from '../modals/PlatformCreationModal';
+import PlatformDeletionModal from '../modals/PlatformDeletionModal';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -44,21 +45,15 @@ const Platforms = (props) => {
     }
 
     const [showCreationMenu, setShowCreationMenu] = useState(false);
+    const [showPlatformDeletionModal, setShowPlatformDeletionModal] = useState(false);
+    const [removePlatform, setRemovePlatform] = useState('');
     const [editingMode, toggleEditingMode] = useState(false);
   
     const handleCancel = () => {
         toggleEditingMode(false);
     }
 
-    // var [saveChanges] = useMutation(mutations.EDIT_PROFILE, {
-    //     variables: {
-    //         id: profile._id,
-    //         updatedProfile: updatedProfile
-    //     }
-    // });
-
     const handleSave = () => {
-        //saveChanges();
         setTimeout(() => {
             props.refetchProfileData();
         }, 300);
@@ -66,7 +61,6 @@ const Platforms = (props) => {
     }
 
     const deletePlatform = async (platformId) => {
-        console.log("deleting platform");
         const { data } = await DeletePlatform({variables: { platformId: platformId }});
         refetchProfileData();
         refetchPlatformsData();
@@ -107,9 +101,13 @@ const Platforms = (props) => {
                 </div>
             }
             {platforms && <PlatformCards platforms={platforms} profile={profile} activeTab={props.activeTab} editingMode={editingMode}
-                            deletePlatform={deletePlatform} user={user}/>}
+                            setShowPlatformDeletionModal={setShowPlatformDeletionModal} setRemovePlatform={setRemovePlatform} user={user}/>}
             {
                 showCreationMenu && (<PlatformCreationModal setShowCreationMenu={setShowCreationMenu} refetchProfileData={refetchProfileData}/>)
+            }
+            {
+                showPlatformDeletionModal && (<PlatformDeletionModal setShowPlatformDeletionModal={setShowPlatformDeletionModal}
+                                            deletePlatform={deletePlatform} removePlatform={removePlatform}/>)
             }
         </div>
     );

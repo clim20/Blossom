@@ -255,8 +255,8 @@ button svg {
 } */
 
 .save-button {
-  width: 8rem;
-  height: 3rem;
+  width: 8rem !important;
+  height: 3rem !important;
   background-color: var(--saveGreen) !important;
 }
 
@@ -273,9 +273,9 @@ button svg {
 }
 
 .cancel-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: #fed3db !important;
+  width: 8rem !important;
+  height: 3rem !important;
+  background-color: var(--cancelRed) !important;
 }
 
 .update {

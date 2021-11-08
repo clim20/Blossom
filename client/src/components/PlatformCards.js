@@ -8,9 +8,9 @@ function PlatformCards(props) {
             {
                 props.platforms.map((entry, index) => (
                     <PlatformCard
-                        platform={entry} key={index} 
+                        platform={entry} key={index} user={props.user}
                         profile={props.profile} activeTab={props.activeTab} editingMode={props.editingMode}
-                        deletePlatform={props.deletePlatform} user={props.user}
+                        setShowPlatformDeletionModal={props.setShowPlatformDeletionModal} setRemovePlatform={props.setRemovePlatform}
                     />
                 ))
             }

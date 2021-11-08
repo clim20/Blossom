@@ -48,9 +48,8 @@ const Collaborators = (props) => {
     }
 
     const [showCollaboratorRequests, setShowCollaboratorRequests] = useState(false);
-    const [removeUser, setRemoveUser] = useState('');
-
     const [showCollaboratorRemovalModal, setShowCollaboratorRemovalModal] = useState(false);
+    const [removeUser, setRemoveUser] = useState('');
     const [buttonText, setButtonText] = useState(user ? (!isOwner ? (isRequest ? "Pending..." : (isCollaborator ? "Leave" : "Join")) : "Requests") : "");
     const [editingMode, toggleEditingMode] = useState(false);
 
