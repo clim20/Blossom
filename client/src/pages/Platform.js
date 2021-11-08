@@ -1,38 +1,42 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
 import Home from '../tabs/Home';
 import Quizzes from '../tabs/Quizzes';
 import Collections from '../tabs/Collections';
 import Collaborators from '../tabs/Collaborators';
-import About from '../tabs/About';
+import PlatformAbout from '../tabs/PlatformAbout';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 
 const Platform = () => {
     const { user } = useContext(AuthContext);
 
     const [activeTab, setActiveTab] = useState('home');
+    const [followed, setFollowed ] = useState(false);
     const params = useParams();
     const platformId = params ? params.platformId : 'could not get params';
 
-    const { data } = useQuery(queries.FIND_PLATFORM_BY_ID, {
+    // Platform page user is on
+    const { data: PlatformData, refetch: refetchPlatformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
             id: platformId
         }
     });
 
     var platform = {};
-    if (data) { 
-		platform = data.findPlatformById;
+    if (PlatformData) { 
+		platform = PlatformData.findPlatformById;
     }
 
+    // User's own User and Profile
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
-            id: platform.owner
+            id: platform ? platform.owner : ''
         }
     });
 
@@ -42,20 +46,56 @@ const Platform = () => {
     }
     console.log(userObject);
 
+    const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: user ? user.profileId : ''
+        }
+    });
+
+    var userProfile = { following: [] };
+    if (userProfileData) { 
+        userProfile = userProfileData.findProfileById;
+    }
+
     const handleTabClick = (name) => {
         setActiveTab(name);
     }
+
+    useEffect(() => {
+        if (userProfile && platform && userProfile.following.find(id => id.toString() === platform._id.toString())) {
+            setFollowed(true);
+        } else {
+            setFollowed(false);
+        }
+    }, [userProfile, platform]);
+    
+    const [followPlatform] = useMutation(mutations.FOLLOW_PLATFORM, {
+        variables: {
+            userId: user ? user._id : '',
+            platformId: platform ? platform._id : ''
+        }
+    });
+
+    const handleFollow = () => {
+        followPlatform();
+        setTimeout(() => {
+            refetchPlatformData();
+            refetchUserProfileData();
+        }, 300);
+    }
+
+    const isOwnPlatform = platform && user && platform.owner === user._id;
 
     return (
         <div>
             <MenuBar/>
             <div className="ui container banner-header"
-                style={{ backgroundImage: `url(https://img.wallpapersafari.com/desktop/1024/576/75/50/m1YVTq.jpg)` }}
+                style={{ backgroundImage: `url(${platform.bannerImg})` }}
             >
                 <div className="banner-info">
                     <div className="display-inline-block">
-                        <img className="card-image creator-circle ui avatar image"
-                            src="https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg"
+                        <img className="card-image platform-circle ui avatar image"
+                            src={platform.platformImg}
                             alt="platform"
                         />
                     </div>
@@ -67,9 +107,9 @@ const Platform = () => {
                     }
                 </div>
 
-                {platform && user && userObject.username !== user.username && 
-                    <button className="ui button follow-button">
-                        Follow
+                {user && !isOwnPlatform && 
+                    <button className="ui button follow-button" onClick={handleFollow}>
+                        {followed ? 'Unfollow' : 'Follow'}
                     </button>
                 }
             </div>
@@ -107,8 +147,8 @@ const Platform = () => {
                     {activeTab === 'home' && <Home/>}
                     {activeTab === 'quizzes' && <Quizzes/>}
                     {activeTab === 'collections' && <Collections/>}
-                    {activeTab === 'collaborators' && <Collaborators/>}
-                    {activeTab === 'about' && <About/>}
+                    {activeTab === 'collaborators' && <Collaborators activeTab={activeTab}/>}
+                    {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>
             </div>
         </div>

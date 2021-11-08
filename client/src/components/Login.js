@@ -13,7 +13,8 @@ const Login = () => {
 
     const [values, setValues] = useState({
         username: '',
-        email: ''
+        email: '',
+        profileImg: ''
     });
 
     const [loginUser] = useMutation(LOGIN_USER, {
@@ -33,7 +34,8 @@ const Login = () => {
         const user = res.profileObj;
         setValues({
             username: user.email,
-            email: user.email
+            email: user.email,
+            profileImg: user.imageUrl
         });
         loginUserCallback();
         // Initializing the setup
@@ -53,11 +55,9 @@ const Login = () => {
     });
 
     return (
-        <div>
-            <Menu.Item onClick={signIn} className="button">
-                <span className="buttonText">Login</span>
-            </Menu.Item>
-        </div>
+        <Menu.Item onClick={signIn} className="button">
+            <span className="buttonText">Login</span>
+        </Menu.Item>
     );
 }
 

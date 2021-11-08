@@ -1,7 +1,7 @@
 const { model, Schema, ObjectId } = require('mongoose');
  
 const drawingSchema = new Schema({
-    id: ObjectId,
+    _id: ObjectId,
 	// pixelData: [colorformat]
 });
 

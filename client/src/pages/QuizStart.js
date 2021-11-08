@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
-import QuizCard from '../components/QuizCard'
+import QuizQuesAns from '../components/QuizQuesAns'
 import QuizEnd from './QuizEnd';
 
 const QuizStart = (props) => {
@@ -46,23 +46,25 @@ const QuizStart = (props) => {
     };
 
     if(isFinished == true || questionNumber == props.currentQuiz.cards.length){
+        console.log(props.currentQuiz.cards.length)
         return( 
             <QuizEnd score = {totalScore} currentQuiz = {props.currentQuiz } highestScores = {props.highestScores}></QuizEnd>
         );
     }else{
+        console.log(props.currentQuiz.cards.length)
         return (
             <div>
                 <header>{(questionNumber+1)+ " of "+(props.currentQuiz.cards.length)}</header>
                 <header>
                     <p>{props.currentQuiz.title}</p>
-                    <p>{"Created by "+props.currentQuiz.author}</p>
+                    <p>{"Created by "+props.author}</p>
        
                 </header>
                 <div>
-                    <QuizCard showAnswer={showAnswer} currentQuestion={props.currentQuiz.cards[questionNumber] } score={questionScore} handleSetQuestionNumber={handleSetQuestionNumber}  handleSetShowAnswer={handleSetShowAnswer} handleAnswerOptionsClick={handleAnswerOptionsClick}></QuizCard>
+                    <QuizQuesAns showAnswer={showAnswer} currentQuestion={props.currentQuiz.cards[questionNumber] } score={questionScore} handleSetQuestionNumber={handleSetQuestionNumber}  handleSetShowAnswer={handleSetShowAnswer} handleAnswerOptionsClick={handleAnswerOptionsClick}></QuizQuesAns>
                 </div>
 
-                <button onClick = {() => handleFinish()}>
+                <button className="quiz-finish-button" onClick = {() => handleFinish()}>
                     Finish
                 </button>
     

@@ -9,7 +9,7 @@ function PlatformCard(props) {
 
     const { data } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
-            id: props.platform.id
+            id: props.platform._id
         }
     });
 
@@ -21,13 +21,13 @@ function PlatformCard(props) {
     }
 
     const handleClick = () => {
-        history.push("/platform/" + props.platform.id);
+        history.push("/platform/" + props.platform._id);
     }
 
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
             <img className="card-image platform-circle ui avatar image"
-                src="https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg"
+                src={platform.platformImg}
                 alt="platform"
             />
             <br/>

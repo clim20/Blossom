@@ -7,7 +7,7 @@ const Profile = require('../../models/Profile');
 
 function generateToken(user) {
   return jwt.sign({
-    id: user.id,
+    _id: user._id,
     email: user.email,
     username: user.username,
     profileId: user.profileId,
@@ -17,6 +17,12 @@ function generateToken(user) {
 
 module.exports = {
   Query: {
+    async getUsers() {
+      const users = await User.find();
+
+      if (users) return users;
+      return [];
+    },
     async getPopularUsers() {
       const profiles = await Profile.find().sort({ followerCount: -1 });
 
@@ -41,14 +47,14 @@ module.exports = {
     }
   },
   Mutation: {
-    async login(_, { username, email }) {
+    async login(_, { username, email, profileImg }) {
       const user = await User.findOne({ email });
 
       // If user not found, register user
       if (!user) {
         const profileId = new ObjectId();
         const newUser = new User({
-          id: new ObjectId(),
+          _id: new ObjectId(),
           email,
           username,
           profileId: profileId,
@@ -57,16 +63,15 @@ module.exports = {
         });
 
         const newProfile = new Profile({
-          id: profileId,
-          user: newUser.id,
-          profileImg: {},
-          bannerImg: {},
+          _id: profileId,
+          user: newUser._id,
+          profileImg: profileImg,
+          bannerImg: "https://wallpaperaccess.com/full/5163061.jpg",
           badges: [],
           description: "",
           contact: "",
           followerCount: 0,
-          usersFollowing: [],
-          platformsFollowing: [],
+          following: [],
           quizzes: [],
           collections: [],
           platforms: []
@@ -94,17 +99,18 @@ module.exports = {
         token
       };
     },
-    async updateScore(_, { id, score }) {
-      let user = await User.findById(new ObjectId(id));
+    async updateUsername(_, { id, name }){
+      const user = await User.findOne({_id: id});
+      const usernameExist = await User.findOne({username: name});
 
-      if (!user) {
-        return {};
+      if(!usernameExist){
+          const updated = await User.updateOne({_id: id}, {username: name});
+
+          if (updated) {
+              const newUser = await User.findOne({_id: user._id});
+              return newUser;
+          }
       }
-
-      const updatedScores = [...user.scores, score];
-      await User.updateOne({ _id: id }, { scores: updatedScores });
-      user = await User.findById(new ObjectId(id));
-
       return user;
     }
   },

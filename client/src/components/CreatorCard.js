@@ -24,7 +24,7 @@ const CreatorCard = (props) => {
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
             <img className="card-image creator-circle ui avatar image"
-                src="https://image.pngaaa.com/477/46477-middle.png"
+                src={profile.profileImg}
                 alt="creator profile"
             />
             <br/>
@@ -35,6 +35,12 @@ const CreatorCard = (props) => {
             <br/>
             <div className="header">
                 {profile && profile.followerCount && profile.followerCount} followers
+            </div>
+            <div>
+                {props.activeTab === "collaborators" && props.user._id === props.platform.owner && <div> Owner </div>} 
+            </div>
+            <div>
+                {props.activeTab === "collaborators" && props.user._id !== props.platform.owner && <div> Collaborator </div>}
             </div>
         </div>    
     );

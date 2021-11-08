@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
 import Home from '../tabs/Home';
@@ -9,32 +9,42 @@ import Platforms from '../tabs/Platforms';
 import Collections from '../tabs/Collections';
 import Following from '../tabs/Following';
 import Badges from '../tabs/Badges';
-import About from '../tabs/About';
+import ProfileAbout from '../tabs/ProfileAbout';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 
 const Profile = () => {
     const { user } = useContext(AuthContext);
 
     const [activeTab, setActiveTab] = useState('home');
+    const [followed, setFollowed ] = useState(false);
     const params = useParams();
     const profileId = params ? params.profileId : 'could not get params';
 
-    const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    useEffect(() => {
+        if (params) {
+            setActiveTab('home');
+        }
+    }, [params]);
+
+    // Profile Page user is on
+    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: profileId
         }
     });
 
     var profile = {};
-    if (data) { 
-		profile = data.findProfileById;
+    if (profileData) { 
+		profile = profileData.findProfileById;
     }
 
+    // User's own User and Profile
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
-            id: profile.user
+            id: profile ? profile.user : ''
         }
     });
 
@@ -43,20 +53,56 @@ const Profile = () => {
 		userObject = userData.findUserById;
     }
 
+    const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: user ? user.profileId : ''
+        }
+    });
+
+    var userProfile = { following: [] };
+    if (userProfileData) { 
+        userProfile = userProfileData.findProfileById;
+    }
+
     const handleTabClick = (name) => {
         setActiveTab(name);
     }
+
+    useEffect(() => {
+        if (userProfile && profile && userProfile.following.find(id => id.toString() === profile.user.toString())) {
+            setFollowed(true);
+        } else {
+            setFollowed(false);
+        }
+    }, [userProfile, profile]);
+    
+    const [followProfile] = useMutation(mutations.FOLLOW_PROFILE, {
+        variables: {
+            userId: user ? user._id : '',
+            profileId: profile ? profile._id : ''
+        }
+    });
+
+    const handleFollow = () => {
+        followProfile();
+        setTimeout(() => {
+            refetchProfileData();
+            refetchUserProfileData();
+        }, 300);
+    }
+
+    const isOwnProfile = profile && user && profile.user === user._id;
 
     return (
         <div>
             <MenuBar/>
             <div className="ui container banner-header"
-                style={{ backgroundImage: `url(https://wallpaperaccess.com/full/5163061.jpg)` }}
+                style={{ backgroundImage: `url(${profile.bannerImg})` }}
             >
                 <div className="banner-info">
                     <div className="display-inline-block">
                         <img className="card-image creator-circle ui avatar image"
-                            src="https://image.pngaaa.com/477/46477-middle.png"
+                            src={profile.profileImg}
                             alt="creator profile"
                         />
                     </div>
@@ -68,9 +114,9 @@ const Profile = () => {
                     }
                 </div>
 
-                {profile && user && user.username && userObject.username !== user.username && 
-                    <button className="ui button follow-button">
-                        Follow
+                {user && !isOwnProfile &&
+                    <button className="ui button follow-button" onClick={handleFollow}>
+                        {followed ? 'Unfollow' : 'Follow'}
                     </button>
                 }
             </div>
@@ -115,13 +161,13 @@ const Profile = () => {
                 </div>
 
                 <div className="ui bottom attached active tab segment profile-content">
-                    {activeTab === 'home' && <Home/>}
-                    {activeTab === 'quizzes' && <Quizzes/>}
-                    {activeTab === 'platforms' && <Platforms/>}
-                    {activeTab === 'collections' && <Collections/>}
-                    {activeTab === 'following' && <Following/>}
-                    {activeTab === 'badges' && <Badges/>}
-                    {activeTab === 'about' && <About/>}
+                    {activeTab === 'home' && <Home profile={profile}/>}
+                    {activeTab === 'quizzes' && <Quizzes profile={profile}/>}
+                    {activeTab === 'platforms' && <Platforms profile={profile}/>}
+                    {activeTab === 'collections' && <Collections profile={profile}/>}
+                    {activeTab === 'following' && <Following profile={profile}/>}
+                    {activeTab === 'badges' && <Badges profile={profile}/>}
+                    {activeTab === 'about' && <ProfileAbout profile={profile} refetchProfileData={refetchProfileData}/>}
                 </div>
             </div>
         </div>
