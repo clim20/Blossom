@@ -84,6 +84,10 @@ const Platform = () => {
         }, 300);
     }
 
+    useEffect(() => {
+        refetchPlatformData();
+    }, [user, platform]);
+
     const isOwnPlatform = platform && user && platform.owner === user._id;
 
     return (

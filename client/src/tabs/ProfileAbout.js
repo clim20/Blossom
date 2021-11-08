@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import CreateIcon from '@mui/icons-material/Create';
 
 import { AuthContext } from '../context/auth';
 import * as mutations from '../cache/mutations';
@@ -96,14 +95,14 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                         Description
                     </h3>
                     {
-                        editingMode && <CreateIcon style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingDescription(!editingDescription)}/>
+                        editingMode && <i class="pencil alternate icon" style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingDescription(!editingDescription)}/>
                     }
                 </div>
                 {
                     !editingDescription && !editingMode && <div>{profile.description}</div>
                 }
                 {
-                    editingDescription && <textarea className="edit-box" defaultValue={profile.description} onBlur={handleDescriptionEdit}></textarea>
+                    editingDescription && <textarea className="edit-box" defaultValue={updatedProfile.description} onBlur={handleDescriptionEdit}></textarea>
                 }
                 {
                     !editingDescription && editingMode && <div>{updatedProfile.description}</div>
@@ -118,14 +117,14 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                         Contact
                     </h3>
                     {
-                        editingMode && <CreateIcon style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingContact(!editingContact)}/>
+                        editingMode && <i class="pencil alternate icon" style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingContact(!editingContact)}/>
                     }
                 </div>
                 {
                     !editingContact && !editingMode && <div>{profile.contact}</div>
                 }
                 {
-                    editingContact && <textarea className="edit-box" defaultValue={profile.contact} onBlur={handleContactEdit}></textarea>
+                    editingContact && <textarea className="edit-box" defaultValue={updatedProfile.contact} onBlur={handleContactEdit}></textarea>
                 }
                 {
                     !editingContact && editingMode && <div>{updatedProfile.contact}</div>

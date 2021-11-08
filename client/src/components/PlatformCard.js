@@ -21,20 +21,36 @@ function PlatformCard(props) {
     }
 
     const handleClick = () => {
-        history.push("/platform/" + props.platform._id);
+        if(!props.editingMode)
+            history.push("/platform/" + props.platform._id);
     }
 
+    const onPlatformTab = props.activeTab === "platforms";
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
             <img className="card-image platform-circle ui avatar image"
                 src={platform.platformImg}
                 alt="platform"
             />
+            {
+                onPlatformTab && props.editingMode && platform.owner === props.user._id && 
+                <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                    onClick={() => props.deletePlatform(platform._id)}
+                />
+            }
             <br/>
             <br/>
             <div className="header">{props.platform.name}</div>
             <br/>
-            <div className="header"> {followerCount} followers</div>
+            <div className="header"> 
+                {followerCount} followers
+            </div>
+            <div>
+                {onPlatformTab && props.profile.user === platform.owner && <div> Owner </div>} 
+            </div>
+            <div>
+                {onPlatformTab && props.profile.user !== platform.owner && <div> Collaborator </div>}
+            </div>
         </div>    
     );
 }

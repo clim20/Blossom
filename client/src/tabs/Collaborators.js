@@ -18,7 +18,6 @@ const Collaborators = (props) => {
     const [RemoveCollaborator] 			        = useMutation(mutations.REMOVE_COLLABORATOR);
 
     var platform;
-
     const { data, refetch: refetchPlatformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
             id: platformId
@@ -41,14 +40,15 @@ const Collaborators = (props) => {
     }
 
     var isOwner, isCollaborator, isRequest;
-    if(user) {
+    if(platform && user) {
         isOwner = platform.owner === user._id;
         isCollaborator = platform.collaborators.includes(user._id);
         isRequest = platform.requests.includes(user._id);
     }
+
     const [showCollaboratorRequests, setShowCollaboratorRequests] = useState(false);
     const [buttonText, setButtonText] = useState(user ? (!isOwner ? (isRequest ? "Pending..." : (isCollaborator ? "Leave" : "Join")) : "Requests") : "");
-    const [isEditing, setEditing] = useState(false);
+    const [editingMode, toggleEditingMode] = useState(false);
 
     const handleClick = async () => {
        switch (buttonText) {
@@ -82,18 +82,69 @@ const Collaborators = (props) => {
         refetchPlatformData();
     }, [user, platform]);
 
+    const handleCancel = () => {
+        toggleEditingMode(false);
+    }
+
+    // var [saveChanges] = useMutation(mutations.EDIT_PROFILE, {
+    //     variables: {
+    //         id: profile._id,
+    //         updatedProfile: updatedProfile
+    //     }
+    // });
+
+    const handleSave = () => {
+        //saveChanges();
+        setTimeout(() => {
+            refetchPlatformData();
+        }, 300);
+        handleCancel();
+    }
+
+    const removeCollaborator = async (collaboratorId) => {
+        console.log(collaboratorId);
+        console.log(platform._id);
+        const { data: removeData } = await RemoveCollaborator({variables: { platformId: platform._id, userId: collaboratorId }});
+        console.log("collaborator removed");
+        refetchPlatformData();        
+    }
+
     return (
         <div>
-            {user && buttonText !== "" &&
-                <button className="ui button request-button" onClick={handleClick}>
-                    {buttonText}
-                </button>
+            {
+                isOwner && !editingMode &&
+                <div>
+                    <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
+                        Edit
+                    </button>  
+                </div>
             }
-            {collaborators && <CreatorCards users={collaborators} activeTab={props.activeTab} platform={platform} />}
-            {showCollaboratorRequests && (<RequestModal platform={platform} setShowCollaboratorRequests={setShowCollaboratorRequests} setButtonText={setButtonText}
-            refetchPlatformData={refetchPlatformData}
-            />
-            )}
+            {
+                !editingMode &&
+                <div>
+                    <button className="ui button request-button" style={{ float: 'right' }} onClick={handleClick}>
+                        {buttonText}
+                    </button>
+                </div>
+            }
+            {
+                editingMode &&
+                <div style={{ float: 'right' }}>
+                    <button className="ui button save-button" onClick={handleSave}>
+                        Save
+                    </button>  
+                    <button className="ui button cancel-button" onClick={handleCancel}>
+                        Cancel
+                    </button>  
+                </div>
+            }
+
+            {collaborators && <CreatorCards users={collaborators} activeTab={props.activeTab} platform={platform} 
+                                            editingMode={editingMode} removeCollaborator={removeCollaborator}/>}
+            {
+                showCollaboratorRequests && (<RequestModal platform={platform} setShowCollaboratorRequests={setShowCollaboratorRequests} setButtonText={setButtonText}
+                refetchPlatformData={refetchPlatformData}/>)
+            }
         </div>
     );
 }

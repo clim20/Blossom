@@ -2,6 +2,8 @@
   --pink: #fed3db;
   --platformBorder: #89df79;
   --profileBorder: #c883ff;
+  --cancelRed: #f85b5b;
+  --saveGreen: #8bd784;
 }
 
 .page-title {
@@ -255,7 +257,7 @@ button svg {
 .save-button {
   width: 8rem;
   height: 3rem;
-  background-color: #8bd784 !important;
+  background-color: var(--saveGreen) !important;
 }
 
 .suc-msg {
@@ -273,7 +275,6 @@ button svg {
 .cancel-button {
   width: 8rem;
   height: 3rem;
-<<<<<<< HEAD
   background-color: #fed3db !important;
 }
 
@@ -433,8 +434,8 @@ button svg {
   height: 37px;
   width: 139.23px;
   border-radius: 8px;
-=======
   background-color: #f85b5b !important;
+  background-color: var(--cancelRed) !important;
 }
 
 .edit-box {
@@ -444,10 +445,8 @@ button svg {
 }
 
 .request-button {
-  position: absolute;
-  right: 3rem;
-  width: 10%;
-  height: 2.5rem;
+  width: 8rem;
+  height: 3rem;
   background-color: var(--pink) !important;
 }
 
@@ -520,5 +519,24 @@ button svg {
   color: white;
   font-size: 25px;
   font-family: var(--font-family-puritan-regular);
->>>>>>> b814662d07161a08133f93655ef9ceb87ef35fed
+}
+
+/* PLATFORM CREATION MODAL */
+
+.create-modal-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--saveGreen) !important;
+}
+
+.cancel-modal-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--cancelRed) !important;
+}
+
+.creation-modal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }

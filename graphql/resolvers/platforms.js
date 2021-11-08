@@ -54,45 +54,78 @@ module.exports = {
         }
       }
 
-      console.log(collaborators);
-      
       return collaborators;
     },
   },
   Mutation: {
     async createPlatform(_, { owner, name }) {
-        
       const ownerId = new ObjectId(owner);
-      const user = await User.findOne({_id: ownerId});
+      const user = await User.findOne({_id: ownerId}); 
+      const platformNameExist = await Platform.findOne({name: name});
+  
+      if(!platformNameExist && name !== '') {
+        const newPlatform = new Platform({
+          _id: new ObjectId(),
+          name,
+          owner: user._id,
+          platformImg: "https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg",
+          bannerImg: "https://img.wallpapersafari.com/desktop/1024/576/75/50/m1YVTq.jpg",
+          description: "",
+          contact: "",
+          collaborators: [user._id],
+          requests: [],
+          followerCount: 0,
+          quizzes: [],
+          collections: [],
+          createdAt: new Date().toISOString()
+        });
+  
+        const updated = await newPlatform.save();
+  
+        const profile = await Profile.findOne({_id: new ObjectId(user.profileId)});
+        let platforms = profile.platforms;
+        platforms.push(newPlatform._id);
+        const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
+  
+        if(updated && updated2) {
+          return newPlatform;
+        }
+      } else   
+        return new Platform({
+          _id: new ObjectId(),
+          name: "",
+          owner: user._id,
+          platformImg: "",
+          bannerImg: "",
+          description: "",
+          contact: "",
+          collaborators: [user._id],
+          requests: [],
+          followerCount: 0,
+          quizzes: [],
+          collections: [],
+          createdAt: new Date().toISOString()
+        });
+    },
+    async deletePlatform(_, { platformId }){
+      const platform = await Platform.findOne({_id: platformId});
+      
+      if(platform){
+        const collaborators = platform.collaborators;
 
-      const newPlatform = new Platform({
-        _id: new ObjectId(),
-        name,
-        owner: user._id,
-        platformImg: "https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg",
-        bannerImg: "https://img.wallpapersafari.com/desktop/1024/576/75/50/m1YVTq.jpg",
-        description: "",
-        contact: "",
-        collaborators: [user._id],
-        requests: [],
-        followerCount: 0,
-        quizzes: [],
-        collections: [],
-        createdAt: new Date().toISOString()
-      });
-
-      const updated = await newPlatform.save();
-
-      const profile = await Profile.findOne({_id: user.profileId});
-      let platforms = profile.platforms;
-      platforms.push(newPlatform._id);
-      const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
-
-      if(updated && updated2) {
-        console.log(newPlatform);
-        return newPlatform;
+        for(let i = 0; i < collaborators.length; i++) {
+          if (collaborators[i]) {
+            let profile = await Profile.findOne({user: collaborators[i]})
+            let profilePlatforms = profile.platforms.filter(platform => platform._id.toString() !== platformId.toString());
+            let updated = await Profile.updateOne({user: profile.user}, {collaborators: profilePlatforms});
+          }
+        }
       }
-      else return false;
+
+      const deleted = await Platform.deleteOne({_id: platformId});
+      if (deleted)
+        return true;
+      return false;
     },
     async followPlatform(_, { userId, platformId }) {
       const user = await User.findOne({_id: userId});
@@ -119,7 +152,6 @@ module.exports = {
     async addCollaboratorRequest(_, { platformId, userId }) {
       const platform = await Platform.findOne({_id: platformId});
   
-      console.log(platform);
       let requests = platform.requests;
       requests.push(userId);
       const updated = await Platform.updateOne({_id: platform._id}, {requests: requests});
@@ -131,13 +163,19 @@ module.exports = {
     },
     async addCollaborator(_, { platformId, userId }) {
       const platform = await Platform.findOne({_id: platformId});
-  
+      const user = await User.findOne({_id: userId});
+      const profile = await Profile.findOne({_id: user.profileId});
+
       let collaborators = platform.collaborators;
       collaborators.push(userId);
       const list = platform.requests.filter(id => id.toString() !== new ObjectId(userId).toString());
       const updated = await Platform.updateOne({_id: platform._id}, {collaborators: collaborators, requests: list});
 
-      if(updated){
+      let platforms = profile.platforms;
+      platforms.push(platformId);
+      const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
+
+      if(updated && updated2){
         return platform;
       }
       return platform;
@@ -155,11 +193,16 @@ module.exports = {
     },
     async removeCollaborator(_, { platformId, userId }) {
       const platform = await Platform.findOne({_id: platformId});
-  
-      let list = platform.collaborators.filter(id => id.toString() !== new ObjectId(userId).toString());
+      const user = await User.findOne({_id: userId});
+      const profile = await Profile.findOne({_id: user.profileId});
+
+      let list = platform.collaborators.filter(_id => _id.toString() !== new ObjectId(userId).toString());
       const updated = await Platform.updateOne({_id: platform._id}, {collaborators: list});
       
-      if(updated){
+      let list2 = profile.platforms.filter(_id => _id.toString() !== new ObjectId(platformId).toString());
+      const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: list2});
+      
+      if(updated & updated2){
         return platform;
       }
       return platform;

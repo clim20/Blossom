@@ -91,6 +91,10 @@ const Profile = () => {
         }, 300);
     }
 
+    useEffect(() => {
+        refetchProfileData();
+    }, [user, profile]);
+
     const isOwnProfile = profile && user && profile.user === user._id;
 
     return (
@@ -163,7 +167,7 @@ const Profile = () => {
                 <div className="ui bottom attached active tab segment profile-content">
                     {activeTab === 'home' && <Home profile={profile}/>}
                     {activeTab === 'quizzes' && <Quizzes profile={profile}/>}
-                    {activeTab === 'platforms' && <Platforms profile={profile}/>}
+                    {activeTab === 'platforms' && <Platforms activeTab={activeTab} refetchProfileData={refetchProfileData}/>}
                     {activeTab === 'collections' && <Collections profile={profile}/>}
                     {activeTab === 'following' && <Following profile={profile}/>}
                     {activeTab === 'badges' && <Badges profile={profile}/>}
