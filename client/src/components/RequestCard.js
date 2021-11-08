@@ -40,27 +40,28 @@ const RequestCard = (props) => {
     }
 
     return (
-            <div className="item text-align-center cursor-pointer">
-                <img className="card-image creator-circle ui avatar image"
-                    src={profile.profileImg}
-                    alt="creator profile"
-                    onClick={handleClick}
-                />
-                <br/>
-                <br/>
-                <div className="header">
-                    {props.user.username}
-                </div>
-                <br/>
-                <Modal.Actions>
-                    <Button positive onClick={handleAccept}>
-                        Accept
-                    </Button>
-                    <Button negative onClick={handleReject}>
-                        Reject
-                    </Button>
-                </Modal.Actions>
-            </div>  
+        <div className="item text-align-center cursor-pointer">
+            <img className="card-image creator-circle ui avatar image center"
+                src={profile.profileImg}
+                alt="creator profile"
+                onClick={handleClick}
+            />
+            <br/>
+            <br/>
+            <div className="header">
+                {props.user.username}
+            </div>
+            <br/>
+            <Modal.Actions>
+                <Button positive onClick={handleAccept}>
+                    Accept
+                </Button>
+                <Button negative onClick={handleReject}>
+                    Reject
+                </Button>
+            </Modal.Actions>
+            <br/>
+        </div>  
     );
 }
 

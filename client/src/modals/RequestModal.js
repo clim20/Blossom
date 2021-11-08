@@ -30,7 +30,7 @@ const RequestModal = (props) => {
         onClose={() => props.setShowCollaboratorRequests(false)}
         >
             <Modal.Header>REQUESTS</Modal.Header>
-            <Modal.Content>
+            <Modal.Content scrolling>
             <p>These users wish to join your platform:</p>
             { requests && <div className="ui very relaxed horizontal list medium">
                 {
