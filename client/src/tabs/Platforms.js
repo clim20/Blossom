@@ -107,7 +107,7 @@ const Platforms = (props) => {
                 </div>
             }
             {platforms && <PlatformCards platforms={platforms} profile={profile} activeTab={props.activeTab} editingMode={editingMode}
-                            deletePlatform={deletePlatform}/>}
+                            deletePlatform={deletePlatform} user={user}/>}
             {
                 showCreationMenu && (<PlatformCreationModal setShowCreationMenu={setShowCreationMenu} refetchProfileData={refetchProfileData}/>)
             }

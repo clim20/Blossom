@@ -33,7 +33,7 @@ function PlatformCard(props) {
                 alt="platform"
             />
             {
-                onPlatformTab && props.editingMode &&
+                onPlatformTab && props.editingMode && platform.owner === props.user._id && 
                 <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
                     onClick={() => props.deletePlatform(platform._id)}
                 />

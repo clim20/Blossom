@@ -10,7 +10,7 @@ function PlatformCards(props) {
                     <PlatformCard
                         platform={entry} key={index} 
                         profile={props.profile} activeTab={props.activeTab} editingMode={props.editingMode}
-                        deletePlatform={props.deletePlatform}
+                        deletePlatform={props.deletePlatform} user={props.user}
                     />
                 ))
             }
