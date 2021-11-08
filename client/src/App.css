@@ -360,3 +360,23 @@ button svg {
   font-size: 25px;
   font-family: var(--font-family-puritan-regular);
 }
+
+/* PLATFORM CREATION MODAL */
+
+.create-modal-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--saveGreen) !important;
+}
+
+.cancel-modal-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--cancelRed) !important;
+}
+
+.creation-modal {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}

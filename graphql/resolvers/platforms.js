@@ -61,38 +61,56 @@ module.exports = {
   },
   Mutation: {
     async createPlatform(_, { owner, name }) {
-        
       const ownerId = new ObjectId(owner);
-      const user = await User.findOne({_id: ownerId});
-
-      const newPlatform = new Platform({
-        _id: new ObjectId(),
-        name,
-        owner: user._id,
-        platformImg: "https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg",
-        bannerImg: "https://img.wallpapersafari.com/desktop/1024/576/75/50/m1YVTq.jpg",
-        description: "",
-        contact: "",
-        collaborators: [user._id],
-        requests: [],
-        followerCount: 0,
-        quizzes: [],
-        collections: [],
-        createdAt: new Date().toISOString()
-      });
-
-      const updated = await newPlatform.save();
-
-      const profile = await Profile.findOne({_id: user.profileId});
-      let platforms = profile.platforms;
-      platforms.push(newPlatform._id);
-      const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
-
-      if(updated && updated2) {
-        console.log(newPlatform);
-        return newPlatform;
-      }
-      else return false;
+      const user = await User.findOne({_id: ownerId}); 
+      const platformNameExist = await Platform.findOne({name: name});
+  
+      console.log(user);
+      if(!platformNameExist && name !== '') {
+        console.log(!platformNameExist);
+        const newPlatform = new Platform({
+          _id: new ObjectId(),
+          name,
+          owner: user._id,
+          platformImg: "https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg",
+          bannerImg: "https://img.wallpapersafari.com/desktop/1024/576/75/50/m1YVTq.jpg",
+          description: "",
+          contact: "",
+          collaborators: [user._id],
+          requests: [],
+          followerCount: 0,
+          quizzes: [],
+          collections: [],
+          createdAt: new Date().toISOString()
+        });
+  
+        const updated = await newPlatform.save();
+  
+        const profile = await Profile.findOne({_id: new ObjectId(user.profileId)});
+        let platforms = profile.platforms;
+        platforms.push(newPlatform._id);
+        const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
+  
+        if(updated && updated2) {
+          console.log(newPlatform);
+          return newPlatform;
+        }
+      } else   
+        return new Platform({
+          _id: new ObjectId(),
+          name: "",
+          owner: user._id,
+          platformImg: "",
+          bannerImg: "",
+          description: "",
+          contact: "",
+          collaborators: [user._id],
+          requests: [],
+          followerCount: 0,
+          quizzes: [],
+          collections: [],
+          createdAt: new Date().toISOString()
+        });
     },
     async followPlatform(_, { userId, platformId }) {
       const user = await User.findOne({_id: userId});

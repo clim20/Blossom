@@ -160,3 +160,23 @@ export const REMOVE_COLLABORATOR_REQUEST = gql`
         }
     }
 `;
+
+export const CREATE_PLATFORM = gql`
+    mutation createPlatform($owner: ID!, $name: String!) {
+        createPlatform(owner: $owner, name: $name) {
+            _id
+            name
+            owner
+            platformImg
+            bannerImg
+            description
+            contact
+            collaborators
+            requests
+            followerCount
+            quizzes
+            collections
+            createdAt
+        }
+    }
+`;
