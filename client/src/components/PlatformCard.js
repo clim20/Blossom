@@ -21,7 +21,8 @@ function PlatformCard(props) {
     }
 
     const handleClick = () => {
-        history.push("/platform/" + props.platform._id);
+        if(!props.editingMode)
+            history.push("/platform/" + props.platform._id);
     }
 
     const onPlatformTab = props.activeTab === "platforms";
@@ -31,6 +32,12 @@ function PlatformCard(props) {
                 src={platform.platformImg}
                 alt="platform"
             />
+            {
+                onPlatformTab && props.editingMode &&
+                <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                    onClick={() => props.deletePlatform(platform._id)}
+                />
+            }
             <br/>
             <br/>
             <div className="header">{props.platform.name}</div>

@@ -54,8 +54,6 @@ module.exports = {
         }
       }
 
-      console.log(collaborators);
-      
       return collaborators;
     },
   },
@@ -65,9 +63,7 @@ module.exports = {
       const user = await User.findOne({_id: ownerId}); 
       const platformNameExist = await Platform.findOne({name: name});
   
-      console.log(user);
       if(!platformNameExist && name !== '') {
-        console.log(!platformNameExist);
         const newPlatform = new Platform({
           _id: new ObjectId(),
           name,
@@ -92,7 +88,6 @@ module.exports = {
         const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: platforms});
   
         if(updated && updated2) {
-          console.log(newPlatform);
           return newPlatform;
         }
       } else   
@@ -111,6 +106,26 @@ module.exports = {
           collections: [],
           createdAt: new Date().toISOString()
         });
+    },
+    async deletePlatform(_, { platformId }){
+      const platform = await Platform.findOne({_id: platformId});
+      
+      if(platform){
+        const collaborators = platform.collaborators;
+
+        for(let i = 0; i < collaborators.length; i++) {
+          if (collaborators[i]) {
+            let profile = await Profile.findOne({user: collaborators[i]})
+            let profilePlatforms = profile.platforms.filter(platform => platform._id.toString() !== platformId.toString());
+            let updated = await Profile.updateOne({user: profile.user}, {collaborators: profilePlatforms});
+          }
+        }
+      }
+
+      const deleted = await Platform.deleteOne({_id: platformId});
+      if (deleted)
+        return true;
+      return false;
     },
     async followPlatform(_, { userId, platformId }) {
       const user = await User.findOne({_id: userId});

@@ -180,3 +180,9 @@ export const CREATE_PLATFORM = gql`
         }
     }
 `;
+
+export const DELETE_PLATFORM = gql`
+    mutation deletePlatform($platformId: ID!) {
+        deletePlatform(platformId: $platformId)
+    }
+`;
