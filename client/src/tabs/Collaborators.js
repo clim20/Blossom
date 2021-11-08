@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import CreatorCards from '../components/CreatorCards';
 import RequestModal from '../modals/RequestModal';
+import CollaboratorRemovalModal from '../modals/CollaboratorRemovalModal';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -47,6 +48,9 @@ const Collaborators = (props) => {
     }
 
     const [showCollaboratorRequests, setShowCollaboratorRequests] = useState(false);
+    const [removeUser, setRemoveUser] = useState('');
+
+    const [showCollaboratorRemovalModal, setShowCollaboratorRemovalModal] = useState(false);
     const [buttonText, setButtonText] = useState(user ? (!isOwner ? (isRequest ? "Pending..." : (isCollaborator ? "Leave" : "Join")) : "Requests") : "");
     const [editingMode, toggleEditingMode] = useState(false);
 
@@ -86,15 +90,7 @@ const Collaborators = (props) => {
         toggleEditingMode(false);
     }
 
-    // var [saveChanges] = useMutation(mutations.EDIT_PROFILE, {
-    //     variables: {
-    //         id: profile._id,
-    //         updatedProfile: updatedProfile
-    //     }
-    // });
-
     const handleSave = () => {
-        //saveChanges();
         setTimeout(() => {
             refetchPlatformData();
         }, 300);
@@ -140,10 +136,14 @@ const Collaborators = (props) => {
             }
 
             {collaborators && <CreatorCards users={collaborators} activeTab={props.activeTab} platform={platform} 
-                                            editingMode={editingMode} removeCollaborator={removeCollaborator}/>}
+                            editingMode={editingMode} setShowCollaboratorRemovalModal={setShowCollaboratorRemovalModal} setRemoveUser={setRemoveUser}/>}
             {
                 showCollaboratorRequests && (<RequestModal platform={platform} setShowCollaboratorRequests={setShowCollaboratorRequests} setButtonText={setButtonText}
-                refetchPlatformData={refetchPlatformData}/>)
+                                            refetchPlatformData={refetchPlatformData}/>)
+            }
+            {
+                showCollaboratorRemovalModal && (<CollaboratorRemovalModal setShowCollaboratorRemovalModal={setShowCollaboratorRemovalModal}
+                                                removeCollaborator={removeCollaborator} removeUser={removeUser}/>)
             }
         </div>
     );

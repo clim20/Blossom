@@ -22,6 +22,11 @@ const CreatorCard = (props) => {
             history.push("/profile/" + props.user.profileId);
     }
 
+    const handleXClick = () => {
+        props.setRemoveUser(props.user._id);
+        props.setShowCollaboratorRemovalModal(true);
+    }
+
     const onCollaboratorTab = props.activeTab === "collaborators";
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
@@ -32,7 +37,7 @@ const CreatorCard = (props) => {
             {
                 onCollaboratorTab && props.editingMode && props.user._id !== props.platform.owner &&
                 <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
-                    onClick={() => props.removeCollaborator(props.user._id)}
+                    onClick={handleXClick}
                 />
             }
             <br/>
