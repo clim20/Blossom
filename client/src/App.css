@@ -1,3 +1,9 @@
+:root {
+  --pink: #fed3db;
+  --platformBorder: #89df79;
+  --profileBorder: #c883ff;
+}
+
 .page-title {
     display: block !important;
     text-align: center;
@@ -32,6 +38,15 @@ body {
   display: flex;
   font-size: 24px;
   align-items: center;
+}
+
+/* MENU BAR */
+
+.logo {
+  color:rgba(0, 0, 0, 0.75);
+}
+.search-bar {
+  width: 40%;
 }
 
 /* QUESTION/TIMER/LEFT SECTION */
@@ -108,6 +123,10 @@ button svg {
   display: inline-block;
 }
 
+.display-flex {
+  display: flex;
+}
+
 .text-align-center {
   text-align: center;
 }
@@ -122,11 +141,11 @@ button svg {
 }
 
 .creator-circle {
-  border: 4px solid #c883ff;
+  border: 4px solid var(--profileBorder);
 }
 
 .platform-circle {
-  border: 4px solid #89df79;    
+  border: 4px solid var(--platformBorder);    
 }
 
 .banner-header {
@@ -150,11 +169,12 @@ button svg {
 
 .profile-section, .platform-section {
   position: relative;
+  padding-bottom: 3rem;
   top: 7rem;
 }
 
 .active-tab {
-  background: #fed3db !important;
+  background: var(--pink) !important;
 }
 
 .inactive-tab {
@@ -187,8 +207,73 @@ button svg {
   position: absolute;
   right: 5rem;
   bottom: -4.6rem;
-  width: 10%;
+  width: 8rem;
   height: 3rem;
+  background-color: var(--pink) !important;
+}
+
+.edit-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--pink) !important;
+}
+
+/* .update-account {
+  margin-top: 141px;
+  margin-left: 351px;
+  font-size: 48px;
+  font-family: var(--font-family-puritan-bold);
+} */
+
+/* .update-username-placeholder1 {
+  margin-top: 285px;
+  margin-left: 379px;
+  font-size: 18px;
+} */
+
+/* .update-username-placeholder1 {
+  margin-top: 383px;
+  margin-left: 379px;
+  font-size: 18px;
+} */
+
+/* .update-username {
+  margin-top: 321px;
+  margin-left: 449px;
+  font-size: 24px;
+  font-family: var(--font-family-roboto-bold);
+} */
+
+/* .input-box {
+  margin-top: 417px;
+  margin-left: 380px;
+  width: 264px;
+  height: 35px;
+  border-radius: 5px;
+} */
+
+.save-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: #8bd784 !important;
+}
+
+.suc-msg {
+  color: green;
+  /* font-size: 20px; */
+  /* text-align: center; */
+}
+
+.err-msg {
+  color: red;
+  /* font-size: 20px; */
+  /* text-align: center; */
+}
+
+.cancel-button {
+  width: 8rem;
+  height: 3rem;
+<<<<<<< HEAD
   background-color: #fed3db !important;
 }
 
@@ -348,4 +433,92 @@ button svg {
   height: 37px;
   width: 139.23px;
   border-radius: 8px;
+=======
+  background-color: #f85b5b !important;
+}
+
+.edit-box {
+  margin: 0px;
+  width: 400px;
+  height: 100px;
+}
+
+.request-button {
+  position: absolute;
+  right: 3rem;
+  width: 10%;
+  height: 2.5rem;
+  background-color: var(--pink) !important;
+}
+
+/* .quiz-start-end-button {
+  margin-top:509px;
+  margin-left:464px;
+  text-align: center;
+  color: white;
+  background-color: #ff98ac;
+  width: 98.47px;
+  height: 37px;
+} */
+
+/* .quizLeaderboard {
+  margin-top: 599px;
+  margin-left: 249px;
+  text-align: center;
+  color: black;
+  background-color: #ffcaca;
+  width: 523px;
+  height: 30px;
+} */
+
+/* .quiz-title {
+  margin-top: 70px;
+  margin-left: 303px;
+  font-family: var(--font-family-puritan-bold);
+  font-size: 36px;
+} */
+
+/* .quiz-creator-follow {
+  margin-top: 113px;
+  margin-left: 402px;
+  border-radius: 10px;
+  width: 224px;
+  height: 54px;
+  background-color: #c883ff;
+} */
+
+/* .quiz-finish-button {
+  margin-top: 690px;
+  margin-left: 869px;
+  width: 98.47px;
+  height: 52px;
+  border-radius: 8px;
+  background-color: #f85b5b;
+  color: white;
+} */
+
+.quests {
+  margin-top: 100px;
+  margin-left: 58px;
+  font-size: 48px;
+  font-family: var(--font-family-puritan-bold);
+}
+
+.quests-rectangle {
+  margin-top: 184px;
+  margin-left: 54px;
+  width: 919px;
+  height: 523px;
+  background-color: var(--pink);
+}
+
+.checkBox {
+  width: 139.23px;
+  height: 37px;
+  border-radius: 8px;
+  background-color: #ff98ac;
+  color: white;
+  font-size: 25px;
+  font-family: var(--font-family-puritan-regular);
+>>>>>>> b814662d07161a08133f93655ef9ceb87ef35fed
 }

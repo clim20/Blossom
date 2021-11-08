@@ -3,16 +3,14 @@ import gql from 'graphql-tag';
 export const FETCH_POPULAR_USERS = gql`
     query getPopularUsers {
         getPopularUsers {
-            id
+            _id
             username
             email
             profileId
             quests {
-                questId
+                _id
                 isCompleted
-                image {
-                    id
-                }
+                image
             }
             createdAt
         }
@@ -22,16 +20,14 @@ export const FETCH_POPULAR_USERS = gql`
 export const FIND_USER_BY_ID = gql`
     query findUserById($id: ID!) {
         findUserById(id: $id) {
-            id
+            _id
             username
             email
             profileId
             quests {
-                questId
+                _id
                 isCompleted
-                image {
-                    id
-                }
+                image
             }
             createdAt
         }
@@ -41,16 +37,14 @@ export const FIND_USER_BY_ID = gql`
 export const FETCH_USERS = gql`
     query getUsers {
         getUsers {
-            id
+            _id
             username
             email
             profileId
             quests {
-                questId
+                _id
                 isCompleted
-                image {
-                    id
-                }
+                image
             }
             createdAt
         }
@@ -60,24 +54,15 @@ export const FETCH_USERS = gql`
 export const FETCH_PROFILES = gql`
     query getProfiles {
         getProfiles {
-            id
+            _id
             user
-            # profileImg {
-            #     id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     id
-            #     data
-            #     contentType
-            # }
+            profileImg
+            bannerImg
             badges
             description
             contact
             followerCount
-            usersFollowing 
-            platformsFollowing
+            following
             quizzes
             collections
             platforms
@@ -88,24 +73,15 @@ export const FETCH_PROFILES = gql`
 export const FIND_PROFILE_BY_ID = gql`
     query findProfileById($id: ID!) {
         findProfileById(id: $id) {
-            id
+            _id
             user
-            # profileImg {
-            #     id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     id
-            #     data
-            #     contentType
-            # }
+            profileImg
+            bannerImg
             badges
             description
             contact
             followerCount
-            usersFollowing
-            platformsFollowing
+            following
             quizzes
             collections
             platforms
@@ -113,22 +89,33 @@ export const FIND_PROFILE_BY_ID = gql`
     }
 `;
 
+export const FIND_FOLLOWING_BY_IDS = gql`
+    query findFollowingByIds($ids: [ID!]!) {
+        findFollowingByIds(ids: $ids) {
+            __typename
+            ... on User {
+                _id
+                username
+                profileId
+            }
+            ... on Platform {
+                _id
+                name
+                platformImg
+                followerCount
+            }
+        }
+    }
+`;
+
 export const FETCH_POPULAR_PLATFORMS = gql`
     query getPopularPlatforms {
         getPopularPlatforms {
-            id
+            _id
             name
             owner
-            # platformImg {
-            #     id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     id
-            #     data
-            #     contentType
-            # }
+            platformImg
+            bannerImg
             description
             contact
             collaborators
@@ -144,19 +131,11 @@ export const FETCH_POPULAR_PLATFORMS = gql`
 export const FETCH_PLATFORMS = gql`
     query getPlatforms {
         getPlatforms {
-            id
+            _id
             name
             owner
-            # platformImg {
-            #     id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     id
-            #     data
-            #     contentType
-            # }
+            platformImg
+            bannerImg
             description
             contact
             collaborators
@@ -172,19 +151,11 @@ export const FETCH_PLATFORMS = gql`
 export const FIND_PLATFORM_BY_ID = gql`
     query findPlatformById($id: ID!) {
         findPlatformById(id: $id) {
-            id
+            _id
             name
             owner
-            # platformImg {
-            #     id
-            #     data
-            #     contentType
-            # }
-            # bannerImg {
-            #     id
-            #     data
-            #     contentType
-            # }
+            platformImg
+            bannerImg
             description
             contact
             collaborators
@@ -192,6 +163,163 @@ export const FIND_PLATFORM_BY_ID = gql`
             followerCount
             quizzes
             collections
+            createdAt
+        }
+    }
+`;
+
+export const FIND_PLATFORMS_BY_IDS = gql`
+    query findPlatformsByIds($ids: [ID!]!) {
+        findPlatformsByIds(ids: $ids) {
+            _id
+            name
+            platformImg
+            followerCount
+        }
+    }
+`;
+
+export const GET_QUIZZES = gql`
+    query getQuizzes{
+        getQuizzes {
+            _id
+            title
+            description
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+            quizDislikes
+            badges{
+                rank
+                image
+            }
+            scores{
+                user
+                userScore
+                bestScore
+            }
+            cards{
+                cardNum
+                question
+                choices
+                answer
+                answerExplanation
+                questionImg
+                answerImg
+                drawing{
+                    _id
+                }
+            }
+            createdAt
+        }
+    }
+`;
+
+export const GET_QUIZZES_BY_IDS = gql`
+    query getQuizzesByIds($ids: [ID!]!) {
+        getQuizzesByIds(ids: $ids) {
+            _id
+            title
+            description
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+            quizDislikes
+            badges{
+                rank
+                image
+            }
+            scores{
+                user
+                userScore
+                bestScore
+            }
+            cards{
+                cardNum
+                question
+                choices
+                answer
+                answerExplanation
+                questionImg
+                answerImg
+                drawing{
+                    _id
+                }
+            }
+            createdAt
+        }
+    }
+`;
+
+export const FIND_QUIZ_BY_ID = gql`
+    query findQuizById($id: ID!) {
+        findQuizById(id: $id) {
+            _id
+            title
+            description
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+            quizDislikes
+            badges{
+                rank
+                image
+            }
+            scores{
+                user
+                userScore
+                bestScore
+            }
+            cards{
+                cardNum
+                question
+                choices
+                answer
+                answerExplanation
+                questionImg
+                answerImg
+                drawing{
+                    _id
+                }
+            }
+            createdAt
+        }
+    }
+`;
+
+export const FETCH_POPULAR_QUIIZZES = gql`
+    query getPopularQuizzes {
+        getPopularQuizzes {
+            _id
+            title
+            titleImg
+            creator
+            platform
+            quizHits
+            quizLikes
+        }
+    }
+`;
+
+
+export const FIND_COLLABORATORS_BY_IDS = gql`
+    query findCollaboratorsByIds($ids: [ID!]!) {
+        findCollaboratorsByIds(ids: $ids) {
+            _id
+            username
+            email
+            profileId
+            # quests {
+            #     _id
+            #     isCompleted
+            #     image
+            # }
             createdAt
         }
     }
