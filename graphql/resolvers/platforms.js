@@ -211,6 +211,8 @@ module.exports = {
       const platform = await Platform.findOne({_id: new ObjectId(id)});
 
       const updated = await Platform.updateOne({_id: new ObjectId(id)}, {
+        platformImg: updatedPlatform.platformImg,
+        bannerImg: updatedPlatform.bannerImg,
         description: updatedPlatform.description, 
         contact: updatedPlatform.contact
       });

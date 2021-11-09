@@ -107,8 +107,8 @@ module.exports = gql`
     }
 
     input ProfileInput {
-        # profileImg: String
-        # bannerImg: String
+        profileImg: String
+        bannerImg: String
         description: String
         contact: String
         # following: [ID!]
@@ -119,8 +119,8 @@ module.exports = gql`
 
     input PlatformInput {
         # name: String!
-        # platformImg: String
-        # bannerImg: String
+        platformImg: String
+        bannerImg: String
         description: String
         contact: String
         # collaborators: [ID!]!

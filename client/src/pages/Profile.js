@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
+import ProfileBanner from '../components/ProfileBanner';
 import Home from '../tabs/Home';
 import Quizzes from '../tabs/Quizzes';
 import Platforms from '../tabs/Platforms';
@@ -13,13 +14,11 @@ import ProfileAbout from '../tabs/ProfileAbout';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
-import * as mutations from '../cache/mutations';
 
 const Profile = () => {
     const { user } = useContext(AuthContext);
 
     const [activeTab, setActiveTab] = useState('home');
-    const [followed, setFollowed ] = useState(false);
     const params = useParams();
     const profileId = params ? params.profileId : 'could not get params';
 
@@ -41,89 +40,14 @@ const Profile = () => {
 		profile = profileData.findProfileById;
     }
 
-    // User's own User and Profile
-    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            id: profile ? profile.user : ''
-        }
-    });
-
-    var userObject = {};
-    if (userData) { 
-		userObject = userData.findUserById;
-    }
-
-    const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
-        variables: {
-            id: user ? user.profileId : ''
-        }
-    });
-
-    var userProfile = { following: [] };
-    if (userProfileData) { 
-        userProfile = userProfileData.findProfileById;
-    }
-
     const handleTabClick = (name) => {
         setActiveTab(name);
     }
 
-    useEffect(() => {
-        if (userProfile && profile && userProfile.following.find(id => id.toString() === profile.user.toString())) {
-            setFollowed(true);
-        } else {
-            setFollowed(false);
-        }
-    }, [userProfile, profile]);
-    
-    const [followProfile] = useMutation(mutations.FOLLOW_PROFILE, {
-        variables: {
-            userId: user ? user._id : '',
-            profileId: profile ? profile._id : ''
-        }
-    });
-
-    const handleFollow = () => {
-        followProfile();
-        setTimeout(() => {
-            refetchProfileData();
-            refetchUserProfileData();
-        }, 300);
-    }
-
-    useEffect(() => {
-        refetchProfileData();
-    }, [user, profile]);
-
-    const isOwnProfile = profile && user && profile.user === user._id;
-
     return (
         <div>
             <MenuBar/>
-            <div className="ui container banner-header"
-                style={{ backgroundImage: `url(${profile.bannerImg})` }}
-            >
-                <div className="banner-info">
-                    <div className="display-inline-block">
-                        <img className="card-image creator-circle ui avatar image"
-                            src={profile.profileImg}
-                            alt="creator profile"
-                        />
-                    </div>
-                    {profile && profile.user && 
-                        <div className="banner-text">
-                            <h2 style={{ marginBottom: '0' }}>{userObject.username}</h2>
-                            <div>{profile.followerCount} followers</div>
-                        </div>
-                    }
-                </div>
-
-                {user && !isOwnProfile &&
-                    <button className="ui button follow-button" onClick={handleFollow}>
-                        {followed ? 'Unfollow' : 'Follow'}
-                    </button>
-                }
-            </div>
+            <ProfileBanner profile={profile} user={user} refetchProfileData={refetchProfileData}/>
 
             <div className="ui container profile-section">
                 <div className="ui top attached tabular menu profile-tab">
