@@ -202,7 +202,7 @@ button svg {
   background-color: var(--pink) !important;
 }
 
-<<<<<<< HEAD
+
 /* .update-account {
   margin-top: 141px;
   margin-left: 351px;
@@ -348,7 +348,8 @@ button svg {
   height: 23px;
   margin-top:10px;
   text-align: center;
-=======
+}
+/*
 .save-button {
   width: 8rem !important;
   height: 3rem !important;
@@ -359,21 +360,21 @@ button svg {
   width: 8rem !important;
   height: 3rem !important;
   background-color: var(--cancelRed) !important;
-}
+}*/
 
-.edit-box {
+/*.edit-box {
   margin: 0px;
   width: 400px;
   height: 100px;
-}
+}*/
 
 /* REQUEST BUTTON */
 .request-button {
   width: 8rem;
   height: 3rem;
   background-color: var(--pink) !important;
->>>>>>> 03fda59c7c225e19ec4b3daded74d75c52bcbe54
 }
+
 /*
 .quests {
   font-family: var(--font-family-puritan-bold);
