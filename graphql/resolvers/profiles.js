@@ -63,6 +63,8 @@ module.exports = {
       const profile = await Profile.findOne({_id: new ObjectId(id)});
 
       const updated = await Profile.updateOne({_id: new ObjectId(id)}, {
+        profileImg: updatedProfile.profileImg,
+        bannerImg: updatedProfile.bannerImg,
         description: updatedProfile.description, 
         contact: updatedProfile.contact
       });

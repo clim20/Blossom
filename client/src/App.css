@@ -36,12 +36,6 @@ body {
   justify-content: space-evenly;
 }
 
-.score-section {
-  display: flex;
-  font-size: 24px;
-  align-items: center;
-}
-
 /* MENU BAR */
 
 .logo {
@@ -49,34 +43,6 @@ body {
 }
 .search-bar {
   width: 40%;
-}
-
-/* QUESTION/TIMER/LEFT SECTION */
-.question-section {
-  width: 100%;
-  position: relative;
-}
-
-.question-count {
-  margin-bottom: 20px;
-}
-
-.question-count span {
-  font-size: 28px;
-}
-
-.question-text {
-  margin-bottom: 12px;
-}
-
-.timer-text {
-  background: rgb(230, 153, 12);
-  padding: 15px;
-  margin-top: 20px;
-  margin-right: 20px;
-  border: 5px solid rgb(255, 189, 67);
-  border-radius: 15px;
-  text-align: center;
 }
 
 /* ANSWERS/RIGHT SECTION */
@@ -99,14 +65,6 @@ button {
   align-items: center;
   border: 5px solid #234668;
   cursor: pointer;
-}
-
-.correct {
-  background-color: #2f922f;
-}
-
-.incorrect {
-  background-color: #ff3333;
 }
 
 button:hover {
@@ -150,6 +108,8 @@ button svg {
   border: 4px solid var(--platformBorder);    
 }
 
+/* PROFILE/PLATFORM PAGES */
+/* BANNER */
 .banner-header {
   position: relative;
   height: 20rem;
@@ -169,6 +129,36 @@ button svg {
   display: inline-block;
 }
 
+.follow-button {
+  position: absolute;
+  right: 5rem;
+  bottom: -4.6rem;
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--pink) !important;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#upload-banner-image, #upload-profile-image, #upload-platform-image {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.editBannerButtons {
+  position: absolute;
+  right: 5rem;
+  bottom: -4.6rem;
+}
+
+/* TABS */
 .profile-section, .platform-section {
   position: relative;
   padding-bottom: 3rem;
@@ -205,21 +195,14 @@ button svg {
   border-color: black !important;
 }
 
-.follow-button {
-  position: absolute;
-  right: 5rem;
-  bottom: -4.6rem;
-  width: 8rem;
-  height: 3rem;
-  background-color: var(--pink) !important;
-}
-
+/* EDIT SAVE CANCEL */
 .edit-button {
   width: 8rem;
   height: 3rem;
   background-color: var(--pink) !important;
 }
 
+<<<<<<< HEAD
 /* .update-account {
   margin-top: 141px;
   margin-left: 351px;
@@ -365,6 +348,31 @@ button svg {
   height: 23px;
   margin-top:10px;
   text-align: center;
+=======
+.save-button {
+  width: 8rem !important;
+  height: 3rem !important;
+  background-color: var(--saveGreen) !important;
+}
+
+.cancel-button {
+  width: 8rem !important;
+  height: 3rem !important;
+  background-color: var(--cancelRed) !important;
+}
+
+.edit-box {
+  margin: 0px;
+  width: 400px;
+  height: 100px;
+}
+
+/* REQUEST BUTTON */
+.request-button {
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--pink) !important;
+>>>>>>> 03fda59c7c225e19ec4b3daded74d75c52bcbe54
 }
 /*
 .quests {
@@ -403,16 +411,50 @@ button svg {
   background-color: var(--cancelRed) !important;
 }*/
 
-.edit-box {
-  margin: 0px;
-  width: 400px;
-  height: 100px;
+/* .update-account {
+  margin-top: 141px;
+  margin-left: 351px;
+  font-size: 48px;
+  font-family: var(--font-family-puritan-bold);
+} */
+
+/* .update-username-placeholder1 {
+  margin-top: 285px;
+  margin-left: 379px;
+  font-size: 18px;
+} */
+
+/* .update-username-placeholder1 {
+  margin-top: 383px;
+  margin-left: 379px;
+  font-size: 18px;
+} */
+
+/* .update-username {
+  margin-top: 321px;
+  margin-left: 449px;
+  font-size: 24px;
+  font-family: var(--font-family-roboto-bold);
+} */
+
+/* .input-box {
+  margin-top: 417px;
+  margin-left: 380px;
+  width: 264px;
+  height: 35px;
+  border-radius: 5px;
+} */
+
+.suc-msg {
+  color: green;
+  /* font-size: 20px; */
+  /* text-align: center; */
 }
 
-.request-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: var(--pink) !important;
+.err-msg {
+  color: red;
+  /* font-size: 20px; */
+  /* text-align: center; */
 }
 
 /* .quiz-start-end-button {

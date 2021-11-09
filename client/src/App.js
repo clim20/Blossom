@@ -7,7 +7,6 @@ import './App.css';
 
 import { AuthProvider } from './context/auth';
 
-import MenuBar from './components/MenuBar';
 import Home from './pages/Home';
 
 import Search from './pages/Search';

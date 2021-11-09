@@ -8,6 +8,8 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
     const { user } = useContext(AuthContext);
 
     const [updatedProfile, setUpdatedProfile] = useState({ 
+        profileImg: profile.profileImg,
+        bannerImg: profile.bannerImg,
         description: profile.description,
         contact: profile.contact 
     });

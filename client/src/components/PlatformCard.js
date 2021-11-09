@@ -25,6 +25,11 @@ function PlatformCard(props) {
             history.push("/platform/" + props.platform._id);
     }
 
+    const handleXClick = () => {
+        props.setRemovePlatform(platform._id);
+        props.setShowPlatformDeletionModal(true);
+    }
+
     const onPlatformTab = props.activeTab === "platforms";
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
@@ -35,7 +40,7 @@ function PlatformCard(props) {
             {
                 onPlatformTab && props.editingMode && platform.owner === props.user._id && 
                 <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
-                    onClick={() => props.deletePlatform(platform._id)}
+                    onClick={handleXClick}
                 />
             }
             <br/>

@@ -71,16 +71,18 @@ const MenuBar = () => {
             case "Logout":
                 signOut();
                 break;
+            default:
+                break;
         }
     }
 
-    const blossom = '\xa0\xa0\xa0'+ 'Blossom';
+    const blossom = '\xa0\xa0\xa0Blossom';
     const menuBar = user ? (
         <Menu pointing secondary size="massive" color="pink">
             <Menu.Menu position='left'>
                 <Menu.Item style={{ height: "97%" }}>
                     <a href="/" className='logo'>
-                        <img class="ui bottom aligned mini image" src={Blossom}/>
+                        <img className="ui bottom aligned mini image" src={Blossom} alt="Blossom Logo"/>
                         {blossom}
                     </a>
                 </Menu.Item>
@@ -108,7 +110,7 @@ const MenuBar = () => {
             <Menu.Menu position='left'>
                 <Menu.Item style={{ height: "97%" }}>
                     <a href="/" className='logo'>
-                        <img class="ui bottom aligned mini image" src={Blossom}/>
+                        <img className="ui bottom aligned mini image" src={Blossom} alt="Blossom Logo"/>
                         {blossom}
                     </a>
                 </Menu.Item>

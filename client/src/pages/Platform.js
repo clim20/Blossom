@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 
 import MenuBar from '../components/MenuBar';
+import PlatformBanner from "../components/PlatformBanner";
 import Home from '../tabs/Home';
 import Quizzes from '../tabs/Quizzes';
 import Collections from '../tabs/Collections';
@@ -11,13 +12,11 @@ import PlatformAbout from '../tabs/PlatformAbout';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
-import * as mutations from '../cache/mutations';
 
 const Platform = () => {
     const { user } = useContext(AuthContext);
 
     const [activeTab, setActiveTab] = useState('home');
-    const [followed, setFollowed ] = useState(false);
     const params = useParams();
     const platformId = params ? params.platformId : 'could not get params';
 
@@ -33,90 +32,14 @@ const Platform = () => {
 		platform = PlatformData.findPlatformById;
     }
 
-    // User's own User and Profile
-    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            id: platform ? platform.owner : ''
-        }
-    });
-
-    var userObject = {};
-    if (userData) { 
-		userObject = userData.findUserById;
-    }
-    console.log(userObject);
-
-    const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
-        variables: {
-            id: user ? user.profileId : ''
-        }
-    });
-
-    var userProfile = { following: [] };
-    if (userProfileData) { 
-        userProfile = userProfileData.findProfileById;
-    }
-
     const handleTabClick = (name) => {
         setActiveTab(name);
     }
 
-    useEffect(() => {
-        if (userProfile && platform && userProfile.following.find(id => id.toString() === platform._id.toString())) {
-            setFollowed(true);
-        } else {
-            setFollowed(false);
-        }
-    }, [userProfile, platform]);
-    
-    const [followPlatform] = useMutation(mutations.FOLLOW_PLATFORM, {
-        variables: {
-            userId: user ? user._id : '',
-            platformId: platform ? platform._id : ''
-        }
-    });
-
-    const handleFollow = () => {
-        followPlatform();
-        setTimeout(() => {
-            refetchPlatformData();
-            refetchUserProfileData();
-        }, 300);
-    }
-
-    useEffect(() => {
-        refetchPlatformData();
-    }, [user, platform]);
-
-    const isOwnPlatform = platform && user && platform.owner === user._id;
-
     return (
         <div>
             <MenuBar/>
-            <div className="ui container banner-header"
-                style={{ backgroundImage: `url(${platform.bannerImg})` }}
-            >
-                <div className="banner-info">
-                    <div className="display-inline-block">
-                        <img className="card-image platform-circle ui avatar image"
-                            src={platform.platformImg}
-                            alt="platform"
-                        />
-                    </div>
-                    {platform && platform.owner && 
-                        <div className="banner-text">
-                            <h2 style={{ marginBottom: '0' }}>{platform.name}</h2>
-                            <div>{platform.followerCount} followers</div>
-                        </div>
-                    }
-                </div>
-
-                {user && !isOwnPlatform && 
-                    <button className="ui button follow-button" onClick={handleFollow}>
-                        {followed ? 'Unfollow' : 'Follow'}
-                    </button>
-                }
-            </div>
+            <PlatformBanner platform={platform} user={user} refetchPlatformData={refetchPlatformData}/>
 
             <div className="ui container platform-section">
                 <div className="ui top attached tabular menu platform-tab">

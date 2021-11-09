@@ -8,6 +8,8 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
     const { user } = useContext(AuthContext);
 
     const [updatedPlatform, setUpdatedPlatform] = useState({ 
+        platformImg: platform.platformImg,
+        bannerImg: platform.bannerImg,
         description: platform.description,
         contact: platform.contact 
     });

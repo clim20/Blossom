@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import CreatorCards from '../components/CreatorCards';
 import RequestModal from '../modals/RequestModal';
+import CollaboratorRemovalModal from '../modals/CollaboratorRemovalModal';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -47,13 +48,15 @@ const Collaborators = (props) => {
     }
 
     const [showCollaboratorRequests, setShowCollaboratorRequests] = useState(false);
+    const [showCollaboratorRemovalModal, setShowCollaboratorRemovalModal] = useState(false);
+    const [removeUser, setRemoveUser] = useState('');
     const [buttonText, setButtonText] = useState(user ? (!isOwner ? (isRequest ? "Pending..." : (isCollaborator ? "Leave" : "Join")) : "Requests") : "");
     const [editingMode, toggleEditingMode] = useState(false);
 
     const handleClick = async () => {
        switch (buttonText) {
            case "Join": 
-                const { data: joinData } = await AddCollaboratorRequest({variables: { platformId: platform._id, userId: user._id }});
+                await AddCollaboratorRequest({variables: { platformId: platform._id, userId: user._id }});
                 setButtonText("Pending...");
                 refetchPlatformData();
                 break;
@@ -61,12 +64,14 @@ const Collaborators = (props) => {
                 setShowCollaboratorRequests(true);
                 break;
             case "Leave":
-                const { data: leaveData } = await RemoveCollaborator({variables: { platformId: platform._id, userId: user._id }});
+                await RemoveCollaborator({variables: { platformId: platform._id, userId: user._id }});
                 setButtonText("Join");
                 refetchPlatformData();
                 break;
             case "Pending...":
                 alert("Join request already sent");
+                break;
+            default:
                 break;
        }
     }
@@ -76,25 +81,17 @@ const Collaborators = (props) => {
                                         : (isCollaborator ? setButtonText("Leave") 
                                         : setButtonText("Join"))) : setButtonText("Requests")) 
                                         : setButtonText(""))
-    }, [user, platform]);
+    }, [user, platform, isCollaborator, isOwner, isRequest]);
 
     useEffect(() => {
         refetchPlatformData();
-    }, [user, platform]);
+    }, [user, platform, refetchPlatformData]);
 
     const handleCancel = () => {
         toggleEditingMode(false);
     }
 
-    // var [saveChanges] = useMutation(mutations.EDIT_PROFILE, {
-    //     variables: {
-    //         id: profile._id,
-    //         updatedProfile: updatedProfile
-    //     }
-    // });
-
     const handleSave = () => {
-        //saveChanges();
         setTimeout(() => {
             refetchPlatformData();
         }, 300);
@@ -140,10 +137,14 @@ const Collaborators = (props) => {
             }
 
             {collaborators && <CreatorCards users={collaborators} activeTab={props.activeTab} platform={platform} 
-                                            editingMode={editingMode} removeCollaborator={removeCollaborator}/>}
+                            editingMode={editingMode} setShowCollaboratorRemovalModal={setShowCollaboratorRemovalModal} setRemoveUser={setRemoveUser}/>}
             {
                 showCollaboratorRequests && (<RequestModal platform={platform} setShowCollaboratorRequests={setShowCollaboratorRequests} setButtonText={setButtonText}
-                refetchPlatformData={refetchPlatformData}/>)
+                                            refetchPlatformData={refetchPlatformData}/>)
+            }
+            {
+                showCollaboratorRemovalModal && (<CollaboratorRemovalModal setShowCollaboratorRemovalModal={setShowCollaboratorRemovalModal}
+                                                removeCollaborator={removeCollaborator} removeUser={removeUser}/>)
             }
         </div>
     );

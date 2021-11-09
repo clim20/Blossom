@@ -9,7 +9,8 @@ const CreatorCards = (props) => {
                 props.users.map((entry, index) => (
                     <CreatorCard
                         user={entry} key={index} activeTab={props.activeTab} platform={props.platform}
-                        editingMode={props.editingMode} removeCollaborator={props.removeCollaborator}
+                        editingMode={props.editingMode} 
+                        setShowCollaboratorRemovalModal={props.setShowCollaboratorRemovalModal} setRemoveUser={props.setRemoveUser}
                     />
                 ))
             }
