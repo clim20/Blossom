@@ -294,8 +294,8 @@ button svg {
 }
 
 .save-button {
-  width: 8rem;
-  height: 3rem;
+  width: 8rem !important;
+  height: 3rem !important;
   background-color: var(--saveGreen) !important;
   color: white;
   text-align: center;
@@ -304,9 +304,9 @@ button svg {
 }
 
 .cancel-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: #fed3db !important;
+  width: 8rem !important;
+  height: 3rem !important;
+  background-color: var(--cancelRed) !important;
   color: white;
   text-align: center;
   font-family: var(--font-family-roboto-bold);
@@ -349,18 +349,6 @@ button svg {
   margin-top:10px;
   text-align: center;
 }
-/*
-.save-button {
-  width: 8rem !important;
-  height: 3rem !important;
-  background-color: var(--saveGreen) !important;
-}
-
-.cancel-button {
-  width: 8rem !important;
-  height: 3rem !important;
-  background-color: var(--cancelRed) !important;
-}*/
 
 /*.edit-box {
   margin: 0px;
