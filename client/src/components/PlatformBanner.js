@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
@@ -65,7 +65,7 @@ const PlatformBanner = ({ platform, user, refetchPlatformData }) => {
 
     useEffect(() => {
         refetchPlatformData();
-    }, [user, platform]);
+    }, [user, platform, refetchPlatformData]);
 
     const uploadImage = async (type) => {
         const image = type === 'platform' ? platformImage : bannerImage;

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Button, Input } from 'semantic-ui-react'
-import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';

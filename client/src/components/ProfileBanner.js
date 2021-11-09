@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
@@ -65,7 +65,7 @@ const ProfileBanner = ({ profile, user, refetchProfileData }) => {
 
     useEffect(() => {
         refetchProfileData();
-    }, [user, profile]);
+    }, [user, profile, refetchProfileData]);
 
     const uploadImage = async (type) => {
         const image = type === 'profile' ? profileImage : bannerImage;

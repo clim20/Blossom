@@ -61,7 +61,7 @@ const Platforms = (props) => {
     }
 
     const deletePlatform = async (platformId) => {
-        const { data } = await DeletePlatform({variables: { platformId: platformId }});
+        await DeletePlatform({variables: { platformId: platformId }});
         refetchProfileData();
         refetchPlatformsData();
     }
@@ -69,7 +69,7 @@ const Platforms = (props) => {
     useEffect(() => {
         refetchProfileData();
         refetchPlatformsData();
-    }, [user, profile, platforms]);
+    }, [user, profile, platforms, refetchProfileData, refetchPlatformsData]);
 
     return (
         <div>

@@ -56,7 +56,7 @@ const Collaborators = (props) => {
     const handleClick = async () => {
        switch (buttonText) {
            case "Join": 
-                const { data: joinData } = await AddCollaboratorRequest({variables: { platformId: platform._id, userId: user._id }});
+                await AddCollaboratorRequest({variables: { platformId: platform._id, userId: user._id }});
                 setButtonText("Pending...");
                 refetchPlatformData();
                 break;
@@ -64,12 +64,14 @@ const Collaborators = (props) => {
                 setShowCollaboratorRequests(true);
                 break;
             case "Leave":
-                const { data: leaveData } = await RemoveCollaborator({variables: { platformId: platform._id, userId: user._id }});
+                await RemoveCollaborator({variables: { platformId: platform._id, userId: user._id }});
                 setButtonText("Join");
                 refetchPlatformData();
                 break;
             case "Pending...":
                 alert("Join request already sent");
+                break;
+            default:
                 break;
        }
     }
@@ -79,11 +81,11 @@ const Collaborators = (props) => {
                                         : (isCollaborator ? setButtonText("Leave") 
                                         : setButtonText("Join"))) : setButtonText("Requests")) 
                                         : setButtonText(""))
-    }, [user, platform]);
+    }, [user, platform, isCollaborator, isOwner, isRequest]);
 
     useEffect(() => {
         refetchPlatformData();
-    }, [user, platform]);
+    }, [user, platform, refetchPlatformData]);
 
     const handleCancel = () => {
         toggleEditingMode(false);
