@@ -446,17 +446,6 @@ button svg {
   border-radius: 5px;
 } */
 
-.suc-msg {
-  color: green;
-  /* font-size: 20px; */
-  /* text-align: center; */
-}
-
-.err-msg {
-  color: red;
-  /* font-size: 20px; */
-  /* text-align: center; */
-}
 
 /* .quiz-start-end-button {
   margin-top:509px;
