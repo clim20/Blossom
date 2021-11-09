@@ -254,30 +254,6 @@ button svg {
   border-radius: 5px;
 } */
 
-.save-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: var(--saveGreen) !important;
-}
-
-.suc-msg {
-  color: green;
-  /* font-size: 20px; */
-  /* text-align: center; */
-}
-
-.err-msg {
-  color: red;
-  /* font-size: 20px; */
-  /* text-align: center; */
-}
-
-.cancel-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: #fed3db !important;
-}
-
 .update {
   background-color: #e3eefb;
   align-items: center;
@@ -290,13 +266,12 @@ button svg {
 .update-account {
   color: var(--black);
   font-family: var(--font-family-puritan-bold);
-  font-size: var(--font-size-l);
-  font-weight: 700;
+  font-size: 48px;
   height: 54px;
   line-height: 48px;
-  margin-right: 1.0px;
-  margin-top: 141px;
-  min-width: 321px;
+  text-align: center;
+ /* margin-left: 54px;
+  margin-top: 105px;*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -304,11 +279,10 @@ button svg {
 
 .update-username-placeholder1 {
   height: 21px;
-  letter-spacing: 0;
+  font-size: 24px;
   line-height: 18px;
-  margin-left: 379px;
-  margin-top: 285px;
-  min-width: 82px;
+  text-align: center;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -316,11 +290,9 @@ button svg {
 
 .update-username-placeholder2 {
   height: 21px;
-  letter-spacing: 0;
-  line-height: 18px;
-  margin-left: 379px;
-  margin-top: 383px;
-  min-width: 82px;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -329,48 +301,41 @@ button svg {
 .update-username {
   color: var(--black);
   font-family: var(--font-family-roboto-bold);
-  font-size: var(--font-size-m);
-  font-weight: 700;
+  text-align: center;
+  font-size: 29px;
   height: 33px;
-  line-height: 24px;
-  margin-top: 321px;
-  margin-left: 449px;
-  width: 126px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .save-button {
-  height: 48px;
-  width: 138px;
-  background-color: #8bd784;
-  border-radius: 8px;
+  width: 8rem;
+  height: 3rem;
+  background-color: var(--saveGreen) !important;
   color: white;
   text-align: center;
   font-family: var(--font-family-roboto-bold);
   font-size: 24px;
-  margin-top: 542px;
-  margin-left: 138px;
 }
 
 .cancel-button {
-  height: 48px;
-  width: 139px;
-  background-color: #f85b5b;
-  border-radius: 8px;
+  width: 8rem;
+  height: 3rem;
+  background-color: #fed3db !important;
   color: white;
   text-align: center;
   font-family: var(--font-family-roboto-bold);
   font-size: 24px;
-  margin-top: 542px;
-  margin-left: 529px;
 }
 
 .input-box {
   background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
+  /*border: 1px solid black;
+  border-radius: 5px;*/
+  margin-left: 430px;
+  margin-top: 30px;
   height: 35px;
   width: 264px;
   display: flex;
@@ -386,8 +351,8 @@ button svg {
   flex-direction: column;
   justify-content: center;
   height: 23px;
-  margin-top: 453px;
-  margin-left: 374px;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .err-msg {
@@ -398,10 +363,10 @@ button svg {
   flex-direction: column;
   justify-content: center;
   height: 23px;
-  margin-top:453px;
-  margin-left: 374px;
+  margin-top:10px;
+  text-align: center;
 }
-
+/*
 .quests {
   font-family: var(--font-family-puritan-bold);
   font-size: 48px;
@@ -410,15 +375,15 @@ button svg {
   flex-direction: column;
   justify-content: center;
   margin-left: 58px;
-  margin-top: 49px;
+  margin-top: 30px;
 }
 
 .quests-rectangle {
   background-color: #fed3db;
-  height: 523px;
-  width: 919px;
-  margin-top: 184px;
-  margin-left: 54px;
+  height: 20%;
+  width: 60%;
+  margin-top: 150px;
+  margin-left: 54px; 
 }
 
 .quest-lists {
@@ -430,13 +395,13 @@ button svg {
 .checkBox {
   background-color: #ff98ac;
   color: white;
-  margin-left: 789px;
-  height: 37px;
-  width: 139.23px;
-  border-radius: 8px;
+  margin-right: 50px;
+  height: 3rem;
+  width: 8rem;
+  border-radius: .28571429rem .28571429rem 0 0;
   background-color: #f85b5b !important;
   background-color: var(--cancelRed) !important;
-}
+}*/
 
 .edit-box {
   margin: 0px;
@@ -496,30 +461,96 @@ button svg {
   color: white;
 } */
 
+/* QUEST PAGE */
+
 .quests {
-  margin-top: 100px;
+  margin-top: 3rem;
   margin-left: 58px;
   font-size: 48px;
   font-family: var(--font-family-puritan-bold);
 }
 
 .quests-rectangle {
-  margin-top: 184px;
+  margin-top: 4rem;
   margin-left: 54px;
   width: 919px;
-  height: 523px;
+  height: 480px;
   background-color: var(--pink);
+  font-size: 1.7rem;
 }
 
-.checkBox {
-  width: 139.23px;
-  height: 37px;
-  border-radius: 8px;
+.checkBox1 {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5px;
+  border-color: #ff3333;
   background-color: #ff98ac;
   color: white;
-  font-size: 25px;
+  font-size: 23px;
   font-family: var(--font-family-puritan-regular);
+  margin-left: 290px;
 }
+
+.checkBox2 {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5px;
+  border-color: #ff3333;
+  background-color: #ff98ac;
+  color: white;
+  font-size: 23px;
+  font-family: var(--font-family-puritan-regular);
+  margin-left: 190px;
+}
+
+.checkBox3 {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5px;
+  border-color: #ff3333;
+  background-color: #ff98ac;
+  color: white;
+  font-size: 23px;
+  font-family: var(--font-family-puritan-regular);
+  margin-left: 280px;
+}
+
+.checkBox4 {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5px;
+  border-color: #ff3333;
+  background-color: #ff98ac;
+  color: white;
+  font-size: 23px;
+  font-family: var(--font-family-puritan-regular);
+  margin-left: 510px;
+}
+
+.checkBox5 {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5px;
+  border-color: #ff3333;
+  background-color: #ff98ac;
+  color: white;
+  font-size: 23px;
+  font-family: var(--font-family-puritan-regular);
+  margin-left: 480px;
+}
+
+.checkBox6 {
+  width: 8rem;
+  height: 3rem;
+  border-radius: 5px;
+  border-color: #ff3333;
+  background-color: #ff98ac;
+  color: white;
+  font-size: 23px;
+  font-family: var(--font-family-puritan-regular);
+  margin-left: 500px;
+}
+
 
 /* PLATFORM CREATION MODAL */
 

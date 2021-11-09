@@ -12,39 +12,35 @@ const Quest = () => {
                 Quests
             </div>
             <div className="quests-rectangle">
+                    <br />
                 <p>
-                    Be 1st place on the leaderboard once!
-                    <span className="checkBox">Incomplete</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Be 1st place on the leaderboard once!
+                    <span className="checkBox1">Incomplete</span>
                 </p>
                     <br />
-                    <br />
                 <p>
-                    Maintain 1st place on a leaderboard for a week!
-                    <span className="checkBox">Incomplete</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maintain 1st place on a leaderboard for a week!
+                    <span className="checkBox2">Incomplete</span>
                 </p>
                     <br />
-                    <br />
                 <p>
-                    Have 100 people take one of your quiz.
-                    <span className="checkBox">Incomplete</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 100 people take one of your quiz.
+                    <span className="checkBox3">Incomplete</span>
                 </p>
                     <br />
-                    <br />
                 <p>
-                    Make 10 Quizzes!
-                    <span className="checkBox">Incomplete</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make 10 Quizzes!
+                    <span className="checkBox4">Incomplete</span>
                 </p>
                     <br />
-                    <br />
                 <p>
-                    Make your first quiz!
-                    <span className="checkBox">Incomplete</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make your first quiz!
+                    <span className="checkBox5">Incomplete</span>
                 </p>
                     <br />
-                    <br />
                 <p>
-                    Take you first quiz!
-                    <span className="checkBox">Incomplete</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take you first quiz!
+                    <span className="checkBox6">Incomplete</span>
                 </p>
             </div>
         </div>
