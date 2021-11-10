@@ -43,6 +43,7 @@ const ProfileQuizzes = (props) => {
     const [featuredQuiz, changeFeaturedQuiz] = useState(profile.featuredQuiz);
     const [editingMode, toggleEditingMode] = useState(false);
   
+    // TODO: Featured quiz doesn't default back to setFeaturedQuiz if cancel is clicked
     const handleCancel = () => {
         setFeaturedQuiz(profile.featuredQuiz);
         toggleEditingMode(false);
@@ -70,6 +71,23 @@ const ProfileQuizzes = (props) => {
         refetchQuizzesData();
     }, [user, profile, quizzes, refetchProfileData, refetchQuizzesData]);
 
+    const [CreateQuiz] = useMutation(mutations.CREATE_QUIZ);
+    //const [DeleteQuiz = useMutation(mutations.)]
+    const handleSubmit = async () => {
+        const { data } = await CreateQuiz({
+            variables: { 
+                owner: user._id, 
+                title: "test"
+            }
+        });
+
+        var returnedQuiz = {};
+        if (data) { 
+            returnedQuiz = data.createQuiz;
+            console.log(returnedQuiz);
+        }
+    }
+
     return (
         <div>
             {
@@ -83,7 +101,7 @@ const ProfileQuizzes = (props) => {
             {
                 isOwner && !editingMode &&
                 <div>
-                    <button className="ui button request-button" style={{ float: 'right' }}>
+                    <button className="ui button request-button" style={{ float: 'right' }} onClick={handleSubmit}>
                         Create
                     </button>
                 </div>
