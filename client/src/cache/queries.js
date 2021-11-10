@@ -63,6 +63,7 @@ export const FETCH_PROFILES = gql`
             contact
             followerCount
             following
+            featuredQuiz
             quizzes
             collections
             platforms
@@ -82,6 +83,7 @@ export const FIND_PROFILE_BY_ID = gql`
             contact
             followerCount
             following
+            featuredQuiz
             quizzes
             collections
             platforms
@@ -141,6 +143,7 @@ export const FETCH_PLATFORMS = gql`
             collaborators
             requests
             followerCount
+            featuredQuiz
             quizzes
             collections
             createdAt
@@ -161,6 +164,7 @@ export const FIND_PLATFORM_BY_ID = gql`
             collaborators
             requests
             followerCount
+            featuredQuiz
             quizzes
             collections
             createdAt

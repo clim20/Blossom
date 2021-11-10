@@ -72,7 +72,7 @@ module.exports = {
           contact: "",
           followerCount: 0,
           following: [],
-          featuredQuiz: "",
+          featuredQuiz: null,
           quizzes: [],
           collections: [],
           platforms: []

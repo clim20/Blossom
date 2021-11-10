@@ -75,6 +75,7 @@ module.exports = {
           collaborators: [user._id],
           requests: [],
           followerCount: 0,
+          featuredQuiz: null,
           quizzes: [],
           collections: [],
           createdAt: new Date().toISOString()
@@ -102,6 +103,7 @@ module.exports = {
           collaborators: [user._id],
           requests: [],
           followerCount: 0,
+          featuredQuiz: null,
           quizzes: [],
           collections: [],
           createdAt: new Date().toISOString()

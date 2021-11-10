@@ -25,6 +25,6 @@ module.exports = {
         ...usersResolvers.Mutation,
         ...profilesResolvers.Mutation,
         ...platformsResolvers.Mutation,
-        ...quizzesResolvers.Mutations,
+        ...quizzesResolvers.Mutation,
     }
 }

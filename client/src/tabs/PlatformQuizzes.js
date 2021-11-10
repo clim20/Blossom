@@ -8,25 +8,25 @@ import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 
-const ProfileQuizzes = (props) => {
+const PlatformQuizzes = (props) => {
     const { user } = useContext(AuthContext);
     const params = useParams();
-    const profileId = params ? params.profileId : 'could not get params';
+    const platformId = params ? params.platformId : 'could not get params';
 
-    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    const { data: platformData, refetch: refetchPlatformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
-            id: profileId
+            id: platformId
         }
     });
 
-    var profile;
-    if(profileData) {
-        profile = profileData.findProfileById;
+    var platform;
+    if(platformData) {
+        platform = platformData.findPlatformById;
     }
 
     const { data: quizzesData, refetch: refetchQuizzesData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
         variables: {
-            ids: profile.quizzes
+            ids: platform.quizzes
         }
     });
 
@@ -36,21 +36,21 @@ const ProfileQuizzes = (props) => {
     }
 
     var isOwner;
-    if(profile && user) {
-        isOwner = profile.user === user._id;
+    if(platform && user) {
+        isOwner = platform.owner === user._id;
     }
 
-    const [featuredQuiz, changeFeaturedQuiz] = useState(profile.featuredQuiz);
+    const [featuredQuiz, changeFeaturedQuiz] = useState(platform.featuredQuiz);
     const [editingMode, toggleEditingMode] = useState(false);
   
     const handleCancel = () => {
-        setFeaturedQuiz(profile.featuredQuiz);
+        setFeaturedQuiz(platform.featuredQuiz);
         toggleEditingMode(false);
     }
 
     const [setFeaturedQuiz] = useMutation(mutations.SET_FEATURED_QUIZ, {
         variables: {
-            profilePlatformId: profile ? profile._id : '',
+            profilePlatformId: platform ? platform._id : '',
             quizId: featuredQuiz
         }
     });
@@ -58,7 +58,7 @@ const ProfileQuizzes = (props) => {
     const handleSave = () => {
         setFeaturedQuiz();
         setTimeout(() => {
-            refetchProfileData();
+            refetchPlatformData();
             refetchQuizzesData();
         }, 300);
         handleCancel();
@@ -66,9 +66,9 @@ const ProfileQuizzes = (props) => {
     }
 
     useEffect(() => {
-        refetchProfileData();
+        refetchPlatformData();
         refetchQuizzesData();
-    }, [user, profile, quizzes, refetchProfileData, refetchQuizzesData]);
+    }, [user, platform, quizzes, refetchPlatformData, refetchQuizzesData]);
 
     return (
         <div>
@@ -100,10 +100,10 @@ const ProfileQuizzes = (props) => {
                 </div>
             }
 
-            {quizzes && <QuizCards quizzes={quizzes} activeTab={props.activeTab} editingMode={editingMode} user={user}
-                            featuredQuiz={featuredQuiz} setFeaturedQuiz={changeFeaturedQuiz} refetchData={refetchProfileData}/>
+            {quizzes && <QuizCards quizzes={quizzes} activeTab={props.activeTab} platform={platform} editingMode={editingMode} user={user}
+                            featuredQuiz={featuredQuiz} setFeaturedQuiz={changeFeaturedQuiz} refetchData={refetchPlatformData}/>
             }
         </div>
     );
 }
-export default ProfileQuizzes;
+export default PlatformQuizzes;

@@ -121,9 +121,9 @@ module.exports = {
 
       },
       async setFeaturedQuiz(_, { profilePlatformId, quizId }) {
-        console.log("test");
         const profile = await Profile.findOne({_id: new ObjectId(profilePlatformId)});
-        // const platform = await Platform.findOne({_id: new ObjectId(profilePlatformId)});
+        const platform = await Platform.findOne({_id: new ObjectId(profilePlatformId)});
+        const quiz = await Quiz.findOne({_id: new ObjectId(quizId)});
 
         var updated;
         if (profile) {
@@ -132,14 +132,14 @@ module.exports = {
           });
         }
 
-        // if (platform) {
-        //   platform = await Platform.updateOne({_id: new ObjectId(profilePlatformId)}, {
-        //     featuredQuiz: quizId
-        //   });
-        // }
+        if (platform) {
+          platform = await Platform.updateOne({_id: new ObjectId(profilePlatformId)}, {
+            featuredQuiz: quizId
+          });
+        }
   
-        if (updated) return true;
-        return false;
+        if (updated) return quiz;
+        return quiz;
       }
     },
   };

@@ -27,7 +27,7 @@ module.exports = gql`
         contact: String
         followerCount: Int!
         following: [ID!]
-        featuredQuiz: String
+        featuredQuiz: ID
         quizzes: [ID!]
         collections: [ID!]
         platforms: [ID!]
@@ -44,6 +44,7 @@ module.exports = gql`
         collaborators: [ID!]!
         requests: [ID!]
         followerCount: Int!
+        featuredQuiz: ID
         quizzes: [ID!]
         collections: [ID!]
         createdAt: String!
@@ -182,7 +183,7 @@ module.exports = gql`
         removeCollaborator(platformId: ID!, userId: ID!): Platform!
         editProfile(id: ID!, updatedProfile: ProfileInput!): Profile!
         editPlatform(id: ID!, updatedPlatform: PlatformInput!): Platform!
-        setFeaturedQuiz(profilePlatformId: ID!, quizId: ID!): Boolean!
+        setFeaturedQuiz(profilePlatformId: ID!, quizId: ID!): Quiz!
         createQuiz(owner: ID!, newQuiz: QuizInput!): Quiz!
         updateQuiz(quizId: ID!, tempQuiz: QuizInput!): Quiz!
         deleteQuiz(deletedQuiz: ID!): Boolean!

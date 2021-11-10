@@ -41,7 +41,7 @@ const ProfileBanner = ({ profile, user, refetchProfileData }) => {
     }
 
     useEffect(() => {
-        if (userProfile && profile && userProfile.following.find(id => id.toString() === profile.user.toString())) {
+        if (userProfile && profile && profile.user && userProfile.following.find(id => id.toString() === profile.user.toString())) {
             setFollowed(true);
         } else {
             setFollowed(false);

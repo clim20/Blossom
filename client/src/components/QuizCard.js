@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
@@ -28,7 +28,7 @@ function QuizCard(props) {
     var quizHits = 0;
     if(quizData){
         quiz = quizData.findQuizById;
-        quizHits = props.quiz.quizHits;
+        quizHits = props.quiz.quizHits !== 1 ? props.quiz.quizHits + ' Quiz Hits' : props.quiz.quizHits + ' Quiz Hit';
     }
 
     const handleClick = () => {
@@ -37,7 +37,17 @@ function QuizCard(props) {
         }
     }
 
+    const handleStarClick = () => {
+        if (props.featuredQuiz !== quiz._id) {
+            props.setFeaturedQuiz(quiz._id);
+        } else {
+            props.setFeaturedQuiz(null);
+        }
+        props.refetchData();
+    }
+
     const onQuizzesTab = props.activeTab === "quizzes";
+    const starClass = props.featuredQuiz === quiz._id ? 'star icon featured' : 'star icon unfeatured';
 
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
@@ -47,8 +57,7 @@ function QuizCard(props) {
                 />
                 {
                     onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
-                    <i class="star icon" style={{ float: 'right', marginTop: '7px', marginLeft: '-100px', fontSize: '15pt' }}
-                    />
+                    <i class={starClass} onClick={handleStarClick}/>
                 }
                 <br/>
                 <br/>
