@@ -21,8 +21,9 @@ function PlatformCard(props) {
     }
 
     const handleClick = () => {
-        if(!props.editingMode)
+        if(!props.editingMode) {
             history.push("/platform/" + props.platform._id);
+        }
     }
 
     const handleXClick = () => {
@@ -31,6 +32,7 @@ function PlatformCard(props) {
     }
 
     const onPlatformTab = props.activeTab === "platforms";
+    
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
             <img className="card-image platform-circle ui avatar image"

@@ -11,6 +11,7 @@ const platformSchema = new Schema({
     collaborators: [ObjectId],
     requests: [ObjectId],
     followerCount: Number,
+    featuredQuiz: ObjectId,
     quizzes: [ObjectId],
     collections: [ObjectId],
     createdAt: String

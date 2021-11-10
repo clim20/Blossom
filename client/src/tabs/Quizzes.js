@@ -10,9 +10,6 @@ import { AuthContext } from '../context/auth';
 import { Button, Modal, Input } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';;
 
-
-
-
 const Quizzes = (props) => {
 
     const { user } = useContext(AuthContext);

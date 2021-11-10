@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import MenuBar from '../components/MenuBar';
 import ProfileBanner from '../components/ProfileBanner';
 import Home from '../tabs/Home';
-import Quizzes from '../tabs/Quizzes';
+import ProfileQuizzes from '../tabs/ProfileQuizzes';
 import Platforms from '../tabs/Platforms';
 import Collections from '../tabs/Collections';
 import Following from '../tabs/Following';
@@ -90,8 +90,8 @@ const Profile = () => {
 
                 <div className="ui bottom attached active tab segment profile-content">
                     {activeTab === 'home' && <Home profile={profile}/>}
-                    {activeTab === 'quizzes' && <Quizzes profile={profile}/>}
-                    {activeTab === 'platforms' && <Platforms activeTab={activeTab} refetchProfileData={refetchProfileData}/>}
+                    {activeTab === 'quizzes' && <ProfileQuizzes activeTab={activeTab}/>}
+                    {activeTab === 'platforms' && <Platforms activeTab={activeTab}/>}
                     {activeTab === 'collections' && <Collections profile={profile}/>}
                     {activeTab === 'following' && <Following profile={profile}/>}
                     {activeTab === 'badges' && <Badges profile={profile}/>}

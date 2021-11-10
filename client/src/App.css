@@ -202,41 +202,6 @@ button svg {
   background-color: var(--pink) !important;
 }
 
-
-/* .update-account {
-  margin-top: 141px;
-  margin-left: 351px;
-  font-size: 48px;
-  font-family: var(--font-family-puritan-bold);
-} */
-
-/* .update-username-placeholder1 {
-  margin-top: 285px;
-  margin-left: 379px;
-  font-size: 18px;
-} */
-
-/* .update-username-placeholder1 {
-  margin-top: 383px;
-  margin-left: 379px;
-  font-size: 18px;
-} */
-
-/* .update-username {
-  margin-top: 321px;
-  margin-left: 449px;
-  font-size: 24px;
-  font-family: var(--font-family-roboto-bold);
-} */
-
-/* .input-box {
-  margin-top: 417px;
-  margin-left: 380px;
-  width: 264px;
-  height: 35px;
-  border-radius: 5px;
-} */
-
 .update {
   background-color: #e3eefb;
   align-items: center;
@@ -350,11 +315,11 @@ button svg {
   text-align: center;
 }
 
-/*.edit-box {
+.edit-box {
   margin: 0px;
   width: 400px;
   height: 100px;
-}*/
+}
 
 /* REQUEST BUTTON */
 .request-button {
@@ -571,7 +536,6 @@ button svg {
   margin-left: 500px;
 }
 
-
 /* PLATFORM CREATION MODAL */
 
 .create-modal-button {
@@ -590,4 +554,21 @@ button svg {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+/* FEATURED QUIZ */
+.featured {
+  float: right !important;
+  color: yellow;
+  margin-top: 5px !important;
+  margin-left: -100px !important;
+  font-size: 15pt !important;
+}
+
+.unfeatured {
+  float: right !important;
+  color: white;
+  margin-top: 5px !important;
+  margin-left: -100px !important;
+  font-size: 15pt !important;
 }
