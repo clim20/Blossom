@@ -75,7 +75,7 @@ const Update = () => {
         </div>
     :
         <div className="err-msg">
-            The username is already taken
+            *The username is already taken
         </div>
     ;
 
@@ -94,6 +94,7 @@ const Update = () => {
             <div className="update-username-placeholder2">
                 New Username:
             </div>
+            <br />
             <Input 
                 className="input-box"
                 name='name' onBlur={setUsername} autoFocus={false} placeholder={"New username..."}
@@ -102,7 +103,7 @@ const Update = () => {
 
             {submitted && message}
 
-            <div style={{ marginTop: '20px' }}>
+            <div style={{ marginTop: '30px' , marginLeft: '450px'}}>
                 <Button 
                     className="save-button"
                     onClick={handleSubmit}
