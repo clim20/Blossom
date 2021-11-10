@@ -100,9 +100,13 @@ const Platforms = (props) => {
                     </button>  
                 </div>
             }
-            {platforms && <PlatformCards platforms={platforms} profile={profile} activeTab={props.activeTab} editingMode={editingMode}
-                            setShowPlatformDeletionModal={setShowPlatformDeletionModal} setRemovePlatform={setRemovePlatform} user={user}/>
-            }
+
+            <div className="tab_content">
+                {platforms && <PlatformCards platforms={platforms} profile={profile} activeTab={props.activeTab} editingMode={editingMode}
+                                setShowPlatformDeletionModal={setShowPlatformDeletionModal} setRemovePlatform={setRemovePlatform} user={user}/>
+                }
+            </div>
+
             {
                 showCreationMenu && (<PlatformCreationModal setShowCreationMenu={setShowCreationMenu} refetchProfileData={refetchProfileData}/>)
             }

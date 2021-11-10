@@ -45,7 +45,7 @@ module.exports = {
             const quizzes = await Quiz.find().sort({ quizLikes: -1 });
           
             var res = [];
-            for(let i = 0; i < 5; i++) {
+            for (let i = 0; i < 4; i++) {
               if (quizzes[i]) {
                 res.push(quizzes[i]);
               }

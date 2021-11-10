@@ -131,13 +131,13 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                     }
                 </div>
                 {
-                    !editingDescription && !editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{platform.description}</div>
+                    !editingDescription && !editingMode && <div className="text_box">{platform.description}</div>
                 }
                 {
                     editingDescription && <textarea className="edit-box" defaultValue={updatedPlatform.description} onBlur={handleDescriptionEdit}></textarea>
                 }
                 {
-                    !editingDescription && editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{updatedPlatform.description}</div>
+                    !editingDescription && editingMode && <div className="text_box">{updatedPlatform.description}</div>
                 }
             </div>
 
@@ -153,13 +153,13 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                     }
                 </div>
                 {
-                    !editingContact && !editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{platform.contact}</div>
+                    !editingContact && !editingMode && <div className="text_box">{platform.contact}</div>
                 }
                 {
                     editingContact && <textarea className="edit-box" defaultValue={updatedPlatform.contact} onBlur={handleContactEdit}></textarea>
                 }
                 {
-                    !editingContact && editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{updatedPlatform.contact}</div>
+                    !editingContact && editingMode && <div className="text_box">{updatedPlatform.contact}</div>
                 }
             </div>
 

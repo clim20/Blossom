@@ -91,6 +91,10 @@ button svg {
   text-align: center;
 }
 
+.icon:hover {
+  cursor: pointer;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -98,6 +102,10 @@ button svg {
 .card-image {
   width: 9rem !important;
   height: 9rem !important;
+}
+
+.ui.four.cards, .ui.five.cards {
+  justify-content: space-between;
 }
 
 .creator-circle {
@@ -127,6 +135,16 @@ button svg {
   left: 11rem;
   bottom: 1rem;
   display: inline-block;
+  width: fit-content;
+}
+
+.text_box {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.tab_content {
+  width: 75%;
 }
 
 .follow-button {
@@ -567,7 +585,7 @@ button svg {
 
 .unfeatured {
   float: right !important;
-  color: white;
+  color: #bbb;
   margin-top: 5px !important;
   margin-left: -100px !important;
   font-size: 15pt !important;

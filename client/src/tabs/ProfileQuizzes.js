@@ -26,7 +26,7 @@ const ProfileQuizzes = (props) => {
 
     const { data: quizzesData, refetch: refetchQuizzesData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
         variables: {
-            ids: profile.quizzes
+            ids: profile ? profile.quizzes : []
         }
     });
 
@@ -43,9 +43,8 @@ const ProfileQuizzes = (props) => {
     const [featuredQuiz, changeFeaturedQuiz] = useState(profile.featuredQuiz);
     const [editingMode, toggleEditingMode] = useState(false);
   
-    // TODO: Featured quiz doesn't default back to setFeaturedQuiz if cancel is clicked
     const handleCancel = () => {
-        setFeaturedQuiz(profile.featuredQuiz);
+        changeFeaturedQuiz(profile.featuredQuiz);
         toggleEditingMode(false);
     }
 
@@ -63,7 +62,7 @@ const ProfileQuizzes = (props) => {
             refetchQuizzesData();
         }, 300);
         handleCancel();
-        setFeaturedQuiz(featuredQuiz);
+        changeFeaturedQuiz(featuredQuiz);
     }
 
     useEffect(() => {

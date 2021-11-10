@@ -26,7 +26,7 @@ const PlatformQuizzes = (props) => {
 
     const { data: quizzesData, refetch: refetchQuizzesData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
         variables: {
-            ids: platform.quizzes
+            ids: platform ? platform.quizzes : []
         }
     });
 
@@ -43,9 +43,8 @@ const PlatformQuizzes = (props) => {
     const [featuredQuiz, changeFeaturedQuiz] = useState(platform.featuredQuiz);
     const [editingMode, toggleEditingMode] = useState(false);
   
-    // TODO: Featured quiz doesn't default back to setFeaturedQuiz if cancel is clicked
     const handleCancel = () => {
-        setFeaturedQuiz(platform.featuredQuiz);
+        changeFeaturedQuiz(platform.featuredQuiz);
         toggleEditingMode(false);
     }
 
@@ -63,7 +62,7 @@ const PlatformQuizzes = (props) => {
             refetchQuizzesData();
         }, 300);
         handleCancel();
-        setFeaturedQuiz(featuredQuiz);
+        changeFeaturedQuiz(featuredQuiz);
     }
 
     useEffect(() => {
@@ -101,9 +100,7 @@ const PlatformQuizzes = (props) => {
             {
                 isOwner && !editingMode &&
                 <div>
-                    <button className="ui button request-button" style={{ float: 'right' }} onClick={handleSubmit}>
-                        Create
-                    </button>
+                    <button className="ui button request-button" style={{ float: 'right', visibility: 'hidden' }}/>
                 </div>
             }
             {

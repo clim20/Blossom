@@ -1,10 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Grid, Image } from 'semantic-ui-react';
 import { useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
 
 const Home = (props) => {
+    const history = useHistory();
+
     const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: props.profile ? props.profile._id : ''
@@ -51,10 +54,14 @@ const Home = (props) => {
         quizCreator = data.findUserById;
     }
 
+    const handleClick = () => {
+        history.push("/quiz/" + quiz._id);
+    }
+
     return (
         <div>
             {quiz && 
-                <div class="ui card" style={{ width: '100%' }}>
+                <div class="ui fluid card" style={{ cursor: 'pointer' }} onClick={handleClick}>
                     <div class="content">
                         <Grid>
                             <Grid.Column width={4}>

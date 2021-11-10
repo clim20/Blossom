@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
@@ -50,7 +50,8 @@ function QuizCard(props) {
     const starClass = props.featuredQuiz === quiz._id ? 'star icon featured' : 'star icon unfeatured';
 
     return (
-        <div className="item text-align-center cursor-pointer" onClick={handleClick}>
+        <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
+            <div className="content">
                 <img width='200px' height='120px'
                     src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
                     alt="quiz"
@@ -68,9 +69,9 @@ function QuizCard(props) {
                     Created by {quizCreator.username}
                 </div>
                 <div>
-                    {quizHits} Quiz Hits
+                    {quizHits}
                 </div>
-                <br/>
+            </div>
         </div>
     );
 }

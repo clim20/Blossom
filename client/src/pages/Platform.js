@@ -42,7 +42,7 @@ const Platform = () => {
             <PlatformBanner platform={platform} user={user} refetchPlatformData={refetchPlatformData}/>
 
             <div className="ui container platform-section">
-                <div className="ui top attached tabular menu platform-tab">
+                <div className="ui top attached tabular menu platform-tab" style={{ cursor: 'pointer' }}>
                     <div className={`${activeTab === 'home' ? 'active active-tab' : 'inactive-tab'} platform-tab item`}
                         onClick={() => handleTabClick('home')}
                     >

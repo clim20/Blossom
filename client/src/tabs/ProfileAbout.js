@@ -128,13 +128,13 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     }
                 </div>
                 {
-                    !editingDescription && !editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{profile.description}</div>
+                    !editingDescription && !editingMode && <div className="text_box">{profile.description}</div>
                 }
                 {
                     editingDescription && <textarea className="edit-box" defaultValue={updatedProfile.description} onBlur={handleDescriptionEdit}></textarea>
                 }
                 {
-                    !editingDescription && editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{updatedProfile.description}</div>
+                    !editingDescription && editingMode && <div className="text_box">{updatedProfile.description}</div>
                 }
             </div>
 
@@ -150,13 +150,13 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     }
                 </div>
                 {
-                    !editingContact && !editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{profile.contact}</div>
+                    !editingContact && !editingMode && <div className="text_box">{profile.contact}</div>
                 }
                 {
                     editingContact && <textarea className="edit-box" defaultValue={updatedProfile.contact} onBlur={handleContactEdit}></textarea>
                 }
                 {
-                    !editingContact && editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{updatedProfile.contact}</div>
+                    !editingContact && editingMode && <div className="text_box">{updatedProfile.contact}</div>
                 }
             </div>
 
