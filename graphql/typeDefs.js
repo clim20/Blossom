@@ -184,7 +184,7 @@ module.exports = gql`
         editProfile(id: ID!, updatedProfile: ProfileInput!): Profile!
         editPlatform(id: ID!, updatedPlatform: PlatformInput!): Platform!
         setFeaturedQuiz(profilePlatformId: ID!, quizId: ID!): Quiz!
-        createQuiz(owner: ID!, newQuiz: QuizInput!): Quiz!
+        createQuiz(owner: ID!, title: String!): Quiz
         updateQuiz(quizId: ID!, tempQuiz: QuizInput!): Quiz!
         deleteQuiz(deletedQuiz: ID!): Boolean!
     }

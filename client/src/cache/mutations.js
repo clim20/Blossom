@@ -199,3 +199,17 @@ export const SET_FEATURED_QUIZ = gql`
         }
     }
 `;
+
+export const CREATE_QUIZ = gql`
+    mutation createQuiz($owner: ID!, $title: String!) {
+        createQuiz(owner: $owner, title: $title) {
+            _id
+        }
+    }
+`;
+
+export const DELETE_QUIZ = gql`
+    mutation deleteQuiz($platformId: ID!) {
+        deleteQuiz(platformId: $platformId)
+    }
+`;
