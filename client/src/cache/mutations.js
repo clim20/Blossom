@@ -186,3 +186,17 @@ export const DELETE_PLATFORM = gql`
         deletePlatform(platformId: $platformId)
     }
 `;
+
+export const CREATE_QUIZ = gql`
+    mutation createQuiz($owner: ID!, $title: String!) {
+        createQuiz(owner: $owner, title: $title) {
+            _id
+        }
+    }
+`;
+
+export const DELETE_QUIZ = gql`
+    mutation deleteQuiz($platformId: ID!) {
+        deleteQuiz(platformId: $platformId)
+    }
+`;

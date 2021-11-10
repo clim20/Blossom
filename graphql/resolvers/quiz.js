@@ -2,6 +2,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const Quiz = require('../../models/Quiz');
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 module.exports = {
     Query: {
@@ -54,34 +55,52 @@ module.exports = {
         },
     },
     Mutation: {
-        async createQuiz(_, { owner, newQuiz }) {
-        
+        async createQuiz(_, { owner, title }) {
+            //console.log("here")
             const ownerId = new ObjectId(owner);
             const user = await User.findOne({_id: ownerId});
-      
+            
             const retQuiz = new Quiz({
-              _id:  new ObjectId(),
-                title: newQuiz.title,
-                description: newQuiz.description,
-                titleImg: newQuiz.titleImg,  
+              
+                _id:  new ObjectId(),
+                title: title,
+                description: "Add Description Here",
+                titleImg: "",  
                 creator: user._id,
-                platformId: newQuiz.platformId,
+                platformId: null,
                 quizHits: 0,
                 quizLikes: 0,
                 quizDislikes: 0,
-                badges: newQuiz.badges,
+                badges: [],
                 scores: [],
-                cards: newQuiz.cards,
+                cards: [
+                  {
+                    cardNum: 0,
+                    question: "Enter Question Here",
+                    choices: ["Enter Choices Here"],
+                    answer: 0,
+                    answerExplanation: "Enter Explenation Here",
+                    questionImg: "",
+                    answerImg: "",
+                    drawing: null
+                  }
+                ],
                 createdAt: new Date().toISOString()
             });
       
             const updated = await retQuiz.save();
-      
-            if(updated) {
-              console.log(retQuiz);
+
+            const profile = await Profile.findOne({_id: new ObjectId(user.profileId)});
+            let quizzes = profile.quizzes;
+            quizzes.push(retQuiz._id);
+            const updated2 = await Profile.updateOne({_id: profile._id}, {quizzes: quizzes});
+  
+            if(updated && updated2) {
               return retQuiz;
+            }else{
+
+              return null;
             }
-            else return false;
           },
       async updateQuiz(_, { id, updatedQuiz }) {
         const quiz = await Quiz.findOne({_id: new ObjectId(id)});
@@ -106,16 +125,28 @@ module.exports = {
       },
 
       async deleteQuiz(_, { id }){
-        const deletedQuiz = await Quiz.findOneAndDelete({_id: new ObjectId(id)}, function(err, docs){
-            if(err){
-                return false;
-            }else{
-                return true;
-            }
-        });
+        const deletedQuiz = await Quiz.findOne({_id: new ObjectId(id)});
+        /*
+        if(deletedQuiz){
+          const creator = deletedQuiz.creator;
+  
+          
+          let profile = await Profile.findOne({user: creator})
+          let profileQuiz = profile.quizzes.filter(deletedQuiz => deletedQuiz._id.toString() !== id.toString());
+          let updated = await Profile.updateOne({user: profile.user}, {quizzes: profileQuiz});
+            
+          
+        }
+        */
 
-        //deletedQuiz.remove()
-        return deletedQuiz;
+        const deleted = await Quiz.deleteOne({_id: id});
+
+
+        if (deleted){
+          return true;
+        }
+        
+        return false;
 
       },
 
