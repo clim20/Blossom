@@ -10,6 +10,7 @@ const profileSchema = new Schema({
     contact: String,
     followerCount: Number,
     following: [ObjectId],
+    featuredQuiz: String,
     quizzes: [ObjectId],
     collections: [ObjectId],
     platforms: [ObjectId]

@@ -2,6 +2,8 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const Quiz = require('../../models/Quiz');
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
+const Platform = require('../../models/Platform');
 
 module.exports = {
     Query: {
@@ -18,7 +20,7 @@ module.exports = {
             if (quiz) return quiz;
             return{};
         },
-        async getQuizzesByIds(_, { ids }){
+        async findQuizzesByIds(_, { ids }){
             var quizzes = [];
             for(let i = 0; i < ids.length; i++){
                 const quiz = await Quiz.findOne({_id: ids[i]});
@@ -56,33 +58,33 @@ module.exports = {
     Mutation: {
         async createQuiz(_, { owner, newQuiz }) {
         
-            const ownerId = new ObjectId(owner);
-            const user = await User.findOne({_id: ownerId});
-      
-            const retQuiz = new Quiz({
-              _id:  new ObjectId(),
-                title: newQuiz.title,
-                description: newQuiz.description,
-                titleImg: newQuiz.titleImg,  
-                creator: user._id,
-                platformId: newQuiz.platformId,
-                quizHits: 0,
-                quizLikes: 0,
-                quizDislikes: 0,
-                badges: newQuiz.badges,
-                scores: [],
-                cards: newQuiz.cards,
-                createdAt: new Date().toISOString()
-            });
-      
-            const updated = await retQuiz.save();
-      
-            if(updated) {
-              console.log(retQuiz);
-              return retQuiz;
-            }
-            else return false;
-          },
+          const ownerId = new ObjectId(owner);
+          const user = await User.findOne({_id: ownerId});
+    
+          const retQuiz = new Quiz({
+            _id:  new ObjectId(),
+              title: newQuiz.title,
+              description: newQuiz.description,
+              titleImg: newQuiz.titleImg,  
+              creator: user._id,
+              platformId: newQuiz.platformId,
+              quizHits: 0,
+              quizLikes: 0,
+              quizDislikes: 0,
+              badges: newQuiz.badges,
+              scores: [],
+              cards: newQuiz.cards,
+              createdAt: new Date().toISOString()
+          });
+    
+          const updated = await retQuiz.save();
+    
+          if(updated) {
+            console.log(retQuiz);
+            return retQuiz;
+          }
+          else return false;
+        },
       async updateQuiz(_, { id, updatedQuiz }) {
         const quiz = await Quiz.findOne({_id: new ObjectId(id)});
   
@@ -118,6 +120,26 @@ module.exports = {
         return deletedQuiz;
 
       },
+      async setFeaturedQuiz(_, { profilePlatformId, quizId }) {
+        console.log("test");
+        const profile = await Profile.findOne({_id: new ObjectId(profilePlatformId)});
+        // const platform = await Platform.findOne({_id: new ObjectId(profilePlatformId)});
 
+        var updated;
+        if (profile) {
+          updated = await Profile.updateOne({_id: new ObjectId(profilePlatformId)}, {
+            featuredQuiz: quizId
+          });
+        }
+
+        // if (platform) {
+        //   platform = await Platform.updateOne({_id: new ObjectId(profilePlatformId)}, {
+        //     featuredQuiz: quizId
+        //   });
+        // }
+  
+        if (updated) return true;
+        return false;
+      }
     },
   };

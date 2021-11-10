@@ -217,9 +217,9 @@ export const GET_QUIZZES = gql`
     }
 `;
 
-export const GET_QUIZZES_BY_IDS = gql`
-    query getQuizzesByIds($ids: [ID!]!) {
-        getQuizzesByIds(ids: $ids) {
+export const FIND_QUIZZES_BY_IDS = gql`
+    query findQuizzesByIds($ids: [ID!]!) {
+        findQuizzesByIds(ids: $ids) {
             _id
             title
             description

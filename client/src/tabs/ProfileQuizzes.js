@@ -1,42 +1,38 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
-import PlatformCards from '../components/PlatformCards';
-import PlatformCreationModal from '../modals/PlatformCreationModal';
-import PlatformDeletionModal from '../modals/PlatformDeletionModal';
+import QuizCards from '../components/QuizCards';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 
-const Platforms = (props) => {
+const ProfileQuizzes = (props) => {
     const { user } = useContext(AuthContext);
     const params = useParams();
     const profileId = params ? params.profileId : 'could not get params';
 
-    const [DeletePlatform] 			        = useMutation(mutations.DELETE_PLATFORM);
-
-    var profile;
     const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: profileId
         }
     });
 
+    var profile;
     if(profileData) {
         profile = profileData.findProfileById;
     }
 
-    var platforms;
-    const { data: platformsData, refetch: refetchPlatformsData } = useQuery(queries.FIND_PLATFORMS_BY_IDS, {
+    const { data: quizzesData, refetch: refetchQuizzesData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
         variables: {
-            ids: profile.platforms
+            ids: profile.quizzes
         }
     });
 
-    if(platformsData) { 
-        platforms = platformsData.findPlatformsByIds; 
+    var quizzes;
+    if(quizzesData) { 
+        quizzes = quizzesData.findQuizzesByIds; 
     }
 
     var isOwner;
@@ -44,9 +40,7 @@ const Platforms = (props) => {
         isOwner = profile.user === user._id;
     }
 
-    const [showCreationMenu, setShowCreationMenu] = useState(false);
-    const [showPlatformDeletionModal, setShowPlatformDeletionModal] = useState(false);
-    const [removePlatform, setRemovePlatform] = useState('');
+    const [featuredQuiz, setfeaturedQuiz] = useState('');
     const [editingMode, toggleEditingMode] = useState(false);
   
     const handleCancel = () => {
@@ -60,16 +54,10 @@ const Platforms = (props) => {
         handleCancel();
     }
 
-    const deletePlatform = async (platformId) => {
-        await DeletePlatform({variables: { platformId: platformId }});
-        refetchProfileData();
-        refetchPlatformsData();
-    }
-
     useEffect(() => {
         refetchProfileData();
-        refetchPlatformsData();
-    }, [user, profile, platforms, refetchProfileData, refetchPlatformsData]);
+        refetchQuizzesData();
+    }, [user, profile, quizzes, refetchProfileData, refetchQuizzesData]);
 
     return (
         <div>
@@ -84,7 +72,7 @@ const Platforms = (props) => {
             {
                 isOwner && !editingMode &&
                 <div>
-                    <button className="ui button request-button" style={{ float: 'right' }} onClick={() => {setShowCreationMenu(true)}}>
+                    <button className="ui button request-button" style={{ float: 'right' }}>
                         Create
                     </button>
                 </div>
@@ -100,17 +88,9 @@ const Platforms = (props) => {
                     </button>  
                 </div>
             }
-            {platforms && <PlatformCards platforms={platforms} profile={profile} activeTab={props.activeTab} editingMode={editingMode}
-                            setShowPlatformDeletionModal={setShowPlatformDeletionModal} setRemovePlatform={setRemovePlatform} user={user}/>
-            }
-            {
-                showCreationMenu && (<PlatformCreationModal setShowCreationMenu={setShowCreationMenu} refetchProfileData={refetchProfileData}/>)
-            }
-            {
-                showPlatformDeletionModal && (<PlatformDeletionModal setShowPlatformDeletionModal={setShowPlatformDeletionModal}
-                                            deletePlatform={deletePlatform} removePlatform={removePlatform}/>)
-            }
+
+            {quizzes && <QuizCards quizzes={quizzes} profile={profile} activeTab={props.activeTab} editingMode={editingMode} user={user}/>}
         </div>
     );
 }
-export default Platforms;
+export default ProfileQuizzes;

@@ -186,3 +186,9 @@ export const DELETE_PLATFORM = gql`
         deletePlatform(platformId: $platformId)
     }
 `;
+
+export const SET_FEATURED_QUIZ = gql`
+    mutation setFeaturedQuiz($profilePlatformId: ID!, $quizId: ID!) {
+        setFeaturedQuiz(profilePlatformId: $profilePlatformId, quizId: $quizId)
+    }
+`;

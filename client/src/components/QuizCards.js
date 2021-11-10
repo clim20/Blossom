@@ -8,7 +8,8 @@ function QuizCards(props) {
             {
                 props.quizzes.map((entry, index) => (
                     <QuizCard
-                        quiz={entry} key={index}
+                        quiz={entry} key={index} user={props.user}
+                        profile={props.profile} activeTab={props.activeTab} editingMode={props.editingMode}
                     />
                 ))
             }

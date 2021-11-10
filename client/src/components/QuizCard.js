@@ -6,54 +6,60 @@ import * as queries from '../cache/queries';
 
 function QuizCard(props) {
     const history = useHistory();
-    /*
-    const { quizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
+    
+    const { data } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: props.quiz.creator
+        }
+    });
+
+    var quizCreator = {};
+    if(data){
+        quizCreator = data.findUserById;
+    }
+
+    const { data: quizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
         variables: {
             id: props.quiz._id
         }
     });
 
     var quiz = {};
-    var title = "";
-    
-    if (quizData) { 
-		quiz = quizData.getQuizById;
-        title = props.quiz.title;
-        
-    }
-    */
-    
-    const { data } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            
-            id: props.quiz.creator
-        }
-    });
-    console.log(data)
-    //id: props.quiz.creator
-    //console.log(quizData)
-    var user = {};
-    if(data){
-        user = data.findUserById;
+    var quizHits = 0;
+    if(quizData){
+        quiz = quizData.findQuizById;
+        quizHits = props.quiz.quizHits;
     }
 
     const handleClick = () => {
-        history.push("/quiz/" + props.quiz._id);
+        if(!props.editingMode) {
+            history.push("/quiz/" + props.quiz._id);
+        }
     }
+
+    const onQuizzesTab = props.activeTab === "quizzes";
 
     return (
         <div className="item text-align-center cursor-pointer" onClick={handleClick}>
-                <img className="card-image ui avatar image"
+                <img width='200px' height='120px'
                     src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
                     alt="quiz"
                 />
+                {
+                    onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
+                    <i class="star icon" style={{ float: 'right', marginTop: '7px', marginLeft: '-100px', fontSize: '15pt' }}
+                    />
+                }
                 <br/>
                 <br/>
                 <div className="header">
                     {props.quiz.title}
                 </div>
                 <div>
-                    {user.username}
+                    Created by {quizCreator.username}
+                </div>
+                <div>
+                    {quizHits} Quiz Hits
                 </div>
                 <br/>
         </div>
