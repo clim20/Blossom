@@ -1,11 +1,35 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import moment from 'moment';
 
 import { AuthContext } from '../context/auth';
+import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 
 const PlatformAbout = ({ platform, refetchPlatformData }) => {
     const { user } = useContext(AuthContext);
+
+    const { data: ownerData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: platform ? platform.owner : ''
+        }
+    });
+
+    var owner = {};
+    if (ownerData) { 
+		owner = ownerData.findUserById;
+    }
+
+    const { data: quizHitsData } = useQuery(queries.GET_QUIZ_HITS, {
+        variables: {
+            ids: platform ? platform.quizzes : []
+        }
+    });
+
+    var quizHitCount = 0;
+    if (quizHitsData) { 
+		quizHitCount = quizHitsData.getQuizHits;
+    }
 
     const [updatedPlatform, setUpdatedPlatform] = useState({ 
         platformImg: platform.platformImg,
@@ -66,11 +90,16 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
 
     const isOwnPlatform = platform && user && platform.owner === user._id;
 
+    const created = 'Created: ' + moment(owner.createdAt).format("MMMM D[,] YYYY");
+    const platformOwner = 'Owner: ' + owner.username;
+    const collaborators = platform.collaborators.length !== 1 ? platform.collaborators.length + ' Collaborators' : platform.collaborators.length + ' Collaborator';
+    const quizzes = platform.quizzes.length !== 1 ? platform.quizzes.length + ' Quizzes' : platform.quizzes.length + ' Quiz';
+    const quizHits = quizHitCount !== 1 ? quizHitCount + ' Quiz Hits' : quizHitCount + ' Quiz Hit';
+
     return (
         <div>
             <div>
-                {
-                    isOwnPlatform && !editingMode && 
+                {isOwnPlatform && !editingMode && 
                     <div>
                         <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
                             Edit
@@ -78,8 +107,7 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                     </div>
                 }
 
-                {
-                    editingMode && 
+                {editingMode && 
                     <div style={{ float: 'right' }}>
                         <button className="ui button save-button" onClick={handleSave}>
                             Save
@@ -103,13 +131,13 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                     }
                 </div>
                 {
-                    !editingDescription && !editingMode && <div>{platform.description}</div>
+                    !editingDescription && !editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{platform.description}</div>
                 }
                 {
                     editingDescription && <textarea className="edit-box" defaultValue={updatedPlatform.description} onBlur={handleDescriptionEdit}></textarea>
                 }
                 {
-                    !editingDescription && editingMode && <div>{updatedPlatform.description}</div>
+                    !editingDescription && editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{updatedPlatform.description}</div>
                 }
             </div>
 
@@ -125,14 +153,27 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                     }
                 </div>
                 {
-                    !editingContact && !editingMode && <div>{platform.contact}</div>
+                    !editingContact && !editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{platform.contact}</div>
                 }
                 {
                     editingContact && <textarea className="edit-box" defaultValue={updatedPlatform.contact} onBlur={handleContactEdit}></textarea>
                 }
                 {
-                    !editingContact && editingMode && <div>{updatedPlatform.contact}</div>
+                    !editingContact && editingMode && <div style={{ whiteSpace: 'pre-wrap'}}>{updatedPlatform.contact}</div>
                 }
+            </div>
+
+            <div className="ui hidden divider"></div>
+
+            <div>
+                <h3 className="ui header"> 
+                    Stats
+                </h3>
+                <div> {created} </div>
+                <div> {platformOwner} </div>
+                <div> {collaborators} </div>
+                <div> {quizzes} </div>
+                <div> {quizHits} </div>
             </div>
         </div>
     );

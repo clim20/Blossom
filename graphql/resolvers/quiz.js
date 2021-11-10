@@ -29,6 +29,16 @@ module.exports = {
             if (quizzes) return quizzes;
             return [];
         },
+        async getQuizHits(_, { ids }){
+          var quizHits = 0;
+          for(let i = 0; i < ids.length; i++){
+              const quiz = await Quiz.findOne({_id: ids[i]});
+              if (quiz) {
+                  quizHits += quiz.quizHits;
+              }
+          }
+          return quizHits;
+        },
         async getPopularQuizzes() {
             const quizzes = await Quiz.find().sort({ quizLikes: -1 });
           

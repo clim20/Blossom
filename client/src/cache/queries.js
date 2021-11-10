@@ -293,6 +293,12 @@ export const FIND_QUIZ_BY_ID = gql`
     }
 `;
 
+export const GET_QUIZ_HITS = gql`
+    query getQuizHits($ids: [ID!]!) {
+        getQuizHits(ids: $ids)
+    }
+`;
+
 export const FETCH_POPULAR_QUIIZZES = gql`
     query getPopularQuizzes {
         getPopularQuizzes {
