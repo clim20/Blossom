@@ -65,7 +65,7 @@ export const FETCH_PROFILES = gql`
             following
             featuredQuiz
             quizzes
-            collections
+            quizCollections
             platforms
         }
     }
@@ -85,7 +85,7 @@ export const FIND_PROFILE_BY_ID = gql`
             following
             featuredQuiz
             quizzes
-            collections
+            quizCollections
             platforms
         }
     }
@@ -124,7 +124,7 @@ export const FETCH_POPULAR_PLATFORMS = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -145,7 +145,7 @@ export const FETCH_PLATFORMS = gql`
             followerCount
             featuredQuiz
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -166,7 +166,7 @@ export const FIND_PLATFORM_BY_ID = gql`
             followerCount
             featuredQuiz
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }

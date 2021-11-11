@@ -7,7 +7,7 @@ import ProfileBanner from '../components/ProfileBanner';
 import Home from '../tabs/Home';
 import ProfileQuizzes from '../tabs/ProfileQuizzes';
 import Platforms from '../tabs/Platforms';
-import Collections from '../tabs/Collections';
+import QuizCollections from '../tabs/QuizCollections';
 import Following from '../tabs/Following';
 import Badges from '../tabs/Badges';
 import ProfileAbout from '../tabs/ProfileAbout';
@@ -66,8 +66,8 @@ const Profile = () => {
                     >
                         PLATFORMS
                     </div>
-                    <div className={`${activeTab === 'collections' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
-                        onClick={() => handleTabClick('collections')}
+                    <div className={`${activeTab === 'quizCollections' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
+                        onClick={() => handleTabClick('quizCollections')}
                     >
                         COLLECTIONS
                     </div>
@@ -92,7 +92,7 @@ const Profile = () => {
                     {activeTab === 'home' && <Home profile={profile}/>}
                     {activeTab === 'quizzes' && <ProfileQuizzes activeTab={activeTab}/>}
                     {activeTab === 'platforms' && <Platforms activeTab={activeTab}/>}
-                    {activeTab === 'collections' && <Collections profile={profile}/>}
+                    {activeTab === 'quizCollections' && <QuizCollections profile={profile}/>}
                     {activeTab === 'following' && <Following profile={profile}/>}
                     {activeTab === 'badges' && <Badges profile={profile}/>}
                     {activeTab === 'about' && <ProfileAbout profile={profile} refetchProfileData={refetchProfileData}/>}

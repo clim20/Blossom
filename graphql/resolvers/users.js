@@ -74,7 +74,7 @@ module.exports = {
           following: [],
           featuredQuiz: null,
           quizzes: [],
-          collections: [],
+          quizCollections: [],
           platforms: []
         });
 

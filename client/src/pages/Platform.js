@@ -6,7 +6,7 @@ import MenuBar from '../components/MenuBar';
 import PlatformBanner from "../components/PlatformBanner";
 import Home from '../tabs/Home';
 import PlatformQuizzes from '../tabs/PlatformQuizzes';
-import Collections from '../tabs/Collections';
+import QuizCollections from '../tabs/QuizCollections';
 import Collaborators from '../tabs/Collaborators';
 import PlatformAbout from '../tabs/PlatformAbout';
 
@@ -53,8 +53,8 @@ const Platform = () => {
                     >
                         QUIZZES
                     </div>
-                    <div className={`${activeTab === 'collections' ? 'active active-tab' : 'inactive-tab'} platform-tab item`}
-                        onClick={() => handleTabClick('collections')}
+                    <div className={`${activeTab === 'quizCollections' ? 'active active-tab' : 'inactive-tab'} platform-tab item`}
+                        onClick={() => handleTabClick('quizCollections')}
                     >
                         COLLECTIONS
                     </div>
@@ -73,7 +73,7 @@ const Platform = () => {
                 <div className="ui bottom attached active tab segment platform-content">
                     {activeTab === 'home' && <Home platform={platform}/>}
                     {activeTab === 'quizzes' && <PlatformQuizzes activeTab={activeTab}/>}
-                    {activeTab === 'collections' && <Collections/>}
+                    {activeTab === 'quizCollections' && <QuizCollections/>}
                     {activeTab === 'collaborators' && <Collaborators activeTab={activeTab}/>}
                     {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>

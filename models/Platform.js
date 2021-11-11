@@ -13,7 +13,7 @@ const platformSchema = new Schema({
     followerCount: Number,
     featuredQuiz: ObjectId,
     quizzes: [ObjectId],
-    collections: [ObjectId],
+    quizCollections: [ObjectId],
     createdAt: String
 });
     

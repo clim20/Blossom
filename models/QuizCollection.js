@@ -1,6 +1,6 @@
 const { model, Schema, ObjectId } = require('mongoose');
 
-const collectionSchema = new Schema({
+const quizCollectionSchema = new Schema({
     _id: ObjectId,
 	creator: ObjectId, 
 	img: String,
@@ -9,5 +9,5 @@ const collectionSchema = new Schema({
 	createdAt: String
 });
 
-const Collection = model('Collection', collectionSchema);
-module.exports = Collection;
+const QuizCollection = model('QuizCollection', quizCollectionSchema);
+module.exports = QuizCollection;

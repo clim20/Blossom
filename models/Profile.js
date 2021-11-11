@@ -12,7 +12,7 @@ const profileSchema = new Schema({
     following: [ObjectId],
     featuredQuiz: ObjectId,
     quizzes: [ObjectId],
-    collections: [ObjectId],
+    quizCollections: [ObjectId],
     platforms: [ObjectId]
 });
 

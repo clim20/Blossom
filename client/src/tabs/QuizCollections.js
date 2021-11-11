@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
-const Collections = () => {
+const QuizCollections = () => {
 
     return (
         <div>
@@ -9,4 +9,4 @@ const Collections = () => {
         </div>
     );
 }
-export default Collections;
+export default QuizCollections;

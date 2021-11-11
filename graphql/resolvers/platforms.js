@@ -77,7 +77,7 @@ module.exports = {
           followerCount: 0,
           featuredQuiz: null,
           quizzes: [],
-          collections: [],
+          quizCollections: [],
           createdAt: new Date().toISOString()
         });
   
@@ -105,7 +105,7 @@ module.exports = {
           followerCount: 0,
           featuredQuiz: null,
           quizzes: [],
-          collections: [],
+          quizCollections: [],
           createdAt: new Date().toISOString()
         });
     },

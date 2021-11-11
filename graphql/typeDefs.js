@@ -29,7 +29,7 @@ module.exports = gql`
         following: [ID!]
         featuredQuiz: ID
         quizzes: [ID!]
-        collections: [ID!]
+        quizCollections: [ID!]
         platforms: [ID!]
     }
 
@@ -46,7 +46,7 @@ module.exports = gql`
         followerCount: Int!
         featuredQuiz: ID
         quizzes: [ID!]
-        collections: [ID!]
+        quizCollections: [ID!]
         createdAt: String!
     }
 

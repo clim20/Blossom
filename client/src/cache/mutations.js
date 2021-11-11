@@ -55,7 +55,7 @@ export const EDIT_PROFILE = gql`
             followerCount
             following
             quizzes
-            collections
+            quizCollections
             platforms
         }
     }
@@ -75,7 +75,7 @@ export const EDIT_PLATFORM = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -95,7 +95,7 @@ export const ADD_COLLABORATOR = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -115,7 +115,7 @@ export const REMOVE_COLLABORATOR = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -135,7 +135,7 @@ export const ADD_COLLABORATOR_REQUEST = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -155,7 +155,7 @@ export const REMOVE_COLLABORATOR_REQUEST = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -175,7 +175,7 @@ export const CREATE_PLATFORM = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
