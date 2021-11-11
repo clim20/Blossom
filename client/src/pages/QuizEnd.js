@@ -99,7 +99,7 @@ const QuizEnd = (props) =>{
                     </header>
                 </div>
     
-                <button className="quiz-start-end-button" onClick = {() => handleRetry()} style = {styles.button}>
+                <button className="quiz-start-retry-button" onClick = {() => handleRetry()} style = {styles.button}>
                     RETRY
                 </button>
                 <p>*Only first scores are posted to the leaderboards</p>
@@ -108,7 +108,7 @@ const QuizEnd = (props) =>{
                     <button className="quizLeaderboard" style = {styles.button}>
                         LEADERBOARDS
                     </button>
-                    <table>
+                    <table className="leaderboard-table">
                         {/*props.highestScores.splice(0,5).map(displayTopScores)*/}
                     </table>
                     

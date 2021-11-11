@@ -82,18 +82,18 @@ const Update = () => {
     return (
         user ? <div>
             <MenuBar/>
-            <div className="update-account">
+            <h2 className="update-account">
                 Update Account 
-            </div>
-            <div className="update-username-placeholder1">
+            </h2>
+            <h4 className="update-username-placeholder1">
                 Username:
-            </div>
+            </h4>
             <div className="update-username">
                 {userObject.username}
             </div>
-            <div className="update-username-placeholder2">
+            <h4 className="update-username-placeholder2">
                 New Username:
-            </div>
+            </h4>
             <br />
             <Input 
                 className="input-box"
@@ -103,7 +103,7 @@ const Update = () => {
 
             {submitted && message}
 
-            <div style={{ marginTop: '30px' , marginLeft: '450px'}}>
+            <div style={{ marginTop: '30px' , marginLeft: '430px'}}>
                 <Button 
                     className="save-button"
                     onClick={handleSubmit}

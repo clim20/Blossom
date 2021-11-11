@@ -8,40 +8,40 @@ const Quest = () => {
     return (
         <div>
             <MenuBar/>
-            <div className="quests">
+            <h2 className="quests">
                 Quests
-            </div>
+            </h2>
             <div className="quests-rectangle">
                     <br />
-                <p>
+                <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Be 1st place on the leaderboard once!
                     <span className="checkBox1">Incomplete</span>
-                </p>
+                </h2>
                     <br />
-                <p>
+                <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maintain 1st place on a leaderboard for a week!
                     <span className="checkBox2">Incomplete</span>
-                </p>
+                </h2>
                     <br />
-                <p>
+                <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 100 people take one of your quiz.
                     <span className="checkBox3">Incomplete</span>
-                </p>
+                </h2>
                     <br />
-                <p>
+                <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make 10 Quizzes!
                     <span className="checkBox4">Incomplete</span>
-                </p>
+                </h2>
                     <br />
-                <p>
+                <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make your first quiz!
                     <span className="checkBox5">Incomplete</span>
-                </p>
+                </h2>
                     <br />
-                <p>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take you first quiz!
+                <h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take your first quiz!
                     <span className="checkBox6">Incomplete</span>
-                </p>
+                </h2>
             </div>
         </div>
     );

@@ -54,13 +54,16 @@ const QuizStart = (props) => {
         console.log(props.currentQuiz.cards.length)
         return (
             <div>
-                <header>{(questionNumber+1)+ " of "+(props.currentQuiz.cards.length)}</header>
-                <header>
-                    <p>{props.currentQuiz.title}</p>
-                    <p>{"Created by "+props.author}</p>
-       
-                </header>
-                <div>
+                <br />
+                <h3>{(questionNumber+1)+ " of "+(props.currentQuiz.cards.length)}</h3>
+                <h1>
+                    <p style={{textAlign:'center'}}>{props.currentQuiz.title}</p>
+                </h1>
+                <h4>
+                    <p style={{textAlign:'center'}}>{"Created by "+props.author}</p>
+                </h4>
+                
+                <div className="each-question">
                     <QuizQuesAns showAnswer={showAnswer} currentQuestion={props.currentQuiz.cards[questionNumber] } score={questionScore} handleSetQuestionNumber={handleSetQuestionNumber}  handleSetShowAnswer={handleSetShowAnswer} handleAnswerOptionsClick={handleAnswerOptionsClick}></QuizQuesAns>
                 </div>
 
