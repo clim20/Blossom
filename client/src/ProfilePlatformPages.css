@@ -115,6 +115,39 @@
     justify-content: center !important;
 }
 
+.create-modal-input {
+    background-color: white;
+    height: 35px;
+    width: 264px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.create-modal-suc-msg {
+    color: green;
+    font-family: var(--font-family-roboto-regular);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 23px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  .create-modal-err-msg {
+    color: red;
+    font-family: var(--font-family-roboto-regular);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 23px;
+    margin-top:10px;
+    text-align: center;
+  }
+
 /* FEATURED QUIZ */
 .featured {
     float: right !important;

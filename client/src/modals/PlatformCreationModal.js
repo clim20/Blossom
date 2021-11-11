@@ -63,7 +63,7 @@ const PlatformCreationModal = (props) => {
         </div>
     ;
 
-    const platformName = "Platform Name:" + "\xa0\xa0\xa0\xa0";
+    const platformName = "Platform Name: \xa0\xa0\xa0\xa0";
     return (
         <Modal
         closeIcon
@@ -76,7 +76,7 @@ const PlatformCreationModal = (props) => {
                 <span>
                     {platformName}
                 </span>
-                <Input className='input-box' name='name' placeholder={"Untitled"} onBlur={setPlatformName} inputtype='text'></Input>
+                <Input className='create-modal-input' name='name' placeholder={"Untitled"} onBlur={setPlatformName} inputtype='text'></Input>
             </Modal.Content>
             <div className="creation-modal">
                 {submitted && message}
