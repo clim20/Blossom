@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams, useHistory } from "react-router-dom";
-//import { SafeAreaView, StyleSheet, TextInput } from "react-native";
-//import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -10,6 +8,8 @@ import * as mutations from '../cache/mutations';
 
 
 import MenuBar from '../components/MenuBar';
+import EditQuestion from '../components/EditQuestion';
+import EditAnswer from '../components/EditAnswer';
 
 
 
@@ -175,19 +175,24 @@ const QuizEdit = () => {
     const handleCancel = () =>{
         history.push("/quiz/" + quizId);
     }
-    //<input type="text" value={tempQuiz.title} onChange={(e) => handleTitleChange(e.target.value)}> </input>
     if(initTemp == false && isCreator){
         return (
             <div>
                 <MenuBar/>
                 QuizEdit Page
                 <input type="text" value={title} onChange={(e) => handleTitleChange(e.target.value)}/>
-                <button onClick = {() => handleSave()}>
-                    Save
-                </button>
-                <button onClick = {() => handleCancel()}>
-                    Cancel
-                </button>
+                <div>
+                    <EditQuestion tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
+                    <EditAnswer tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
+                </div>
+                <div>
+                    <button onClick = {() => handleSave()}>
+                        Save
+                    </button>
+                    <button onClick = {() => handleCancel()}>
+                        Cancel
+                    </button>
+                </div>
             </div>
         );
     }else{
