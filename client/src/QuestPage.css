@@ -1,0 +1,88 @@
+/*QUEST PAGE*/
+.quests {
+    margin-top: 3rem;
+    margin-left: 58px;
+    font-size: 48px;
+    font-family: var(--font-family-puritan-bold);
+}
+
+.quests-rectangle {
+    margin-top: 4rem;
+    margin-left: 54px;
+    width: 919px;
+    height: 480px;
+    background-color: var(--pink);
+    font-size: 1.7rem;
+}
+
+.checkBox1 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 290px;
+}
+
+.checkBox2 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 190px;
+}
+
+.checkBox3 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 280px;
+}
+  
+.checkBox4 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 510px;
+}
+  
+.checkBox5 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 480px;
+}
+  
+.checkBox6 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 500px;
+}
