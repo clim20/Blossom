@@ -31,6 +31,18 @@ const QuizEdit = () => {
 		originalQuiz = quizData.findQuizById;
     }
 
+    const { data: creatorData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: originalQuiz.creator
+        }
+    });
+
+    let creator = {};
+    if(creatorData) {
+        creator = creatorData.findUserById;
+    }
+
+    var isCreator = creator && user && creator._id === user._id
     const [tempQuiz, setTempQuiz] = useState(
         {
             
@@ -164,7 +176,7 @@ const QuizEdit = () => {
         history.push("/quiz/" + quizId);
     }
     //<input type="text" value={tempQuiz.title} onChange={(e) => handleTitleChange(e.target.value)}> </input>
-    if(initTemp == false){
+    if(initTemp == false && isCreator){
         return (
             <div>
                 <MenuBar/>

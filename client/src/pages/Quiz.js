@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 //import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 
@@ -23,6 +23,7 @@ const styles = {
 
 const Quiz = () =>{
     const { user } = useContext(AuthContext);
+    const history = useHistory();
 
     const params = useParams();
     const quizId = params ? params.quizId : 'could not get params';
@@ -66,55 +67,12 @@ const Quiz = () =>{
         followers = profileObject.followerCount;
     }
 
-
+    var isCreator = userObject && user && userObject._id === user._id
 
     console.log(username)
     console.log(followers)
 
-    /*
-    const [currentQuiz, setCurrentQuiz] = useState({
-        title: "What's The Deal With Seals?",
-        author: "Joe Shmo",
-        followers: 114,
-        questions: 24,
-        description: "test description",
-        cards: [
-            {
-                cardNum: 0,
-                question: "0",
-                choices: ["0", "1", "2", "3"],
-                answer: 0,
-                answerExplanation: "it is 0",
     
-            },
-            {
-                cardNum: 1,
-                question: "1",
-                choices: ["0", "1", "2", "3"],
-                answer: 1,
-                answerExplanation: "it is 1",
-    
-            },
-            {
-                cardNum: 2,
-                question: "2",
-                choices: ["0", "1", "2", "3"],
-                answer: 2,
-                answerExplanation: "it is 2",
-    
-            },
-            {
-                cardNum: 3,
-                question: "3",
-                choices: ["0", "1", "2", "3"],
-                answer: 3,
-                answerExplanation: "it is 3",
-    
-            }
-        ]
-
-    });
-    */
     const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200]]);
     const [score, setScore] = useState(0);
 
@@ -123,7 +81,9 @@ const Quiz = () =>{
     const handleStart = event =>{
         setRedirect(true);
     };
-    const gotoEdit = event =>{}; 
+    const gotoEdit = event =>{
+        history.push("/quiz/edit/" + quizId)
+    }; 
     const handleFollow = event => {};
     const handleCreateCollection = event => {};
     const handleAddToCollection = event => {};
@@ -151,32 +111,40 @@ const Quiz = () =>{
             <div style={{textAlign: 'center'}}>
                 
                 <MenuBar></MenuBar>
-                <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
-                <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
-                    <p style={{textAlign: 'center'}}>
-                        {username}
-                    </p>
-                    <p style={{textAlign: 'center'}}> 
-                        {followers + " Followers"}
-                    </p>
-                </button>
-                <img src={image1}/>
-                <p style={{textAlign: 'center'}}>{cards.length + " Questions"}</p>
-                <p>{currentQuiz.description}</p>
-    
-                <button className="quiz-start-end-button" onClick = {() => handleStart()} style = {styles.button}>
-                    Start
-                </button>
-    
                 <div>
-                    <button className="quizLeaderboard" style = {styles.button}>
-                        LEADERBOARDS
+                    <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
+                    <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
+                        <p style={{textAlign: 'center'}}>
+                            {username}
+                        </p>
+                        <p style={{textAlign: 'center'}}> 
+                            {followers + " Followers"}
+                        </p>
                     </button>
-                    <table>
-                        {highestScores.splice(0,5).map(displayTopScores)}
-                    </table>
-                    
+                    <img src={image1}/>
+                    <p style={{textAlign: 'center'}}>{cards.length + " Questions"}</p>
+                    <p>{currentQuiz.description}</p>
+        
+                    <button className="quiz-start-end-button" onClick = {() => handleStart()} style = {styles.button}>
+                        Start
+                    </button>
+        
+                    <div>
+                        <button className="quizLeaderboard" style = {styles.button}>
+                            LEADERBOARDS
+                        </button>
+                        <table>
+                            {highestScores.splice(0,5).map(displayTopScores)}
+                        </table>
+                        
+                    </div>
                 </div>
+                {isCreator &&
+                    <button className="quiz-start-end-button" onClick = {() => gotoEdit()} style = {styles.button}>
+                        Edit
+                    </button>
+                }
+                
             </div>
             
         );
