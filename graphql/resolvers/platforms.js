@@ -112,6 +112,7 @@ module.exports = {
     async deletePlatform(_, { platformId }){
       const platform = await Platform.findOne({_id: platformId});
       
+      
       if(platform){
         const collaborators = platform.collaborators;
 
@@ -119,7 +120,7 @@ module.exports = {
           if (collaborators[i]) {
             let profile = await Profile.findOne({user: collaborators[i]})
             let profilePlatforms = profile.platforms.filter(platform => platform._id.toString() !== platformId.toString());
-            let updated = await Profile.updateOne({user: profile.user}, {collaborators: profilePlatforms});
+            await Profile.updateOne({user: profile.user}, {platforms: profilePlatforms});
           }
         }
       }
