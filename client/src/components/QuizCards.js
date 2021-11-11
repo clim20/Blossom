@@ -2,17 +2,26 @@ import React from 'react';
 
 import QuizCard from './QuizCard';
 
-function QuizCards(props) {  
+const QuizCards = (props) => {  
+    const quizCardClass = props.activeTab ? "ui three cards" : "ui four cards";
+
     return (
-        <div className="ui very relaxed horizontal list medium">
-            {
-                props.quizzes.map((entry, index) => (
-                    <QuizCard
-                        quiz={entry} key={index}
-                    />
-                ))
-            }
+        <div>
+            <br/>
+            <div className={quizCardClass}>
+                {
+                    props.quizzes.map((entry, index) => (
+                        <QuizCard
+                            quiz={entry} key={index} user={props.user}
+                            activeTab={props.activeTab} editingMode={props.editingMode}
+                            featuredQuiz={props.featuredQuiz} setFeaturedQuiz={props.setFeaturedQuiz} 
+                            refetchData={props.refetchData}
+                        />
+                    ))
+                }
+            </div>
         </div>
+        
     );
 }
 

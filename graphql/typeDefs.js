@@ -27,8 +27,9 @@ module.exports = gql`
         contact: String
         followerCount: Int!
         following: [ID!]
+        featuredQuiz: ID
         quizzes: [ID!]
-        collections: [ID!]
+        quizCollections: [ID!]
         platforms: [ID!]
     }
 
@@ -43,8 +44,9 @@ module.exports = gql`
         collaborators: [ID!]!
         requests: [ID!]
         followerCount: Int!
+        featuredQuiz: ID
         quizzes: [ID!]
-        collections: [ID!]
+        quizCollections: [ID!]
         createdAt: String!
     }
 
@@ -112,47 +114,56 @@ module.exports = gql`
         description: String
         contact: String
         # following: [ID!]
-        # quizzes: [ID!]
-        # collections: [ID!]
-        # platforms: [ID!]
     }
 
     input PlatformInput {
-        # name: String!
         platformImg: String
         bannerImg: String
         description: String
         contact: String
-        # collaborators: [ID!]!
-        # quizzes: [ID!]
-        # collections: [ID!]
     }
 
+    
+
     input QuizInput {
+        _id: ID!
         title: String!
         description: String!
         titleImg: String
-        #creator: ID!
-        #platform: ID!
-        #quizHits: Int!
-        #quizLikes: Int!
-        #quizDislikes: Int!
-        #badges: [quizBadge],
-        #scores: [Score],
+        creator: ID!
+        platformId: ID
+        quizHits: Int!
+        quizLikes: Int!
+        quizDislikes: Int!
+        badges: [BadgeInput],
+        scores: [ScoreInput],
         cards: [CardInput!]!,
         createdAt: String!
     }
 
     input CardInput{
-        cardNum: Int!
-        question: String!
-        choices: [String!]!
-        answer: Int!
-        answerExplanation: String!
-        #questionImg: String
-        #answerImg: String
-        #drawing: Drawing
+        cardNum: Int!,
+        question: String!,
+        choices: [String!]!,
+        answer: Int!,
+        answerExplanation: String!,
+        questionImg: String,
+        answerImg: String,
+        drawing: ID
     }
+
+    input BadgeInput{
+        rank: Int,
+        image: String
+    }
+
+    input ScoreInput{
+        user: ID,
+        userScore: Int,
+        bestScore: Int
+    }
+
+    
 
     union Following = User | Platform
 
@@ -170,7 +181,8 @@ module.exports = gql`
         getUsers: [User!]!
         getQuizzes: [Quiz!]!
         findQuizById(id: ID!): Quiz!
-        getQuizzesByIds(ids: [ID!]!): [Quiz!]!
+        findQuizzesByIds(ids: [ID!]!): [Quiz!]!
+        getQuizHits(ids: [ID!]!): Int!
         getPopularQuizzes: [Quiz!]!
     }
 
@@ -187,8 +199,9 @@ module.exports = gql`
         removeCollaborator(platformId: ID!, userId: ID!): Platform!
         editProfile(id: ID!, updatedProfile: ProfileInput!): Profile!
         editPlatform(id: ID!, updatedPlatform: PlatformInput!): Platform!
-        createQuiz(owner: ID!, newQuiz: QuizInput!): Quiz!
-        updateQuiz(quizId: ID!, tempQuiz: QuizInput!): Quiz!
+        setFeaturedQuiz(profilePlatformId: ID!, quizId: ID!): Quiz!
+        createQuiz(owner: ID!, title: String!): Quiz
+        updateQuiz(quizId: ID!, updatedQuiz: QuizInput!): Quiz
         deleteQuiz(deletedQuiz: ID!): Boolean!
     }
 `

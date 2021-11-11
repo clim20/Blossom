@@ -1,0 +1,79 @@
+/* UPDATE */
+
+.update {
+    background-color: #e3eefb;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 768px;
+    width: 1024px;
+  }
+  
+  .update-account {
+    color: var(--black);
+    font-family: var(--font-family-puritan-bold);
+    font-size: 48px;
+    height: 54px;
+    line-height: 48px;
+    text-align: center;
+   /* margin-left: 54px;
+    margin-top: 105px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .update-username-placeholder1 {
+    height: 21px;
+    font-size: 24px;
+    line-height: 18px;
+    text-align: center;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .update-username-placeholder2 {
+    height: 21px;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .update-username {
+    color: var(--black);
+    font-family: var(--font-family-roboto-bold);
+    text-align: center;
+    font-size: 29px;
+    height: 33px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .save-button {
+    width: 8rem !important;
+    height: 3rem !important;
+    background-color: var(--saveGreen) !important;
+    color: white !important;
+    text-align: center;
+    font-family: var(--font-family-roboto-bold);
+    font-size: 15px !important;
+  }
+  
+  .cancel-button {
+    width: 8rem !important;
+    height: 3rem !important;
+    margin-left: 40px !important;
+    background-color: var(--cancelRed) !important;
+    color: white !important;
+    text-align: center;
+    font-family: var(--font-family-roboto-bold);
+    font-size: 15px !important;
+  }
+

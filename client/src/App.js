@@ -1,14 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Container } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react';
 
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
+import './ProfilePlatformPages.css';
+import './QuestPage.css';
+import './QuizPages.css';
+import './UpdatePage.css';
 
 import { AuthProvider } from './context/auth';
 
 import Home from './pages/Home';
-
 import Search from './pages/Search';
 import Profile from './pages/Profile';
 import Platform from './pages/Platform';

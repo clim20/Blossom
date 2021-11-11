@@ -33,17 +33,18 @@ const Following = (props) => {
 
     return (
         <div>
+            <div className="ui hidden divider"></div>
             {users.length > 0 && 
                 <div>
                     <h3 className="ui header">Users</h3>
-                    <CreatorCards users={users} />
+                    <CreatorCards users={users} activeTab='following'/>
                 </div>
             }
             <div className="ui hidden divider"></div>
             {platforms.length > 0 &&
                 <div>
                     <h3 className="ui header">Platforms</h3>
-                    {platforms && <PlatformCards platforms={platforms} />}
+                    {platforms && <PlatformCards platforms={platforms} activeTab='following'/>}
                 </div>
             }            
         </div>

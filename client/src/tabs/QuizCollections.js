@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react';
 //import { useMutation, useQuery } from '@apollo/react-hooks';
 
-const Quizzes = () => {
+const QuizCollections = () => {
 
     return (
         <div>
-            Quizzes Tab
+            Collections Tab
         </div>
     );
 }
-export default Quizzes;
+export default QuizCollections;

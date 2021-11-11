@@ -55,7 +55,7 @@ export const EDIT_PROFILE = gql`
             followerCount
             following
             quizzes
-            collections
+            quizCollections
             platforms
         }
     }
@@ -75,7 +75,7 @@ export const EDIT_PLATFORM = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -95,7 +95,7 @@ export const ADD_COLLABORATOR = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -115,7 +115,7 @@ export const REMOVE_COLLABORATOR = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -135,7 +135,7 @@ export const ADD_COLLABORATOR_REQUEST = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -155,7 +155,7 @@ export const REMOVE_COLLABORATOR_REQUEST = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -175,7 +175,7 @@ export const CREATE_PLATFORM = gql`
             requests
             followerCount
             quizzes
-            collections
+            quizCollections
             createdAt
         }
     }
@@ -184,5 +184,41 @@ export const CREATE_PLATFORM = gql`
 export const DELETE_PLATFORM = gql`
     mutation deletePlatform($platformId: ID!) {
         deletePlatform(platformId: $platformId)
+    }
+`;
+
+export const SET_FEATURED_QUIZ = gql`
+    mutation setFeaturedQuiz($profilePlatformId: ID!, $quizId: ID!) {
+        setFeaturedQuiz(profilePlatformId: $profilePlatformId, quizId: $quizId) {
+            _id
+            title 
+            titleImg
+            description
+            creator
+            quizHits
+        }
+    }
+`;
+
+export const CREATE_QUIZ = gql`
+    mutation createQuiz($owner: ID!, $title: String!) {
+        createQuiz(owner: $owner, title: $title) {
+            _id
+        }
+    }
+`;
+
+export const DELETE_QUIZ = gql`
+    mutation deleteQuiz($platformId: ID!) {
+        deleteQuiz(platformId: $platformId)
+    }
+`;
+
+export const UPDATE_QUIZ = gql`
+    mutation updateQuiz($quizId: ID!, $updatedQuiz: QuizInput!){
+        updateQuiz(quizId: $quizId, updatedQuiz: $updatedQuiz){
+            _id
+            
+        }
     }
 `;

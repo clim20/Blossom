@@ -1,11 +1,35 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import moment from 'moment';
 
 import { AuthContext } from '../context/auth';
+import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 
 const ProfileAbout = ({ profile, refetchProfileData }) => {
     const { user } = useContext(AuthContext);
+
+    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: profile ? profile.user : ''
+        }
+    });
+
+    var userObject = {};
+    if (userData) { 
+		userObject = userData.findUserById;
+    }
+
+    const { data: quizHitsData } = useQuery(queries.GET_QUIZ_HITS, {
+        variables: {
+            ids: profile ? profile.quizzes : []
+        }
+    });
+
+    var quizHitCount = 0;
+    if (quizHitsData) { 
+		quizHitCount = quizHitsData.getQuizHits;
+    }
 
     const [updatedProfile, setUpdatedProfile] = useState({ 
         profileImg: profile.profileImg,
@@ -64,11 +88,15 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
 
     const isOwnProfile = profile && user && profile.user === user._id;
 
+    const created = 'Created: ' + moment(userObject.createdAt).format("MMMM D[,] YYYY");
+    const platforms = profile.platforms.length !== 1 ? profile.platforms.length + ' Platforms' : profile.platforms.length + ' Platform';
+    const quizzes = profile.quizzes.length !== 1 ? profile.quizzes.length + ' Quizzes' : profile.quizzes.length + ' Quiz';
+    const quizHits = quizHitCount !== 1 ? quizHitCount + ' Quiz Hits' : quizHitCount + ' Quiz Hit';
+
     return (
         <div>
             <div>
-                {
-                    isOwnProfile && !editingMode && 
+                {isOwnProfile && !editingMode && 
                     <div>
                         <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
                             Edit
@@ -76,8 +104,7 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     </div>
                 }
 
-                {
-                    editingMode && 
+                {editingMode && 
                     <div style={{ float: 'right' }}>
                         <button className="ui button save-button" onClick={handleSave}>
                             Save
@@ -101,13 +128,13 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     }
                 </div>
                 {
-                    !editingDescription && !editingMode && <div>{profile.description}</div>
+                    !editingDescription && !editingMode && <div className="text_box">{profile.description}</div>
                 }
                 {
                     editingDescription && <textarea className="edit-box" defaultValue={updatedProfile.description} onBlur={handleDescriptionEdit}></textarea>
                 }
                 {
-                    !editingDescription && editingMode && <div>{updatedProfile.description}</div>
+                    !editingDescription && editingMode && <div className="text_box">{updatedProfile.description}</div>
                 }
             </div>
 
@@ -123,14 +150,26 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     }
                 </div>
                 {
-                    !editingContact && !editingMode && <div>{profile.contact}</div>
+                    !editingContact && !editingMode && <div className="text_box">{profile.contact}</div>
                 }
                 {
                     editingContact && <textarea className="edit-box" defaultValue={updatedProfile.contact} onBlur={handleContactEdit}></textarea>
                 }
                 {
-                    !editingContact && editingMode && <div>{updatedProfile.contact}</div>
+                    !editingContact && editingMode && <div className="text_box">{updatedProfile.contact}</div>
                 }
+            </div>
+
+            <div className="ui hidden divider"></div>
+
+            <div>
+                <h3 className="ui header"> 
+                    Stats
+                </h3>
+                <div> {created} </div>
+                <div> {platforms} </div>
+                <div> {quizzes} </div>
+                <div> {quizHits} </div>
             </div>
         </div>
     );

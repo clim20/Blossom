@@ -5,8 +5,8 @@ import { useQuery } from '@apollo/react-hooks';
 import MenuBar from '../components/MenuBar';
 import PlatformBanner from "../components/PlatformBanner";
 import Home from '../tabs/Home';
-import Quizzes from '../tabs/Quizzes';
-import Collections from '../tabs/Collections';
+import PlatformQuizzes from '../tabs/PlatformQuizzes';
+import QuizCollections from '../tabs/QuizCollections';
 import Collaborators from '../tabs/Collaborators';
 import PlatformAbout from '../tabs/PlatformAbout';
 
@@ -42,7 +42,7 @@ const Platform = () => {
             <PlatformBanner platform={platform} user={user} refetchPlatformData={refetchPlatformData}/>
 
             <div className="ui container platform-section">
-                <div className="ui top attached tabular menu platform-tab">
+                <div className="ui top attached tabular menu platform-tab" style={{ cursor: 'pointer' }}>
                     <div className={`${activeTab === 'home' ? 'active active-tab' : 'inactive-tab'} platform-tab item`}
                         onClick={() => handleTabClick('home')}
                     >
@@ -53,8 +53,8 @@ const Platform = () => {
                     >
                         QUIZZES
                     </div>
-                    <div className={`${activeTab === 'collections' ? 'active active-tab' : 'inactive-tab'} platform-tab item`}
-                        onClick={() => handleTabClick('collections')}
+                    <div className={`${activeTab === 'quizCollections' ? 'active active-tab' : 'inactive-tab'} platform-tab item`}
+                        onClick={() => handleTabClick('quizCollections')}
                     >
                         COLLECTIONS
                     </div>
@@ -71,9 +71,9 @@ const Platform = () => {
                 </div>
 
                 <div className="ui bottom attached active tab segment platform-content">
-                    {activeTab === 'home' && <Home/>}
-                    {activeTab === 'quizzes' && <Quizzes/>}
-                    {activeTab === 'collections' && <Collections/>}
+                    {activeTab === 'home' && <Home platform={platform}/>}
+                    {activeTab === 'quizzes' && <PlatformQuizzes activeTab={activeTab}/>}
+                    {activeTab === 'quizCollections' && <QuizCollections/>}
                     {activeTab === 'collaborators' && <Collaborators activeTab={activeTab}/>}
                     {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>

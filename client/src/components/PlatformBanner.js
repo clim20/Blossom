@@ -41,7 +41,7 @@ const PlatformBanner = ({ platform, user, refetchPlatformData }) => {
     }
 
     useEffect(() => {
-        if (userProfile && platform && userProfile.following.find(id => id.toString() === platform._id.toString())) {
+        if (userProfile && platform && platform._id && userProfile.following.find(id => id.toString() === platform._id.toString())) {
             setFollowed(true);
         } else {
             setFollowed(false);
