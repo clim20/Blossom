@@ -103,10 +103,10 @@ module.exports = {
             return null;
           }
         },
-      async updateQuiz(_, { id, updatedQuiz }) {
-        const quiz = await Quiz.findOne({_id: new ObjectId(id)});
+      async updateQuiz(_, { quizId, updatedQuiz }) {
+        const quiz = await Quiz.findOne({_id: new ObjectId(quizId)});
   
-        const updated = await Quiz.updateOne({_id: new ObjectId(id)}, {
+        const updated = await Quiz.updateOne({_id: new ObjectId(quizId)}, {
 
             title: updatedQuiz.title,
             description: updatedQuiz.description,
@@ -115,13 +115,20 @@ module.exports = {
             quizHits: updatedQuiz.quizHits,
             quizLikes: updatedQuiz.quizLikes,
             quizDislikes: updatedQuiz.quizDislikes,
-            badges: updatedQuiz.badges,
-            scores: updatedQuiz.scores,
+            //badges: updatedQuiz.badges,
+            //scores: updatedQuiz.scores,
             cards: updatedQuiz.cards,
         });
-  
-        if (updated) return quiz;
-        return quiz;
+        console.log("-------")
+        console.log(quiz)
+        console.log("======")
+        console.log(updated)
+        if (updated) {
+          return quiz;
+        }else{
+          return null;
+        }
+        
       },
 
       async deleteQuiz(_, { id }){

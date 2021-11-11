@@ -123,31 +123,47 @@ module.exports = gql`
         contact: String
     }
 
+    
+
     input QuizInput {
+        _id: ID!
         title: String!
         description: String!
         titleImg: String
-        #creator: ID!
-        #platform: ID!
-        #quizHits: Int!
-        #quizLikes: Int!
-        #quizDislikes: Int!
-        #badges: [quizBadge],
-        #scores: [Score],
+        creator: ID!
+        platformId: ID
+        quizHits: Int!
+        quizLikes: Int!
+        quizDislikes: Int!
+        badges: [BadgeInput],
+        scores: [ScoreInput],
         cards: [CardInput!]!,
         createdAt: String!
     }
 
     input CardInput{
-        cardNum: Int!
-        question: String!
-        choices: [String!]!
-        answer: Int!
-        answerExplanation: String!
-        #questionImg: String
-        #answerImg: String
-        #drawing: Drawing
+        cardNum: Int!,
+        question: String!,
+        choices: [String!]!,
+        answer: Int!,
+        answerExplanation: String!,
+        questionImg: String,
+        answerImg: String,
+        drawing: ID
     }
+
+    input BadgeInput{
+        rank: Int,
+        image: String
+    }
+
+    input ScoreInput{
+        user: ID,
+        userScore: Int,
+        bestScore: Int
+    }
+
+    
 
     union Following = User | Platform
 
@@ -185,7 +201,7 @@ module.exports = gql`
         editPlatform(id: ID!, updatedPlatform: PlatformInput!): Platform!
         setFeaturedQuiz(profilePlatformId: ID!, quizId: ID!): Quiz!
         createQuiz(owner: ID!, title: String!): Quiz
-        updateQuiz(quizId: ID!, tempQuiz: QuizInput!): Quiz!
+        updateQuiz(quizId: ID!, updatedQuiz: QuizInput!): Quiz
         deleteQuiz(deletedQuiz: ID!): Boolean!
     }
 `

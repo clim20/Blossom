@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import QuizCards from '../components/QuizCards';
 
@@ -12,6 +12,8 @@ const ProfileQuizzes = (props) => {
     const { user } = useContext(AuthContext);
     const params = useParams();
     const profileId = params ? params.profileId : 'could not get params';
+
+    const history = useHistory();
 
     const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
@@ -85,6 +87,8 @@ const ProfileQuizzes = (props) => {
             returnedQuiz = data.createQuiz;
             console.log(returnedQuiz);
         }
+
+        history.push("/quiz/edit/" + returnedQuiz._id);
     }
 
     return (

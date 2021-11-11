@@ -213,3 +213,12 @@ export const DELETE_QUIZ = gql`
         deleteQuiz(platformId: $platformId)
     }
 `;
+
+export const UPDATE_QUIZ = gql`
+    mutation updateQuiz($quizId: ID!, $updatedQuiz: QuizInput!){
+        updateQuiz(quizId: $quizId, updatedQuiz: $updatedQuiz){
+            _id
+            
+        }
+    }
+`;
