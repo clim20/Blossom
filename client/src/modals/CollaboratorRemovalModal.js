@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
 import { useQuery } from '@apollo/react-hooks';
+
 import * as queries from '../cache/queries';
 
 const CollaboratorRemovalModal = (props) => {

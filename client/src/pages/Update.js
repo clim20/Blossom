@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Button, Input } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { Button, Input } from 'semantic-ui-react';
+
+import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
-import { AuthContext } from '../context/auth';
-import { useHistory } from 'react-router-dom';
 
 import MenuBar from '../components/MenuBar';
 
@@ -22,7 +23,6 @@ const Update = () => {
     if (userData) { 
 		userObject = userData.findUserById;
     }
-    console.log(userObject);
 
     const [UpdateUsername] = useMutation(mutations.UPDATE_USERNAME);
     const [inputUsername, setInputUsername] = useState({ name: '' });
@@ -51,14 +51,10 @@ const Update = () => {
                 returnedUser = data.updateUsername;
             }
 
-            console.log(returnedUser.username, user.username);
-
             if (returnedUser.username === userObject.username) {
-                console.log("disable false")
                 setDisable(false);
                 // error message
             } else{
-                console.log("disable true")
                 setDisable(true);
 
                 setTimeout(() => {
@@ -105,7 +101,7 @@ const Update = () => {
 
             <div style={{ marginTop: '30px' , marginLeft: '430px'}}>
                 <Button 
-                    className="save-button"
+                    className="update-save-button"
                     onClick={handleSubmit}
                     disable={inputUsername.name === userObject.username || inputUsername.name === ''}
                 >
@@ -113,7 +109,7 @@ const Update = () => {
                 </Button>
 
                 <Button
-                    className="cancel-button"
+                    className="update-cancel-button"
                     onClick={() => history.push({ pathname: '/'})}
                 >
                     Cancel

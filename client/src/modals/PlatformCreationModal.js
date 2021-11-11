@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Button, Modal, Input } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { Button, Modal, Input } from 'semantic-ui-react';
+
+import { AuthContext } from '../context/auth';
 import * as mutations from '../cache/mutations';
-import { AuthContext } from '../context/auth'
-import { useHistory } from 'react-router-dom';;
 
 const PlatformCreationModal = (props) => {
     const history = useHistory();

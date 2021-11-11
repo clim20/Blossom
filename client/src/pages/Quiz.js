@@ -111,28 +111,6 @@ const Quiz = () =>{
             <div style={{textAlign: 'center'}}>
                 
                 <MenuBar></MenuBar>
-
-                <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
-                <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
-                    {/* <p style={{textAlign: 'center'}}>
-                        {username}
-                    </p>
-                    <p style={{textAlign: 'center'}}> 
-                        {followers + " Followers"}
-                    </p>*/}
-                    <p style={{textAlign: 'center'}}>
-                        {username}
-                        <br />
-                        {followers + " Followers"}
-                    </p>
-                </button>
-                <img src={image1} width='500' height='300'/>
-                <p style={{textAlign: 'center'}}>{cards.length + " Questions"}</p>
-                <p>{currentQuiz.description}</p>
-    
-                <button className="quiz-start-retry-button" onClick = {() => handleStart()} style = {styles.button}>
-                    Start
-                </button>
     
                 <div>
                     <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
@@ -155,8 +133,6 @@ const Quiz = () =>{
                     <table className="leaderboard-table">
                         {highestScores.splice(0,5).map(displayTopScores)}
                     </table>
-                    
-
         
                     <div>
                         <button className="quizLeaderboard" style = {styles.button}>

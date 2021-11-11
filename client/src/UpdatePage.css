@@ -56,24 +56,18 @@
     justify-content: center;
   }
   
-  .save-button {
+  .update-save-button {
     width: 8rem !important;
     height: 3rem !important;
     background-color: var(--saveGreen) !important;
     color: white !important;
-    text-align: center;
-    font-family: var(--font-family-roboto-bold);
-    font-size: 15px !important;
   }
   
-  .cancel-button {
+  .update-cancel-button {
     width: 8rem !important;
     height: 3rem !important;
     margin-left: 40px !important;
     background-color: var(--cancelRed) !important;
     color: white !important;
-    text-align: center;
-    font-family: var(--font-family-roboto-bold);
-    font-size: 15px !important;
   }
 

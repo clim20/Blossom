@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Grid, Image } from 'semantic-ui-react';
 import { useQuery } from '@apollo/react-hooks';
+import { Grid, Image } from 'semantic-ui-react';
 
 import * as queries from '../cache/queries';
 
