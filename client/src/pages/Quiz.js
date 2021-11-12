@@ -28,7 +28,7 @@ const Quiz = () =>{
     const params = useParams();
     const quizId = params ? params.quizId : 'could not get params';
 
-    const { data: quizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
+    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
         variables: {
             id: quizId
         }
@@ -91,6 +91,7 @@ const Quiz = () =>{
     const scoreQuery = () =>{};
     const handleSaveChanges = () =>{};
 
+    
     const displayTopScores = (arr, index) =>{
 
         return(
@@ -103,6 +104,16 @@ const Quiz = () =>{
         )
         
     };
+
+    const[DelQuiz] = useMutation(mutations.DELETE_QUIZ);
+    const delTest = async () =>{
+        
+        await DelQuiz({variables: { id: quizId }});
+        refetchQuizData();
+        history.push("/profile/"+profileObject._id);
+        
+    }
+
 
     if(redirect == false){
         console.log(highestScores)
@@ -145,8 +156,13 @@ const Quiz = () =>{
                     </div>
                 </div>
                 {isCreator &&
-                    <button className="quiz-start-end-button" onClick = {() => gotoEdit()} style = {styles.button}>
+                    <button className="quiz-start-end-button" onClick = {() => gotoEdit()} >
                         Edit
+                    </button>
+                }
+                {isCreator &&
+                    <button className="quiz-start-end-button" onClick = {() => delTest()} >
+                        DelTest
                     </button>
                 }
                 
