@@ -10,6 +10,7 @@ import * as mutations from '../cache/mutations';
 import MenuBar from '../components/MenuBar';
 import EditQuestion from '../components/EditQuestion';
 import EditAnswer from '../components/EditAnswer';
+import TableOfContents from '../components/TableOfContents'
 
 
 
@@ -179,19 +180,21 @@ const QuizEdit = () => {
         return (
             <div>
                 <MenuBar/>
-                QuizEdit Page
-                <input type="text" value={title} onChange={(e) => handleTitleChange(e.target.value)}/>
+                <TableOfContents tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} setSelectedCard = {setSelectedCard}/>
                 <div>
-                    <EditQuestion tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
-                    <EditAnswer tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
-                </div>
-                <div>
-                    <button onClick = {() => handleSave()}>
-                        Save
-                    </button>
-                    <button onClick = {() => handleCancel()}>
-                        Cancel
-                    </button>
+                    <input type="text" value={title} onChange={(e) => handleTitleChange(e.target.value)}/>
+                    <div>
+                        <EditQuestion tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
+                        <EditAnswer tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
+                    </div>
+                    <div>
+                        <button onClick = {() => handleSave()}>
+                            Save
+                        </button>
+                        <button onClick = {() => handleCancel()}>
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
         );
