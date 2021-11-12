@@ -209,5 +209,7 @@ module.exports = gql`
         deleteQuiz(id: ID!): Boolean!
         createQuizCollection(owner: ID!, name: String!): QuizCollection!
         deleteQuizCollection(quizCollectionId: ID!): Boolean! 
+        addQuizToQuizCollection(quizId: ID!, quizCollectionId: ID!): QuizCollection!
+        removeQuizFromQuizCollection(quizId: ID!, quizCollectionId: ID!): Boolean!
     }
 `

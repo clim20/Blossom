@@ -222,3 +222,43 @@ export const UPDATE_QUIZ = gql`
         }
     }
 `;
+
+export const CREATE_QUIZ_COLLECTION = gql`
+    mutation createQuizCollection($owner: ID!, $name: String!) {
+        createQuizCOllection(owner: $owner, name: $name) {
+            _id
+            name
+            creator
+            img
+            description
+            quizzes
+            createdAt
+        }
+    }
+`;
+
+export const DELETE_QUIZ_COLLECTION = gql`
+    mutation deleteQuizCollection($quizCollectionId: ID!) {
+        deleteQuizCollection(quizCollectionId: $quizCollectionId)
+    }
+`;
+
+export const ADD_QUIZ_TO_QUIZ_COLLECTION = gql`
+    mutation AddQuizToQuizCollection($quizId: ID!, $quizCollectionId: ID!) {
+        addQuizToQuizCOllection(quizId: $quizId, quizCollectionId: $quizCollectionId) {
+            _id
+            name
+            creator
+            img
+            description
+            quizzes
+            createdAt
+        }
+    }
+`;
+
+export const REMOVE_QUIZ_FROM_QUIZ_COLLECTION = gql`
+    mutation RemoveQuizFromQuizCollection($quizId: ID!, $quizCollectionId: ID!) {
+        removeQuizFromQuizCollection(quizId: $quizId, quizCollectionId: $quizCollectionId)
+    }
+`;

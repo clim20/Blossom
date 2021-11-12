@@ -74,6 +74,29 @@ module.exports = {
         return false;
       }
       return false;
+    },
+    async addQuizToQuizCollection(_, { quizId, quizCollectionId }) {
+      const quizCollection = await QuizCollection.findOne({_id: quizCollectionId}); 
+  
+      let quizzes = quizCollection.quizzes;
+      quizzes.push(quizId);
+      const updated = await QuizCollection.updateOne({_id: quizCollectionId}, {quizzes: quizzes});
+
+      if(updated) {
+        return quizCollection;
+      }
+      return quizCollection;
+    },  
+    async removeQuizFromQuizCollection(_, { quizId, quizCollectionId }) {
+      const quizCollection = await QuizCollection.findOne({_id: quizCollectionId}); 
+  
+      let quizzes = quizCollection.quizzes.filter(quiz => quiz._id.toString() !== quizId.toString());
+      const updated = await QuizCollection.updateOne({_id: quizCollectionId}, {quizzes: quizzes});
+
+      if(updated) {
+        return true;
+      }
+      return false;
     },  
   }
 };
