@@ -209,8 +209,8 @@ export const CREATE_QUIZ = gql`
 `;
 
 export const DELETE_QUIZ = gql`
-    mutation deleteQuiz($platformId: ID!) {
-        deleteQuiz(platformId: $platformId)
+    mutation deleteQuiz($id: ID!) {
+        deleteQuiz(id: $id)
     }
 `;
 
