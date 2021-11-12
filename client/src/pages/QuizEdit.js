@@ -21,7 +21,7 @@ const QuizEdit = () => {
     const params = useParams();
     const quizId = params ? params.quizId : 'could not get params';
 
-    const { data: quizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
+    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_QUIZ_BY_ID, {
         variables: {
             id: quizId
         }
@@ -49,7 +49,7 @@ const QuizEdit = () => {
             
         }
     );
-    const [selectedCard, setSelectedCard] = useState(0);
+    const [selectedCard, setSelectedCard] = useState(-1);
     const [initTemp, setInitTemp] = useState(true);
 
     const [UpdateQuiz] = useMutation(mutations.UPDATE_QUIZ);
@@ -163,9 +163,9 @@ const QuizEdit = () => {
         console.log(savingQuiz);
 
         setTimeout(() => {
-            
+            refetchQuizData();
             history.push("/quiz/" + quizId);
-            window.location.reload(false);
+            //window.location.reload(false);
             
         }, 300);
         

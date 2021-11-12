@@ -21,13 +21,20 @@ function EditAnswer(props) {
         );
     }
 
+    const handleDesChange = event =>{
+        let change = JSON.parse(JSON.stringify(props.tempQuiz));
+        change.description = event;
+        props.setTempQuiz(change);
+    }
+
     
 
     //console.log(currentCard)
-    var ansIndex = currentCard.answer
-    var ansExplanation = currentCard.answerExplanation
+    
     //var quesTxt = "props.currentCard.question"
     if(currentCard){
+        var ansIndex = currentCard.answer
+        var ansExplanation = currentCard.answerExplanation
         return(
             <div>
                 {displayAnsChoice(ansIndex)}
@@ -36,7 +43,10 @@ function EditAnswer(props) {
             </div>
         )
     }else{
-
+        var description = props.tempQuiz.description
+        return(
+            <input type="text" value={description} onChange={(e) => handleDesChange(e.target.value)}/>
+        );
     }
     
 }

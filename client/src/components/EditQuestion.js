@@ -84,9 +84,10 @@ function EditQuestion(props) {
     };
 
     //console.log(currentCard)
-    var quesTxt = currentCard.question
+    
     //var quesTxt = "props.currentCard.question"
     if(currentCard){
+        var quesTxt = currentCard.question
         return(
             <div>
                 <input type="text" value={quesTxt} onChange={(e) => handleQuesChange(e.target.value)}/>
@@ -105,7 +106,10 @@ function EditQuestion(props) {
             </div>
         )
     }else{
-
+        return(
+            <div>TitleImgPlaceHolder</div>
+        );
+       
     }
     
 }
