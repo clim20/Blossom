@@ -225,7 +225,7 @@ export const UPDATE_QUIZ = gql`
 
 export const CREATE_QUIZ_COLLECTION = gql`
     mutation createQuizCollection($owner: ID!, $name: String!) {
-        createQuizCOllection(owner: $owner, name: $name) {
+        createQuizCollection(owner: $owner, name: $name) {
             _id
             name
             creator
@@ -242,6 +242,33 @@ export const DELETE_QUIZ_COLLECTION = gql`
         deleteQuizCollection(quizCollectionId: $quizCollectionId)
     }
 `;
+
+export const ADD_QUIZ_COLLECTION = gql`
+    mutation addQuizCollection($platformId: ID!, $quizCollectionId: String!) {
+        addQuizCollection(platformId: $platformId, quizCollectionId: $quizCollectionId) {
+            _id
+            name
+            owner
+            platformImg
+            bannerImg
+            description
+            contact
+            collaborators
+            requests
+            followerCount
+            quizzes
+            quizCollections
+            createdAt
+        }
+    }
+`;
+
+export const REMOVE_QUIZ_COLLECTION = gql`
+    mutation removeQuizCollection($platformId: ID!, $quizCollectionId: ID!) {
+        removeQuizCollection(platformId: $platformId, quizCollectionId: $quizCollectionId)
+    }
+`;
+
 
 export const ADD_QUIZ_TO_QUIZ_COLLECTION = gql`
     mutation AddQuizToQuizCollection($quizId: ID!, $quizCollectionId: ID!) {

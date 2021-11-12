@@ -169,22 +169,28 @@ module.exports = gql`
     union Following = User | Platform
 
     type Query {
-        getPopularUsers: [User!]!
+        getUsers: [User!]!
         findUserById(id: ID!): User!
+        getPopularUsers: [User!]!
+
         getProfiles: [Profile!]!
         findProfileById(id: ID!): Profile!
+
         findFollowingByIds(ids: [ID!]!): [Following!]!
-        getPopularPlatforms: [Platform!]!
+
         getPlatforms: [Platform!]!
         findPlatformById(id: ID!): Platform!
         findPlatformsByIds(ids: [ID!]!): [Platform!]!
+        getPopularPlatforms: [Platform!]!
+
         findCollaboratorsByIds(ids: [ID!]!): [User!]!
-        getUsers: [User!]!
+        
         getQuizzes: [Quiz!]!
         findQuizById(id: ID!): Quiz!
         findQuizzesByIds(ids: [ID!]!): [Quiz!]!
         getQuizHits(ids: [ID!]!): Int!
         getPopularQuizzes: [Quiz!]!
+
         getQuizCollections: [QuizCollection!]!
         findQuizCollectionById(id: ID!): QuizCollection!
         findQuizCollectionByIds(ids: [ID!]!): [QuizCollection!]!
@@ -192,23 +198,31 @@ module.exports = gql`
 
     type Mutation {
         login(username: String!, email: String!, profileImg: String!): User!
+        updateUsername(id: ID!, name: String!): User!
+
         followProfile(userId: ID!, profileId: ID!): Boolean!
         followPlatform(userId: ID!, platformId: ID!): Boolean!
+
         createPlatform(owner: ID!, name: String!): Platform! 
         deletePlatform(platformId: ID!): Boolean! 
-        updateUsername(id: ID!, name: String!): User!
+        
         addCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
         addCollaborator(platformId: ID!, userId: ID!): Platform!
         removeCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
         removeCollaborator(platformId: ID!, userId: ID!): Platform!
+
         editProfile(id: ID!, updatedProfile: ProfileInput!): Profile!
         editPlatform(id: ID!, updatedPlatform: PlatformInput!): Platform!
         setFeaturedQuiz(profilePlatformId: ID!, quizId: ID!): Quiz!
+
         createQuiz(owner: ID!, title: String!): Quiz
         updateQuiz(quizId: ID!, updatedQuiz: QuizInput!): Quiz
         deleteQuiz(id: ID!): Boolean!
+
         createQuizCollection(owner: ID!, name: String!): QuizCollection!
         deleteQuizCollection(quizCollectionId: ID!): Boolean! 
+        addQuizCollection(platformId: ID!, quizCollectionId: ID!): Platform!
+        removeQuizCollection(platformId: ID!, quizCollectionId: ID!): Boolean!
         addQuizToQuizCollection(quizId: ID!, quizCollectionId: ID!): QuizCollection!
         removeQuizFromQuizCollection(quizId: ID!, quizCollectionId: ID!): Boolean!
     }

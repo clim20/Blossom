@@ -2,6 +2,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
+const Platform = require('../../models/Platform');
 const QuizCollection = require('../../models/QuizCollection');
 
 module.exports = {
@@ -56,7 +57,6 @@ module.exports = {
       if(updated && updated2) {
         return newQuizCollection;
       }
-
       return newQuizCollection;
     },
     async deleteQuizCollection(_, { quizCollectionId }){
@@ -65,13 +65,55 @@ module.exports = {
       if(quizCollection){
         const user = await User.findOne({_id: quizCollection.creator});
         const profile = await Profile.findOne({_id: user.profileId});
+        
+        //const platforms = profile.platforms;
+        // owner of quizCollection can only add to platforms they are a part of, thus query their platforms
+        // and remove when we see it hold the quizCollection
+
+        // TODO: how to find a collection with an array with a specific item mongo
+        const platforms = Platform.find({quizCollection: {$in: new ObjectId(quizCollectionId)}});
+        console.log(platforms);
+        console.log(platforms.length)
+        for (let i = 0; i < platforms.length; i++){
+          console.log(platforms[i]);
+          if (platforms[i]) {
+            let platform = await Platform.findOne({_id: platforms[i]._id })
+            console.log(platform);
+            let quizCollections = platform.quizCollections.filter(q => q._id.toString() !== quizCollectionId.toString());
+            console.log(quizCollections);
+            await Platform.updateOne({_id: platform._id}, {quizCollections: quizCollections});
+          }
+        }
+
         let quizCollections = profile.quizCollections.filter(quizCollection => quizCollection._id.toString() !== quizCollectionId.toString());
         await Profile.updateOne({user: quizCollection.creator}, {quizCollections: quizCollections});
 
         const deleted = await QuizCollection.deleteOne({_id: quizCollectionId});
-        if (deleted)
-          return true;
-        return false;
+        if (deleted) return true;
+      }
+      return false;
+    },
+    async addQuizCollection(_, { platformId, quizCollectionId }){
+      const platform = await Platform.findOne({_id: platformId});
+      
+      if(platform){
+        let quizCollections = platform.quizCollections;
+        quizCollections.push(quizCollectionId);
+
+        const updated =  await Platform.updateOne({_id: platformId}, {quizCollections: quizCollections});
+
+        if (updated) return platform;
+      }
+      return false;
+    },
+    async removeQuizCollection(_, { platformId, quizCollectionId }){
+      const platform = await Platform.findOne({_id: platformId});
+      
+      if(platform){
+        let quizCollections = platform.quizCollections.filter(quizCollection => quizCollection._id.toString() !== quizCollectionId.toString());
+        const updated =  await Platform.updateOne({_id: platformId}, {quizCollections: quizCollections});
+
+        if (updated) return true;
       }
       return false;
     },
@@ -93,9 +135,7 @@ module.exports = {
       let quizzes = quizCollection.quizzes.filter(quiz => quiz._id.toString() !== quizId.toString());
       const updated = await QuizCollection.updateOne({_id: quizCollectionId}, {quizzes: quizzes});
 
-      if(updated) {
-        return true;
-      }
+      if(updated) return true;
       return false;
     },  
   }
