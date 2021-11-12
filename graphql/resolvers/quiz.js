@@ -133,16 +133,18 @@ module.exports = {
 
       async deleteQuiz(_, { id }){
         const deletedQuiz = await Quiz.findOne({_id: new ObjectId(id)});
-        /*
+        
         if(deletedQuiz){
+          console.log("deletedQuiz")
           const creator = deletedQuiz.creator;
   
           let profile = await Profile.findOne({user: creator})
-          let profileQuiz = profile.quizzes.filter(deletedQuiz => deletedQuiz._id.toString() !== id.toString());
+          let profileQuiz = profile.quizzes.filter(quizId => deletedQuiz._id.toString() !== quizId.toString());
+          
           let updated = await Profile.updateOne({user: profile.user}, {quizzes: profileQuiz});
             
         }
-        */
+        
 
         const deleted = await Quiz.deleteOne({_id: id});
 

@@ -202,6 +202,6 @@ module.exports = gql`
         setFeaturedQuiz(profilePlatformId: ID!, quizId: ID!): Quiz!
         createQuiz(owner: ID!, title: String!): Quiz
         updateQuiz(quizId: ID!, updatedQuiz: QuizInput!): Quiz
-        deleteQuiz(deletedQuiz: ID!): Boolean!
+        deleteQuiz(id: ID!): Boolean!
     }
 `
