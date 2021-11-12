@@ -3,7 +3,7 @@ import React from 'react';
 import CreatorCard from './CreatorCard';
 
 const CreatorCards = (props) => {  
-    const creatorCardClass = props.activeTab ? "ui very relaxed horizontal list medium" : "ui five cards";
+    const creatorCardClass = props.activeTab ? "ui three cards" : "ui five cards";
 
     return (
         <div>

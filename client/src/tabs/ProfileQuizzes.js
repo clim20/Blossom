@@ -58,13 +58,17 @@ const ProfileQuizzes = (props) => {
     });
 
     const handleSave = () => {
-        setFeaturedQuiz();
-        setTimeout(() => {
-            refetchProfileData();
-            refetchQuizzesData();
-        }, 300);
-        handleCancel();
-        changeFeaturedQuiz(featuredQuiz);
+        if (featuredQuiz) {
+            setFeaturedQuiz();
+            setTimeout(() => {
+                refetchProfileData();
+                refetchQuizzesData();
+            }, 300);
+            handleCancel();
+            changeFeaturedQuiz(featuredQuiz);
+        } else {
+            handleCancel();
+        }
     }
 
     useEffect(() => {
@@ -91,8 +95,10 @@ const ProfileQuizzes = (props) => {
         history.push("/quiz/edit/" + returnedQuiz._id);
     }
 
+    const height = quizzes && quizzes.length === 0 ? "empty-tab" : "";
+
     return (
-        <div>
+        <div className={height}>
             {
                 isOwner && !editingMode &&
                 <div>

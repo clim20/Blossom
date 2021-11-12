@@ -108,6 +108,11 @@ button svg {
   border: 4px solid var(--platformBorder);    
 }
 
+.card-text {
+  font-weight: bold;
+  word-break: break-all;
+}
+
 /* EDIT SAVE CANCEL BUTTONS */
 .edit-button {
   width: 8rem;
@@ -120,6 +125,7 @@ button svg {
   height: 3rem !important;
   background-color: var(--saveGreen) !important;
 }
+
 .cancel-button {
   width: 8rem !important;
   height: 3rem !important;

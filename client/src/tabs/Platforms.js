@@ -71,8 +71,10 @@ const Platforms = (props) => {
         refetchPlatformsData();
     }, [user, profile, platforms, refetchProfileData, refetchPlatformsData]);
 
+    const height = platforms && platforms.length === 0 ? "empty-tab" : "";
+
     return (
-        <div>
+        <div className={height}>
             {
                 isOwner && !editingMode &&
                 <div>
