@@ -29,31 +29,30 @@ const CreatorCard = (props) => {
 
     const onCollaboratorTab = props.activeTab === "collaborators";
     return (
-        <div className="item text-align-center cursor-pointer" onClick={handleClick}>
-            <img className="card-image creator-circle ui avatar image"
-                src={profile.profileImg}
-                alt="creator profile"
-            />
-            {
-                onCollaboratorTab && props.editingMode && props.user._id !== props.platform.owner &&
-                <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
-                    onClick={handleXClick}
-                />
-            }
-            <br/>
-            <br/>
-            <div className="header">
-                {props.user.username}
-            </div>
-            <br/>
-            <div className="header">
-                {profile && profile.followerCount && profile.followerCount} followers
-            </div>
-            <div>
-                {onCollaboratorTab && props.user._id === props.platform.owner && <div> Owner </div>} 
-            </div>
-            <div>
-                {onCollaboratorTab && props.user._id !== props.platform.owner && <div> Collaborator </div>}
+        <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
+            <div className="content">
+                <div className="description">
+                    <img className="card-image creator-circle ui avatar image"
+                        src={profile.profileImg}
+                        alt="creator profile"
+                    />
+                    {
+                        onCollaboratorTab && props.editingMode && props.user._id !== props.platform.owner &&
+                        <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                            onClick={handleXClick}
+                        />
+                    }
+                    <br/>
+                    <br/>
+                    <div className="card-text"> {props.user.username} </div>
+                    <div> {profile && profile.followerCount && profile.followerCount} followers </div>
+                    <div>
+                        {onCollaboratorTab && props.user._id === props.platform.owner && <div> Owner </div>} 
+                    </div>
+                    <div>
+                        {onCollaboratorTab && props.user._id !== props.platform.owner && <div> Collaborator </div>}
+                    </div>
+                </div>
             </div>
         </div>    
     );

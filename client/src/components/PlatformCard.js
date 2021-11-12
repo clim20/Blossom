@@ -34,29 +34,31 @@ function PlatformCard(props) {
     const onPlatformTab = props.activeTab === "platforms";
     
     return (
-        <div className="item text-align-center cursor-pointer" onClick={handleClick}>
-            <img className="card-image platform-circle ui avatar image"
-                src={platform.platformImg}
-                alt="platform"
-            />
-            {
-                onPlatformTab && props.editingMode && platform.owner === props.user._id && 
-                <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
-                    onClick={handleXClick}
-                />
-            }
-            <br/>
-            <br/>
-            <div className="header">{props.platform.name}</div>
-            <br/>
-            <div className="header"> 
-                {followerCount} followers
-            </div>
-            <div>
-                {onPlatformTab && props.profile.user === platform.owner && <div> Owner </div>} 
-            </div>
-            <div>
-                {onPlatformTab && props.profile.user !== platform.owner && <div> Collaborator </div>}
+        <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
+            <div className="content">
+                <div className="description">
+                    <img className="card-image platform-circle ui avatar image"
+                        src={platform.platformImg}
+                        alt="platform"
+                    />
+                    {
+                        onPlatformTab && props.editingMode && platform.owner === props.user._id && 
+                        <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                            onClick={handleXClick}
+                        />
+                    }
+                    <br/>
+                    <br/>
+                    <div className="card-text">{props.platform.name}</div>
+                    <br/>
+                    <div> {followerCount} followers </div>
+                    <div>
+                        {onPlatformTab && props.profile.user === platform.owner && <div> Owner </div>} 
+                    </div>
+                    <div>
+                        {onPlatformTab && props.profile.user !== platform.owner && <div> Collaborator </div>}
+                    </div>
+                </div>
             </div>
         </div>    
     );

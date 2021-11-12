@@ -87,8 +87,10 @@ const PlatformQuizzes = (props) => {
         }
     }
 
+    const height = quizzes && quizzes.length === 0 ? "empty-tab" : "";
+
     return (
-        <div>
+        <div className={height}>
             {
                 isOwner && !editingMode &&
                 <div>

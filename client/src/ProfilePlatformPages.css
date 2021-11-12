@@ -17,7 +17,11 @@
     left: 11rem;
     bottom: 1rem;
     display: inline-block;
-    width: fit-content;
+    width: 650px;
+    word-break: break-all;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .text_box {
@@ -94,6 +98,10 @@
 .profile-content, .platform-content {
     border-bottom: 1px solid transparent !important;
     border-color: black !important;
+}
+
+.empty-tab {
+    height: 46px;
 }
 
 /* PLATFORM CREATION MODAL */

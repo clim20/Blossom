@@ -3,7 +3,7 @@ import React from 'react';
 import PlatformCard from './PlatformCard';
 
 function PlatformCards(props) {  
-    const platformCardClass = props.activeTab ? "ui very relaxed horizontal list medium" : "ui five cards";
+    const platformCardClass = props.activeTab ? "ui three cards" : "ui five cards";
 
     return (
         <div>

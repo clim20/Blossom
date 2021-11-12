@@ -41,7 +41,7 @@ function QuizCard(props) {
         if (props.featuredQuiz !== quiz._id) {
             props.setFeaturedQuiz(quiz._id);
         } else {
-            props.setFeaturedQuiz(null);
+            props.setFeaturedQuiz('');
         }
         props.refetchData();
     }
@@ -52,24 +52,20 @@ function QuizCard(props) {
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="content">
-                <img width='200px' height='120px'
-                    src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
-                    alt="quiz"
-                />
-                {
-                    onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
-                    <i class={starClass} onClick={handleStarClick}/>
-                }
-                <br/>
-                <br/>
-                <div className="header">
-                    {props.quiz.title}
-                </div>
-                <div>
-                    Created by {quizCreator.username}
-                </div>
-                <div>
-                    {quizHits}
+                <div className="description">
+                    <img width='200px' height='120px'
+                        src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
+                        alt="quiz"
+                    />
+                    {
+                        onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
+                        <i class={starClass} onClick={handleStarClick}/>
+                    }
+                    <br/>
+                    <br/>
+                    <div className="card-text"> {props.quiz.title} </div>
+                    <div> Created by {quizCreator.username} </div>
+                    <div> {quizHits} </div>
                 </div>
             </div>
         </div>
