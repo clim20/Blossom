@@ -88,8 +88,9 @@ module.exports = gql`
         drawing: Drawing
     }
 
-    type Collection {
+    type QuizCollection {
         _id: ID!
+        name: String!
         creator: ID!
         img: String
         description: String
@@ -184,6 +185,9 @@ module.exports = gql`
         findQuizzesByIds(ids: [ID!]!): [Quiz!]!
         getQuizHits(ids: [ID!]!): Int!
         getPopularQuizzes: [Quiz!]!
+        getQuizCollections: [QuizCollection!]!
+        findQuizCollectionById(id: ID!): QuizCollection!
+        findQuizCollectionByIds(ids: [ID!]!): [QuizCollection!]!
     }
 
     type Mutation {
@@ -203,5 +207,7 @@ module.exports = gql`
         createQuiz(owner: ID!, title: String!): Quiz
         updateQuiz(quizId: ID!, updatedQuiz: QuizInput!): Quiz
         deleteQuiz(id: ID!): Boolean!
+        createQuizCollection(owner: ID!, name: String!): QuizCollection!
+        deleteQuizCollection(quizCollectionId: ID!): Boolean! 
     }
 `

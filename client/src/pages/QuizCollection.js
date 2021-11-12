@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 
 import MenuBar from '../components/MenuBar';
 
-const Collection = () => {
+const QuizCollection = () => {
 
     return (
         <div>
@@ -12,4 +12,4 @@ const Collection = () => {
         </div>
     );
 }
-export default Collection;
+export default QuizCollection;

@@ -17,7 +17,7 @@ import Profile from './pages/Profile';
 import Platform from './pages/Platform';
 import Quiz from './pages/Quiz';
 import QuizEdit from './pages/QuizEdit';
-import Collection from './pages/Collection';
+import QuizCollection from './pages/QuizCollection';
 import Update from './pages/Update';
 import Quest from './pages/Quest';
 import QuizStart from './pages/QuizStart';
@@ -33,7 +33,7 @@ const App = () => {
           <Route exact path="/platform/:platformId" component={Platform}/>
           <Route exact path="/quiz/:quizId" component={Quiz}/>
           <Route exact path="/quiz/edit/:quizId" component={QuizEdit}/>
-          <Route exact path="/collection/:collectionId" component={Collection}/>
+          <Route exact path="/quizCollection/:quizCollectionId" component={QuizCollection}/>
           <Route exact path="/update" component={Update}/>
           <Route exact path="/quests" component={Quest}/>
         </Container>
