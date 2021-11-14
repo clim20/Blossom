@@ -6,7 +6,7 @@ import MenuBar from '../components/MenuBar';
 import PlatformBanner from "../components/PlatformBanner";
 import Home from '../tabs/Home';
 import PlatformQuizzes from '../tabs/PlatformQuizzes';
-import QuizCollections from '../tabs/QuizCollections';
+import PlatformQuizCollections from '../tabs/PlatformQuizCollections';
 import Collaborators from '../tabs/Collaborators';
 import PlatformAbout from '../tabs/PlatformAbout';
 
@@ -73,7 +73,7 @@ const Platform = () => {
                 <div className="ui bottom attached active tab segment platform-content">
                     {activeTab === 'home' && <Home platform={platform}/>}
                     {activeTab === 'quizzes' && <PlatformQuizzes activeTab={activeTab}/>}
-                    {activeTab === 'quizCollections' && <QuizCollections/>}
+                    {activeTab === 'quizCollections' && <PlatformQuizCollections/>}
                     {activeTab === 'collaborators' && <Collaborators activeTab={activeTab}/>}
                     {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>
