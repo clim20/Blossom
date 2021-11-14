@@ -179,7 +179,6 @@ const QuizEdit = () => {
     if(initTemp == false && isCreator){
         return (
             <div>
-                <MenuBar/>
                 <TableOfContents tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} setSelectedCard = {setSelectedCard}/>
                 <div>
                     <input type="text" value={title} onChange={(e) => handleTitleChange(e.target.value)}/>
@@ -201,7 +200,6 @@ const QuizEdit = () => {
     }else{
         return(
             <div>
-                <MenuBar/>
                 QuizEdit Page
                 
             </div>

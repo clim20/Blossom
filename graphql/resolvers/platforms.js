@@ -12,6 +12,12 @@ module.exports = {
         if (platforms) return platforms;
         return [];
     },
+    async getPopularPlatforms() {
+      const platforms = await Platform.find().sort({ followerCount: -1 }).limit(5);
+
+      if (platforms) return platforms;
+      return [];
+    },
     async findPlatformById(_, { id }) {
         const platform = await Platform.findOne({_id: id});
         
@@ -29,19 +35,6 @@ module.exports = {
       
       if (platforms) return platforms;
       return [];
-    },
-    async getPopularPlatforms() {
-        const platforms = await Platform.find().sort({ followerCount: -1 });
-      
-        var res = [];
-        for(let i = 0; i < 5; i++) {
-          if (platforms[i]) {
-            res.push(platforms[i]);
-          }
-        }
-
-        if (res) return res;
-        return [];
     },
     async findCollaboratorsByIds(_, { ids }){
       var collaborators = []

@@ -7,7 +7,6 @@ const Search = () => {
 
     return (
         <div>
-            <MenuBar/>
             Search Page
         </div>
     );

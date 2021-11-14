@@ -46,7 +46,6 @@ const Profile = () => {
 
     return (
         <div>
-            <MenuBar/>
             <ProfileBanner profile={profile} user={user} refetchProfileData={refetchProfileData}/>
 
             <div className="ui container profile-section">

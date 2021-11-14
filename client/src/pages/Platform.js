@@ -38,7 +38,6 @@ const Platform = () => {
 
     return (
         <div>
-            <MenuBar/>
             <PlatformBanner platform={platform} user={user} refetchPlatformData={refetchPlatformData}/>
 
             <div className="ui container platform-section">

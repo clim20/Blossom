@@ -11,6 +11,7 @@ import './UpdatePage.css';
 
 import { AuthProvider } from './context/auth';
 
+import MenuBar from './components/MenuBar';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import Profile from './pages/Profile';
@@ -27,6 +28,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Container>
+          <MenuBar/>
           <Route exact path='/' component={Home}/>
           <Route exact path="/search" component={Search}/>
           <Route exact path="/profile/:profileId" component={Profile}/>

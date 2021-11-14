@@ -38,7 +38,6 @@ const Home = () => {
 
 	return (
         <div style={{ paddingBottom: '3rem' }}>
-            <MenuBar/>
             {user &&
                 <div>
                     <h3 className="ui header">For You</h3>

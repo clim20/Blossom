@@ -81,7 +81,6 @@ const QuizEnd = (props) =>{
         return(
         
             <div style={{textAlign: 'center'}}>
-                <MenuBar></MenuBar>
                 <h1 className="quiz-title" style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
                 <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
                     <p style={{textAlign: 'center'}}>

@@ -118,11 +118,7 @@ const Quiz = () =>{
     if(redirect == false){
         console.log(highestScores)
         return(
-            
-            <div style={{textAlign: 'center'}}>
-                
-                <MenuBar></MenuBar>
-    
+            <div style={{textAlign: 'center'}}>    
                 <div>
                     <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
                     <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
@@ -167,7 +163,6 @@ const Quiz = () =>{
                 }
                 
             </div>
-            
         );
 
     }else{

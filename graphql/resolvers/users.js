@@ -24,10 +24,10 @@ module.exports = {
       return [];
     },
     async getPopularUsers() {
-      const profiles = await Profile.find().sort({ followerCount: -1 });
+      const profiles = await Profile.find().sort({ followerCount: -1 }).limit(5);
 
       var users = [];
-      for(let i = 0; i < 5; i++) {
+      for(let i = 0; i < profiles.length; i++) {
         if (profiles[i]) {
           var userObject = await User.findOne({_id: profiles[i].user});
 
