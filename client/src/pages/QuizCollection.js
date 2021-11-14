@@ -7,7 +7,6 @@ const QuizCollection = () => {
 
     return (
         <div>
-            <MenuBar/>
             Collection Page
         </div>
     );

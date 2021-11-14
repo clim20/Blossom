@@ -76,8 +76,7 @@ const Update = () => {
     ;
 
     return (
-        user ? <div>
-            <MenuBar/>
+        user && <div>
             <h2 className="update-account">
                 Update Account 
             </h2>
@@ -115,10 +114,6 @@ const Update = () => {
                     Cancel
                 </Button>
             </div>
-        </div>
-        :
-        <div>
-            <MenuBar/>
         </div>
     );
 }

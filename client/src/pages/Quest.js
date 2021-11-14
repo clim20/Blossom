@@ -7,7 +7,6 @@ const Quest = () => {
 
     return (
         <div>
-            <MenuBar/>
             <h2 className="quests">
                 Quests
             </h2>
