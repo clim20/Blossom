@@ -334,3 +334,31 @@ export const FIND_COLLABORATORS_BY_IDS = gql`
         }
     }
 `;
+
+export const FIND_QUIZ_COLLECTION_BY_ID = gql`
+    query findQuizCollectionById($id: ID!) {
+        findQuizCollectionById(id: $id) {
+            _id 
+            name
+	        creator
+	        img
+	        description
+	        quizzes
+	        createdAt
+        }
+    }
+`;
+
+export const FIND_QUIZ_COLLECTION_BY_IDS = gql`
+    query findQuizCollectionByIds($ids: [ID!]!) {
+        findQuizCollectionByIds(ids: $ids) {
+            _id 
+            name
+	        creator
+	        img
+	        description
+	        quizzes
+	        createdAt
+        }
+    }
+`;

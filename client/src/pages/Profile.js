@@ -7,7 +7,7 @@ import ProfileBanner from '../components/ProfileBanner';
 import Home from '../tabs/Home';
 import ProfileQuizzes from '../tabs/ProfileQuizzes';
 import Platforms from '../tabs/Platforms';
-import QuizCollections from '../tabs/QuizCollections';
+import ProfileQuizCollections from '../tabs/ProfileQuizCollections';
 import Following from '../tabs/Following';
 import Badges from '../tabs/Badges';
 import ProfileAbout from '../tabs/ProfileAbout';
@@ -92,7 +92,7 @@ const Profile = () => {
                     {activeTab === 'home' && <Home profile={profile}/>}
                     {activeTab === 'quizzes' && <ProfileQuizzes activeTab={activeTab}/>}
                     {activeTab === 'platforms' && <Platforms activeTab={activeTab}/>}
-                    {activeTab === 'quizCollections' && <QuizCollections profile={profile}/>}
+                    {activeTab === 'quizCollections' && <ProfileQuizCollections activeTab={activeTab}/>}
                     {activeTab === 'following' && <Following profile={profile}/>}
                     {activeTab === 'badges' && <Badges profile={profile}/>}
                     {activeTab === 'about' && <ProfileAbout profile={profile} refetchProfileData={refetchProfileData}/>}
