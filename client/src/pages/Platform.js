@@ -73,7 +73,7 @@ const Platform = () => {
                 <div className="ui bottom attached active tab segment platform-content">
                     {activeTab === 'home' && <Home platform={platform}/>}
                     {activeTab === 'quizzes' && <PlatformQuizzes activeTab={activeTab}/>}
-                    {activeTab === 'quizCollections' && <PlatformQuizCollections/>}
+                    {activeTab === 'quizCollections' && <PlatformQuizCollections activeTab={activeTab}/>}
                     {activeTab === 'collaborators' && <Collaborators activeTab={activeTab}/>}
                     {activeTab === 'about' && <PlatformAbout platform={platform} refetchPlatformData={refetchPlatformData}/>}
                 </div>
