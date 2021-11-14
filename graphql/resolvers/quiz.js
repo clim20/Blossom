@@ -13,6 +13,12 @@ module.exports = {
       if (quizzes) return quizzes;
       return [];
     },
+    async getPopularQuizzes() {
+      const quizzes = await Quiz.find().sort({ quizLikes: -1 }).limit(4);
+      
+      if (quizzes) return quizzes;
+      return [];
+    },
     async findQuizById (_, { id }){
       const quiz= await Quiz.findOne({_id: id});
       console.log(quiz);
@@ -39,19 +45,6 @@ module.exports = {
         }
       }
       return quizHits;
-    },
-    async getPopularQuizzes() {
-      const quizzes = await Quiz.find().sort({ quizLikes: -1 });
-    
-      var res = [];
-      for (let i = 0; i < 4; i++) {
-        if (quizzes[i]) {
-          res.push(quizzes[i]);
-        }
-      }
-
-      if (res) return res;
-      return [];
     },
   },
   Mutation: {
