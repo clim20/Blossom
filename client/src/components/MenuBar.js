@@ -57,7 +57,7 @@ const MenuBar = (props) => {
     }
 
     const handleSearchSubmit = (e) => {
-        if (e.key === 'Enter'){
+        if (e.key === 'Enter' || e.type === 'click'){
             history.push("/search");
         } else {
             props.setSearchQuery(e.target.value);
@@ -134,7 +134,7 @@ const MenuBar = (props) => {
                 />
             </Menu.Menu>
             <Menu.Item className='search-bar'>
-                <Input icon='search' placeholder='Search...' 
+                <Input icon={{ name: 'search', link: true, onClick: handleSearchSubmit }} placeholder='Search...' 
                     onKeyUp={handleSearchSubmit}
                 />
             </Menu.Item>
