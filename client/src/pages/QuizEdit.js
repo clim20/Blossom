@@ -6,8 +6,6 @@ import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 
-
-import MenuBar from '../components/MenuBar';
 import EditQuestion from '../components/EditQuestion';
 import EditAnswer from '../components/EditAnswer';
 import TableOfContents from '../components/TableOfContents'

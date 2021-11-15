@@ -6,10 +6,6 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
-
-
-
-import MenuBar from '../components/MenuBar';
 import QuizStart from './QuizStart';
 
 const styles = {

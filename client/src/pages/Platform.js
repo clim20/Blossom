@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
-import MenuBar from '../components/MenuBar';
 import PlatformBanner from "../components/PlatformBanner";
 import Home from '../tabs/Home';
 import PlatformQuizzes from '../tabs/PlatformQuizzes';

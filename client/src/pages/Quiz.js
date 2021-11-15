@@ -10,7 +10,6 @@ import * as mutations from '../cache/mutations';
 
 import image1 from '../testpic/seal.jpg';
 
-import MenuBar from '../components/MenuBar';
 import QuizStart from './QuizStart';
 
 const styles = {

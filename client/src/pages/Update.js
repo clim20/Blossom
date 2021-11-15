@@ -7,8 +7,6 @@ import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 
-import MenuBar from '../components/MenuBar';
-
 const Update = () => {
     const history = useHistory();
     const { user } = useContext(AuthContext);

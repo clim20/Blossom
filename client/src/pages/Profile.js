@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
-import MenuBar from '../components/MenuBar';
 import ProfileBanner from '../components/ProfileBanner';
 import Home from '../tabs/Home';
 import ProfileQuizzes from '../tabs/ProfileQuizzes';
