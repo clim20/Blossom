@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Button } from 'semantic-ui-react'
 
-import * as queries from '../cache/queries';
-import * as mutations from '../cache/mutations';
+import * as queries from '../../cache/queries';
+import * as mutations from '../../cache/mutations';
 
 const RequestCard = (props) => {
     const history = useHistory();

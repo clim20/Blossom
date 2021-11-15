@@ -3,7 +3,7 @@ import { Grid, Image } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
-import * as queries from '../cache/queries';
+import * as queries from '../../cache/queries';
 
 const PlatformSearchCard = (props) => {
     const history = useHistory();
@@ -45,7 +45,7 @@ const PlatformSearchCard = (props) => {
                 <div className="ui fluid card" style={{ cursor: 'pointer', marginBottom: '15px' }} onClick={handleClick}>
                     <div className="content">
                         <Grid verticalAlign="middle">
-                            <Grid.Column width={4}>
+                            <Grid.Column width={4} style={{ textAlign: 'center' }}>
                                 <Image className="card-image platform-circle ui avatar image" src={platform && platform.platformImg}/>
                             </Grid.Column>
                             <Grid.Column width={12}>
@@ -55,8 +55,12 @@ const PlatformSearchCard = (props) => {
                                 <div> {platform && followerCount} </div>
                                 <div> {platform && collaborators} </div>
                                 <div> {platform && quizzes} </div>
-                                <br/>
-                                <div> {platform && platform.description} </div>
+                                {platform && platform.description !== '' &&
+                                    <div>
+                                        <br/>
+                                        {platform.description}
+                                    </div>
+                                }
                             </div>
                             </Grid.Column>                
                         </Grid>

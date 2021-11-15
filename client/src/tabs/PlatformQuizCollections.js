@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import QuizCollectionCards from '../components/QuizCollectionCards';
+import QuizCollectionCards from '../components/cards/QuizCollectionCards';
 import QuizCollectionRemovalModal from '../modals/QuizCollectionRemovalModal';
 
 import { AuthContext } from '../context/auth';
@@ -65,45 +66,46 @@ const PlatformQuizCollections = (props) => {
         refetchPlatformData();        
     }
 
-    const height = quizCollections && quizCollections.length === 0 ? "empty-tab" : "";
-
     return (
-        <div className={height}>
-            {
-                isOwner && !editingMode &&
-                <div>
-                    <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
-                        Edit
-                    </button>  
-                </div>
-            }
-            {
-                isOwner && !editingMode &&
-                <div>
-                    <button className="ui button request-button" style={{ float: 'right', visibility: 'hidden' }}/>
-                </div>
-            }
-            {
-                editingMode &&
-                <div style={{ float: 'right' }}>
-                    <button className="ui button save-button" onClick={handleSave}>
-                        Save
-                    </button>  
-                    <button className="ui button cancel-button" onClick={handleCancel}>
-                        Cancel
-                    </button>  
-                </div>
-                
-            }
-            {
-                quizCollections && <QuizCollectionCards platform={platform} quizCollections={quizCollections} activeTab={props.activeTab} editingMode={editingMode} user={user}
-                                refetchData={refetchPlatformData} setShowQuizCollectionRemovalModal={setShowQuizCollectionRemovalModal} setQuizCollectionName={setQuizCollectionName}/>
-            }
+        <Grid>
+            <Grid.Column width={12}>
+                {
+                    quizCollections && <QuizCollectionCards platform={platform} quizCollections={quizCollections} activeTab={props.activeTab} editingMode={editingMode} user={user}
+                                    refetchData={refetchPlatformData} setShowQuizCollectionRemovalModal={setShowQuizCollectionRemovalModal} setQuizCollectionName={setQuizCollectionName}/>
+                }
+            </Grid.Column>
+            <Grid.Column width={4}>
+                {
+                    isOwner && !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
+                            Edit
+                        </button>  
+                    </div>
+                }
+                {
+                    isOwner && !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right', visibility: 'hidden' }}/>
+                    </div>
+                }
+                {
+                    editingMode &&
+                    <div style={{ float: 'right' }}>
+                        <button className="ui button save-button" onClick={handleSave}>
+                            Save
+                        </button>  
+                        <button className="ui button cancel-button" onClick={handleCancel}>
+                            Cancel
+                        </button>  
+                    </div>   
+                }
+            </Grid.Column>
             {
                 showQuizCollectionRemovalModal && (<QuizCollectionRemovalModal setShowQuizCollectionRemovalModal={setShowQuizCollectionRemovalModal}
                                                 removeQuizCollection={removeQuizCollection} quizCollectionName={quizCollectionName}/>)
             }
-        </div>
+        </Grid>
     );
 }
 export default PlatformQuizCollections;

@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams } from "react-router-dom";
 
-import CreatorCards from '../components/CreatorCards';
+import CreatorCards from '../components/cards/CreatorCards';
 import RequestModal from '../modals/RequestModal';
 import CollaboratorRemovalModal from '../modals/CollaboratorRemovalModal';
 
@@ -109,37 +110,41 @@ const Collaborators = (props) => {
     const height = collaborators && collaborators.length === 0 ? "empty-tab" : "";
 
     return (
-        <div className={height}>
-            {
-                isOwner && !editingMode &&
-                <div>
-                    <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
-                        Edit
-                    </button>  
-                </div>
-            }
-            {
-                !editingMode &&
-                <div>
-                    <button className="ui button request-button" style={{ float: 'right' }} onClick={handleClick}>
-                        {buttonText}
-                    </button>
-                </div>
-            }
-            {
-                editingMode &&
-                <div style={{ float: 'right' }}>
-                    <button className="ui button save-button" onClick={handleSave}>
-                        Save
-                    </button>  
-                    <button className="ui button cancel-button" onClick={handleCancel}>
-                        Cancel
-                    </button>  
-                </div>
-            }
-
-            {collaborators && <CreatorCards users={collaborators} activeTab={props.activeTab} platform={platform} 
-                            editingMode={editingMode} setShowCollaboratorRemovalModal={setShowCollaboratorRemovalModal} setRemoveUser={setRemoveUser}/>}
+        <Grid>
+            <Grid.Column width={12}>
+                {collaborators && <CreatorCards users={collaborators} activeTab={props.activeTab} platform={platform} 
+                                editingMode={editingMode} setShowCollaboratorRemovalModal={setShowCollaboratorRemovalModal} setRemoveUser={setRemoveUser}/>
+                }
+            </Grid.Column>
+            <Grid.Column width={4}>
+                {
+                    isOwner && !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
+                            Edit
+                        </button>  
+                    </div>
+                }
+                {
+                    !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={handleClick}>
+                            {buttonText}
+                        </button>
+                    </div>
+                }
+                {
+                    editingMode &&
+                    <div style={{ float: 'right' }}>
+                        <button className="ui button save-button" onClick={handleSave}>
+                            Save
+                        </button>  
+                        <button className="ui button cancel-button" onClick={handleCancel}>
+                            Cancel
+                        </button>  
+                    </div>
+                }
+            </Grid.Column>
             {
                 showCollaboratorRequests && (<RequestModal platform={platform} setShowCollaboratorRequests={setShowCollaboratorRequests} setButtonText={setButtonText}
                                             refetchPlatformData={refetchPlatformData}/>)
@@ -148,7 +153,7 @@ const Collaborators = (props) => {
                 showCollaboratorRemovalModal && (<CollaboratorRemovalModal setShowCollaboratorRemovalModal={setShowCollaboratorRemovalModal}
                                                 removeCollaborator={removeCollaborator} removeUser={removeUser}/>)
             }
-        </div>
+        </Grid>
     );
 }
 export default Collaborators;

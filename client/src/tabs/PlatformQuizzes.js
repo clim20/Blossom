@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 
-import QuizCards from '../components/QuizCards';
+import QuizCards from '../components/cards/QuizCards';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -87,40 +88,41 @@ const PlatformQuizzes = (props) => {
         }
     }
 
-    const height = quizzes && quizzes.length === 0 ? "empty-tab" : "";
-
     return (
-        <div className={height}>
-            {
-                isOwner && !editingMode &&
-                <div>
-                    <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
-                        Edit
-                    </button>  
-                </div>
-            }
-            {
-                isOwner && !editingMode &&
-                <div>
-                    <button className="ui button request-button" style={{ float: 'right', visibility: 'hidden' }}/>
-                </div>
-            }
-            {
-                editingMode &&
-                <div style={{ float: 'right' }}>
-                    <button className="ui button save-button" onClick={handleSave}>
-                        Save
-                    </button>  
-                    <button className="ui button cancel-button" onClick={handleCancel}>
-                        Cancel
-                    </button>  
-                </div>
-            }
-
-            {quizzes && <QuizCards quizzes={quizzes} activeTab={props.activeTab} platform={platform} editingMode={editingMode} user={user}
-                            featuredQuiz={featuredQuiz} setFeaturedQuiz={changeFeaturedQuiz} refetchData={refetchPlatformData}/>
-            }
-        </div>
+        <Grid>
+            <Grid.Column width={12}>
+                {quizzes && <QuizCards quizzes={quizzes} activeTab={props.activeTab} platform={platform} editingMode={editingMode} user={user}
+                                featuredQuiz={featuredQuiz} setFeaturedQuiz={changeFeaturedQuiz} refetchData={refetchPlatformData}/>
+                }
+            </Grid.Column>
+            <Grid.Column width={4}>
+                {
+                    isOwner && !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
+                            Edit
+                        </button>  
+                    </div>
+                }
+                {
+                    isOwner && !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right', visibility: 'hidden' }}/>
+                    </div>
+                }
+                {
+                    editingMode &&
+                    <div style={{ float: 'right' }}>
+                        <button className="ui button save-button" onClick={handleSave}>
+                            Save
+                        </button>  
+                        <button className="ui button cancel-button" onClick={handleCancel}>
+                            Cancel
+                        </button>  
+                    </div>
+                }
+            </Grid.Column>
+        </Grid>
     );
 }
 export default PlatformQuizzes;

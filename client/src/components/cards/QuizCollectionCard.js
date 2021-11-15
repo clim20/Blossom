@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
-import * as queries from '../cache/queries';
+import * as queries from '../../cache/queries';
 
 function QuizCollectionCard(props) {
     const history = useHistory();

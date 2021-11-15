@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import moment from 'moment';
 
@@ -97,8 +98,64 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
     const quizHits = quizHitCount !== 1 ? quizHitCount + ' Quiz Hits' : quizHitCount + ' Quiz Hit';
 
     return (
-        <div>
-            <div>
+        <Grid>
+            <Grid.Column width={12}>
+                <div>
+                    <div className="display-flex">
+                        <h3 className="ui header" style={{ marginBottom: '10px' }}>
+                            Description
+                        </h3>
+                        {
+                            editingMode && <i class="pencil alternate icon" style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingDescription(!editingDescription)}/>
+                        }
+                    </div>
+                    {
+                        !editingDescription && !editingMode && <div className="text_box">{platform.description}</div>
+                    }
+                    {
+                        editingDescription && <textarea className="edit-box" defaultValue={updatedPlatform.description} onBlur={handleDescriptionEdit}></textarea>
+                    }
+                    {
+                        !editingDescription && editingMode && <div className="text_box">{updatedPlatform.description}</div>
+                    }
+                </div>
+
+                <div className="ui hidden divider"></div>
+
+                <div>
+                    <div className="display-flex">
+                        <h3 className="ui header" style={{ marginBottom: '10px' }}>
+                            Contact
+                        </h3>
+                        {
+                            editingMode && <i class="pencil alternate icon" style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingContact(!editingContact)}/>
+                        }
+                    </div>
+                    {
+                        !editingContact && !editingMode && <div className="text_box">{platform.contact}</div>
+                    }
+                    {
+                        editingContact && <textarea className="edit-box" defaultValue={updatedPlatform.contact} onBlur={handleContactEdit}></textarea>
+                    }
+                    {
+                        !editingContact && editingMode && <div className="text_box">{updatedPlatform.contact}</div>
+                    }
+                </div>
+
+                <div className="ui hidden divider"></div>
+
+                <div>
+                    <h3 className="ui header"> 
+                        Stats
+                    </h3>
+                    <div> {created} </div>
+                    <div> {platformOwner} </div>
+                    <div> {collaborators} </div>
+                    <div> {quizzes} </div>
+                    <div> {quizHits} </div>
+                </div>
+            </Grid.Column>
+            <Grid.Column width={4}>
                 {isOwnPlatform && !editingMode && 
                     <div>
                         <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
@@ -117,65 +174,8 @@ const PlatformAbout = ({ platform, refetchPlatformData }) => {
                         </button>  
                     </div>
                 }
-            </div>
-
-            <div className="ui hidden divider"></div>
-
-            <div>
-                <div className="display-flex">
-                    <h3 className="ui header" style={{ marginBottom: '10px' }}>
-                        Description
-                    </h3>
-                    {
-                        editingMode && <i class="pencil alternate icon" style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingDescription(!editingDescription)}/>
-                    }
-                </div>
-                {
-                    !editingDescription && !editingMode && <div className="text_box">{platform.description}</div>
-                }
-                {
-                    editingDescription && <textarea className="edit-box" defaultValue={updatedPlatform.description} onBlur={handleDescriptionEdit}></textarea>
-                }
-                {
-                    !editingDescription && editingMode && <div className="text_box">{updatedPlatform.description}</div>
-                }
-            </div>
-
-            <div className="ui hidden divider"></div>
-
-            <div>
-                <div className="display-flex">
-                    <h3 className="ui header" style={{ marginBottom: '10px' }}>
-                        Contact
-                    </h3>
-                    {
-                        editingMode && <i class="pencil alternate icon" style={{ marginTop: '-1px', marginLeft: '5px' }} onClick={() => toggleEditingContact(!editingContact)}/>
-                    }
-                </div>
-                {
-                    !editingContact && !editingMode && <div className="text_box">{platform.contact}</div>
-                }
-                {
-                    editingContact && <textarea className="edit-box" defaultValue={updatedPlatform.contact} onBlur={handleContactEdit}></textarea>
-                }
-                {
-                    !editingContact && editingMode && <div className="text_box">{updatedPlatform.contact}</div>
-                }
-            </div>
-
-            <div className="ui hidden divider"></div>
-
-            <div>
-                <h3 className="ui header"> 
-                    Stats
-                </h3>
-                <div> {created} </div>
-                <div> {platformOwner} </div>
-                <div> {collaborators} </div>
-                <div> {quizzes} </div>
-                <div> {quizHits} </div>
-            </div>
-        </div>
+            </Grid.Column>
+        </Grid>
     );
 }
 export default PlatformAbout;

@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
 
-import FeaturedQuizCard from '../components/FeaturedQuizCard';
+import FeaturedQuizCard from '../components/cards/FeaturedQuizCard';
 
 const Home = (props) => {
     const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {

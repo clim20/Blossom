@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
-import * as queries from '../cache/queries';
+import * as queries from '../../cache/queries';
 
 const CreatorCard = (props) => {
     const history = useHistory();
@@ -34,7 +34,7 @@ const CreatorCard = (props) => {
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="content">
-                <div className="description">
+                <div className="description card-text">
                     <img className="card-image creator-circle ui avatar image"
                         src={profile && profile.profileImg}
                         alt="creator profile"
@@ -47,7 +47,7 @@ const CreatorCard = (props) => {
                     }
                     <br/>
                     <br/>
-                    <div className="card-text"> {props.user.username} </div>
+                    <div style={{ fontWeight: 'bold' }}> {props.user.username} </div>
                     <div> {profile && followerCount} </div>
                     <div>
                         {onCollaboratorTab && props.user._id === props.platform.owner && <div> Owner </div>} 

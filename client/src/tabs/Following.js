@@ -1,8 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
-import CreatorCards from '../components/CreatorCards';
-import PlatformCards from '../components/PlatformCards';
+import CreatorCards from '../components/cards/CreatorCards';
+import PlatformCards from '../components/cards/PlatformCards';
 
 import * as queries from '../cache/queries';
 
@@ -32,22 +33,24 @@ const Following = (props) => {
     });
 
     return (
-        <div>
-            <div className="ui hidden divider"></div>
-            {users.length > 0 && 
-                <div>
-                    <h3 className="ui header">Users</h3>
-                    <CreatorCards users={users} activeTab='following'/>
-                </div>
-            }
-            <div className="ui hidden divider"></div>
-            {platforms.length > 0 &&
+        <Grid>
+            <Grid.Column>
+                <br/>
+                {users.length > 0 && 
+                    <div>
+                        <h3 className="ui header">Users</h3>
+                        <CreatorCards users={users} activeTab='following'/>
+                    </div>
+                }
+                <div className="ui hidden divider"></div>
+                {platforms.length > 0 &&
                 <div>
                     <h3 className="ui header">Platforms</h3>
                     {platforms && <PlatformCards platforms={platforms} activeTab='following'/>}
                 </div>
-            }            
-        </div>
+            }          
+            </Grid.Column>
+        </Grid>
     );
 }
 export default Following;

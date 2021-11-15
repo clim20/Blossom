@@ -29,8 +29,12 @@
     overflow-wrap: break-word;
 }
 
-.tab_content {
-    width: 75%;
+/* BUTTONS */
+.edit-button {
+    max-width: 8rem;
+    width: -webkit-fill-available;
+    height: 3rem;
+    background-color: var(--pink) !important;
 }
 
 .follow-button {
@@ -176,6 +180,6 @@
 /* ABOUT EDIT BOXES */
 .edit-box {
     margin: 0px;
-    width: 400px;
+    width: -webkit-fill-available;
     height: 100px;
 }

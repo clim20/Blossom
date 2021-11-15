@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams } from "react-router-dom";
 
-import PlatformCards from '../components/PlatformCards';
+import PlatformCards from '../components/cards/PlatformCards';
 import PlatformCreationModal from '../modals/PlatformCreationModal';
 import PlatformDeletionModal from '../modals/PlatformDeletionModal';
 
@@ -71,44 +72,42 @@ const Platforms = (props) => {
         refetchPlatformsData();
     }, [user, profile, platforms, refetchProfileData, refetchPlatformsData]);
 
-    const height = platforms && platforms.length === 0 ? "empty-tab" : "";
-
     return (
-        <div className={height}>
-            {
-                isOwner && !editingMode &&
-                <div>
-                    <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
-                        Edit
-                    </button>  
-                </div>
-            }
-            {
-                isOwner && !editingMode &&
-                <div>
-                    <button className="ui button request-button" style={{ float: 'right' }} onClick={() => {setShowCreationMenu(true)}}>
-                        Create
-                    </button>
-                </div>
-            }
-            {
-                editingMode &&
-                <div style={{ float: 'right' }}>
-                    <button className="ui button save-button" onClick={handleSave}>
-                        Save
-                    </button>  
-                    <button className="ui button cancel-button" onClick={handleCancel}>
-                        Cancel
-                    </button>  
-                </div>
-            }
-
-            <div className="tab_content">
+        <Grid>
+            <Grid.Column width={12}>
                 {platforms && <PlatformCards platforms={platforms} profile={profile} activeTab={props.activeTab} editingMode={editingMode}
                                 setShowPlatformDeletionModal={setShowPlatformDeletionModal} setRemovePlatform={setRemovePlatform} user={user}/>
                 }
-            </div>
-
+            </Grid.Column>
+            <Grid.Column width={4}>
+                {
+                    isOwner && !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
+                            Edit
+                        </button>  
+                    </div>
+                }
+                {
+                    isOwner && !editingMode &&
+                    <div>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => {setShowCreationMenu(true)}}>
+                            Create
+                        </button>
+                    </div>
+                }
+                {
+                    editingMode &&
+                    <div style={{ float: 'right' }}>
+                        <button className="ui button save-button" onClick={handleSave}>
+                            Save
+                        </button>  
+                        <button className="ui button cancel-button" onClick={handleCancel}>
+                            Cancel
+                        </button>  
+                    </div>
+                }
+            </Grid.Column>
             {
                 showCreationMenu && (<PlatformCreationModal setShowCreationMenu={setShowCreationMenu} refetchProfileData={refetchProfileData}/>)
             }
@@ -116,7 +115,7 @@ const Platforms = (props) => {
                 showPlatformDeletionModal && (<PlatformDeletionModal setShowPlatformDeletionModal={setShowPlatformDeletionModal}
                                             deletePlatform={deletePlatform} removePlatform={removePlatform}/>)
             }
-        </div>
+        </Grid>
     );
 }
 export default Platforms;

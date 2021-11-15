@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { useQuery } from '@apollo/react-hooks';
 
-import * as queries from '../cache/queries';
+import * as queries from '../../cache/queries';
 
 function PlatformCard(props) {
     const history = useHistory();
@@ -35,7 +35,7 @@ function PlatformCard(props) {
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="content">
-                <div className="description">
+                <div className="description card-text">
                     <img className="card-image platform-circle ui avatar image"
                         src={platform && platform.platformImg}
                         alt="platform"
@@ -48,7 +48,7 @@ function PlatformCard(props) {
                     }
                     <br/>
                     <br/>
-                    <div className="card-text">{props.platform.name}</div>
+                    <div style={{ fontWeight: 'bold' }}>{props.platform.name}</div>
                     <br/>
                     <div> {platform && followerCount} </div>
                     <div>

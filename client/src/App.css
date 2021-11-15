@@ -109,7 +109,6 @@ button svg {
 }
 
 .card-text {
-  font-weight: bold;
   word-break: break-all;
 }
 
@@ -117,30 +116,19 @@ button svg {
   padding-bottom: 1px;
 }
 
-/* EDIT SAVE CANCEL BUTTONS */
-.edit-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: var(--pink) !important;
-}
-
+/* SAVE CANCEL BUTTONS */
 .save-button {
-  width: 8rem !important;
-  height: 3rem !important;
+  max-width: 8rem;
+  width: -webkit-fill-available;
+  height: 3rem;
   background-color: var(--saveGreen) !important;
 }
 
 .cancel-button {
-  width: 8rem !important;
-  height: 3rem !important;
-  background-color: var(--cancelRed) !important;
-}
-
-/* REQUEST BUTTON */
-.request-button {
-  width: 8rem;
+  max-width: 8rem;
+  width: -webkit-fill-available;
   height: 3rem;
-  background-color: var(--pink) !important;
+  background-color: var(--cancelRed) !important;
 }
 
 .input-box {

@@ -3,7 +3,7 @@ import { Grid, Image } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
-import * as queries from '../cache/queries';
+import * as queries from '../../cache/queries';
 
 const QuizCollectionSearchCard = (props) => {
     console.log(props)
@@ -43,7 +43,7 @@ const QuizCollectionSearchCard = (props) => {
                 <div className="ui fluid card" style={{ cursor: 'pointer', marginBottom: '15px' }} onClick={handleClick}>
                     <div className="content">
                         <Grid verticalAlign="middle">
-                            <Grid.Column width={4}>
+                            <Grid.Column width={4} style={{ textAlign: 'center' }}>
                                 <Image src={quizCollection.titleImg}/>
                             </Grid.Column>
                             <Grid.Column width={12}>
@@ -51,8 +51,12 @@ const QuizCollectionSearchCard = (props) => {
                                 <h3> {quizCollection && quizCollection.name} </h3>
                                 <div> Created by {quizCollectionCreator && quizCollectionCreator.username} </div>
                                 <div> {quizCollection && quizzes} </div>
-                                <br/>
-                                <div> {quizCollection && quizCollection.description} </div>
+                                {quizCollection && quizCollection.description !== '' &&
+                                    <div>
+                                        <br/>
+                                        {quizCollection.description}
+                                    </div>
+                                }
                             </div>
                             </Grid.Column>                
                         </Grid>

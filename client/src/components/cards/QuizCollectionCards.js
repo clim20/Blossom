@@ -3,7 +3,7 @@ import React from 'react';
 import QuizCollectionCard from './QuizCollectionCard';
 
 function QuizCollectionCards(props) {  
-    const quizCollectionCardClass = props.activeTab ? "ui three cards" : "ui five cards";
+    const quizCollectionCardClass = props.activeTab ? "ui three cards stackable" : "ui five cards stackable";
 
     return (
         <div>

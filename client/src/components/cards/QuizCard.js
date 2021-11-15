@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
-import * as queries from '../cache/queries';
+import * as queries from '../../cache/queries';
 
 function QuizCard(props) {
     const history = useHistory();
@@ -51,19 +51,18 @@ function QuizCard(props) {
 
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
+            <div class="image">
+                <img src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
+                    alt="quiz"
+                />
+            </div>
             <div className="content">
-                <div className="description">
-                    <img width='200px' height='120px'
-                        src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
-                        alt="quiz"
-                    />
+                <div className="description card-text">
                     {
                         onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
                         <i class={starClass} onClick={handleStarClick}/>
                     }
-                    <br/>
-                    <br/>
-                    <div className="card-text"> {props.quiz.title} </div>
+                    <div style={{ fontWeight: 'bold' }}> {props.quiz.title} </div>
                     <div> Created by {quizCreator.username} </div>
                     <div> {quizHits} </div>
                 </div>
