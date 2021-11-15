@@ -6,13 +6,14 @@ import * as queries from '../cache/queries';
 
 const CreatorCard = (props) => {
     const history = useHistory();
+    
     const { data } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
-            id: props.user.profileId
+            id: props.user ? props.user.profileId : ''
         }
     });
 
-    var profile = {};
+    var profile;
     if (data) { 
 		profile = data.findProfileById;
     }
@@ -28,12 +29,14 @@ const CreatorCard = (props) => {
     }
 
     const onCollaboratorTab = props.activeTab === "collaborators";
+    const followerCount = profile ? profile.followerCount !== 1 ? profile.followerCount + ' followers' : profile.followerCount + ' follower' : '';
+
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="content">
                 <div className="description">
                     <img className="card-image creator-circle ui avatar image"
-                        src={profile.profileImg}
+                        src={profile && profile.profileImg}
                         alt="creator profile"
                     />
                     {
@@ -45,7 +48,7 @@ const CreatorCard = (props) => {
                     <br/>
                     <br/>
                     <div className="card-text"> {props.user.username} </div>
-                    <div> {profile && profile.followerCount && profile.followerCount} followers </div>
+                    <div> {profile && followerCount} </div>
                     <div>
                         {onCollaboratorTab && props.user._id === props.platform.owner && <div> Owner </div>} 
                     </div>

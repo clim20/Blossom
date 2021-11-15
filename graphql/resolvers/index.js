@@ -3,15 +3,33 @@ const profilesResolvers = require('./profiles');
 const platformsResolvers = require('./platforms');
 const quizzesResolvers = require('./quiz');
 const quizCollectionsResolvers = require('./quizCollections');
+const searchResolvers = require('./search');
 
 module.exports = {
     Following: {
         __resolveType(obj) {
             if (obj.username){
-            return 'User';
+                return 'User';
             }
             if (obj.name){
-            return 'Platform';
+                return 'Platform';
+            }
+            return null;
+        },
+    },
+    SearchResults: {
+        __resolveType(obj) {
+            if (obj.username){
+                return 'User';
+            }
+            if (obj.owner){
+                return 'Platform';
+            }
+            if (obj.title){
+                return 'Quiz';
+            }
+            if (obj.creator){
+                return 'QuizCollection';
             }
             return null;
         },
@@ -22,12 +40,14 @@ module.exports = {
         ...platformsResolvers.Query,
         ...quizzesResolvers.Query,
         ...quizCollectionsResolvers.Query,
+        ...searchResolvers.Query,
     },
     Mutation: {
         ...usersResolvers.Mutation,
         ...profilesResolvers.Mutation,
         ...platformsResolvers.Mutation,
         ...quizzesResolvers.Mutation,
-        ...quizCollectionsResolvers.Mutation
+        ...quizCollectionsResolvers.Mutation,
+        ...searchResolvers.Mutation,
     }
 }

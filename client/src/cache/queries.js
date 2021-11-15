@@ -362,3 +362,39 @@ export const FIND_QUIZ_COLLECTION_BY_IDS = gql`
         }
     }
 `;
+
+export const GET_SEARCH_RESULTS = gql`
+    query getSearchResults($searchQuery: String!, $filters: [String]!) {
+        getSearchResults(searchQuery: $searchQuery, filters: $filters) {
+            __typename
+            ... on User {
+                _id
+                username
+                profileId
+            }
+            
+            ... on Platform {
+                _id
+                name
+                platformImg
+                followerCount
+            }
+
+            ... on Quiz {
+                _id
+                creator
+                title
+                description
+                quizHits
+            }
+
+            ... on QuizCollection {
+                _id
+                creator
+                name
+                description
+                quizzes
+            }
+        }
+    }
+`;

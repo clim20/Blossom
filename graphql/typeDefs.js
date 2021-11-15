@@ -53,7 +53,7 @@ module.exports = gql`
     type Quiz {
         _id: ID!
         title: String!
-        description: String!
+        description: String
         titleImg: String
         creator: ID!
         platform: ID
@@ -124,12 +124,10 @@ module.exports = gql`
         contact: String
     }
 
-    
-
     input QuizInput {
         _id: ID!
         title: String!
-        description: String!
+        description: String
         titleImg: String
         creator: ID!
         platformId: ID
@@ -165,8 +163,8 @@ module.exports = gql`
     }
 
     
-
     union Following = User | Platform
+    union SearchResults = User | Platform | Quiz | QuizCollection
 
     type Query {
         getUsers: [User!]!
@@ -194,6 +192,8 @@ module.exports = gql`
         getQuizCollections: [QuizCollection!]!
         findQuizCollectionById(id: ID!): QuizCollection!
         findQuizCollectionByIds(ids: [ID!]!): [QuizCollection!]!
+
+        getSearchResults(searchQuery: String!, filters: [String]!): [SearchResults!]!
     }
 
     type Mutation {

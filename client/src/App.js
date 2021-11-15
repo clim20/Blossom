@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
@@ -24,13 +24,17 @@ import Quest from './pages/Quest';
 import QuizStart from './pages/QuizStart';
 
 const App = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <AuthProvider>
       <Router>
         <Container>
-          <MenuBar/>
+          <MenuBar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
           <Route exact path='/' component={Home}/>
-          <Route exact path="/search" component={Search}/>
+          <Route exact path="/search" render={() => (
+            <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+          )}/>
           <Route exact path="/profile/:profileId" component={Profile}/>
           <Route exact path="/platform/:platformId" component={Platform}/>
           <Route exact path="/quiz/:quizId" component={Quiz}/>

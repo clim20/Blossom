@@ -113,6 +113,10 @@ button svg {
   word-break: break-all;
 }
 
+.search-cards {
+  padding-bottom: 1px;
+}
+
 /* EDIT SAVE CANCEL BUTTONS */
 .edit-button {
   width: 8rem;
@@ -152,6 +156,7 @@ button svg {
   justify-content: center;
 }
 
+/* SUCCESS/ERROR MESSAGES */
 .suc-msg {
   color: green;
   font-family: var(--font-family-roboto-regular);
@@ -174,37 +179,4 @@ button svg {
   height: 23px;
   margin-top:10px;
   text-align: center;
-}
-
-/*.edit-box {
-  margin: 0px;
-  width: 400px;
-  height: 100px;
-}*/
-
-/* REQUEST BUTTON */
-.request-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: var(--pink) !important;
-}
-
-/* PLATFORM CREATION MODAL */
-
-.create-modal-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: var(--saveGreen) !important;
-}
-
-.cancel-modal-button {
-  width: 8rem;
-  height: 3rem;
-  background-color: var(--cancelRed) !important;
-}
-
-.creation-modal {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
 }

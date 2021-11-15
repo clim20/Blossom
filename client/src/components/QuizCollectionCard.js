@@ -9,7 +9,7 @@ function QuizCollectionCard(props) {
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
-            id: props.quizCollection.creator
+            id: props.quizCollection ? props.quizCollection.creator : ''
         }
     });
 
@@ -20,7 +20,7 @@ function QuizCollectionCard(props) {
 
     const { data } = useQuery(queries.FIND_QUIZ_COLLECTION_BY_ID, {
         variables: {
-            id: props.quizCollection._id
+            id: props.quizCollection ? props.quizCollection._id : ''
         }
     });
 
@@ -60,9 +60,9 @@ function QuizCollectionCard(props) {
                     />
                     <br/>
                     <br/>
-                    <div className="card-text"> {props.quizCollection.name} </div>
-                    <div> Created by {quizCollectionCreator.username} </div>
-                    <div> {quizzesCount} </div>
+                    <div className="card-text"> {props.quizCollection && props.quizCollection.name} </div>
+                    <div> Created by {quizCollectionCreator && quizCollectionCreator.username} </div>
+                    <div> {quizCollection && quizzesCount} </div>
                 </div>
             </div>
         </div>   

@@ -9,15 +9,13 @@ function PlatformCard(props) {
 
     const { data } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
-            id: props.platform._id
+            id: props.platform ? props.platform._id : ''
         }
     });
 
-    var platform = {};
-    var followerCount = 0;
+    var platform;
     if (data) { 
 		platform = data.findPlatformById;
-        followerCount = props.platform.followerCount;
     }
 
     const handleClick = () => {
@@ -32,13 +30,14 @@ function PlatformCard(props) {
     }
 
     const onPlatformTab = props.activeTab === "platforms";
+    const followerCount = platform ? platform.followerCount !== 1 ? platform.followerCount + ' followers' : platform.followerCount + ' follower' : '';
     
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="content">
                 <div className="description">
                     <img className="card-image platform-circle ui avatar image"
-                        src={platform.platformImg}
+                        src={platform && platform.platformImg}
                         alt="platform"
                     />
                     {
@@ -51,7 +50,7 @@ function PlatformCard(props) {
                     <br/>
                     <div className="card-text">{props.platform.name}</div>
                     <br/>
-                    <div> {followerCount} followers </div>
+                    <div> {platform && followerCount} </div>
                     <div>
                         {onPlatformTab && props.profile.user === platform.owner && <div> Owner </div>} 
                     </div>

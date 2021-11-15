@@ -11,7 +11,7 @@ import * as queries from '../cache/queries';
 import Login from './Login';
 import Blossom from '../Blossom.png';
 
-const MenuBar = () => {
+const MenuBar = (props) => {
     /*TODO: Implementation of Search */
     const history = useHistory();
     const pathname = window.location.pathname;
@@ -77,6 +77,14 @@ const MenuBar = () => {
         }
     }
 
+    const handleSearchSubmit = (e) => {
+        if (e.key === 'Enter'){
+            history.push("/search");
+        } else {
+            props.setSearchQuery(e.target.value);
+        }
+    };
+
     const blossom = '\xa0\xa0\xa0Blossom';
     const menuBar = user ? (
         <Menu pointing secondary size="massive" color="pink">
@@ -100,7 +108,9 @@ const MenuBar = () => {
                 />
             </Menu.Menu>
             <Menu.Item className='search-bar'>
-                    <Input icon='search' placeholder='Search...' />
+                <Input icon='search' placeholder='Search...' 
+                    onKeyUp={handleSearchSubmit}
+                />
             </Menu.Item>
             <Menu.Menu position='right'>
                 <Dropdown text={userObject.username} options={options} onChange={handleDropdownClick} item/>
@@ -121,7 +131,9 @@ const MenuBar = () => {
                 />
             </Menu.Menu>
             <Menu.Item className='search-bar' style={{width: "70%"}}>
-                    <Input icon='search' placeholder='Search...' />
+                <Input icon='search' placeholder='Search...' 
+                    onKeyUp={handleSearchSubmit}
+                />
             </Menu.Item>
             <Menu.Menu position='right'>
                 <Login/>
