@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { Button, Icon, Modal } from 'semantic-ui-react'
+import { useQuery } from '@apollo/react-hooks';
+import { Modal } from 'semantic-ui-react'
 
 import RequestCard from '../components/RequestCard';
 
@@ -8,9 +8,6 @@ import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 
 const RequestModal = (props) => {
-
-    const { user } = useContext(AuthContext);
-
     var requests;
     const { data, refetch: refetchRequestData } = useQuery(queries.FIND_COLLABORATORS_BY_IDS, {
         variables: {
@@ -32,7 +29,8 @@ const RequestModal = (props) => {
             <Modal.Header>REQUESTS</Modal.Header>
             <Modal.Content scrolling>
             <p>These users wish to join your platform:</p>
-            { requests && <div className="ui very relaxed horizontal list medium">
+            <br/>
+            { requests && <div className="ui two cards">
                 {
                     requests.map((entry, index) => (
                         <RequestCard

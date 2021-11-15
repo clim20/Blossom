@@ -133,7 +133,7 @@
 }
 
 .create-modal-suc-msg {
-    color: green;
+    color: var(--saveGreen);
     font-family: var(--font-family-roboto-regular);
     font-size: 20px;
     display: flex;
@@ -145,7 +145,7 @@
   }
   
   .create-modal-err-msg {
-    color: red;
+    color: var(--cancelRed);
     font-family: var(--font-family-roboto-regular);
     font-size: 20px;
     display: flex;

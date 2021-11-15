@@ -39,7 +39,11 @@ function QuizCollectionCard(props) {
 
     const handleXClick = () => {
         props.setQuizCollectionName(quizCollection._id);
-        props.setShowQuizCollectionDeletionModal(true);
+        if (!props.platform) {
+            props.setShowQuizCollectionDeletionModal(true);
+        } else {
+            props.setShowQuizCollectionRemovalModal(true);
+        }
     }
 
     const onQuizCollectionTab = props.activeTab === "quizCollections";

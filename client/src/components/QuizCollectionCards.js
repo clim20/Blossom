@@ -13,8 +13,9 @@ function QuizCollectionCards(props) {
                     props.quizCollections.map((entry, index) => (
                         <QuizCollectionCard
                             quizCollection={entry} key={index} user={props.user}
-                            profile={props.profile} activeTab={props.activeTab} editingMode={props.editingMode}
+                            profile={props.profile} platform={props.platform} activeTab={props.activeTab} editingMode={props.editingMode}
                             setShowQuizCollectionDeletionModal={props.setShowQuizCollectionDeletionModal} setQuizCollectionName={props.setQuizCollectionName}
+                            setShowQuizCollectionRemovalModal={props.setShowQuizCollectionRemovalModal}
                         />
                     ))
                 }
