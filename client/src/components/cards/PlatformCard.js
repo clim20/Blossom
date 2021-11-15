@@ -41,7 +41,7 @@ function PlatformCard(props) {
                         alt="platform"
                     />
                     {
-                        onPlatformTab && props.editingMode && platform.owner === props.user._id && 
+                        onPlatformTab && props.editingMode && platform && platform.owner === props.user._id && 
                         <i className="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
                             onClick={handleXClick}
                         />
@@ -49,13 +49,12 @@ function PlatformCard(props) {
                     <br/>
                     <br/>
                     <div style={{ fontWeight: 'bold' }}>{props.platform.name}</div>
-                    <br/>
                     <div> {platform && followerCount} </div>
                     <div>
-                        {onPlatformTab && props.profile.user === platform.owner && <div> Owner </div>} 
+                        {onPlatformTab && platform && props.profile.user === platform.owner && <div> Owner </div>} 
                     </div>
                     <div>
-                        {onPlatformTab && props.profile.user !== platform.owner && <div> Collaborator </div>}
+                        {onPlatformTab && platform && props.profile.user !== platform.owner && <div> Collaborator </div>}
                     </div>
                 </div>
             </div>

@@ -269,7 +269,6 @@ export const REMOVE_QUIZ_COLLECTION = gql`
     }
 `;
 
-
 export const ADD_QUIZ_TO_QUIZ_COLLECTION = gql`
     mutation AddQuizToQuizCollection($quizId: ID!, $quizCollectionId: ID!) {
         addQuizToQuizCOllection(quizId: $quizId, quizCollectionId: $quizCollectionId) {

@@ -47,11 +47,12 @@ const AddQuizCollectionModal = (props) => {
     const [quizCollectionId, setQuizCollectionId] = useState({});
     
     const handleSubmit = async () => {
+        if (options.length !== 0){
+            setPlaceholder("Select A Quiz Collection To Add");
+            props.addQuizCollection(quizCollectionId);
+        }
         if (options.length === 1){
             setPlaceholder("No Quiz Collections Addable");
-        }
-        if (options.length !== 0){
-            props.addQuizCollection(quizCollectionId);
         }
     }
 

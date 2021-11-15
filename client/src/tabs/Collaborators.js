@@ -107,8 +107,6 @@ const Collaborators = (props) => {
         refetchPlatformData();        
     }
 
-    const height = collaborators && collaborators.length === 0 ? "empty-tab" : "";
-
     return (
         <Grid>
             <Grid.Column width={12}>

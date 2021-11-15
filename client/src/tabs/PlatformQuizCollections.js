@@ -75,8 +75,6 @@ const PlatformQuizCollections = (props) => {
         refetchPlatformData();  
     }
 
-    const height = quizCollections && quizCollections.length === 0 ? "empty-tab" : "";
-
     return (
         <Grid>
             <Grid.Column width={12}>
