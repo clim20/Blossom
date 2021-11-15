@@ -1,18 +1,18 @@
 import React, { useContext, useState } from 'react';
 import { Menu, Input, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useHistory } from "react-router-dom";
 import { useGoogleLogout } from 'react-google-login';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 
 import Login from './Login';
 import Blossom from '../Blossom.png';
 
 const MenuBar = (props) => {
-    /*TODO: Implementation of Search */
     const history = useHistory();
     const pathname = window.location.pathname;
     const path = pathname === '/' ? 'home' : pathname.split('/')[1];
@@ -37,14 +37,48 @@ const MenuBar = (props) => {
     });
 
     var userObject = {};
-    const { data } = useQuery(queries.FIND_USER_BY_ID, {
+    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
             id: user ? user._id : ''
         }
     });
 
-	if(data) {
-        userObject = data.findUserById;
+	if(userData) {
+        userObject = userData.findUserById;
+    }
+
+    const { data: randomQuizData, refetch: getRandomQuiz } = useQuery(queries.GET_RANDOM_QUIZ, {
+        enabled: false
+    });
+
+    const handleRandomClick = async () => {
+        getRandomQuiz();
+        history.push("/quiz/" + randomQuizData.getRandomQuiz)
+    }
+
+    const handleSearchSubmit = (e) => {
+        if (e.key === 'Enter'){
+            history.push("/search");
+        } else {
+            props.setSearchQuery(e.target.value);
+        }
+    };
+
+    const [CreateQuiz] = useMutation(mutations.CREATE_QUIZ);
+    const handleQuizCreate = async () => {
+        const { data } = await CreateQuiz({
+            variables: { 
+                owner: user._id, 
+                title: "test"
+            }
+        });
+
+        var returnedQuiz = {};
+        if (data) { 
+            returnedQuiz = data.createQuiz;
+        }
+
+        history.push("/quiz/edit/" + returnedQuiz._id);
     }
 
     const [activeItem, setActiveItem] = useState(path);
@@ -54,7 +88,7 @@ const MenuBar = (props) => {
         { key: 2, text: 'Quests', value: 2 },
         { key: 3, text: 'Create', value: 3 },
         { key: 4, text: 'Logout', value: 4 }
-    ]
+    ];
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
 
@@ -67,7 +101,7 @@ const MenuBar = (props) => {
                 history.push('/quests');
                 break;
             case "Create":
-                console.log('create clicked'); /*TODO: NEED TO ADD ROUTE TO QUIZ CREATE PAGE*/
+                handleQuizCreate();
                 break;
             case "Logout":
                 signOut();
@@ -76,14 +110,6 @@ const MenuBar = (props) => {
                 break;
         }
     }
-
-    const handleSearchSubmit = (e) => {
-        if (e.key === 'Enter'){
-            history.push("/search");
-        } else {
-            props.setSearchQuery(e.target.value);
-        }
-    };
 
     const blossom = '\xa0\xa0\xa0Blossom';
     const menuBar = user ? (
@@ -103,8 +129,8 @@ const MenuBar = (props) => {
                     to={'/profile/' + userObject.profileId}
                 />
                 <Menu.Item
-                    name='random' /* TODO: Implementation of Random Button */
-                    onClick={()=>{}}
+                    name='random'
+                    onClick={handleRandomClick}
                 />
             </Menu.Menu>
             <Menu.Item className='search-bar'>

@@ -46,6 +46,13 @@ module.exports = {
       }
       return quizHits;
     },
+    async getRandomQuiz(){
+      const quizzes = await Quiz.find();
+      const quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
+
+      if (quiz) return quiz._id;
+      return quiz._id;
+    }
   },
   Mutation: {
     async createQuiz(_, { owner, title }) {

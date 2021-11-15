@@ -297,6 +297,12 @@ export const FIND_QUIZ_BY_ID = gql`
     }
 `;
 
+export const GET_RANDOM_QUIZ = gql`
+    query getRandomQuiz {
+        getRandomQuiz
+    }
+`;
+
 export const GET_QUIZ_HITS = gql`
     query getQuizHits($ids: [ID!]!) {
         getQuizHits(ids: $ids)

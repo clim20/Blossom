@@ -188,6 +188,7 @@ module.exports = gql`
         findQuizzesByIds(ids: [ID!]!): [Quiz!]!
         getQuizHits(ids: [ID!]!): Int!
         getPopularQuizzes: [Quiz!]!
+        getRandomQuiz: ID!
 
         getQuizCollections: [QuizCollection!]!
         findQuizCollectionById(id: ID!): QuizCollection!
