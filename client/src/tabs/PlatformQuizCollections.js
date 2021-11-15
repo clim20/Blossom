@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import QuizCollectionCards from '../components/cards/QuizCollectionCards';
 import QuizCollectionRemovalModal from '../modals/QuizCollectionRemovalModal';
+import AddQuizCollectionModal from '../modals/AddQuizCollectionModal';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -44,6 +45,8 @@ const PlatformQuizCollections = (props) => {
 
     const [showQuizCollectionRemovalModal, setShowQuizCollectionRemovalModal] = useState(false);
     const [quizCollectionName, setQuizCollectionName] = useState('');
+    const [showAddQuizCollectionModal, setShowAddQuizCollectionModal] = useState(false);
+    const [newQuizCollectionName, setNewQuizCollectionName] = useState('');
     const [editingMode, toggleEditingMode] = useState(false);
   
     const handleCancel = () => {
@@ -60,11 +63,19 @@ const PlatformQuizCollections = (props) => {
     }, [user, platform, quizCollections, refetchPlatformData, refetchQuizCollectionsData]);
 
     const [RemoveQuizCollection] = useMutation(mutations.REMOVE_QUIZ_COLLECTION);
+    const [AddQuizCollection] = useMutation(mutations.ADD_QUIZ_COLLECTION);
 
     const removeQuizCollection = async (quizCollectionId) => {
         await RemoveQuizCollection({variables: { platformId: platform._id, quizCollectionId: quizCollectionId }});
         refetchPlatformData();        
     }
+
+    const addQuizCollection = async (quizCollectionId) => {
+        await AddQuizCollection({variables: { platformId: platform._id, quizCollectionId: quizCollectionId }});
+        refetchPlatformData();  
+    }
+
+    const height = quizCollections && quizCollections.length === 0 ? "empty-tab" : "";
 
     return (
         <Grid>
@@ -84,9 +95,11 @@ const PlatformQuizCollections = (props) => {
                     </div>
                 }
                 {
-                    isOwner && !editingMode &&
+                isOwner && !editingMode &&
                     <div>
-                        <button className="ui button edit-button" style={{ float: 'right', visibility: 'hidden' }}/>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => setShowAddQuizCollectionModal(true)}>
+                            Add
+                        </button>  
                     </div>
                 }
                 {
@@ -105,7 +118,11 @@ const PlatformQuizCollections = (props) => {
                 showQuizCollectionRemovalModal && (<QuizCollectionRemovalModal setShowQuizCollectionRemovalModal={setShowQuizCollectionRemovalModal}
                                                 removeQuizCollection={removeQuizCollection} quizCollectionName={quizCollectionName}/>)
             }
-        </Grid>
+            {
+                showAddQuizCollectionModal && (<AddQuizCollectionModal platformQuizCollections={quizCollections} setShowAddQuizCollectionModal={setShowAddQuizCollectionModal}
+                    addQuizCollection={addQuizCollection} setNewQuizCollectionName={setNewQuizCollectionName}/>)
+            }
+            </Grid>
     );
 }
 export default PlatformQuizCollections;

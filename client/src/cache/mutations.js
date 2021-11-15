@@ -244,7 +244,7 @@ export const DELETE_QUIZ_COLLECTION = gql`
 `;
 
 export const ADD_QUIZ_COLLECTION = gql`
-    mutation addQuizCollection($platformId: ID!, $quizCollectionId: String!) {
+    mutation addQuizCollection($platformId: ID!, $quizCollectionId: ID!) {
         addQuizCollection(platformId: $platformId, quizCollectionId: $quizCollectionId) {
             _id
             name

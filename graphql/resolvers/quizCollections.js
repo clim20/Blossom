@@ -36,8 +36,31 @@ module.exports = {
     async createQuizCollection(_, { owner, name }) {
       const ownerId = new ObjectId(owner);
       const user = await User.findOne({_id: ownerId}); 
+      const quizCollectionNameExist = await QuizCollection.findOne({name: name, creator: user._id});
   
-      const newQuizCollection = new QuizCollection({
+      if(!quizCollectionNameExist && name !== '') {
+        const newQuizCollection = new QuizCollection({
+          _id: new ObjectId(),
+          name,
+          creator: user._id, 
+          img: "https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg",
+          description: "",
+          quizzes: [],
+          createdAt: new Date().toISOString()
+        });
+
+        const updated = await newQuizCollection.save();
+
+        const profile = await Profile.findOne({_id: new ObjectId(user.profileId)});
+        let quizCollections = profile.quizCollections;
+        quizCollections.push(newQuizCollection._id);
+        const updated2 = await Profile.updateOne({_id: profile._id}, {quizCollections: quizCollections});
+
+        if(updated && updated2) {
+          return newQuizCollection;
+        }
+      }
+      return new QuizCollection({
         _id: new ObjectId(),
         name,
         creator: user._id, 
@@ -46,18 +69,6 @@ module.exports = {
         quizzes: [],
         createdAt: new Date().toISOString()
       });
-
-      const updated = await newQuizCollection.save();
-
-      const profile = await Profile.findOne({_id: new ObjectId(user.profileId)});
-      let quizCollections = profile.quizCollections;
-      quizCollections.push(newQuizCollection._id);
-      const updated2 = await Profile.updateOne({_id: profile._id}, {quizCollections: quizCollections});
-
-      if(updated && updated2) {
-        return newQuizCollection;
-      }
-      return newQuizCollection;
     },
     async deleteQuizCollection(_, { quizCollectionId }){
       const quizCollection = await QuizCollection.findOne({_id: quizCollectionId});

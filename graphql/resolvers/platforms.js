@@ -84,23 +84,23 @@ module.exports = {
         if(updated && updated2) {
           return newPlatform;
         }
-      } else   
-        return new Platform({
-          _id: new ObjectId(),
-          name: "",
-          owner: user._id,
-          platformImg: "",
-          bannerImg: "",
-          description: "",
-          contact: "",
-          collaborators: [user._id],
-          requests: [],
-          followerCount: 0,
-          featuredQuiz: null,
-          quizzes: [],
-          quizCollections: [],
-          createdAt: new Date().toISOString()
-        });
+      }
+      return new Platform({
+        _id: new ObjectId(),
+        name: "",
+        owner: user._id,
+        platformImg: "",
+        bannerImg: "",
+        description: "",
+        contact: "",
+        collaborators: [user._id],
+        requests: [],
+        followerCount: 0,
+        featuredQuiz: null,
+        quizzes: [],
+        quizCollections: [],
+        createdAt: new Date().toISOString()
+      });
     },
     async deletePlatform(_, { platformId }){
       const platform = await Platform.findOne({_id: platformId});
