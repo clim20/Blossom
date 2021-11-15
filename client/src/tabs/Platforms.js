@@ -98,12 +98,12 @@ const Platforms = (props) => {
                 }
                 {
                     editingMode &&
-                    <div style={{ float: 'right' }}>
-                        <button className="ui button save-button" onClick={handleSave}>
-                            Save
-                        </button>  
-                        <button className="ui button cancel-button" onClick={handleCancel}>
+                    <div>
+                        <button className="ui button cancel-button" style={{ float: 'right' }} onClick={handleCancel}>
                             Cancel
+                        </button>  
+                        <button className="ui button save-button" style={{ float: 'right' }} onClick={handleSave}>
+                            Save
                         </button>  
                     </div>
                 }

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid } from 'semantic-ui-react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 
 import CreatorCards from '../components/cards/CreatorCards';
 import PlatformCards from '../components/cards/PlatformCards';
@@ -8,8 +8,6 @@ import PlatformCards from '../components/cards/PlatformCards';
 import * as queries from '../cache/queries';
 
 const Following = (props) => {
-    const [isEditing, setEditing] = useState(false);
-
     var following = [];
     const { data } = useQuery(queries.FIND_FOLLOWING_BY_IDS, {
         variables: {
@@ -36,19 +34,21 @@ const Following = (props) => {
         <Grid>
             <Grid.Column>
                 <br/>
-                {users.length > 0 && 
+                {
+                    users.length > 0 && 
                     <div>
                         <h3 className="ui header">Users</h3>
                         <CreatorCards users={users} activeTab='following'/>
                     </div>
                 }
                 <div className="ui hidden divider"></div>
-                {platforms.length > 0 &&
-                <div>
-                    <h3 className="ui header">Platforms</h3>
-                    {platforms && <PlatformCards platforms={platforms} activeTab='following'/>}
-                </div>
-            }          
+                {
+                    platforms.length > 0 &&
+                    <div>
+                        <h3 className="ui header">Platforms</h3>
+                        {platforms && <PlatformCards platforms={platforms} activeTab='following'/>}
+                    </div>
+                }          
             </Grid.Column>
         </Grid>
     );

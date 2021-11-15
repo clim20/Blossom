@@ -152,7 +152,8 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                 </div>
             </Grid.Column>
             <Grid.Column width={4}>
-                {isOwnProfile && !editingMode && 
+                {
+                    isOwnProfile && !editingMode && 
                     <div>
                         <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
                             Edit
@@ -160,13 +161,14 @@ const ProfileAbout = ({ profile, refetchProfileData }) => {
                     </div>
                 }
 
-                {editingMode && 
-                    <div style={{ float: 'right' }}>
-                        <button className="ui button save-button" onClick={handleSave}>
-                            Save
-                        </button>  
-                        <button className="ui button cancel-button" onClick={handleCancel}>
+                {
+                    editingMode && 
+                    <div>
+                        <button className="ui button cancel-button" style={{ float: 'right' }} onClick={handleCancel}>
                             Cancel
+                        </button>  
+                        <button className="ui button save-button" style={{ float: 'right' }} onClick={handleSave}>
+                            Save
                         </button>  
                     </div>
                 }
