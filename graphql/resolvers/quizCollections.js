@@ -66,21 +66,11 @@ module.exports = {
         const user = await User.findOne({_id: quizCollection.creator});
         const profile = await Profile.findOne({_id: user.profileId});
         
-        //const platforms = profile.platforms;
-        // owner of quizCollection can only add to platforms they are a part of, thus query their platforms
-        // and remove when we see it hold the quizCollection
-
-        // TODO: how to find a collection with an array with a specific item mongo
-        const platforms = Platform.find({quizCollection: {$in: new ObjectId(quizCollectionId)}});
-        console.log(platforms);
-        console.log(platforms.length)
+        const platforms = await Platform.find({quizCollection: {$in: new ObjectId(quizCollectionId)}});
         for (let i = 0; i < platforms.length; i++){
-          console.log(platforms[i]);
           if (platforms[i]) {
             let platform = await Platform.findOne({_id: platforms[i]._id })
-            console.log(platform);
             let quizCollections = platform.quizCollections.filter(q => q._id.toString() !== quizCollectionId.toString());
-            console.log(quizCollections);
             await Platform.updateOne({_id: platform._id}, {quizCollections: quizCollections});
           }
         }

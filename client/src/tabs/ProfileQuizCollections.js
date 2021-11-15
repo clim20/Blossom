@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import QuizCollectionCards from '../components/QuizCollectionCards';
 import QuizCollectionDeletionModal from '../modals/QuizCollectionDeletionModal';
@@ -61,10 +61,8 @@ const ProfileQuizCollections = (props) => {
     const [DeleteQuizCollection] = useMutation(mutations.DELETE_QUIZ_COLLECTION);
 
     const deleteQuizCollection = async (quizCollectionId) => {
-        console.log("Still need to work on mutation"); //TODO
-        // await DeleteQuizCollection({variables: { quizCollectionId: quizCollectionId }});
-        // console.log("quiz collection removed");
-        // refetchProfileData();        
+        await DeleteQuizCollection({variables: { quizCollectionId: quizCollectionId }});
+        refetchProfileData();        
     }
 
     const height = quizCollections && quizCollections.length === 0 ? "empty-tab" : "";
