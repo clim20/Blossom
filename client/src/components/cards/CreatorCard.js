@@ -41,7 +41,7 @@ const CreatorCard = (props) => {
                     />
                     {
                         onCollaboratorTab && props.editingMode && props.user._id !== props.platform.owner &&
-                        <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                        <i className="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
                             onClick={handleXClick}
                         />
                     }

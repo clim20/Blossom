@@ -54,7 +54,7 @@ function QuizCollectionCard(props) {
                 <div className="description">
                     {
                         onQuizCollectionTab && props.editingMode && 
-                        <i class="times icon" style={{ position: 'absolute', top: '8px', right: '15px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                        <i className="times icon" style={{ position: 'absolute', top: '8px', right: '15px', color: 'var(--cancelRed)', fontSize: '15pt' }}
                             onClick={handleXClick}
                         />
                     }

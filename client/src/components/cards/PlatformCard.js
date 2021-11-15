@@ -42,7 +42,7 @@ function PlatformCard(props) {
                     />
                     {
                         onPlatformTab && props.editingMode && platform.owner === props.user._id && 
-                        <i class="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                        <i className="times icon" style={{ float: 'right', marginLeft: '-100px', color: 'var(--cancelRed)', fontSize: '15pt' }}
                             onClick={handleXClick}
                         />
                     }
