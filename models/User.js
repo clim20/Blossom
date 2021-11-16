@@ -8,6 +8,7 @@ const userSchema = new Schema({
     quests: [
         {
             _id: ObjectId,
+            description: String,
             isCompleted: Boolean,
             image: String
         }
