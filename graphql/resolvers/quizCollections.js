@@ -62,7 +62,7 @@ module.exports = {
       }
       return new QuizCollection({
         _id: new ObjectId(),
-        name,
+        name: "",
         creator: user._id, 
         img: "https://i.pinimg.com/originals/36/36/91/363691f9212a3c3184703443c42c7a40.jpg",
         description: "",

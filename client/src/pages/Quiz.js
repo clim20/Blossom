@@ -130,26 +130,49 @@ const Quiz = () =>{
     const [RemoveQuizFromQuizCollection] = useMutation(mutations.REMOVE_QUIZ_FROM_QUIZ_COLLECTION);
 
     const [createClicked, setCreateClicked] = useState(false);
+    const [disabled, setDisable] = useState(false);
+    const [submitted, setSubmit] = useState(false);
     const [quizCollectionName, setQuizCollectionName] = useState("");
-    
+
     const createQuizCollection = async () => {
-        console.log("creating quiz collection");
-        console.log(quizCollectionName);
-        await CreateQuizCollection({variables: { owner: user._id, name: quizCollectionName }});
+        const { data } = await CreateQuizCollection({variables: { owner: user._id, name: quizCollectionName }});
         setQuizCollectionName("");
+        setSubmit(true);
+
+        var returnedQuizCollection = {};
+        if (data) { 
+            returnedQuizCollection = data.createQuizCollection;
+        }
+
+        if (returnedQuizCollection.name === "") {
+            setDisable(false);
+        } else{
+            addQuizToQuizCollection(returnedQuizCollection._id);
+            setDisable(true);
+            setTimeout(() => {
+                setCreateClicked(false)
+                setSubmit(false);
+            }, 300);
+        }
     }
 
     const addQuizToQuizCollection = async (quizCollectionId) => {
-        console.log("adding to quiz collection");
-        console.log(quizCollectionId);
         await AddQuizToQuizCollection({variables: { quizId: currentQuiz._id, quizCollectionId: quizCollectionId }});
     }
 
     const removeQuizFromQuizCollection = async (quizCollectionId) => {
-        console.log("removing from quiz collection");
-        console.log(quizCollectionId);
         await RemoveQuizFromQuizCollection({variables: { quizId: currentQuiz._id, quizCollectionId: quizCollectionId }});
     }
+
+    const message = disabled ? 
+        <div className="suc-msg">
+            Successfully Created Quiz Collection
+        </div>
+        :
+        <div className="err-msg">
+            Invalid/Duplicate Quiz Collection Name
+        </div>
+    ;
 
     if(redirect == false){
         //console.log(highestScores)
@@ -197,7 +220,9 @@ const Quiz = () =>{
                         DelTest
                     </button>
                 }
-                <div>
+                {
+                    user && 
+                    <div>
                     <Button.Group>
                         <Dropdown
                             style={{ backgroundColor: 'var(--darkPink)' }}
@@ -229,23 +254,34 @@ const Quiz = () =>{
                             Create
                         </Button>
                     </Button.Group>
-                </div>
+                    </div>
+                }
                 {
                     createClicked && 
                     <div>
                         <Input 
+                            action
                             name='name'
                             placeholder={"Enter Quiz Collection Name Here"}
                             autoFocus={true}
                             onChange={event => setQuizCollectionName(event.target.value)} 
-                            onBlur={() => setCreateClicked(false)}
                             inputtype='text'
-                        />
-                        <Button
-                            onMouseDown={createQuizCollection}
                         >
-                            Create
-                        </Button>
+                        <input/>
+                        {submitted && message}
+                        <Button 
+                            icon="check"
+                            style={{ backgroundColor: 'var(--saveGreen)', width: "15%" }}
+                            className='ui button icon'
+                            onClick={createQuizCollection}
+                        />
+                        <Button 
+                            icon="close"
+                            style={{ backgroundColor: 'var(--cancelRed)', width: "15%" }}
+                            className='ui button icon'
+                            onMouseDown={() => setCreateClicked(false)}
+                        />
+                    </Input>
                     </div>
                 }
             </div>
