@@ -288,3 +288,23 @@ export const REMOVE_QUIZ_FROM_QUIZ_COLLECTION = gql`
         removeQuizFromQuizCollection(quizId: $quizId, quizCollectionId: $quizCollectionId)
     }
 `;
+
+export const ADD_QUESTS = gql`
+    mutation AddQuests($isCompleted: Boolean!) {
+        addQuests(isCompleted: $isCompleted) {
+            _id 
+            isCompleted
+            image 
+        }
+    }
+`;
+
+export const EDIT_COMPLETENESS = gql`
+    mutation EditCompleteness($isCompleted: Boolean!) {
+        editCompleteness(isCompleted: $isCompleted) {
+            _id 
+            isCompleted
+            image 
+        }
+    }
+`;
