@@ -9,6 +9,7 @@ export const FETCH_POPULAR_USERS = gql`
             profileId
             quests {
                 _id
+                description
                 isCompleted
                 image
             }
@@ -26,6 +27,7 @@ export const FIND_USER_BY_ID = gql`
             profileId
             quests {
                 _id
+                description
                 isCompleted
                 image
             }
@@ -43,6 +45,7 @@ export const FETCH_USERS = gql`
             profileId
             quests {
                 _id
+                description
                 isCompleted
                 image
             }
