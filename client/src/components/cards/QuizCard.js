@@ -51,7 +51,7 @@ function QuizCard(props) {
 
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
-            <div class="image">
+            <div className="image">
                 <img src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
                     alt="quiz"
                 />
@@ -60,7 +60,7 @@ function QuizCard(props) {
                 <div className="description card-text">
                     {
                         onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
-                        <i class={starClass} onClick={handleStarClick}/>
+                        <i className={starClass} onClick={handleStarClick}/>
                     }
                     <div style={{ fontWeight: 'bold' }}> {props.quiz.title} </div>
                     <div> Created by {quizCreator.username} </div>
