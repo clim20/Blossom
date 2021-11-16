@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useParams, useHistory } from "react-router-dom";
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 //import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
@@ -17,6 +18,8 @@ const styles = {
 }
 
 const QuizEnd = (props) =>{
+
+    const history = useHistory();
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
@@ -49,6 +52,8 @@ const QuizEnd = (props) =>{
     
     const handleRetry = event =>{
         setIsRetrying(true);
+        //history.push("/quiz/" + props.currentQuiz._id);
+        window.location.reload(false);
     };
     const handleFollow = event =>{
         //props.handleFollow(event);
@@ -73,7 +78,9 @@ const QuizEnd = (props) =>{
         
     };
 
-    if(isRetrying == false){
+    //if(isRetrying == false){
+     //   history.push("/quiz/" + props.currentQuiz._id);
+    //}
         return(
         
             <div style={{textAlign: 'center'}}>
@@ -111,11 +118,10 @@ const QuizEnd = (props) =>{
             </div>
             
         );    
-    }else{
-        return(
-            <QuizStart currentQuiz = {props.currentQuiz} highestScores = {props.highestScores}></QuizStart>
-        );
-    }
+    //}else{
+        
+        
+    //}
     
 
 }
