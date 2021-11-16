@@ -1,13 +1,18 @@
 import React, { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 
 const Quest = () => {
     const history = useHistory();
     const { user } = useContext(AuthContext);
+    //const params = useParams();
+    //const userId = params ? params._id : 'could not get params';
+    
 
     if (!user) {
         history.push("/");
@@ -15,15 +20,44 @@ const Quest = () => {
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
-            id: user ? user.profileId : ''
+            id: user ? user._id : ''
         }
     });
 
-    const { data: userObject } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    var userObject = {};
+    if (userData) { 
+		userObject = userData.findUserById;
+    }
+
+    var userQuizzes = {};
+    if(userObject) {
+        userQuizzes = userObject.quizzes;
+    }
+
+   /* const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
-            id: userData ? userData.quizzes : ''
+            quests: user.quests 
         }
     });
+
+    var userObject = {};
+    if (userData) { 
+		userObject = questDes.isCompleted;
+    }*/
+
+    const [disabled1, setDisable1] = useState(false);
+    const [disabled2, setDisable2] = useState(false);
+    const [disabled3, setDisable3] = useState(false);
+    const [disabled4, setDisable4] = useState(false);
+    const [disabled5, setDisable5] = useState(false);
+    const [disabled6, setDisable6] = useState(false);
+
+    if(userQuizzes) {
+        setDisable5(true);
+        if(userQuizzes.length > 9) {
+            setDisable4(true);
+        }
+    }
 
     return (
         user && <div>
@@ -49,11 +83,15 @@ const Quest = () => {
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make 10 Quizzes!
+                    {disabled4} ? <span className="completeBox4">Complete</span> 
+                    :
                     <span className="checkBox4">Incomplete</span>
                 </h2>
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make your first quiz!
+                    {disabled5} ? <span className="completeBox5">Complete</span>
+                    :
                     <span className="checkBox5">Incomplete</span>
                 </h2>
                     <br />

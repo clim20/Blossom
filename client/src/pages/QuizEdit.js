@@ -119,21 +119,7 @@ const QuizEdit = () => {
             variables: { 
                 quizId: quizId, 
                 updatedQuiz: {
-                    /*
-                    "_id": tempQuiz._id,
-                    "title": tempQuiz.title,
-                    "description": tempQuiz.description,
-                    "titleImg": tempQuiz.titleImg,
-                    "creator": tempQuiz.creator,
-                    "platformId": tempQuiz.platformId,
-                    "quizHits": tempQuiz.quizHits,
-                    "quizLikes": tempQuiz.quizLikes,
-                    "quizDislikes": tempQuiz.quizDislikes,
-                    "badges": tempQuiz.badges,
-                    "scores": tempQuiz.scores,
-                    "cards": tempQuiz.cards,
-                    "createdAt": tempQuiz.createdAt
-                    */
+                   
                     "_id": tempQuiz._id,
                     "title": tempQuiz.title,
                     "description": tempQuiz.description,

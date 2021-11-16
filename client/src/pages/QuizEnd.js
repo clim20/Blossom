@@ -78,51 +78,47 @@ const QuizEnd = (props) =>{
         
     };
 
-    //if(isRetrying == false){
-     //   history.push("/quiz/" + props.currentQuiz._id);
-    //}
-        return(
-        
-            <div style={{textAlign: 'center'}}>
-                <h1 className="quiz-title" style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
-                <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
-                    <p style={{textAlign: 'center'}}>
-                        {username}
-                    </p>
-                    <p style={{textAlign: 'center'}}> 
-                        {followers + " Followers"}
-                    </p>
-                </button>
-                
-                <div>
-                    <header>Congratulations</header>
-                    <header>
-                    {props.score} pts
-                    </header>
-                </div>
+    return(
     
-                <button className="quiz-start-retry-button" onClick = {() => handleRetry()} style = {styles.button}>
-                    RETRY
-                </button>
-                <p>*Only first scores are posted to the leaderboards</p>
-    
-                <div>
-                    <button className="quizLeaderboard" style = {styles.button}>
-                        LEADERBOARDS
-                    </button>
-                    <table className="leaderboard-table">
-                        {/*props.highestScores.splice(0,5).map(displayTopScores)*/}
-                    </table>
-                    
-                </div>
-            </div>
+        <div style={{textAlign: 'center'}}>
+            <h1 className="quiz-title" style={{textAlign: 'center'}}>{props.currentQuiz.title}</h1>
+            <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
+                <p style={{textAlign: 'center'}}>
+                    {username}
+                </p>
+                <p style={{textAlign: 'center'}}> 
+                    {followers + " Followers"}
+                </p>
+            </button>
             
-        );    
-    //}else{
-        
-        
-    //}
-    
+            <div>
+                <header>Congratulations</header>
+                <header>
+                {props.score} pts
+                </header>
+                <header>
+                {props.numOfCorrect} out of {props.currentQuiz.cards.length}
+                </header>
+                
+            </div>
 
+            <button className="quiz-start-retry-button" onClick = {() => handleRetry()} style = {styles.button}>
+                RETRY
+            </button>
+            <p>*Only first scores are posted to the leaderboards</p>
+
+            <div>
+                <button className="quizLeaderboard" style = {styles.button}>
+                    LEADERBOARDS
+                </button>
+                <table className="leaderboard-table">
+                    {/*props.highestScores.splice(0,5).map(displayTopScores)*/}
+                </table>
+                
+            </div>
+        </div>
+            
+    );    
+    
 }
 export default QuizEnd;
