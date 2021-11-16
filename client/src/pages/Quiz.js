@@ -152,6 +152,7 @@ const Quiz = () =>{
             setTimeout(() => {
                 setCreateClicked(false)
                 setSubmit(false);
+                history.push("/quizCollection/" + returnedQuizCollection._id);
             }, 300);
         }
     }
