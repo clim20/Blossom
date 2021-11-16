@@ -157,7 +157,7 @@ const MenuBar = (props) => {
                 />
             </Menu.Menu>
             <Menu.Item className='search-bar' style={{width: "70%"}}>
-                <Input icon='search' placeholder='Search...' 
+                <Input icon={{ name: 'search', link: true, onClick: handleSearchSubmit }} placeholder='Search...' 
                     onKeyUp={handleSearchSubmit}
                 />
             </Menu.Item>

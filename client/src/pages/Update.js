@@ -11,6 +11,10 @@ const Update = () => {
     const history = useHistory();
     const { user } = useContext(AuthContext);
 
+    if (!user) {
+        history.push("/");
+    }
+
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
             id: user ? user._id : ''

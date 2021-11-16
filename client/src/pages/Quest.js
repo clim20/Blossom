@@ -1,10 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 import { useQuery } from '@apollo/react-hooks';
+
 import * as queries from '../cache/queries';
 
 const Quest = () => {
+    const history = useHistory();
     const { user } = useContext(AuthContext);
+
+    if (!user) {
+        history.push("/");
+    }
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
@@ -17,11 +24,9 @@ const Quest = () => {
             id: userData ? userData.quizzes : ''
         }
     });
-    
-    
 
     return (
-        <div>
+        user && <div>
             <h2 className="quests">
                 Quests
             </h2>
