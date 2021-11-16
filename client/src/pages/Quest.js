@@ -6,6 +6,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
+import { selectionSetMatchesResult } from '@apollo/react-hooks/node_modules/@apollo/client/cache/inmemory/helpers';
 
 const Quest = () => {
     const history = useHistory();
@@ -68,36 +69,38 @@ const Quest = () => {
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Be 1st place on the leaderboard once!
-                    <span className="checkBox1">Incomplete</span>
+                    {(disabled1) ? <span className="completeBox1">Completed</span> :
+                    <span className="checkBox1">Incomplete</span>}
                 </h2>
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maintain 1st place on a leaderboard for a week!
-                    <span className="checkBox2">Incomplete</span>
+                    {(disabled2) ? <span className="completeBox2">Completed</span> :
+                    <span className="checkBox2">Incomplete</span> }
                 </h2>
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 100 people take one of your quiz.
-                    <span className="checkBox3">Incomplete</span>
+                    {(disabled3) ? <span className="completeBox3">Completed</span> :
+                    <span className="checkBox3">Incomplete</span>}
                 </h2>
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make 10 Quizzes!
-                    {disabled4} ? <span className="completeBox4">Complete</span> 
-                    :
-                    <span className="checkBox4">Incomplete</span>
+                    {(disabled4) ? <span className="completeBox4">Completed</span> :
+                    <span className="checkBox4">Incomplete</span>}
                 </h2>
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make your first quiz!
-                    {disabled5} ? <span className="completeBox5">Complete</span>
-                    :
-                    <span className="checkBox5">Incomplete</span>
+                    {(disabled5) ? <span className="completeBox5">Completed</span> :
+                    <span className="checkBox5">Incomplete</span>}
                 </h2>
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take your first quiz!
-                    <span className="checkBox6">Incomplete</span>
+                    {(disabled6) ? <span className="completeBox6">Completed</span> :
+                    <span className="checkBox6">Incomplete</span>}
                 </h2>
             </div>
         </div>
