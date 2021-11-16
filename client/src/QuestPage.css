@@ -27,12 +27,36 @@
     font-family: var(--font-family-puritan-regular);
     margin-left: 290px;
   }
+
+  .completeBox1 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #ff98ac;
+    color: white;
+    /*font-size: 23px;*/
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 290px;
+  }
   
   .checkBox2 {
     width: 8rem;
     height: 3rem;
     border-radius: 5px;
     border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 190px;
+  }
+
+  .completeBox2 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
     background-color: #ff98ac;
     color: white;
     font-size: 23px;
@@ -51,12 +75,36 @@
     font-family: var(--font-family-puritan-regular);
     margin-left: 285px;
   }
+
+  .completeBox3 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 285px;
+  }
   
   .checkBox4 {
     width: 8rem;
     height: 3rem;
     border-radius: 5px;
     border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 508px;
+  }
+
+  .completeBox4 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
     background-color: #ff98ac;
     color: white;
     font-size: 23px;
@@ -75,12 +123,36 @@
     font-family: var(--font-family-puritan-regular);
     margin-left: 480px;
   }
+
+  .completeBox5 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 480px;
+  }
   
   .checkBox6 {
     width: 8rem;
     height: 3rem;
     border-radius: 5px;
     border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 490px;
+  }
+
+  .completeBox6 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
     background-color: #ff98ac;
     color: white;
     font-size: 23px;
