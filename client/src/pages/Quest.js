@@ -1,6 +1,24 @@
 import React, { useContext, useState } from 'react';
+import { AuthContext } from '../context/auth';
+import { useQuery } from '@apollo/react-hooks';
+import * as queries from '../cache/queries';
 
 const Quest = () => {
+    const { user } = useContext(AuthContext);
+
+    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
+        variables: {
+            id: user ? user.profileId : ''
+        }
+    });
+
+    const { data: userObject } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: userData ? userData.quizzes : ''
+        }
+    });
+    
+    
 
     return (
         <div>
