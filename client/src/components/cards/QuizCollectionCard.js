@@ -59,7 +59,7 @@ function QuizCollectionCard(props) {
                         />
                     }
                     <img width='200px' height='120px'
-                        src="https://www.samoyed-dogs.net/wp-content/uploads/2020/08/poup-e1617474219921.png"
+                        src={quizCollection && quizCollection.img}
                         alt="quizCollection"
                     />
                     <br/>

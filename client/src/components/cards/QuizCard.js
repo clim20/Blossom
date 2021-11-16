@@ -52,7 +52,7 @@ function QuizCard(props) {
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="image">
-                <img src="https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg"
+                <img src={quiz && quiz.titleImg}
                     alt="quiz"
                 />
             </div>

@@ -63,7 +63,7 @@ module.exports = {
         _id:  new ObjectId(),
         title: title,
         description: "Add Description Here",
-        titleImg: "",  
+        titleImg: "https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg",  
         creator: user._id,
         platformId: null,
         quizHits: 0,
@@ -126,6 +126,7 @@ module.exports = {
       }
     },
     async deleteQuiz(_, { id }){
+      /* TODO: Quiz need to be removed from the collections that have them */
       const deletedQuiz = await Quiz.findOne({_id: new ObjectId(id)});
       
       if(deletedQuiz){
