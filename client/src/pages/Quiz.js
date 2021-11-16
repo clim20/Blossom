@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams, useHistory } from "react-router-dom";
+import { Button, Input, Dropdown, Icon } from 'semantic-ui-react';
 
 //import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 
@@ -11,6 +12,7 @@ import * as mutations from '../cache/mutations';
 import image1 from '../testpic/seal.jpg';
 
 import QuizStart from './QuizStart';
+import QuizCollectionEntry from '../components/QuizCollectionEntry';
 
 const styles = {
     button : {
@@ -66,11 +68,21 @@ const Quiz = () =>{
         followers = profileObject.followerCount;
     }
 
+    const { data: quizCollectionsData, refetch: refetchQuizCollectionsData } = useQuery(queries.FIND_QUIZ_COLLECTION_BY_IDS, {
+        variables: {
+            ids: profileObject ? profileObject.quizCollections : []
+        }
+    });
+
+    var quizCollections;
+    if(quizCollectionsData) { 
+        quizCollections = quizCollectionsData.findQuizCollectionByIds; 
+    }
+
     var isCreator = userObject && user && userObject._id === user._id
 
-    console.log(username)
-    console.log(followers)
-
+    //console.log(username)
+    //console.log(followers)
     
     const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200]]);
     const [score, setScore] = useState(0);
@@ -80,12 +92,12 @@ const Quiz = () =>{
     const handleStart = event =>{
         setRedirect(true);
     };
+
     const gotoEdit = event =>{
         history.push("/quiz/edit/" + quizId)
     }; 
+
     const handleFollow = event => {};
-    const handleCreateCollection = event => {};
-    const handleAddToCollection = event => {};
     
     const scoreQuery = () =>{};
     const handleSaveChanges = () =>{};
@@ -104,18 +116,43 @@ const Quiz = () =>{
         
     };
 
-    const[DelQuiz] = useMutation(mutations.DELETE_QUIZ);
-    const delTest = async () =>{
-        
+    const [DelQuiz] = useMutation(mutations.DELETE_QUIZ);
+
+    const delTest = async () =>{     
         await DelQuiz({variables: { id: quizId }});
         refetchQuizData();
-        history.push("/profile/"+profileObject._id);
-        
+        history.push("/profile/"+profileObject._id);    
     }
 
+    /* QUIZ COLLECTION FUNCTIONS */
+    const [CreateQuizCollection] = useMutation(mutations.CREATE_QUIZ_COLLECTION);
+    const [AddQuizToQuizCollection] = useMutation(mutations.ADD_QUIZ_TO_QUIZ_COLLECTION);
+    const [RemoveQuizFromQuizCollection] = useMutation(mutations.REMOVE_QUIZ_FROM_QUIZ_COLLECTION);
+
+    const [createClicked, setCreateClicked] = useState(false);
+    const [quizCollectionName, setQuizCollectionName] = useState("");
+    
+    const createQuizCollection = async () => {
+        console.log("creating quiz collection");
+        console.log(quizCollectionName);
+        await CreateQuizCollection({variables: { owner: user._id, name: quizCollectionName }});
+        setQuizCollectionName("");
+    }
+
+    const addQuizToQuizCollection = async (quizCollectionId) => {
+        console.log("adding to quiz collection");
+        console.log(quizCollectionId);
+        await AddQuizToQuizCollection({variables: { quizId: currentQuiz._id, quizCollectionId: quizCollectionId }});
+    }
+
+    const removeQuizFromQuizCollection = async (quizCollectionId) => {
+        console.log("removing from quiz collection");
+        console.log(quizCollectionId);
+        await RemoveQuizFromQuizCollection({variables: { quizId: currentQuiz._id, quizCollectionId: quizCollectionId }});
+    }
 
     if(redirect == false){
-        console.log(highestScores)
+        //console.log(highestScores)
         return(
             <div style={{textAlign: 'center'}}>    
                 <div>
@@ -160,7 +197,57 @@ const Quiz = () =>{
                         DelTest
                     </button>
                 }
-                
+                <div>
+                    <Button.Group>
+                        <Dropdown
+                            style={{ backgroundColor: 'var(--darkPink)' }}
+                            className='button icon'
+                            icon='plus'
+                            floating
+                            trigger={<></>}
+                        >
+                            <Dropdown.Menu>
+                                <Dropdown.Header icon='clone outline icon' content='Quiz Collections' />
+                                <Dropdown.Divider />
+                                {
+                                    quizCollections && quizCollections.map((entry, index) => (
+                                        <QuizCollectionEntry
+                                            quizCollection={entry} key={index}
+                                            addQuizToQuizCollection={addQuizToQuizCollection}
+                                            removeQuizFromQuizCollection={removeQuizFromQuizCollection}
+                                            refetchQuizCollectionsData={refetchQuizCollectionsData}
+                                            currentQuiz={currentQuiz}
+                                        />
+                                    ))
+                                }
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <Button
+                            style={{ backgroundColor: 'var(--pink)' }}
+                            onClick={() => setCreateClicked(true)}
+                        >
+                            Create
+                        </Button>
+                    </Button.Group>
+                </div>
+                {
+                    createClicked && 
+                    <div>
+                        <Input 
+                            name='name'
+                            placeholder={"Enter Quiz Collection Name Here"}
+                            autoFocus={true}
+                            onChange={event => setQuizCollectionName(event.target.value)} 
+                            onBlur={() => setCreateClicked(false)}
+                            inputtype='text'
+                        />
+                        <Button
+                            onMouseDown={createQuizCollection}
+                        >
+                            Create
+                        </Button>
+                    </div>
+                }
             </div>
         );
 
