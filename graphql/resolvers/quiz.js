@@ -112,7 +112,7 @@ module.exports = {
         quizLikes: updatedQuiz.quizLikes,
         quizDislikes: updatedQuiz.quizDislikes,
         //badges: updatedQuiz.badges,
-        //scores: updatedQuiz.scores,
+        scores: updatedQuiz.scores,
         cards: updatedQuiz.cards,
       });
       console.log("-------")

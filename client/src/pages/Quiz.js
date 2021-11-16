@@ -291,7 +291,7 @@ const Quiz = () =>{
     }else{
         
         return(
-            <QuizStart currentQuiz = {currentQuiz} author = {username}></QuizStart>
+            <QuizStart currentQuiz = {currentQuiz} author = {username} currentUser = {user} refetchQuizData = {refetchQuizData}></QuizStart>
         );
         
        
