@@ -72,7 +72,6 @@ const Platforms = (props) => {
         refetchPlatformsData();
     }, [user, profile, platforms, refetchProfileData, refetchPlatformsData]);
 
-    //TODO: Fix modal
     return (
         <Grid>
             <Grid.Column width={12}>

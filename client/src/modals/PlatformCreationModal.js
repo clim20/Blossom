@@ -67,11 +67,10 @@ const PlatformCreationModal = (props) => {
     const platformName = "Platform Name: \xa0\xa0\xa0\xa0";
     return (
         <Modal
-        closeIcon
         size="tiny"
         open={true}
-        onClose={() => props.setShowCreationMenu(false)}
         >
+            <i aria-hidden="true" class="close icon modal-close" onClick={() => props.setShowCreationMenu(false)}/>
             <Modal.Header>CREATE PLATFORM</Modal.Header>
             <Modal.Content className="creation-modal">
                 <span>

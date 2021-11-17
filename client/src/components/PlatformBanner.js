@@ -165,12 +165,12 @@ const PlatformBanner = ({ platform, user, refetchPlatformData }) => {
                         <div className="banner-info" style={{ bottom: user ? '-2rem' : '-5rem' }}>
                             <div className="display-inline-block">
                                 {!editingMode ?
-                                    <img className="card-image platform-circle ui avatar image"
+                                    <img className="card-image platform-circle ui avatar image platform-image"
                                         src={platform.platformImg} alt="platform"
                                     />
                                     :
                                     <label htmlFor="upload-platform-image" className="hover-image" style={{ position: 'relative' }}>
-                                        <img className="card-image platform-circle ui avatar image"
+                                        <img className="card-image platform-circle ui avatar image platform-image"
                                             src={platform.platformImg} alt="platform"
                                             style={{ cursor: 'pointer' }}
                                         />

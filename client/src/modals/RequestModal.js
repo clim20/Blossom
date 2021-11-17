@@ -21,11 +21,10 @@ const RequestModal = (props) => {
 
     return (
         <Modal
-        closeIcon
         size="tiny"
         open={true}
-        onClose={() => props.setShowCollaboratorRequests(false)}
         >
+            <i aria-hidden="true" class="close icon modal-close" onClick={() => props.setShowCollaboratorRequests(false)}/>
             <Modal.Header>REQUESTS</Modal.Header>
             <Modal.Content scrolling>
             <p>These users wish to join your platform:</p>

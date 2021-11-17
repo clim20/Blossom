@@ -65,11 +65,10 @@ const AddQuizCollectionModal = (props) => {
 
     return (
         <Modal
-        closeIcon
         size="tiny"
         open={true}
-        onClose={() => props.setShowAddQuizCollectionModal(false)}
         >
+            <i aria-hidden="true" class="close icon modal-close" onClick={() => props.setShowAddQuizCollectionModal(false)}/>
             <Modal.Header>ADD QUIZ COLLECTION</Modal.Header>
             <Modal.Content className="creation-modal">
                 <span>
