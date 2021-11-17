@@ -2,17 +2,16 @@ import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
-import * as mutations from '../cache/mutations';
 import { selectionSetMatchesResult } from '@apollo/react-hooks/node_modules/@apollo/client/cache/inmemory/helpers';
 
 const Quest = () => {
     const history = useHistory();
     const { user } = useContext(AuthContext);
     //const params = useParams();
-    //const userId = params ? params._id : 'could not get params';
+    //const profileId = params ? params.profileId : 'could not get params';
     
 
     if (!user) {
@@ -30,20 +29,22 @@ const Quest = () => {
 		userObject = userData.findUserById;
     }
 
-    var userQuizzes = {};
-    if(userObject) {
-        userQuizzes = userObject.quizzes;
-    }
+    var profileId = userObject.profileId;
 
-   /* const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
+    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
-            quests: user.quests 
+            id: profileId
         }
     });
 
-    var userObject = {};
-    if (userData) { 
-		userObject = questDes.isCompleted;
+    var profileObject = {};
+    if (profileData) { 
+		profileObject = profileData.findProfileById;
+    }
+
+    /*var userQuizzes = {};
+    if(userObject) {
+        userQuizzes = userObject.quizzes;
     }*/
 
     const [disabled1, setDisable1] = useState(false);
@@ -53,12 +54,20 @@ const Quest = () => {
     const [disabled5, setDisable5] = useState(false);
     const [disabled6, setDisable6] = useState(false);
 
-    if(userQuizzes) {
-        setDisable5(true);
-        if(userQuizzes.length > 9) {
-            setDisable4(true);
+    //const count = profileObject.quizzes.filter(item => item.status === '0').length;
+    const quizzes = profileObject.quizzes;
+
+    /*let count = 0;
+    for (const obj of quizzes) {
+        if (obj.status === '0') count++;
+    }*/
+    //console.log(quizzes);
+    /*if(quizzes.length() > 0) {
+        setDisable5(true); //create first quiz 
+        if(quizzes.length() > 9) {
+            setDisable4(true); //create 10 quizzes
         }
-    }
+    }*/
 
     return (
         user && <div>
