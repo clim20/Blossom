@@ -124,6 +124,13 @@ module.exports = gql`
         contact: String
     }
 
+    input QuizCollectionInput {
+        img: String
+        name: String
+        description: String
+        quizzes: [ID]
+    }
+
     input QuizInput {
         _id: ID!
         title: String!
@@ -206,7 +213,6 @@ module.exports = gql`
 
         createPlatform(owner: ID!, name: String!): Platform! 
         deletePlatform(platformId: ID!): Boolean! 
-        
         addCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
         addCollaborator(platformId: ID!, userId: ID!): Platform!
         removeCollaboratorRequest(platformId: ID!, userId: ID!): Platform!
@@ -226,5 +232,6 @@ module.exports = gql`
         removeQuizCollection(platformId: ID!, quizCollectionId: ID!): Boolean!
         addQuizToQuizCollection(quizId: ID!, quizCollectionId: ID!): QuizCollection!
         removeQuizFromQuizCollection(quizId: ID!, quizCollectionId: ID!): Boolean!
+        editQuizCollection(id: ID!, updatedQuizCollection: QuizCollectionInput!): QuizCollection!
     }
 `

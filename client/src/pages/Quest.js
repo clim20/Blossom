@@ -38,14 +38,11 @@ const Quest = () => {
     });
 
     var profileObject = {};
+    var quizzes = [];
     if (profileData) { 
 		profileObject = profileData.findProfileById;
+        quizzes = profileObject.quizzes;
     }
-
-    /*var userQuizzes = {};
-    if(userObject) {
-        userQuizzes = userObject.quizzes;
-    }*/
 
     const [disabled1, setDisable1] = useState(false);
     const [disabled2, setDisable2] = useState(false);
@@ -54,17 +51,15 @@ const Quest = () => {
     const [disabled5, setDisable5] = useState(false);
     const [disabled6, setDisable6] = useState(false);
 
-    //const count = profileObject.quizzes.filter(item => item.status === '0').length;
-    const quizzes = profileObject.quizzes;
-
     /*let count = 0;
     for (const obj of quizzes) {
         if (obj.status === '0') count++;
     }*/
-    //console.log(quizzes);
-    /*if(quizzes.length() > 0) {
+    //console.log(quizzes.length);
+    
+    /*if(quizzes.length > 0) {
         setDisable5(true); //create first quiz 
-        if(quizzes.length() > 9) {
+        if(quizzes.length > 9) {
             setDisable4(true); //create 10 quizzes
         }
     }*/

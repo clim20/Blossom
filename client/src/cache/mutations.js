@@ -288,3 +288,17 @@ export const REMOVE_QUIZ_FROM_QUIZ_COLLECTION = gql`
         removeQuizFromQuizCollection(quizId: $quizId, quizCollectionId: $quizCollectionId)
     }
 `;
+
+export const EDIT_QUIZ_COLLECTION = gql`
+    mutation editQuizCollection($id: ID!, $updatedQuizCollection: QuizCollectionInput!){
+        editQuizCollection(id: $id, updatedQuizCollection: $updatedQuizCollection) {
+            _id
+            name
+            creator
+            img
+            description
+            quizzes
+            createdAt
+        }
+    }
+`;
