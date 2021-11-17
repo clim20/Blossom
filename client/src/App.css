@@ -117,6 +117,21 @@ button svg {
   padding-bottom: 1px;
 }
 
+/* SAVE CANCEL BUTTONS */
+.save-button {
+  max-width: 8rem;
+  width: -webkit-fill-available;
+  height: 3rem;
+  background-color: var(--saveGreen) !important;
+}
+
+.cancel-button {
+  max-width: 8rem;
+  width: -webkit-fill-available;
+  height: 3rem;
+  background-color: var(--cancelRed) !important;
+}
+
 .input-box {
   background-color: white;
   /*border: 1px solid black;

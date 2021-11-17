@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
@@ -137,67 +138,86 @@ const PlatformBanner = ({ platform, user, refetchPlatformData }) => {
     const isOwnPlatform = platform && user && platform.owner === user._id;
 
     return (
-        <div className="ui container banner-header"
-                style={{ backgroundImage: `url(${platform.bannerImg})` }}
-            >
-            {editingMode &&
-                <label htmlFor="upload-banner-image">
-                    <span className="dot" style={{ position: 'absolute', top: '9px', right: '10px', opacity:'90%' }}/>
-                    <i className="pencil alternate icon" style={{ position: 'absolute', top: '12px', right: '10px' }}/>
-                    <input type="file" name="banner" id="upload-banner-image" accept="image/png, image/jpeg"
-                        onChange={(e) => setBannerImage(e.target.files[0])}
+        <div>
+            <div>
+                {!editingMode ?
+                    <img className="banner-header"
+                        src={platform.bannerImg} alt="banner"
                     />
-                </label>
-            }
-
-                <div className="banner-info">
-                    <div className="display-inline-block">
-                        <img className="card-image platform-circle ui avatar image"
-                            src={platform.platformImg}
-                            alt="platform"
-                        />
-                        {editingMode &&
-                            <label htmlFor="upload-platform-image">
-                                <span className="dot" style={{ position: 'absolute', top: '7px', right: '10px', opacity:'90%' }}/>
-                                <i className="pencil alternate icon" style={{ position: 'absolute', top: '10px', right: '10px' }}/>
-                                <input type="file" name="platform" id="upload-platform-image" accept="image/png, image/jpeg"
-                                    onChange={(e) => setPlatformImage(e.target.files[0])}
-                                />
-                            </label>
-                        }
-                    </div>
-                    {platform && platform.owner && 
-                        <div className="banner-text">
-                            <h2 style={{ marginBottom: '0' }}>{platform.name}</h2>
-                            <div>{platform.followerCount} followers</div>
-                        </div>
-                    }
-                </div>
-
-                {user && !isOwnPlatform &&
-                    <button className="ui button follow-button" onClick={handleFollow}>
-                        {followed ? 'Unfollow' : 'Follow'}
-                    </button>
-                }
-
-                {user && isOwnPlatform && !editingMode &&
-                    <button className="ui button follow-button" onClick={() => toggleEditingMode(!editingMode)}>
-                        Edit
-                    </button>  
-                }
-
-                {editingMode &&
-                    <div className="editBannerButtons">
-                        <button className="ui button save-button" onClick={handleSave}>
-                            Save
-                        </button>  
-                        <button className="ui button cancel-button" onClick={handleCancel}>
-                            Cancel
-                        </button>  
+                    :
+                    <div className="hover-image">
+                        <label htmlFor="upload-banner-image" style={{ width: '100%' }}>
+                            <img className="banner-header" style={{ cursor: 'pointer' }}
+                                src={platform.bannerImg} alt="banner"
+                            />
+                            <i class="camera icon" style={{ top: '25%' }}/>
+                            <input type="file" name="banner" id="upload-banner-image" accept="image/png, image/jpeg"
+                                onChange={(e) => setBannerImage(e.target.files[0])}
+                            />
+                        </label>
                     </div>
                 }
-
             </div>
+
+            <Grid>
+                <Grid.Row>
+                    <Grid.Column width={12}>
+                        <div className="banner-info" style={{ bottom: user ? '-2rem' : '-5rem' }}>
+                            <div className="display-inline-block">
+                                {!editingMode ?
+                                    <img className="card-image platform-circle ui avatar image"
+                                        src={platform.platformImg} alt="platform"
+                                    />
+                                    :
+                                    <label htmlFor="upload-platform-image" className="hover-image" style={{ position: 'relative' }}>
+                                        <img className="card-image platform-circle ui avatar image"
+                                            src={platform.platformImg} alt="platform"
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                        <i class="camera icon"/>
+                                        <input type="file" name="platform" id="upload-platform-image" accept="image/png, image/jpeg"
+                                            onChange={(e) => setPlatformImage(e.target.files[0])}
+                                        />
+                                    </label>
+                                }
+                            </div>
+
+                            {platform && platform.owner && 
+                                <div className="banner-text">
+                                    <h2 style={{ marginBottom: '0' }}>{platform.name}</h2>
+                                    <div>{platform.followerCount} followers</div>
+                                </div>
+                            }
+                        </div>
+                    </Grid.Column>
+
+                    <Grid.Column width={4}>
+                        {user && !isOwnPlatform &&
+                            <button className="ui button follow-button" onClick={handleFollow}>
+                                {followed ? 'Unfollow' : 'Follow'}
+                            </button>
+                        }
+
+                        {user && isOwnPlatform && !editingMode &&
+                            <button className="ui button follow-button" style={{ float: 'right' }} onClick={() => toggleEditingMode(!editingMode)}>
+                                Edit
+                            </button>
+                        }
+
+                        {editingMode &&
+                            <div className="editBannerButtons">
+                                <button className="ui button cancel-button" style={{ float: 'right' }} onClick={handleCancel}>
+                                    Cancel
+                                </button>  
+                                <button className="ui button save-button" style={{ float: 'right' }} onClick={handleSave}>
+                                    Save
+                                </button>
+                            </div>
+                        }
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+        </div>
     );
 }
 

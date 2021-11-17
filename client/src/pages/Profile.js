@@ -47,8 +47,8 @@ const Profile = () => {
         <div>
             <ProfileBanner profile={profile} user={user} refetchProfileData={refetchProfileData}/>
 
-            <div className="ui container profile-section">
-                <div className="ui top attached tabular menu profile-tab" style={{ cursor: 'pointer' }}>
+            <div className="profile-section" style={{ top: user ? '4rem' : '7rem' }}>
+                <div className="ui top attached tabular menu profile-tab" style={{ fontSize: '1vw', cursor: 'pointer' }}>
                     <div className={`${activeTab === 'home' ? 'active active-tab' : 'inactive-tab'} profile-tab item`}
                         onClick={() => handleTabClick('home')}
                     >
