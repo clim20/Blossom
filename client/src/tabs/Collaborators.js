@@ -107,6 +107,7 @@ const Collaborators = (props) => {
         refetchPlatformData();        
     }
 
+    //TODO: Fix modal
     return (
         <Grid>
             <Grid.Column width={12}>
