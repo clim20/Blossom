@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
@@ -39,9 +39,13 @@ const Quest = () => {
 
     var profileObject = {};
     var quizzes = [];
+    var platform = [];
+    var followers = 0;
     if (profileData) { 
 		profileObject = profileData.findProfileById;
         quizzes = profileObject.quizzes;
+        platform = profileObject.platforms;
+        followers = profileObject.followerCount;
     }
 
     const [disabled1, setDisable1] = useState(false);
@@ -55,14 +59,34 @@ const Quest = () => {
     for (const obj of quizzes) {
         if (obj.status === '0') count++;
     }*/
-    //console.log(quizzes.length);
-    
-    /*if(quizzes.length > 0) {
-        setDisable5(true); //create first quiz 
-        if(quizzes.length > 9) {
-            setDisable4(true); //create 10 quizzes
-        }
+    //console.log(platform.length);
+    /*if(platform.length != 0) {
+        setDisable1(true);
     }*/
+
+    useEffect(()=>{
+        if(platform.length > 0){
+            setDisable1(true);
+        }
+    });
+
+    useEffect(() => {
+        if(quizzes.length > 0){
+            setDisable2(true);
+            if(quizzes.length > 4) {
+                setDisable3(true);
+            }
+            if(quizzes.length > 9) {
+                setDisable4(true);
+            }
+        }
+    });
+
+    useEffect(()=> {
+        if(followers > 99) {
+            setDisable6(true);
+        }
+    });
 
     return (
         user && <div>
@@ -72,19 +96,19 @@ const Quest = () => {
             <div className="quests-rectangle">
                     <br />
                 <h2>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Be 1st place on the leaderboard once!
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create your first platform!
                     {(disabled1) ? <span className="completeBox1">Completed</span> :
                     <span className="checkBox1">Incomplete</span>}
                 </h2>
                     <br />
                 <h2>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maintain 1st place on a leaderboard for a week!
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make your first quiz!
                     {(disabled2) ? <span className="completeBox2">Completed</span> :
                     <span className="checkBox2">Incomplete</span> }
                 </h2>
                     <br />
                 <h2>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 100 people take one of your quiz.
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make 5 Quizzes!
                     {(disabled3) ? <span className="completeBox3">Completed</span> :
                     <span className="checkBox3">Incomplete</span>}
                 </h2>
@@ -96,13 +120,13 @@ const Quest = () => {
                 </h2>
                     <br />
                 <h2>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Make your first quiz!
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 100 people take one of your quiz.
                     {(disabled5) ? <span className="completeBox5">Completed</span> :
                     <span className="checkBox5">Incomplete</span>}
                 </h2>
                     <br />
                 <h2>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take your first quiz!
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 100 Followers!
                     {(disabled6) ? <span className="completeBox6">Completed</span> :
                     <span className="checkBox6">Incomplete</span>}
                 </h2>
