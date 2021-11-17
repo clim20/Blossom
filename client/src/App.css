@@ -93,8 +93,10 @@ button svg {
 }
 
 .card-image {
-  width: 9rem !important;
-  height: 9rem !important;
+  min-width: 5rem !important;
+  min-height: 5rem !important;
+  width: 9vw !important;
+  height: 9vw !important;
 }
 
 .ui.four.cards, .ui.five.cards {
@@ -168,4 +170,18 @@ button svg {
   height: 23px;
   margin-top:10px;
   text-align: center;
+}
+
+.modal {
+  height: auto;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  right: auto;
+}
+
+.modal-close {
+  top: 10px !important;
+  right: 10px !important;
+  color: black !important;
 }

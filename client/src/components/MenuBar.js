@@ -113,10 +113,10 @@ const MenuBar = (props) => {
 
     const blossom = '\xa0\xa0\xa0Blossom';
     const menuBar = user ? (
-        <Menu pointing secondary size="massive" color="pink">
+        <Menu pointing secondary size="massive" color="pink" stackable>
             <Menu.Menu position='left'>
                 <Menu.Item style={{ height: "97%" }}>
-                    <a href="/" className='logo'>
+                    <a href="/" className='logo' style={{ color: '#000000DE' }}>
                         <img className="ui bottom aligned mini image" src={Blossom} alt="Blossom Logo"/>
                         {blossom}
                     </a>

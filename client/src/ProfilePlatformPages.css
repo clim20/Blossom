@@ -31,6 +31,11 @@
     overflow-wrap: break-word;
 }
 
+.profile-image, .platform-image {
+    min-width: 7rem !important;
+    min-height: 7rem !important;
+}
+
 /* BUTTONS */
 .edit-button {
     max-width: 8rem;

@@ -139,5 +139,18 @@ module.exports = {
       if(updated) return true;
       return false;
     },  
+    async editQuizCollection(_, { id, updatedQuizCollection }) {
+      const quizCollection = await QuizCollection.findOne({_id: new ObjectId(id)});
+
+      const updated = await QuizCollection.updateOne({_id: new ObjectId(id)}, {
+        img: updatedQuizCollection.img,
+        name: updatedQuizCollection.name,
+        description: updatedQuizCollection.description,
+        quizzes: updatedQuizCollection.quizzes
+      });
+
+      if (updated) return quizCollection;
+      return quizCollection;
+    },
   }
 };

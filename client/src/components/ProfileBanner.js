@@ -165,12 +165,12 @@ const ProfileBanner = ({ profile, user, refetchProfileData }) => {
                         <div className="banner-info" style={{ bottom: user ? '-2rem' : '-5rem' }}>
                             <div className="display-inline-block">
                                 {!editingMode ?
-                                    <img className="card-image creator-circle ui avatar image"
+                                    <img className="card-image creator-circle ui avatar image profile-image"
                                         src={profile.profileImg} alt="creator profile"
                                     />
                                     :
                                     <label htmlFor="upload-profile-image" className="hover-image" style={{ position: 'relative' }}>
-                                        <img className="card-image creator-circle ui avatar image"
+                                        <img className="card-image creator-circle ui avatar image profile-image"
                                             src={profile.profileImg} alt="creator profile"
                                             style={{ cursor: 'pointer' }}
                                         />
