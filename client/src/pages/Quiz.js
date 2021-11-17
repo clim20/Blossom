@@ -68,9 +68,20 @@ const Quiz = () =>{
         followers = profileObject.followerCount;
     }
 
+    const { data: userProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+        variables: {
+            id: user ? user.profileId : []
+        }
+    });
+
+    var userProfile = {};
+    if (userProfileData) { 
+		userProfile = userProfileData.findProfileById;
+    }
+
     const { data: quizCollectionsData, refetch: refetchQuizCollectionsData } = useQuery(queries.FIND_QUIZ_COLLECTION_BY_IDS, {
         variables: {
-            ids: profileObject ? profileObject.quizCollections : []
+            ids: userProfile ? userProfile.quizCollections : []
         }
     });
 
