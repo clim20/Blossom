@@ -3,7 +3,7 @@ import React from 'react';
 import QuizCard from './QuizCard';
 
 const QuizCards = (props) => {  
-    const quizCardClass = props.activeTab ? "ui three cards stackable" : "ui four cards stackable";
+    const quizCardClass = props.activeTab ? "ui three cards doubling stackable grid container" : "ui four cards doubling stackable grid container";
 
     return (
         <div>

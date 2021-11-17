@@ -153,7 +153,7 @@ const MenuBar = (props) => {
                 </Menu.Item>
                 <Menu.Item
                     name='random'
-                    onClick={()=>{}}
+                    onClick={handleRandomClick}
                 />
             </Menu.Menu>
             <Menu.Item className='search-bar' style={{width: "70%"}}>

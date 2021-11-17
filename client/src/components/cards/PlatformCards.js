@@ -3,7 +3,7 @@ import React from 'react';
 import PlatformCard from './PlatformCard';
 
 function PlatformCards(props) {  
-    const platformCardClass = props.activeTab ? "ui three cards stackable" : "ui five cards stackable";
+    const platformCardClass = props.activeTab ? "ui three cards doubling stackable grid container" : "ui four cards doubling stackable grid container";
 
     return (
         <div>

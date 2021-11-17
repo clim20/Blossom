@@ -13,7 +13,7 @@ module.exports = {
         return [];
     },
     async getPopularPlatforms() {
-      const platforms = await Platform.find().sort({ followerCount: -1 }).limit(5);
+      const platforms = await Platform.find().sort({ followerCount: -1 }).limit(4);
 
       if (platforms) return platforms;
       return [];

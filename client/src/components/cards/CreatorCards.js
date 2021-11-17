@@ -3,7 +3,7 @@ import React from 'react';
 import CreatorCard from './CreatorCard';
 
 const CreatorCards = (props) => {  
-    const creatorCardClass = props.activeTab ? "ui three cards stackable" : "ui five cards stackable";
+    const creatorCardClass = props.activeTab ? "ui three cards doubling stackable grid container" : "ui four cards doubling stackable grid container";
 
     return (
         <div>

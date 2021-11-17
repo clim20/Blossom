@@ -24,7 +24,7 @@ module.exports = {
       return [];
     },
     async getPopularUsers() {
-      const profiles = await Profile.find().sort({ followerCount: -1 }).limit(5);
+      const profiles = await Profile.find().sort({ followerCount: -1 }).limit(4);
 
       var users = [];
       for(let i = 0; i < profiles.length; i++) {
