@@ -8,6 +8,7 @@ import './ProfilePlatformPages.css';
 import './QuestPage.css';
 import './QuizPages.css';
 import './UpdatePage.css';
+import './QuizCollectionPage.css';
 
 import { AuthProvider } from './context/auth';
 

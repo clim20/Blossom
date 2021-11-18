@@ -38,7 +38,7 @@ function QuizCollectionEntry(props) {
     return (
         <Dropdown.Item>
             <div className="ui checkbox">
-                <input type="checkbox" onClick={handleClick} checked={hasQuiz}/>
+                <input type="checkbox" onChange={handleClick} checked={hasQuiz}/>
                 <label>{props.quizCollection.name}</label>
             </div>
         </Dropdown.Item>

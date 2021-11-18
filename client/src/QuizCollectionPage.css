@@ -1,0 +1,49 @@
+/* QUIZ COLLECTION PAGE */
+/* BANNER */
+
+.qc-banner-header {
+  position: relative;
+  width: 100%;
+  height: 20rem;
+  text-align: left;
+}
+
+.qc-edit-button {
+    position: relative;
+    float: right;
+    /* right: 5rem;
+    bottom: 0rem; */
+    width: 8rem;
+    height: 3rem;
+    background-color: var(--pink) !important;
+}
+
+.qc-delete-button {
+  width: 8rem;
+  height: 3rem;
+  text-align: center;
+  background-color: var(--cancelRed) !important;
+}
+
+.qc-section {
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.qc-save-button {
+    position: relative;
+    float: right;
+    max-width: 8rem;
+    width: -webkit-fill-available;
+    height: 3rem;
+    background-color: var(--saveGreen) !important;
+  }
+  
+  .qc-cancel-button {
+    position: relative;
+    float: right;
+    max-width: 8rem;
+    width: -webkit-fill-available;
+    height: 3rem;
+    background-color: var(--cancelRed) !important;
+  }
