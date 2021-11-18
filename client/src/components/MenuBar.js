@@ -143,7 +143,7 @@ const MenuBar = (props) => {
             </Menu.Menu>
         </Menu>
         ) : (
-        <Menu pointing secondary size="massive" color="pink">
+        <Menu pointing secondary size="massive" color="pink" stackable>
             <Menu.Menu position='left'>
                 <Menu.Item style={{ height: "97%" }}>
                     <a href="/" className='logo'>
