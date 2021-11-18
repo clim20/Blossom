@@ -55,11 +55,13 @@ const QuizStart = (props) => {
         //let tempQuizScores = temp.scores;
         let existingScore = scoreArr.findIndex(({ user }) => user === props.currentUser._id)
         console.log(existingScore)
+        let hitmodify = temp.quizHits
         if (existingScore != -1){
             if (scoreArr[existingScore].bestScore < totalScore){
                 scoreArr[existingScore].bestScore = totalScore;
             }
         }else{
+            hitmodify += 1;
             let i = 0;
             let foundspot = false;
             while(foundspot==false&&i<scoreArr.length){
@@ -120,7 +122,7 @@ const QuizStart = (props) => {
                     "titleImg": temp.titleImg,
                     "creator":  temp.creator,
                     "platformId": temp.platformId,
-                    "quizHits": temp.quizHits,
+                    "quizHits": hitmodify,
                     "quizLikes": temp.quizLikes,
                     "quizDislikes": temp.quizDislikes,
                     "badges": badgeArr,
