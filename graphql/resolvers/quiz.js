@@ -38,6 +38,35 @@ module.exports = {
       if (quizzes) return quizzes;
       return [];
     },
+    async getForYouQuizzes(_, { id }) {
+      const profile = await Profile.findOne({_id: new ObjectId(id)});
+
+      const followingIds = profile ? profile.following : [];
+
+      var quizIds = [];
+      for (let i = 0; i < followingIds.length; i++) {
+        const user = await User.findOne({_id: followingIds[i]});
+        if (user) {
+          const userProfile = await Profile.findOne({_id: user.profileId});
+          if (userProfile) {
+            quizIds = [...quizIds, ...userProfile.quizzes];
+          }
+        }
+      }
+
+      var quizzes = [];
+      for (let i = 0; i < quizIds.length; i++) {
+        const quiz = await Quiz.findOne({_id: quizIds[i]});
+        if (quiz) {
+          quizzes.push(quiz);
+        }
+      }
+
+      quizzes = quizzes.sort().reverse().slice(0, 4);
+      
+      if (quizzes) return quizzes;
+      return [];
+    },
     async findQuizById (_, { id }){
       const quiz= await Quiz.findOne({_id: id});
       console.log(quiz);

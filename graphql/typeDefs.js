@@ -195,13 +195,14 @@ module.exports = gql`
         findQuizzesByIds(ids: [ID!]!): [Quiz!]!
         getQuizHits(ids: [ID!]!): Int!
         getPopularQuizzes: [Quiz!]!
-        getPopularQuizzesOfId(id: ID!): [Quiz]!
+        getPopularQuizzesOfId(id: ID!): [Quiz!]!
+        getForYouQuizzes(id: ID!): [Quiz!]!
         getRandomQuiz: ID!
 
         getQuizCollections: [QuizCollection!]!
         findQuizCollectionById(id: ID!): QuizCollection!
         findQuizCollectionByIds(ids: [ID!]!): [QuizCollection!]!
-        getPopularQuizCollectionsOfId(id: ID!): [QuizCollection]!
+        getPopularQuizCollectionsOfId(id: ID!): [QuizCollection!]!
 
         getSearchResults(searchQuery: String!, filters: [String]!): [SearchResults!]!
     }
