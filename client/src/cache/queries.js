@@ -316,7 +316,6 @@ export const FETCH_POPULAR_QUIIZZES = gql`
             title
             titleImg
             creator
-            platformId
             quizHits
             quizLikes
         }
