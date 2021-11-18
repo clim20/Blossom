@@ -29,7 +29,7 @@ module.exports = {
         } 
         
         if (filters.length == 0) {
-            results = [...users, ...platforms, ...quizzes, ...quizCollections].sort((a, b) => {a._id - b._id}).slice(0, 20);
+            results = [...users, ...platforms, ...quizzes, ...quizCollections].reverse().slice(0, 20);
         }
         
         if (results) return results;
