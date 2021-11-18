@@ -24,11 +24,7 @@ const QuizStart = (props) => {
    
     const saveScore = async () =>{
         let temp = JSON.parse(JSON.stringify(props.currentQuiz));
-        //console.log(temp._id)
-        //console.log(temp.scores.length)
-        //console.log(temp)
-
-        //console.log(temp.cards)
+        
         var badgeArr = [];
         for(let i = 0; i < temp.badges.length; i++){
             let insert = {

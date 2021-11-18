@@ -37,9 +37,11 @@ const Quiz = () =>{
 
     var currentQuiz = {};
     var cards = [];
+    var scores = [];
     if (quizData) { 
 		currentQuiz = quizData.findQuizById;
         cards = currentQuiz.cards
+        scores = JSON.parse(JSON.stringify(currentQuiz.scores));
     }
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
@@ -95,7 +97,7 @@ const Quiz = () =>{
     //console.log(username)
     //console.log(followers)
     
-    const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200]]);
+    //const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200]]);
     const [score, setScore] = useState(0);
 
     const [redirect, setRedirect] = useState(false);
@@ -115,13 +117,32 @@ const Quiz = () =>{
 
     
     const displayTopScores = (arr, index) =>{
+        var name = "";
+        let score = arr.userScore
+        
+        const NameComp = (props) =>{
+            const { data: playerData } = useQuery(queries.FIND_USER_BY_ID, {
+                variables: {
+                    id: props.user
+                }
+            });
+
+            var player = {};
+            name = ""
+            if (playerData) { 
+		        player = playerData.findUserById;
+                name = player.username
+            }
+
+            return <th>{name}</th>
+        }
 
         return(
             <tr>
                 <th>{index+1}</th>
-                <th>{arr[0]}</th>
+                <NameComp user = {arr.user}></NameComp>
                 <th>...</th>
-                <th>{arr[1]}</th>
+                <th>{score}</th>
             </tr>
         )
         
@@ -209,7 +230,7 @@ const Quiz = () =>{
                     </button>
 
                     <table className="leaderboard-table">
-                        {highestScores.splice(0,5).map(displayTopScores)}
+                        {scores.slice(0,5).map(displayTopScores)}
                     </table>
         
                     <div>
@@ -217,7 +238,7 @@ const Quiz = () =>{
                             LEADERBOARDS
                         </button>
                         <table>
-                            {highestScores.splice(0,5).map(displayTopScores)}
+                            {scores.slice(0,5).map(displayTopScores)}
                         </table>
                         
                     </div>
