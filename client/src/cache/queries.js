@@ -191,7 +191,7 @@ export const GET_QUIZZES = gql`
             description
             titleImg
             creator
-            platform
+            platformId
             quizHits
             quizLikes
             quizDislikes
@@ -229,7 +229,7 @@ export const FIND_QUIZZES_BY_IDS = gql`
             description
             titleImg
             creator
-            platform
+            platformId
             quizHits
             quizLikes
             quizDislikes
@@ -267,7 +267,7 @@ export const FIND_QUIZ_BY_ID = gql`
             description
             titleImg
             creator
-            platform
+            platformId
             quizHits
             quizLikes
             quizDislikes
@@ -316,13 +316,26 @@ export const FETCH_POPULAR_QUIIZZES = gql`
             title
             titleImg
             creator
-            platform
+            platformId
             quizHits
             quizLikes
         }
     }
 `;
 
+export const GET_POPULAR_QUIIZZES_OF_ID = gql`
+    query getPopularQuizzesOfId($id: ID!) {
+        getPopularQuizzesOfId(id: $id) {
+            _id
+            title
+            titleImg
+            creator
+            platformId
+            quizHits
+            quizLikes
+        }
+    }
+`;
 
 export const FIND_COLLABORATORS_BY_IDS = gql`
     query findCollaboratorsByIds($ids: [ID!]!) {
@@ -358,6 +371,20 @@ export const FIND_QUIZ_COLLECTION_BY_ID = gql`
 export const FIND_QUIZ_COLLECTION_BY_IDS = gql`
     query findQuizCollectionByIds($ids: [ID!]!) {
         findQuizCollectionByIds(ids: $ids) {
+            _id 
+            name
+	        creator
+	        img
+	        description
+	        quizzes
+	        createdAt
+        }
+    }
+`;
+
+export const GET_POPULAR_QUIZ_COLLECTIONS_OF_ID = gql`
+    query getPopularQuizCollectionsOfId($id: ID!) {
+        getPopularQuizCollectionsOfId(id: $id) {
             _id 
             name
 	        creator

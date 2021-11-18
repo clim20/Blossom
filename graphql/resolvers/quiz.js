@@ -19,6 +19,25 @@ module.exports = {
       if (quizzes) return quizzes;
       return [];
     },
+    async getPopularQuizzesOfId(_, { id }) {
+      const profile = await Profile.findOne({_id: new ObjectId(id)});
+      const platform = await Platform.findOne({_id: new ObjectId(id)});
+
+      const quizIds = profile ? profile.quizzes : platform ? platform.quizzes : [];
+
+      var quizzes = [];
+      for (let i = 0; i < quizIds.length; i++) {
+        const quiz = await Quiz.findOne({_id: quizIds[i]});
+        if (quiz) {
+          quizzes.push(quiz);
+        }
+      }
+
+      quizzes = quizzes.sort((a, b) => {b.quizHits - a.quizHits}).slice(0, 3);
+      
+      if (quizzes) return quizzes;
+      return [];
+    },
     async findQuizById (_, { id }){
       const quiz= await Quiz.findOne({_id: id});
       console.log(quiz);

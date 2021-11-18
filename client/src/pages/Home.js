@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import CreatorCards from '../components/cards/CreatorCards';
 import PlatformCards from '../components/cards/PlatformCards';
-import QuizCards from '../components/cards/QuizCards'
+import QuizCards from '../components/cards/QuizCards';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';

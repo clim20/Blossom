@@ -13,6 +13,25 @@ module.exports = {
         if (quizCollections) return quizCollections;
         return [];
     },
+    async getPopularQuizCollectionsOfId(_, { id }) {
+      const profile = await Profile.findOne({_id: new ObjectId(id)});
+      const platform = await Platform.findOne({_id: new ObjectId(id)});
+
+      const quizCollectionIds = profile ? profile.quizCollections : platform ? platform.quizCollections : [];
+
+      var quizCollections = [];
+      for (let i = 0; i < quizCollectionIds.length; i++) {
+        const quizCollection = await QuizCollection.findOne({_id: quizCollectionIds[i]});
+        if (quizCollection) {
+          quizCollections.push(quizCollection);
+        }
+      }
+
+      quizCollections = quizCollections.reverse().slice(0, 3);
+      
+      if (quizCollections) return quizCollections;
+      return [];
+    },
     async findQuizCollectionById(_, { id }) {
         const quizCollection = await QuizCollection.findOne({_id: id});
         

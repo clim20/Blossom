@@ -50,21 +50,18 @@ function QuizCollectionCard(props) {
     
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
-            <div className="content">
-                <div className="description">
-                    {
-                        onQuizCollectionTab && props.editingMode && 
-                        <i className="times icon" style={{ position: 'absolute', top: '8px', right: '15px', color: 'var(--cancelRed)', fontSize: '15pt' }}
-                            onClick={handleXClick}
-                        />
-                    }
-                    <img width='200px' height='120px'
-                        src={quizCollection && quizCollection.img}
-                        alt="quizCollection"
+            <div className="image">
+                <img src={quizCollection && quizCollection.img} alt="quizCollection"/>
+                {
+                    onQuizCollectionTab && props.editingMode && 
+                    <i className="times icon" style={{ position: 'absolute', top: '8px', right: '15px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                        onClick={handleXClick}
                     />
-                    <br/>
-                    <br/>
-                    <div className="card-text"> {props.quizCollection && props.quizCollection.name} </div>
+                }
+            </div>
+            <div className="content">
+                <div className="description card-text">
+                    <div> {props.quizCollection && props.quizCollection.name} </div>
                     <div> Created by {quizCollectionCreator && quizCollectionCreator.username} </div>
                     <div> {quizCollection && quizzesCount} </div>
                 </div>

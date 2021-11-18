@@ -56,7 +56,7 @@ module.exports = gql`
         description: String
         titleImg: String
         creator: ID!
-        platform: ID
+        platformId: ID
         quizHits: Int!
         quizLikes: Int!
         quizDislikes: Int!
@@ -195,11 +195,13 @@ module.exports = gql`
         findQuizzesByIds(ids: [ID!]!): [Quiz!]!
         getQuizHits(ids: [ID!]!): Int!
         getPopularQuizzes: [Quiz!]!
+        getPopularQuizzesOfId(id: ID!): [Quiz]!
         getRandomQuiz: ID!
 
         getQuizCollections: [QuizCollection!]!
         findQuizCollectionById(id: ID!): QuizCollection!
         findQuizCollectionByIds(ids: [ID!]!): [QuizCollection!]!
+        getPopularQuizCollectionsOfId(id: ID!): [QuizCollection]!
 
         getSearchResults(searchQuery: String!, filters: [String]!): [SearchResults!]!
     }
