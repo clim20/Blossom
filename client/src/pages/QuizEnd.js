@@ -8,6 +8,7 @@ import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 import QuizStart from './QuizStart';
+import LeaderBoardModal from '../modals/LeaderBoardModal';
 
 const styles = {
     button : {
@@ -19,7 +20,7 @@ const styles = {
 
 const QuizEnd = (props) =>{
 
-    const history = useHistory();
+    const { user } = useContext(AuthContext);
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {
@@ -49,6 +50,8 @@ const QuizEnd = (props) =>{
 
 
     const [isRetrying, setIsRetrying] = useState(false);
+    const [showLeaderBoardModal, setShowLeaderBoardModal] = useState(false);
+    var scores = props.currentQuiz.scores;
     
     const handleRetry = event =>{
         setIsRetrying(true);
@@ -65,14 +68,34 @@ const QuizEnd = (props) =>{
         props.handleAddToCollection(event);
     };
 
+    
     const displayTopScores = (arr, index) =>{
+        var name = "";
+        let score = arr.userScore
+        
+        const NameComp = (props) =>{
+            const { data: playerData } = useQuery(queries.FIND_USER_BY_ID, {
+                variables: {
+                    id: props.user
+                }
+            });
+
+            var player = {};
+            name = ""
+            if (playerData) { 
+		        player = playerData.findUserById;
+                name = player.username
+            }
+
+            return <th>{name}</th>
+        }
 
         return(
             <tr>
                 <th>{index+1}</th>
-                <th>{arr[0]}</th>
+                <NameComp user = {arr.user}></NameComp>
                 <th>...</th>
-                <th>{arr[1]}</th>
+                <th>{score}</th>
             </tr>
         )
         
@@ -108,14 +131,18 @@ const QuizEnd = (props) =>{
             <p>*Only first scores are posted to the leaderboards</p>
 
             <div>
-                <button className="quizLeaderboard" style = {styles.button}>
+                <button className="quizLeaderboard" style = {styles.button} onClick = {() => setShowLeaderBoardModal(true)} >
                     LEADERBOARDS
                 </button>
                 <table className="leaderboard-table">
-                    {/*props.highestScores.splice(0,5).map(displayTopScores)*/}
+                    {scores.slice(0,5).map(displayTopScores)}
                 </table>
                 
             </div>
+
+            {
+                    showLeaderBoardModal && (<LeaderBoardModal setShowLeaderBoardModal = {setShowLeaderBoardModal} scores = {scores} currentuser = {user._id}/>)
+            }
         </div>
             
     );    

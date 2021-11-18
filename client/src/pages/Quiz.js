@@ -13,6 +13,7 @@ import image1 from '../testpic/seal.jpg';
 
 import QuizStart from './QuizStart';
 import QuizCollectionEntry from '../components/QuizCollectionEntry';
+import LeaderBoardModal from '../modals/LeaderBoardModal';
 
 const styles = {
     button : {
@@ -94,11 +95,7 @@ const Quiz = () =>{
 
     var isCreator = userObject && user && userObject._id === user._id
 
-    //console.log(username)
-    //console.log(followers)
-    
-    //const [highestScores, setHighestScores] = useState([["A",600],["B",500],["C",300],["D",200]]);
-    const [score, setScore] = useState(0);
+    const [showLeaderBoardModal, setShowLeaderBoardModal] = useState(false);
 
     const [redirect, setRedirect] = useState(false);
 
@@ -112,8 +109,6 @@ const Quiz = () =>{
 
     const handleFollow = event => {};
     
-    const scoreQuery = () =>{};
-    const handleSaveChanges = () =>{};
 
     
     const displayTopScores = (arr, index) =>{
@@ -234,7 +229,7 @@ const Quiz = () =>{
                     </table>
         
                     <div>
-                        <button className="quizLeaderboard" style = {styles.button}>
+                        <button className="quizLeaderboard" style = {styles.button} onClick = {() => setShowLeaderBoardModal(true)}>
                             LEADERBOARDS
                         </button>
                         <table>
@@ -316,6 +311,9 @@ const Quiz = () =>{
                         />
                     </Input>
                     </div>
+                }
+                {
+                    showLeaderBoardModal && (<LeaderBoardModal setShowLeaderBoardModal = {setShowLeaderBoardModal} scores = {scores} currentuser = {user._id}/>)
                 }
             </div>
         );
