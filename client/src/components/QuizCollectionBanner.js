@@ -32,10 +32,6 @@ const QuizCollectionBanner = (props) => {
 
     const [quizCollectionImage, setQuizCollectionImage] = useState('');
 
-    useEffect(() => {
-        props.refetchQuizCollectionData();
-    }, [props.user, props.quizCollection, props.refetchQuizCollectionData]);
-
     const uploadImage = async (type) => {
         const data = new FormData();
         data.append("file", quizCollectionImage);
@@ -55,7 +51,7 @@ const QuizCollectionBanner = (props) => {
                     quizzes: props.updatedQuizCollection.quizzes
                 });
             }
-            saveChanges();
+            props.saveChanges();
             setTimeout(() => {
                 props.refetchQuizCollectionData();
             }, 300);
@@ -80,10 +76,10 @@ const QuizCollectionBanner = (props) => {
             quizzes: props.updatedQuizCollection.quizzes,
             description: newDescription,
         });
+        props.saveChanges();
     }
 
     const handleNameChange = (e) => {
-        console.log("TODO: handleNameChange");
         const newName = e.target.value ? e.target.value : props.quizCollection.name;
         var dup = false;
         for (let i = 0; i < quizCollections.length; i++) {
@@ -97,7 +93,6 @@ const QuizCollectionBanner = (props) => {
                 break;
             }
         }
-        console.log(dup);
         if (!dup) {
             props.setUpdatedQuizCollection({
                 img: props.updatedQuizCollection.img,
@@ -120,21 +115,17 @@ const QuizCollectionBanner = (props) => {
         props.refetchQuizCollectionData();
     }
 
-    var [saveChanges] = useMutation(mutations.EDIT_QUIZ_COLLECTION, {
-        variables: {
-            id: props.quizCollection._id,
-            updatedQuizCollection: props.updatedQuizCollection
-        }
-    });
-
     const handleSave = (e) => {
         if (quizCollectionImage) { 
             uploadImage('quizCollection');
         }
-        console.log(props.updatedQuizCollection);
-        saveChanges();
+        props.saveChanges();
         handleCancel();
     }
+
+    useEffect(() => {
+        props.refetchQuizCollectionData();
+    }, [props.user, props.updatedQuizCollection, props.refetchQuizCollectionData]);
 
     const isOwnQuizCollection = props.quizCollection && props.user && props.quizCollection.creator === props.user._id;
 
@@ -143,7 +134,7 @@ const QuizCollectionBanner = (props) => {
             <Grid.Row>
                 <Grid.Column width={6}>
                     <img width='360px' height='200px'
-                        src={props.quizCollection && props.quizCollection.img}
+                        src={props.updatedQuizCollection && props.updatedQuizCollection.img}
                         alt="quizCollection"
                     />
                     {
@@ -161,21 +152,21 @@ const QuizCollectionBanner = (props) => {
                     {
                         !props.editingMode && props.quizCollection && 
                         <div>
-                            <h2>{props.quizCollection.name}</h2>
-                            <h2>{props.quizCollection.description}</h2>
+                            <h2>{props.updatedQuizCollection.name}</h2>
+                            <h2>{props.updatedQuizCollection.description}</h2>
                         </div>
                     }
                     {
-                        props.editingMode && props.quizCollection && 
+                        props.editingMode && props.updatedQuizCollection && 
                         <div>
                             <textarea
                                 name='name'
-                                defaultValue={props.quizCollection.name}
+                                defaultValue={props.updatedQuizCollection.name}
                                 onBlur={handleNameChange}
                             />
                             <textarea  
                                 name='description'
-                                defaultValue={props.quizCollection.description}
+                                defaultValue={props.updatedQuizCollection.description}
                                 onBlur={handleDescriptionEdit}
                             />
                         </div>

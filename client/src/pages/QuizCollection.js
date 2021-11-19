@@ -11,8 +11,19 @@ import * as mutations from '../cache/mutations';
 
 const QuizCollection = () => {
     const { user } = useContext(AuthContext);
-    const [editingMode, toggleEditingMode] = useState(false);
     const history = useHistory();
+    const [editingMode, toggleEditingMode] = useState(false);
+
+    const [updatedQuizCollection, setUpdatedQuizCollection] = useState({ 
+        img: quizCollection ? quizCollection.img : "",
+        name: quizCollection ? quizCollection.name : "",
+        description: quizCollection ? quizCollection.description : "",
+        quizzes: quizCollection ? quizCollection.quizzes : []
+        // img: quizCollection.img,
+        // name: quizCollection.name,
+        // description: quizCollection.description,
+        // quizzes: quizCollection.quizzes
+    });
 
     const params = useParams();
     const quizCollectionId = params ? params.quizCollectionId : 'could not get params';
@@ -20,7 +31,13 @@ const QuizCollection = () => {
     const { data: quizCollectionData, refetch: refetchQuizCollectionData } = useQuery(queries.FIND_QUIZ_COLLECTION_BY_ID, {
         variables: {
             id: quizCollectionId
-        }
+        },
+        onCompleted: data => setUpdatedQuizCollection({
+            img: data.findQuizCollectionById.img,
+            name: data.findQuizCollectionById.name,
+            description: data.findQuizCollectionById.description,
+            quizzes: data.findQuizCollectionById.quizzes
+        })
     });
 
     var quizCollection = {};
@@ -39,30 +56,29 @@ const QuizCollection = () => {
         quizzes = quizzesData.findQuizzesByIds; 
     }
 
-    const [updatedQuizCollection, setUpdatedQuizCollection] = useState({ 
-        img: quizCollection.img,
-        name: quizCollection.name,
-        description: quizCollection.description,
-        quizzes: quizCollection.quizzes
-    });
-
     useEffect(() => {
         refetchQuizCollectionData();
         refetchQuizzesData();
-    }, [updatedQuizCollection]);
+    }, [saveChanges, updatedQuizCollection]);
+
+    var [saveChanges] = useMutation(mutations.EDIT_QUIZ_COLLECTION, {
+        variables: {
+            id: quizCollection._id,
+            updatedQuizCollection: updatedQuizCollection
+        }
+    });
 
     const [DeleteQuizCollection] = useMutation(mutations.DELETE_QUIZ_COLLECTION);
 
     const deleteQuizCollection = async () => {
         await DeleteQuizCollection({variables: { quizCollectionId: quizCollection._id }});
-        console.log(quizCollection._id);
         history.push("/");
     }
 
     return (
         <div>
             <QuizCollectionBanner quizCollection={quizCollection} user={user} refetchQuizCollectionData={refetchQuizCollectionData}
-                editingMode={editingMode} toggleEditingMode={toggleEditingMode}
+                editingMode={editingMode} toggleEditingMode={toggleEditingMode} saveChanges={saveChanges}
                 updatedQuizCollection={updatedQuizCollection} setUpdatedQuizCollection={setUpdatedQuizCollection}
             />
             <div className="ui divider"/>
