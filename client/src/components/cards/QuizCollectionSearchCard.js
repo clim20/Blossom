@@ -44,7 +44,7 @@ const QuizCollectionSearchCard = (props) => {
                     <div className="content">
                         <Grid verticalAlign="middle">
                             <Grid.Column width={4} style={{ textAlign: 'center' }}>
-                                <Image src={quizCollection.titleImg}/>
+                                <Image src={quizCollection.img}/>
                             </Grid.Column>
                             <Grid.Column width={12}>
                             <div>
