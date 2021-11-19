@@ -50,18 +50,16 @@ const QuizEdit = () => {
     const [selectedCard, setSelectedCard] = useState(-1);
     const [initTemp, setInitTemp] = useState(true);
 
+    const [mode,setMode] = useState('draw');
+    const [lineWidth, setLineWidth] = useState(10);
+    const [penColor, setPenColor] = useState("#000000")
+
     const [UpdateQuiz] = useMutation(mutations.UPDATE_QUIZ);
 
     if(initTemp && quizData){
         setTempQuiz(originalQuiz)
         setInitTemp(false)
     }
-
-
-
-    console.log(originalQuiz)
-    console.log(tempQuiz)
-    console.log(initTemp)
     
     var title = tempQuiz.title
 
@@ -160,15 +158,51 @@ const QuizEdit = () => {
     const handleCancel = () =>{
         history.push("/quiz/" + quizId);
     }
+
+    const draw =(e)=> { //response to Draw button click 
+        setMode('draw');
+    }
+
+    const erase =() => { //response to Erase button click
+        setMode('erase');
+    }
+
+    const penSizeUp = () =>{ //increase pen size button clicked
+        setLineWidth(lineWidth + 5);
+    }
+
+    const penSizeDown = () => {//decrease pen size button clicked
+        setLineWidth(lineWidth - 5);
+    }
+
+    
+    const setColor = (e) =>{ //a color button was clicked
+        setPenColor(e.target.value)
+    }
+
+    const resetCanvas = () =>{
+        setMode('draw')
+        setLineWidth(10);
+        setPenColor("#000000");
+    }
+
     if(initTemp == false && isCreator){
         return (
             <div>
                 <TableOfContents tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} setSelectedCard = {setSelectedCard}/>
+
+                <div>
+                    <button onClick={(e)=>draw(e)} >Draw</button>
+                    <button onClick={(e)=>erase(e)} >Erase</button>
+                    <button onClick={(e)=>penSizeUp()} >Pen Size +</button>
+                    <button onClick={(e)=>penSizeDown()} >Pen Size -</button>
+                    <input type = "color" id="brushcolor" name="brushcolor" onChange={(e)=>setColor(e)}></input>
+                </div>
                 <div>
                     <input type="text" value={title} onChange={(e) => handleTitleChange(e.target.value)}/>
                     <div>
-                        <EditQuestion tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
-                        <EditAnswer tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}/>
+                        <EditQuestion tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} mode={mode} lineWidth={lineWidth} penColor={penColor} reset ={resetCanvas} />
+                        <EditAnswer tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} mode={mode} lineWidth={lineWidth} penColor={penColor} reset ={resetCanvas}/>
                     </div>
                     <div>
                         <button onClick = {() => handleSave()}>

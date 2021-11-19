@@ -1,4 +1,5 @@
 import React from 'react';
+import DrawComp from './DrawComp';
 
 function EditAnswer(props) {
     //tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}
@@ -37,6 +38,7 @@ function EditAnswer(props) {
         var ansExplanation = currentCard.answerExplanation
         return(
             <div>
+                <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset}></DrawComp>
                 {displayAnsChoice(ansIndex)}
                 <input type="text" value={ansExplanation} onChange={(e) => handleAnsChange(e.target.value)}/>
                 
