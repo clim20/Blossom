@@ -19,10 +19,6 @@ const QuizCollection = () => {
         name: quizCollection ? quizCollection.name : "",
         description: quizCollection ? quizCollection.description : "",
         quizzes: quizCollection ? quizCollection.quizzes : []
-        // img: quizCollection.img,
-        // name: quizCollection.name,
-        // description: quizCollection.description,
-        // quizzes: quizCollection.quizzes
     });
 
     const params = useParams();
@@ -58,8 +54,7 @@ const QuizCollection = () => {
 
     useEffect(() => {
         refetchQuizCollectionData();
-        refetchQuizzesData();
-    }, [saveChanges, updatedQuizCollection]);
+    }, [updatedQuizCollection]);
 
     var [saveChanges] = useMutation(mutations.EDIT_QUIZ_COLLECTION, {
         variables: {
@@ -87,7 +82,7 @@ const QuizCollection = () => {
                 quizzes && quizzes.map((entry, index) => (
                     <QuizCollectionQuizCard
                         quiz={entry} key={index} index={index} user={user} quizCollection={quizCollection}
-                        editingMode={editingMode}
+                        editingMode={editingMode} saveChanges={saveChanges}
                         refetchData={refetchQuizCollectionData}
                         updatedQuizCollection={updatedQuizCollection} setUpdatedQuizCollection={setUpdatedQuizCollection}
                     />

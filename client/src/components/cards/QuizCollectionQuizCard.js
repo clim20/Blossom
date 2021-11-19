@@ -49,6 +49,7 @@ function QuizCollectionQuizCard(props) {
             description: props.updatedQuizCollection.description,
             quizzes: quizzes
         });
+        props.saveChanges();
     }
 
     const [RemoveQuizFromQuizCollection] = useMutation(mutations.REMOVE_QUIZ_FROM_QUIZ_COLLECTION);
@@ -59,16 +60,41 @@ function QuizCollectionQuizCard(props) {
         // setUpdatedQuizzes({
         //     quizzes: newQuizzes
         // });
-
         handleSave(newQuizzes);
     }
 
     const handleUpClick = () => {
         console.log('HANDLE UP CLICK');
+        // console.log(updatedQuizzes.quizzes);
+        // var newQuizzes = [...updatedQuizzes.quizzes];
+        // var temp;
+        // if (props.index > 0 && props.index < newQuizzes.length) {
+        //     temp = newQuizzes[props.index-1];
+        //     newQuizzes.splice(props.index-1, 1);
+        //     newQuizzes.splice(props.index, 0, temp);
+        //     // setUpdatedQuizzes({
+        //     //     quizzes: newQuizzes});
+        //     console.log(newQuizzes);
+        //     console.log(updatedQuizzes.quizzes);
+        // }
+        // handleSave(newQuizzes);
     }
 
     const handleDownClick = () => {
         console.log("HANDLE DOWN CLICK");
+        // console.log(updatedQuizzes.quizzes);
+        // var newQuizzes = [...updatedQuizzes.quizzes];
+        // var temp;
+        // if (props.index >= 0 && props.index < newQuizzes.length-1) {
+        //     temp = newQuizzes[props.index];
+        //     newQuizzes.splice(props.index, 1);
+        //     newQuizzes.splice(props.index+1, 0, temp);
+        //     // setUpdatedQuizzes({
+        //     //     quizzes: newQuizzes});
+        //     console.log(newQuizzes);
+        //     console.log(updatedQuizzes.quizzes);
+        // }
+        // handleSave(newQuizzes);
     }
 
     useEffect(() => {
@@ -96,6 +122,18 @@ function QuizCollectionQuizCard(props) {
                     onClick={removeQuizFromQuizCollection}
                 />
             }
+            {/* {
+                props.editingMode && 
+                <i className="angle up icon" style={{  fontSize: '15pt' }}
+                    onClick={handleUpClick}
+                />
+            }
+            {
+                props.editingMode && 
+                <i className="angle down icon" style={{  fontSize: '15pt' }}
+                    onClick={handleDownClick}
+                />
+            } */}
         </div>
     );
 }

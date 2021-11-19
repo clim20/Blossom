@@ -55,13 +55,6 @@ const QuizCollectionBanner = (props) => {
             setTimeout(() => {
                 props.refetchQuizCollectionData();
             }, 300);
-            handleCancel();
-            props.setUpdatedQuizCollection({
-                img: props.updatedQuizCollection.img,
-                name: props.updatedQuizCollection.name,
-                description: props.updatedQuizCollection.description,
-                quizzes: props.updatedQuizCollection.quizzes
-            });
         })
         .catch(err => {
             console.log(err);
