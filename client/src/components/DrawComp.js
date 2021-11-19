@@ -3,7 +3,7 @@ import React, {useRef, useState, useEffect } from "react";
 const styles = {
     canvas : {
         border:'1px solid #333',
-        margin:'20px 0px',
+        margin:'0px 0px',
         top: 0,
         left: 350,
         //position: 'absolute'
@@ -13,7 +13,7 @@ const styles = {
     maindiv : {
         padding:'10px',
         margin:'auto',
-        width:'800px',
+        width:'400px',
        
     },
 /*
@@ -53,10 +53,22 @@ const DrawComp = (props) =>{
         ctx.current.lineCap = "round";
         
         ctx.current.fillStyle="white"
-        ctx.current.fillRect(0,0,800,600)
+        ctx.current.fillRect(0,0,400,400)
         ctx.current.lineWidth = props.lineWidth
         ctx.current.strokeStyle = props.penColor
+
         
+        if(props.lastSave!=""){
+            
+            var imagedata = new Image;
+            imagedata.onload = function(){
+                ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
+            };
+            imagedata.src = props.lastSave;
+
+            //var imagedata = JSON.parse(props.lastSave)
+            //ctx.current.putImageData(imagedata,0,0)
+        }
 
         
     }, []);
@@ -64,15 +76,7 @@ const DrawComp = (props) =>{
 
 
     
-/*
-    const draw =(e)=> { //response to Draw button click 
-        setMode('draw');
-    }
 
-    const erase =() => { //response to Erase button click
-        setMode('erase');
-    }
-*/
     const drawing = (e) => { //if the pen is down in the canvas, draw/erase
         console.log(pen)
         if(pen === 'down') {
@@ -95,6 +99,7 @@ const DrawComp = (props) =>{
             ctx.current.stroke();
             
             setPenCoords([e.nativeEvent.offsetX, e.nativeEvent.offsetY]);
+            //save()
         }
     }
 
@@ -108,20 +113,7 @@ const DrawComp = (props) =>{
         
         setPen('up');
     }
-/*
-    const penSizeUp = () =>{ //increase pen size button clicked
-        setLineWidth(lineWidth + 5);
-    }
 
-    const penSizeDown = () => {//decrease pen size button clicked
-        setLineWidth(lineWidth - 5);
-    }
-
-    
-    const setColor = (e) =>{ //a color button was clicked
-        setPenColor(e.target.value)
-    }
-*/
     const reset = () =>{ //clears it to all white, resets state to original
         props.reset()
 
@@ -129,20 +121,52 @@ const DrawComp = (props) =>{
         var canvas = refs.current
         var ctx = canvas.getContext('2d');
         ctx.fillStyle="white"
-        ctx.fillRect(0,0,800,800)
+        ctx.fillRect(0,0,400,400)
         ctx.lineWidth = 10
         ctx.strokeStyle = "#000000"
 
+        //save()
+
+    }
+
+    const reload = () =>{
+        reset()
+        if(props.lastSave!=""){
+            var imagedata = new Image;
+            imagedata.onload = function(){
+                ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
+            };
+            imagedata.src = props.lastSave;
+            /*
+            console.log("here");
+            var imagedata = JSON.parse(props.lastSave)
+            ctx.current.putImageData(imagedata,0,0)
+            */
+        }
+        //save()
+        
+    }
+
+    const save = async () =>{
+        const image = refs.current.toDataURL('image/jpeg', .1);
+        console.log(image)
+        props.save(image)
+        /*
+        const image = refs.current.toDataURL('image/png');
+        const blob = await (await fetch(image)).blob();
+        const blobURL = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobURL;
+        link.download = "image.png";
+        link.click();
+        
+        var imagedata = ctx.current.getImageData(0,0,400,400);
+        console.log(JSON.stringify(imagedata))
+        props.save(JSON.stringify(imagedata))
+        */
+
     }
 /*
-    save(){
-        var imagedata = ctx.getImageData(0,0,800,600);
-        this.setState({
-            lastsave: JSON.stringify(imagedata)
-        })
-
-    }
-
     load(){
         var imagedata = JSON.parse(this.state.lastsave)
         this.reset()
@@ -154,7 +178,7 @@ const DrawComp = (props) =>{
     return(
         <div style={styles.maindiv}>
             <div style={{position: 'reletive'}}>
-                <canvas ref={refs} width="800px" height="600px" style={styles.canvas} 
+                <canvas ref={refs} width="400px" height="400px" style={styles.canvas} 
                     
                     onMouseMove={(e)=>drawing(e)} 
                     onMouseDown={(e)=>penDown(e)} 
@@ -169,6 +193,8 @@ const DrawComp = (props) =>{
             <div>
                 
                 <button onClick={()=>reset()} >Reset</button>
+                <button onClick={()=>reload()} >Reload</button>
+                <button  onClick={()=>save()}>Save Drawing</button>
             </div>
             <div>
                 

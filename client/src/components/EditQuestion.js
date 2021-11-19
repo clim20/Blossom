@@ -47,6 +47,14 @@ function EditQuestion(props) {
         props.setTempQuiz(change);
     }
 
+    const handleDrawChange = drawing =>{
+        let change = JSON.parse(JSON.stringify(props.tempQuiz));
+       
+        change.cards[props.selectedCard].questionImg = drawing;
+        props.setTempQuiz(change);
+        console.log(change)
+    }
+
 
     const displayChoices = (choice, index) =>{
         //String.fromCharCode(c.charCodeAt(0) + 1);
@@ -91,7 +99,7 @@ function EditQuestion(props) {
         var quesTxt = currentCard.question
         return(
             <div>
-                <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset}></DrawComp>
+                <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset} lastSave={currentCard.questionImg} save={handleDrawChange}></DrawComp>
                 <input type="text" value={quesTxt} onChange={(e) => handleQuesChange(e.target.value)}/>
                 <div>
                     <table>
