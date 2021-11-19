@@ -38,31 +38,42 @@ function QuizCollectionQuizCard(props) {
         }
     }
 
-    const [RemoveQuizFromQuizCollection] = useMutation(mutations.REMOVE_QUIZ_FROM_QUIZ_COLLECTION);
+    const [updatedQuizzes, setUpdatedQuizzes] = useState({
+        quizzes: props.updatedQuizCollection.quizzes
+    });
 
-    const removeQuizFromQuizCollection = async () => {
-        await RemoveQuizFromQuizCollection({variables: { quizId: props.quiz._id, quizCollectionId: props.quizCollection._id }});
-        console.log(props.quiz._id);
-        const newQuizzes = props.quizCollection.quizzes.filter(q => q.toString() !== props.quiz._id.toString());
+    const handleSave = (quizzes) => {
         props.setUpdatedQuizCollection({
             img: props.updatedQuizCollection.img,
             name: props.updatedQuizCollection.name,
             description: props.updatedQuizCollection.description,
-            quizzes: newQuizzes
+            quizzes: quizzes
         });
-        
-        console.log(props.updatedQuizCollection.quizzes);
-        console.log(newQuizzes);
-        props.refetchData();
+    }
+
+    const [RemoveQuizFromQuizCollection] = useMutation(mutations.REMOVE_QUIZ_FROM_QUIZ_COLLECTION);
+
+    const removeQuizFromQuizCollection = async () => {
+        await RemoveQuizFromQuizCollection({variables: { quizId: props.quiz._id, quizCollectionId: props.quizCollection._id }});
+        const newQuizzes = props.updatedQuizCollection.quizzes.filter(q => q.toString() !== props.quiz._id.toString());
+        // setUpdatedQuizzes({
+        //     quizzes: newQuizzes
+        // });
+
+        handleSave(newQuizzes);
     }
 
     const handleUpClick = () => {
-    
+        console.log('HANDLE UP CLICK');
     }
 
     const handleDownClick = () => {
-
+        console.log("HANDLE DOWN CLICK");
     }
+
+    useEffect(() => {
+        console.log(updatedQuizzes.quizzes);
+      }, [updatedQuizzes])
 
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
@@ -83,18 +94,6 @@ function QuizCollectionQuizCard(props) {
                 props.editingMode && 
                 <i className="trash icon" style={{ fontSize: '15pt' }}
                     onClick={removeQuizFromQuizCollection}
-                />
-            }
-            {
-                props.editingMode && 
-                <i className="angle up icon" style={{  fontSize: '15pt' }}
-                    onClick={handleUpClick}
-                />
-            }
-            {
-                props.editingMode && 
-                <i className="angle down icon" style={{  fontSize: '15pt' }}
-                    onClick={handleDownClick}
                 />
             }
         </div>
