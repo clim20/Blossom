@@ -316,7 +316,6 @@ export const FETCH_POPULAR_QUIIZZES = gql`
             title
             titleImg
             creator
-            platformId
             quizHits
             quizLikes
         }
@@ -330,7 +329,19 @@ export const GET_POPULAR_QUIIZZES_OF_ID = gql`
             title
             titleImg
             creator
-            platformId
+            quizHits
+            quizLikes
+        }
+    }
+`;
+
+export const GET_FOR_YOU_QUIZZES = gql`
+    query getForYouQuizzes($id: ID!) {
+        getForYouQuizzes(id: $id) {
+            _id
+            title
+            titleImg
+            creator
             quizHits
             quizLikes
         }

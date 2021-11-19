@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useHistory } from "react-router-dom";
+import React, { useContext } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 
 import CreatorCards from '../components/cards/CreatorCards';
 import PlatformCards from '../components/cards/PlatformCards';
@@ -10,7 +9,6 @@ import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 
 const Home = () => {
-    const history = useHistory();
     const { user } = useContext(AuthContext);
 
     var users = [];
@@ -18,8 +16,6 @@ const Home = () => {
 	if(usersData) {
         users = usersData.getPopularUsers;
     }
-
-    console.log(users);
 
     var platforms = [];
     const { data: platformsData } = useQuery(queries.FETCH_POPULAR_PLATFORMS);
@@ -33,13 +29,23 @@ const Home = () => {
         quizzes = quizzesData.getPopularQuizzes; 
     }
 
-    console.log(quizzes);
+    var forYouQuizzes = [];
+    const {data: forYouQuizzesData} = useQuery(queries.GET_FOR_YOU_QUIZZES, {
+        variables: {
+            id: user ? user.profileId : ''
+        }
+    });
+
+    if(forYouQuizzesData) { 
+        forYouQuizzes = forYouQuizzesData.getForYouQuizzes; 
+    }
 
 	return (
         <div style={{ paddingBottom: '3rem' }}>
-            {user &&
+            {user && forYouQuizzes.length !== 0 && 
                 <div>
                     <h3 className="ui header">For You</h3>
+                    {forYouQuizzes && <QuizCards quizzes={forYouQuizzes}/>}
                     <div className="ui hidden divider"></div>
                 </div>
             }
