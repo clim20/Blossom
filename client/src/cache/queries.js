@@ -442,3 +442,15 @@ export const GET_SEARCH_RESULTS = gql`
         }
     }
 `;
+
+export const FIND_BADGES_BY_IDS = gql`
+    query findBadgesByIds($ids: [ID!]!) {
+        findBadgesByIds(ids: $ids) {
+            _id
+            quiz
+            rank
+            image
+            description
+        }
+    }
+`;

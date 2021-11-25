@@ -4,6 +4,7 @@ const platformsResolvers = require('./platforms');
 const quizzesResolvers = require('./quiz');
 const quizCollectionsResolvers = require('./quizCollections');
 const searchResolvers = require('./search');
+const badgesResolvers = require('./badges');
 
 module.exports = {
     Following: {
@@ -41,6 +42,7 @@ module.exports = {
         ...quizzesResolvers.Query,
         ...quizCollectionsResolvers.Query,
         ...searchResolvers.Query,
+        ...badgesResolvers.Query,
     },
     Mutation: {
         ...usersResolvers.Mutation,
@@ -49,5 +51,6 @@ module.exports = {
         ...quizzesResolvers.Mutation,
         ...quizCollectionsResolvers.Mutation,
         ...searchResolvers.Mutation,
+        ...badgesResolvers.Mutation,
     }
 }

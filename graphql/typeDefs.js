@@ -104,9 +104,10 @@ module.exports = gql`
 
     type Badge {
         _id: ID!
-        quiz: ID!
-        rank: Int!
+        quiz: ID
+        rank: Int
         image: String!
+        description: String!
     }
 
     input ProfileInput {
@@ -205,6 +206,10 @@ module.exports = gql`
         getPopularQuizCollectionsOfId(id: ID!): [QuizCollection!]!
 
         getSearchResults(searchQuery: String!, filters: [String]!): [SearchResults!]!
+
+        getBadges: [Badge!]!
+        findBadgeById(id: ID!): Badge!
+        findBadgesByIds(ids: [ID!]!) : [Badge!]!
     }
 
     type Mutation {
@@ -236,5 +241,10 @@ module.exports = gql`
         addQuizToQuizCollection(quizId: ID!, quizCollectionId: ID!): QuizCollection!
         removeQuizFromQuizCollection(quizId: ID!, quizCollectionId: ID!): Boolean!
         editQuizCollection(id: ID!, updatedQuizCollection: QuizCollectionInput!): QuizCollection!
+
+        createBadge(quiz: ID, rank: Int, image: String!, description: String!) : Badge!
+        addBadge(profileId: ID!, badgeId: ID!) : Boolean!
+        removeBadge(profileId: ID!, badgeId: ID!) : Boolean!
+        updateBadge(badgeId: ID!, image: String!): Boolean!
     }
 `

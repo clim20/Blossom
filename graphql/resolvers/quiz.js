@@ -174,7 +174,7 @@ module.exports = {
       }
     },
     async deleteQuiz(_, { id }){
-      /* TODO: Quiz need to be removed from the collections that have them */
+      /* TODO: Quiz need to be removed from the collections that have them and their badges need to be deleted too*/
       const deletedQuiz = await Quiz.findOne({_id: new ObjectId(id)});
       
       if(deletedQuiz){
