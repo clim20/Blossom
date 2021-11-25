@@ -342,6 +342,7 @@ export const GET_FOR_YOU_QUIZZES = gql`
             title
             titleImg
             creator
+            platformId
             quizHits
             quizLikes
         }
