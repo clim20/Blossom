@@ -69,7 +69,7 @@ module.exports = {
     },
     async findQuizById (_, { id }){
       const quiz= await Quiz.findOne({_id: id});
-      console.log(quiz);
+      //console.log(quiz);
       if (quiz) return quiz;
       return{};
     },

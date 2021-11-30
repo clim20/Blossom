@@ -261,6 +261,7 @@ export const FIND_QUIZZES_BY_IDS = gql`
     }
 `;
 
+
 export const FIND_QUIZ_BY_ID = gql`
     query findQuizById($id: ID!) {
         findQuizById(id: $id) {

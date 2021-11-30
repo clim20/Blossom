@@ -268,20 +268,93 @@ const Quiz = () =>{
         console.log(savingQuiz);
 
         setTimeout(() => {
+            
+            
+            setEnableLike(true);
             refetchQuizData();
         }, 300);
     };
 
+    const [enableLike, setEnableLike] = useState(true)
     const handleLike = (like) => {
         let  currentuser = user
         
         let existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentuser._id)
         //console.log(currentQuiz.scores[existingScore].liked)
-        if(existingScore != -1){
+        if(existingScore != -1&&enableLike){
+            setEnableLike(false);
             saveLike(like);
         }
        
     }
+
+    const displayLikeBtn = () =>{
+        //refetchQuizData();
+        let  currentuser = user
+        let existingScore = -1
+        if(currentQuiz.scores){
+            existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentuser._id)
+        }
+        
+        if(enableLike == false){
+            return(
+                <div>
+                    <button disabled className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button, {"background-color": "#c0c0c0"}}>
+                        Like
+                    </button>
+    
+                    <button disabled className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button, {"background-color": "#c0c0c0"}}>
+                        Dislike
+                    </button>
+                </div>
+                
+            )
+        }
+        if(existingScore != -1){
+            
+            if(currentQuiz.scores[existingScore].liked == 1){
+                return(
+                    <div>
+                        <button className="quiz-start-end-button" onClick = {() => handleLike(0)} style = {styles.button,{"background-color": "#4CAF50"}}>
+                            Like
+                        </button>
+
+                        <button className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button}>
+                            Dislike
+                        </button>
+                    </div>
+                )
+                
+            }else if(currentQuiz.scores[existingScore].liked == 2){
+                return(
+                    <div>
+                        <button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
+                            Like
+                        </button>
+
+                        <button className="quiz-start-end-button" onClick = {() => handleLike(0)} style = {styles.button,{"background-color": "#4CAF50"}}>
+                            Dislike
+                        </button>
+                    </div>
+                )
+            }
+        }
+        return(
+            <div>
+                <button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
+                    Like
+                </button>
+
+                <button className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button}>
+                    Dislike
+                </button>
+            </div>
+            
+        )
+        
+    }
+
+
 
     /* QUIZ COLLECTION FUNCTIONS */
     const [CreateQuizCollection] = useMutation(mutations.CREATE_QUIZ_COLLECTION);
@@ -358,13 +431,14 @@ const Quiz = () =>{
                         Start
                     </button>
 
-                    <button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
+                    {displayLikeBtn()}
+                    {/*<button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
                         Like
                     </button>
 
                     <button className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button}>
                         Dislike
-                    </button>
+                    </button>*/}
 
                     <table className="leaderboard-table">
                         {scores.slice(0,5).map(displayTopScores)}
