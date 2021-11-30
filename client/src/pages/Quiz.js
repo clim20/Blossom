@@ -107,6 +107,8 @@ const Quiz = () =>{
         history.push("/quiz/edit/" + quizId)
     }; 
 
+
+
     const handleFollow = event => {};
     
 
@@ -149,6 +151,136 @@ const Quiz = () =>{
         await DelQuiz({variables: { id: quizId }});
         refetchQuizData();
         history.push("/profile/"+profileObject._id);    
+    }
+
+    const [UpdateQuiz] = useMutation(mutations.UPDATE_QUIZ);
+   
+    const saveLike = async (like) =>{
+        let temp = JSON.parse(JSON.stringify(currentQuiz));
+        
+        var badgeArr = [];
+        for(let i = 0; i < temp.badges.length; i++){
+            let insert = {
+                "rank": temp.badges[i].rank,
+                "image": temp.badges[i].image
+                
+            }
+            
+            badgeArr.push(insert)
+            console.log(badgeArr)
+        }
+
+        
+
+        var scoreArr = [];
+        for(let i = 0; i < temp.scores.length; i++){
+            let insert = {
+                "user": temp.scores[i].user,
+                "userScore": temp.scores[i].userScore,
+                "bestScore": temp.scores[i].bestScore,
+                "liked": temp.scores[i].liked
+                
+              }
+            
+              scoreArr.push(insert)
+            //console.log(scoreArr)
+        }
+        let  currentuser = user
+        //let tempQuizScores = temp.scores;
+        let existingScore = scoreArr.findIndex(({ user }) => user === currentuser._id)
+
+
+        console.log(existingScore)
+        if (existingScore != -1){
+            
+            scoreArr[existingScore].liked = like;
+            
+        }
+
+        console.log(scoreArr)
+        var cardArr = [];
+        for(let i = 0; i < temp.cards.length; i++){
+            let insert = {
+                "cardNum": temp.cards[i].cardNum,
+                "question": temp.cards[i].question,
+                "choices": temp.cards[i].choices,
+                "answer": temp.cards[i].answer,
+                "answerExplanation": temp.cards[i].answerExplanation,
+                "questionImg": temp.cards[i].questionImg,
+                "answerImg": temp.cards[i].answerImg,
+                "drawing": temp.cards[i].drawing
+              }
+            
+            cardArr.push(insert)
+            //console.log(cardArr)
+        }
+        
+        
+        
+        let tempquizLikes = temp.quizLikes
+        let tempquizDislikes = temp.quizDislikes
+        let prev = currentQuiz.scores[existingScore].liked
+        console.log("prev = "+prev)
+
+        if(prev == 1){
+            tempquizLikes = tempquizLikes - 1
+        }else if(prev == 2){
+            tempquizDislikes = tempquizDislikes -1
+        }
+
+        if(like == 1){
+            tempquizLikes = tempquizLikes + 1
+        }else if(like == 2){
+            tempquizDislikes = tempquizDislikes + 1
+        }
+        //console.log(props.currentQuiz._id)
+        
+        const { data } = await UpdateQuiz({
+
+            variables: { 
+                quizId: temp._id, 
+                updatedQuiz: {
+                   
+                    "_id": temp._id,
+                    "title": temp.title,
+                    "description": temp.description,
+                    "titleImg": temp.titleImg,
+                    "creator":  temp.creator,
+                    "platformId": temp.platformId,
+                    "quizHits": temp.quizHits,
+                    "quizLikes": tempquizLikes,
+                    "quizDislikes": tempquizDislikes,
+                    "badges": badgeArr,
+                    "scores": scoreArr,
+                    "cards": cardArr,
+                    "createdAt": temp.createdAt
+                  }
+            }
+        });
+        
+        //console.log(currentQuiz.score)
+
+        var savingQuiz = {};
+        if (data) { 
+            savingQuiz = data.updateQuiz;
+        }
+
+        console.log(savingQuiz);
+
+        setTimeout(() => {
+            refetchQuizData();
+        }, 300);
+    };
+
+    const handleLike = (like) => {
+        let  currentuser = user
+        
+        let existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentuser._id)
+        //console.log(currentQuiz.scores[existingScore].liked)
+        if(existingScore != -1){
+            saveLike(like);
+        }
+       
     }
 
     /* QUIZ COLLECTION FUNCTIONS */
@@ -202,6 +334,8 @@ const Quiz = () =>{
         </div>
     ;
 
+
+
     if(redirect == false){
         //console.log(highestScores)
         return(
@@ -222,6 +356,14 @@ const Quiz = () =>{
         
                     <button className="quiz-start-end-button" onClick = {() => handleStart()} style = {styles.button}>
                         Start
+                    </button>
+
+                    <button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
+                        Like
+                    </button>
+
+                    <button className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button}>
+                        Dislike
                     </button>
 
                     <table className="leaderboard-table">

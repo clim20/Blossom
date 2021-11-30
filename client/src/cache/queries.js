@@ -203,6 +203,7 @@ export const GET_QUIZZES = gql`
                 user
                 userScore
                 bestScore
+                liked
             }
             cards{
                 cardNum
@@ -241,6 +242,7 @@ export const FIND_QUIZZES_BY_IDS = gql`
                 user
                 userScore
                 bestScore
+                liked
             }
             cards{
                 cardNum
@@ -279,6 +281,7 @@ export const FIND_QUIZ_BY_ID = gql`
                 user
                 userScore
                 bestScore
+                liked
             }
             cards{
                 cardNum

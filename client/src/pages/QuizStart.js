@@ -44,7 +44,8 @@ const QuizStart = (props) => {
             let insert = {
                 "user": temp.scores[i].user,
                 "userScore": temp.scores[i].userScore,
-                "bestScore": temp.scores[i].bestScore
+                "bestScore": temp.scores[i].bestScore,
+                "liked": temp.scores[i].liked
                 
               }
             
@@ -70,7 +71,8 @@ const QuizStart = (props) => {
                         {
                             "user": props.currentUser._id,
                             "userScore": totalScore,
-                            "bestScore": totalScore
+                            "bestScore": totalScore,
+                            "liked": 0
                         });
                     foundspot = true
                 }
@@ -81,7 +83,8 @@ const QuizStart = (props) => {
                     {
                         "user": props.currentUser._id,
                         "userScore": totalScore,
-                        "bestScore": totalScore
+                        "bestScore": totalScore,
+                        "liked": 0
                     }
                 )
             }

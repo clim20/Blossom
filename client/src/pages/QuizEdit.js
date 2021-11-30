@@ -89,7 +89,8 @@ const QuizEdit = () => {
             let insert = {
                 "user": tempQuiz.scores[i].user,
                 "userScore": tempQuiz.scores[i].userScore,
-                "bestScore": tempQuiz.scores[i].bestScore
+                "bestScore": tempQuiz.scores[i].bestScore,
+                "liked": tempQuiz.scores[i].liked
                 
               }
             

@@ -75,6 +75,7 @@ module.exports = gql`
         user: ID!
         userScore: Int!
         bestScore: Int!
+        liked: Int!
     }
 
     type Card {
@@ -167,7 +168,8 @@ module.exports = gql`
     input ScoreInput{
         user: ID,
         userScore: Int,
-        bestScore: Int
+        bestScore: Int,
+        liked: Int
     }
 
     

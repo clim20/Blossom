@@ -21,6 +21,7 @@ const quizSchema = new Schema({
             user: ObjectId,
             userScore: Number,
             bestScore: Number,
+            liked: Number,
         }
     ],
     cards: [
