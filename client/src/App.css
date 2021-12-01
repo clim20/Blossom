@@ -185,3 +185,9 @@ button svg {
   right: 10px !important;
   color: black !important;
 }
+
+/* LIKE BUTTON */
+.ui.teal.button:focus,
+.ui.teal.buttons {
+  background-color: #00b5ad;
+}
