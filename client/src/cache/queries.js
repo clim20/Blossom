@@ -459,3 +459,15 @@ export const FIND_BADGES_BY_IDS = gql`
         }
     }
 `;
+
+export const FIND_DRAWINGS_BY_IDS = gql`
+    query Query($ids: [ID!]) {
+        findDrawingsByIds(ids: $ids) {
+            _id
+            img
+            pos
+            rot
+            size
+        }
+    }
+`

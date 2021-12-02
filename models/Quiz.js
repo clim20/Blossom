@@ -33,7 +33,8 @@ const quizSchema = new Schema({
             answerExplanation: String,
             questionImg: String,
             answerImg: String,
-            drawing: ObjectId
+            drawing: [ObjectId],
+            drawing2: [ObjectId]
         }
     ],
     createdAt: String

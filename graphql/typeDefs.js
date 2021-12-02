@@ -86,7 +86,8 @@ module.exports = gql`
         answerExplanation: String!
         questionImg: String
         answerImg: String
-        drawing: Drawing
+        drawing: [ID]
+        drawing2: [ID]
     }
 
     type QuizCollection {
@@ -101,6 +102,10 @@ module.exports = gql`
 
     type Drawing {
         _id: ID!
+        img: String!,
+        pos: [Int!]
+        rot: Int!
+        size: [Int!]
     }
 
     type Badge {
@@ -157,7 +162,8 @@ module.exports = gql`
         answerExplanation: String!,
         questionImg: String,
         answerImg: String,
-        drawing: ID
+        drawing: [ID]
+        drawing2: [ID]
     }
 
     input BadgeInput{
@@ -212,6 +218,8 @@ module.exports = gql`
         getBadges: [Badge!]!
         findBadgeById(id: ID!): Badge!
         findBadgesByIds(ids: [ID!]!) : [Badge!]!
+
+        findDrawingsByIds(ids: [ID!]) : [Drawing!]!
     }
 
     type Mutation {
@@ -248,5 +256,11 @@ module.exports = gql`
         addBadge(profileId: ID!, badgeId: ID!) : Boolean!
         removeBadge(profileId: ID!, badgeId: ID!) : Boolean!
         updateBadge(badgeId: ID!, image: String!): Boolean!
+
+        createDrawing(image: String!, position: [Int!], rotation: Int!, sizein: [Int!]) : Drawing!
+        removeDrawing(drawingId: ID!) : Boolean!
+        updateDrawing(drawingId: ID!, image: String!, position: [Int!], rotation: Int!, sizein: [Int!]): Boolean!
+
+
     }
 `
