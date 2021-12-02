@@ -297,7 +297,7 @@ const Quiz = () =>{
             existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentuser._id)
         }
         
-        if(enableLike == false){
+        if(enableLike == false||existingScore == -1){
             return(
                 <div>
                     <button disabled className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button, {"background-color": "#c0c0c0"}}>
