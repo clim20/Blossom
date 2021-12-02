@@ -128,7 +128,8 @@ module.exports = {
             answerExplanation: "Enter Explenation Here",
             questionImg: "",
             answerImg: "",
-            drawing: null
+            drawing: [],
+            drawing2: []
           }
         ],
         createdAt: new Date().toISOString()

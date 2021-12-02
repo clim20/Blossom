@@ -44,6 +44,7 @@ const Quiz = () =>{
         cards = currentQuiz.cards
         scores = JSON.parse(JSON.stringify(currentQuiz.scores));
     }
+    console.log(currentQuiz)
 
     const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
         variables: {

@@ -213,9 +213,8 @@ export const GET_QUIZZES = gql`
                 answerExplanation
                 questionImg
                 answerImg
-                drawing{
-                    _id
-                }
+                drawing
+                drawing2
             }
             createdAt
         }
@@ -252,9 +251,8 @@ export const FIND_QUIZZES_BY_IDS = gql`
                 answerExplanation
                 questionImg
                 answerImg
-                drawing{
-                    _id
-                }
+                drawing
+                drawing2
             }
             createdAt
         }
@@ -292,9 +290,8 @@ export const FIND_QUIZ_BY_ID = gql`
                 answerExplanation
                 questionImg
                 answerImg
-                drawing{
-                    _id
-                }
+                drawing
+                drawing2
             }
             createdAt
         }
