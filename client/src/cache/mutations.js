@@ -309,17 +309,52 @@ export const CREATE_DRAWING = gql`
             _id
         }
     }
-`
+`;
 
 export const UPDATE_DRAWING = gql`
     mutation updateDrawing($drawingId: ID!, $image: String!, $rotation: Int!, $position: [Int!], $sizein: [Int!]) {
         updateDrawing(drawingId: $drawingId, image: $image, rotation: $rotation, position: $position, sizein: $sizein)
     }
-`
+`;
 
 export const DELETE_DRAWING = gql`
     mutation removeDrawing($drawingId: ID!) {
         removeDrawing(drawingId: $drawingId)
     }
-`
+`;
 
+export const CREATE_BADGE = gql`
+    mutation createBadge($quiz: ID!, $rank: Int!, $image: String!, $description: String!){
+        createBadge(quiz: $quiz, rank: $rank, image: $image, description: $description) {
+            _id
+            quiz
+            rank
+            image
+            description
+        }
+    }
+`;
+
+export const DELETE_BADGE = gql`
+    mutation deleteBadge($badgeId: ID!){
+        deleteBadge(badgeId: $badgeId)
+    }
+`;
+
+export const ADD_BADGE = gql`
+    mutation addBadge($profileId: ID!, $badgeId: ID!){
+        addBadge(profileId: $profileId, badgeId: $badgeId)
+    }
+`;
+
+export const REMOVE_BADGE = gql`
+    mutation removeBadge($profileId: ID!, $badgeId: ID!){
+        removeBadge(profileId: $profileId, badgeId: $badgeId)
+    }
+`;
+
+export const UPDATE_BADGE = gql`
+    mutation updateBadge($badgeId: ID!, $image: String!){
+        updateBadge(badgeId: $badgeId, image: $image)
+    }
+`;

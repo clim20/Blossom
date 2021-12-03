@@ -253,6 +253,7 @@ module.exports = gql`
         editQuizCollection(id: ID!, updatedQuizCollection: QuizCollectionInput!): QuizCollection!
 
         createBadge(quiz: ID, rank: Int, image: String!, description: String!) : Badge!
+        deleteBadge(badgeId: ID!) : Boolean!
         addBadge(profileId: ID!, badgeId: ID!) : Boolean!
         removeBadge(profileId: ID!, badgeId: ID!) : Boolean!
         updateBadge(badgeId: ID!, image: String!): Boolean!

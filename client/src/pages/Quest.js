@@ -2,18 +2,20 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
-import { useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+
 import { Button } from 'semantic-ui-react';
 
 import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
 import { selectionSetMatchesResult } from '@apollo/react-hooks/node_modules/@apollo/client/cache/inmemory/helpers';
 
 const Quest = () => {
     const history = useHistory();
     const { user } = useContext(AuthContext);
-    //const params = useParams();
-    //const profileId = params ? params.profileId : 'could not get params';
-    
+
+    const [AddBadge] 			            = useMutation(mutations.ADD_BADGE);
+    const [RemoveBadge] 			        = useMutation(mutations.REMOVE_BADGE);
 
     if (!user) {
         history.push("/");
@@ -73,24 +75,34 @@ const Quest = () => {
         setDisable1(true);
     }*/
 
-    useEffect(()=>{
+    //Created a Platform
+    useEffect(async () => {
         if(platform.length > 0){
             setDisable1(true);
+            //await AddBadge({variables: { profileId: profileId, badgeId: "61a99288b145bce874363058" }});
+        }
+        else
+        {
+            //await RemoveBadge({variables: { profileId: profileId, badgeId: "61a99288b145bce874363058" }});
         }
     });
 
+    //Made a Quiz
     useEffect(() => {
         if(quizzes.length > 0){
             setDisable2(true);
+            //Made 5 Quizzes
             if(quizzes.length > 4) {
                 setDisable3(true);
             }
+            //Made 10 Quizzes
             if(quizzes.length > 9) {
                 setDisable4(true);
             }
         }
     });
 
+    //Has 100 Followers
     useEffect(()=> {
         if(followers > 99) {
             setDisable6(true);

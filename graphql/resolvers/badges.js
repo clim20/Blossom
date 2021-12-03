@@ -2,6 +2,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const Profile = require('../../models/Profile');
 const Badge = require('../../models/Badge');
+const Quiz = require('../../models/Quiz');
 
 module.exports = {
   Query: {
@@ -43,11 +44,28 @@ module.exports = {
         await newBadge.save();
         return newBadge;
     },
+    async deleteBadge(_, { badgeId }) {
+      const badge = await Badge.findOne({_id: badgeId});
+  
+      if(badge){
+        const quiz = await Quiz.findOne({_id: badge.quiz});
+
+        if(quiz){
+          const list = quiz.badges.filter(id => id.toString() !== new ObjectId(badgeId).toString());
+          await Quiz.updateOne({_id: quiz._id}, {badges: list});
+        }
+      }
+
+      const deleted = await Badge.deleteOne({_id: badgeId});
+      if (deleted)
+        return true;
+      return false;
+    },
     async addBadge(_, { profileId, badgeId }) {
         const profile = await Profile.findOne({_id: profileId});
   
         let badges = profile.badges;
-        badges.push(badgeId);
+        badges.push(new ObjectId(badgeId));
         const updated = await Profile.updateOne({_id: profile._id}, {badges: badges});
 
         if(updated){
