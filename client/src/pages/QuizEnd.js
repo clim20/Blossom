@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useHistory } from "react-router-dom";
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
@@ -28,6 +28,7 @@ const QuizEnd = (props) =>{
         }
     });
 
+    const [mounted, setMounted] = useState(false);
     var userObject = {};
     var username = "";
     if (userData) { 
@@ -47,7 +48,6 @@ const QuizEnd = (props) =>{
 		profileObject = profileData.findProfileById;
         followers = profileObject.followerCount;
     }
-
 
     const [isRetrying, setIsRetrying] = useState(false);
     const [showLeaderBoardModal, setShowLeaderBoardModal] = useState(false);
@@ -84,7 +84,14 @@ const QuizEnd = (props) =>{
             name = ""
             if (playerData) { 
 		        player = playerData.findUserById;
-                name = player.username
+                name = player.username;
+                if (index <= 2){
+                    console.log(mounted);
+                    if(mounted && player._id === user._id){
+                        setMounted(false);
+                        alert("Congratulations on receiving rank " + (index+1) + " on the leaderboard for this quiz! You have received a badge, hopefully you can hold on to it");
+                    }
+                }
             }
 
             return <th>{name}</th>
@@ -100,6 +107,11 @@ const QuizEnd = (props) =>{
         )
         
     };
+
+    useEffect(() => {
+        console.log("useEffect called");
+        setMounted(true);
+    }, []);
 
     return(
     
