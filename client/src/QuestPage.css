@@ -159,4 +159,8 @@
     font-family: var(--font-family-puritan-regular);
     margin-left: 480px;
   }
+
+.arrow {
+    margin-left: 580px;
+}
   
