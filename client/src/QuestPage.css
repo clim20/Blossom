@@ -164,3 +164,146 @@
     margin-left: 580px;
 }
   
+.checkBox7 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 565px;
+  }
+
+  .completeBox7 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #008000 !important;
+    background-color: #32CD32 !important;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 565px;
+  }
+  
+  .checkBox8 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 550px;
+  }
+
+  .completeBox8 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #32CD32;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 550px;
+  }
+  
+  .checkBox9 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 550px;
+  }
+
+  .completeBox9 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #32CD32;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 550px;
+  }
+  
+  .checkBox10 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 535px;
+  }
+
+  .completeBox10 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #32CD32;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 535px;
+  }
+  
+  .checkBox11 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 517px;
+  }
+
+  .completeBox11 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #32CD32;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 517px;
+  }
+  
+  .checkBox12 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: #ff3333;
+    background-color: #ff98ac;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 470px;
+  }
+
+  .completeBox12 {
+    width: 8rem;
+    height: 3rem;
+    border-radius: 5px;
+    border-color: green;
+    background-color: #32CD32;
+    color: white;
+    font-size: 23px;
+    font-family: var(--font-family-puritan-regular);
+    margin-left: 470px;
+  }
