@@ -52,8 +52,6 @@ const Home = (props) => {
         popularQuizCollections = popularQuizCollectionsData.getPopularQuizCollectionsOfId; 
     }
 
-    console.log(popularQuizzes, popularQuizCollections)
-
     return (
         <div>
             {quiz && 

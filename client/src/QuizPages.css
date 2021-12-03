@@ -1,35 +1,5 @@
 /* QUIZ */
 
-.quiz-start-retry-button {
-  margin-top:20px;
-  margin-left:520px;
-  border-radius: 8px;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-  background-color: #ff98ac !important;
-  width: 98.47px;
-  height: 37px;
-} 
-
- .quizLeaderboard {
-  margin-top: 20px;
-  margin-left: 300px;
-  border-radius: 8px;
-  text-align: center;
-  margin-bottom: 5px;
-  color: black;
-  font-weight: bold;
-  background-color: var(--pink) !important;
-  width: 523px;
-  height: 30px;
-} 
-
-.leaderboard-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .quiz-title {
   margin-top: 10px;
   font-family: var(--font-family-puritan-bold);
@@ -38,31 +8,67 @@
 
 .quiz-creator-follow {
   align-items: center;
-  margin-top: 20px;
-  margin-left: 480px;
-  margin-bottom: 20px;
+  justify-content: space-evenly;
+  display: inline-flex !important;
   border-radius: 50px;
+  border: none;
   width: 240px;
   height: 70px;
   background-color: var(--profileBorder) !important;
+}
+
+.follow-button-image {
+  min-width: 4rem !important;
+  min-height: 4rem !important;
+}
+
+.quiz-picture {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  max-height: 300px;
+}
+
+.like-dislike {
+  color: cadetblue;
+}
+
+.quiz-buttons {
+  max-width: 8rem;
+  width: -webkit-fill-available;
+  height: 3rem;
+  background-color: var(--pink) !important;
 } 
 
+.quiz-leaderboard {
+  margin-top: 20px !important;
+  border-radius: 8px !important;
+  margin-bottom: 5px !important;
+  color: black !important;
+  font-weight: bold !important;
+  background-color: var(--pink) !important;
+} 
+
+.leaderboard-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .quiz-finish-button {
-  margin-top: 200px;
+  /* margin-top: 200px;
   margin-left: 869px;
   width: 98.47px;
   height: 42px;
   border-radius: 8px;
-  text-align: center;
   background-color: #f85b5b;
-  color: white;
+  color: white; */
 } 
 
 .each-question {
-  width: 500px;
+  /* width: 500px;
   height: 50px;
   margin-top: 10px;
-  margin-left: 300px;
+  margin-left: 300px; */
 }
 
 /*.question-page-number {

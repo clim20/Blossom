@@ -6,8 +6,6 @@ import * as queries from '../cache/queries';
 
 const LeaderBoardModal = (props) => {
    
-    
-
     const displayTopScores = (arr, index) =>{
         console.log(props.scores)
         console.log(props.currentuser)
@@ -28,23 +26,17 @@ const LeaderBoardModal = (props) => {
                 name = player.username
             }
 
-            return <th>{name}</th>
+            return <td>{name}</td>
         }
-        
        
         return(
             <tr>
-                <th>{index+1}</th>
-                <NameComp user = {arr.user}></NameComp>
-                <th>...</th>
-                <th>{score}</th>
+                <td>{index+1}</td>
+                <NameComp user={arr.user}></NameComp>
+                <td>{score}</td>
             </tr>
         )
-        
-        
-        
     };
-
 
     return (
         <Modal
@@ -52,16 +44,21 @@ const LeaderBoardModal = (props) => {
         open={true}
         onClose={() => props.setShowLeaderBoardModal(false)}
         >
-            <Modal.Header>LeaderBoard</Modal.Header>
+            <Modal.Header>Leaderboard</Modal.Header>
             <Modal.Content className="creation-modal">
+                <table class="ui small stackable table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.scores.map(displayTopScores)}
+                    </tbody>
+                </table>            
             </Modal.Content>
-            
-                <table>
-                    {props.scores.map(displayTopScores)
-                    }
-                </table>
-                    
-            
             <br/>
             <br/>
             <div className="creation-modal">

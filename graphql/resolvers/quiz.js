@@ -14,7 +14,7 @@ module.exports = {
       return [];
     },
     async getPopularQuizzes() {
-      const quizzes = await Quiz.find().sort({ quizLikes: -1 }).limit(4);
+      const quizzes = await Quiz.find().sort({ quizHits: -1 }).limit(4);
       
       if (quizzes) return quizzes;
       return [];
@@ -67,15 +67,14 @@ module.exports = {
       if (quizzes) return quizzes;
       return [];
     },
-    async findQuizById (_, { id }){
-      const quiz= await Quiz.findOne({_id: id});
-      //console.log(quiz);
+    async findQuizById (_, { id }) {
+      const quiz = await Quiz.findOne({_id: id});
       if (quiz) return quiz;
-      return{};
+      return {};
     },
-    async findQuizzesByIds(_, { ids }){
+    async findQuizzesByIds(_, { ids }) {
       var quizzes = [];
-      for(let i = 0; i < ids.length; i++){
+      for (let i = 0; i < ids.length; i++) {
           const quiz = await Quiz.findOne({_id: ids[i]});
           if (quiz) {
               quizzes.push(quiz);
@@ -84,9 +83,9 @@ module.exports = {
       if (quizzes) return quizzes;
       return [];
     },
-    async getQuizHits(_, { ids }){
+    async getQuizHits(_, { ids }) {
       var quizHits = 0;
-      for(let i = 0; i < ids.length; i++){
+      for (let i = 0; i < ids.length; i++) {
         const quiz = await Quiz.findOne({_id: ids[i]});
         if (quiz) {
             quizHits += quiz.quizHits;
@@ -94,7 +93,7 @@ module.exports = {
       }
       return quizHits;
     },
-    async getRandomQuiz(){
+    async getRandomQuiz() {
       const quizzes = await Quiz.find();
       const quiz = quizzes[Math.floor(Math.random() * quizzes.length)];
 
@@ -164,10 +163,10 @@ module.exports = {
         scores: updatedQuiz.scores,
         cards: updatedQuiz.cards,
       });
-      console.log("-------")
-      console.log(quiz)
-      console.log("======")
-      console.log(updated)
+      // console.log("-------")
+      // console.log(quiz)
+      // console.log("======")
+      // console.log(updated)
       if (updated) {
         return quiz;
       }else{
@@ -179,7 +178,7 @@ module.exports = {
       const deletedQuiz = await Quiz.findOne({_id: new ObjectId(id)});
       
       if(deletedQuiz){
-        console.log("deletedQuiz")
+        // console.log("deletedQuiz")
         const creator = deletedQuiz.creator;
 
         let profile = await Profile.findOne({user: creator})

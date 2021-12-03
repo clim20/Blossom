@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import { Grid } from 'semantic-ui-react';
+
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams, useHistory } from "react-router-dom";
 import { Button, Input, Dropdown, Icon } from 'semantic-ui-react';
@@ -14,14 +16,6 @@ import image1 from '../testpic/seal.jpg';
 import QuizStart from './QuizStart';
 import QuizCollectionEntry from '../components/QuizCollectionEntry';
 import LeaderBoardModal from '../modals/LeaderBoardModal';
-
-const styles = {
-    button : {
-        'border': 'none',
-        'backgroundColor': '#ff00ff',
-        'textAlign': 'center'
-    }
-}
 
 const Quiz = () =>{
     const { user } = useContext(AuthContext);
@@ -94,29 +88,28 @@ const Quiz = () =>{
         quizCollections = quizCollectionsData.findQuizCollectionByIds; 
     }
 
-    var isCreator = userObject && user && userObject._id === user._id
+    var isCreator = userObject && user && userObject._id === user._id;
 
     const [showLeaderBoardModal, setShowLeaderBoardModal] = useState(false);
 
     const [redirect, setRedirect] = useState(false);
 
-    const handleStart = event =>{
+    const handleStart = () =>{
         setRedirect(true);
     };
 
-    const gotoEdit = event =>{
-        history.push("/quiz/edit/" + quizId)
+    const gotoEdit = () =>{
+        history.push("/quiz/edit/" + quizId);
     }; 
 
-
-
-    const handleFollow = event => {};
+    const handleCreatorClick = () => {
+        history.goBack();
+        history.push("profile/" + profileObject._id);
+    };
     
-
-    
-    const displayTopScores = (arr, index) =>{
+    const displayTopScores = (arr, index) => {
         var name = "";
-        let score = arr.userScore
+        let score = arr.userScore;
         
         const NameComp = (props) =>{
             const { data: playerData } = useQuery(queries.FIND_USER_BY_ID, {
@@ -126,24 +119,22 @@ const Quiz = () =>{
             });
 
             var player = {};
-            name = ""
+            name = "";
             if (playerData) { 
 		        player = playerData.findUserById;
-                name = player.username
+                name = player.username;
             }
 
-            return <th>{name}</th>
+            return <td>{name}</td>
         }
 
         return(
             <tr>
-                <th>{index+1}</th>
-                <NameComp user = {arr.user}></NameComp>
-                <th>...</th>
-                <th>{score}</th>
+                <td>{index+1}</td>
+                <NameComp user={arr.user}></NameComp>
+                <td>{score}</td>
             </tr>
         )
-        
     };
 
     const [DelQuiz] = useMutation(mutations.DELETE_QUIZ);
@@ -151,7 +142,7 @@ const Quiz = () =>{
     const delTest = async () =>{     
         await DelQuiz({variables: { id: quizId }});
         refetchQuizData();
-        history.push("/profile/"+profileObject._id);    
+        history.push("/profile/" + profileObject._id);    
     }
 
     const [UpdateQuiz] = useMutation(mutations.UPDATE_QUIZ);
@@ -163,44 +154,37 @@ const Quiz = () =>{
         for(let i = 0; i < temp.badges.length; i++){
             let insert = {
                 "rank": temp.badges[i].rank,
-                "image": temp.badges[i].image
-                
+                "image": temp.badges[i].image   
             }
             
-            badgeArr.push(insert)
-            console.log(badgeArr)
+            badgeArr.push(insert);
+            console.log(badgeArr);
         }
 
-        
-
         var scoreArr = [];
-        for(let i = 0; i < temp.scores.length; i++){
+        for (let i = 0; i < temp.scores.length; i++){
             let insert = {
                 "user": temp.scores[i].user,
                 "userScore": temp.scores[i].userScore,
                 "bestScore": temp.scores[i].bestScore,
                 "liked": temp.scores[i].liked
-                
-              }
+            }
             
-              scoreArr.push(insert)
+            scoreArr.push(insert);
             //console.log(scoreArr)
         }
-        let  currentuser = user
+        let currentUser = user;
         //let tempQuizScores = temp.scores;
-        let existingScore = scoreArr.findIndex(({ user }) => user === currentuser._id)
+        let existingScore = scoreArr.findIndex(({ user }) => user === currentUser._id);
 
-
-        console.log(existingScore)
-        if (existingScore != -1){
-            
+        console.log(existingScore);
+        if (existingScore != -1) {
             scoreArr[existingScore].liked = like;
-            
         }
 
-        console.log(scoreArr)
+        console.log(scoreArr);
         var cardArr = [];
-        for(let i = 0; i < temp.cards.length; i++){
+        for (let i = 0; i < temp.cards.length; i++) {
             let insert = {
                 "cardNum": temp.cards[i].cardNum,
                 "question": temp.cards[i].question,
@@ -212,36 +196,32 @@ const Quiz = () =>{
                 "drawing": temp.cards[i].drawing
               }
             
-            cardArr.push(insert)
+            cardArr.push(insert);
             //console.log(cardArr)
         }
         
-        
-        
-        let tempquizLikes = temp.quizLikes
-        let tempquizDislikes = temp.quizDislikes
-        let prev = currentQuiz.scores[existingScore].liked
-        console.log("prev = "+prev)
+        let tempquizLikes = temp.quizLikes;
+        let tempquizDislikes = temp.quizDislikes;
+        let prev = currentQuiz.scores[existingScore].liked;
+        console.log("prev = " + prev);
 
-        if(prev == 1){
-            tempquizLikes = tempquizLikes - 1
-        }else if(prev == 2){
-            tempquizDislikes = tempquizDislikes -1
+        if (prev == 1) {
+            tempquizLikes = tempquizLikes - 1;
+        } else if (prev == 2) {
+            tempquizDislikes = tempquizDislikes - 1;
         }
 
-        if(like == 1){
-            tempquizLikes = tempquizLikes + 1
-        }else if(like == 2){
-            tempquizDislikes = tempquizDislikes + 1
+        if (like == 1) {
+            tempquizLikes = tempquizLikes + 1;
+        } else if (like == 2) {
+            tempquizDislikes = tempquizDislikes + 1;
         }
-        //console.log(props.currentQuiz._id)
+        //console.log(props.currentQuiz._id);
         
         const { data } = await UpdateQuiz({
-
             variables: { 
                 quizId: temp._id, 
                 updatedQuiz: {
-                   
                     "_id": temp._id,
                     "title": temp.title,
                     "description": temp.description,
@@ -255,11 +235,11 @@ const Quiz = () =>{
                     "scores": scoreArr,
                     "cards": cardArr,
                     "createdAt": temp.createdAt
-                  }
+                }
             }
         });
         
-        //console.log(currentQuiz.score)
+        //console.log(currentQuiz.score);
 
         var savingQuiz = {};
         if (data) { 
@@ -269,93 +249,94 @@ const Quiz = () =>{
         console.log(savingQuiz);
 
         setTimeout(() => {
-            
-            
             setEnableLike(true);
             refetchQuizData();
         }, 300);
     };
 
-    const [enableLike, setEnableLike] = useState(true)
+    const [enableLike, setEnableLike] = useState(true);
     const handleLike = (like) => {
-        let  currentuser = user
+        let currentUser = user;
         
-        let existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentuser._id)
-        //console.log(currentQuiz.scores[existingScore].liked)
-        if(existingScore != -1&&enableLike){
+        let existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
+        //console.log(currentQuiz.scores[existingScore].liked);
+        if (existingScore !== -1 && enableLike) {
             setEnableLike(false);
             saveLike(like);
         }
-       
     }
 
     const displayLikeBtn = () =>{
         //refetchQuizData();
-        let  currentuser = user
-        let existingScore = -1
-        if(currentQuiz.scores){
-            existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentuser._id)
+        let currentUser = user;
+        let existingScore = -1;
+        if (currentQuiz.scores) {
+            existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
         }
         
-        if(enableLike == false||existingScore == -1){
+        if(enableLike == false || existingScore == -1){
             return(
                 <div>
-                    <button disabled className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button, {"background-color": "#c0c0c0"}}>
-                        Like
-                    </button>
-    
-                    <button disabled className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button, {"background-color": "#c0c0c0"}}>
-                        Dislike
-                    </button>
+                    <div class="ui labeled button" style={{ marginRight: '15px' }}>
+                        <i class="thumbs up icon" onClick={() => handleLike(1)}></i>
+                        {currentQuiz.quizLikes}
+                    </div>
+
+                    <div class="ui labeled button">
+                        <i class="thumbs down icon" onClick={() => handleLike(2)}></i>
+                        {currentQuiz.quizDislikes}
+                    </div>
                 </div>
-                
             )
         }
-        if(existingScore != -1){
-            
-            if(currentQuiz.scores[existingScore].liked == 1){
+
+        if (enableLike && existingScore != -1) {
+            if (currentQuiz.scores[existingScore].liked === 1) {
                 return(
                     <div>
-                        <button className="quiz-start-end-button" onClick = {() => handleLike(0)} style = {styles.button,{"background-color": "#4CAF50"}}>
-                            Like
-                        </button>
-
-                        <button className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button}>
-                            Dislike
-                        </button>
+                        <div class="ui labeled button" style={{ marginRight: '15px' }}>
+                            <i class="thumbs up icon like-dislike" onClick={() => handleLike(0)}></i>
+                            {currentQuiz.quizLikes}
+                        </div>
+        
+                        <div class="ui labeled button">
+                            <i class="thumbs down icon" onClick={() => handleLike(2)}></i>
+                            {currentQuiz.quizDislikes}
+                        </div>
                     </div>
                 )
                 
-            }else if(currentQuiz.scores[existingScore].liked == 2){
+            } else if (currentQuiz.scores[existingScore].liked == 2) {
                 return(
                     <div>
-                        <button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
-                            Like
-                        </button>
-
-                        <button className="quiz-start-end-button" onClick = {() => handleLike(0)} style = {styles.button,{"background-color": "#4CAF50"}}>
-                            Dislike
-                        </button>
+                        <div class="ui labeled button" style={{ marginRight: '15px' }}>
+                            <i class="thumbs up icon" onClick={() => handleLike(1)}></i>
+                            {currentQuiz.quizLikes}
+                        </div>
+        
+                        <div class="ui labeled button">
+                            <i class="thumbs down icon like-dislike" onClick={() => handleLike(0)}></i>
+                            {currentQuiz.quizDislikes}
+                        </div>
                     </div>
                 )
             }
         }
+
         return(
             <div>
-                <button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
-                    Like
-                </button>
+                <div class="ui labeled button" style={{ marginRight: '15px' }}>
+                    <i class="thumbs up icon" onClick={() => handleLike(1)}></i>
+                    {currentQuiz.quizLikes}
+                </div>
 
-                <button className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button}>
-                    Dislike
-                </button>
+                <div class="ui labeled button">
+                    <i class="thumbs down icon" onClick={() => handleLike(2)}></i>
+                    {currentQuiz.quizDislikes}
+                </div>
             </div>
-            
         )
-        
     }
-
-
 
     /* QUIZ COLLECTION FUNCTIONS */
     const [CreateQuizCollection] = useMutation(mutations.CREATE_QUIZ_COLLECTION);
@@ -408,140 +389,155 @@ const Quiz = () =>{
         </div>
     ;
 
-
-
-    if(redirect == false){
+    if (redirect == false){
         //console.log(highestScores)
         return(
-            <div style={{textAlign: 'center'}}>    
-                <div>
-                    <h1 className="quiz-title" style={{textAlign: 'center'}}>{currentQuiz.title}</h1>
-                    <button className="quiz-creator-follow" onClick = {() => handleFollow()} style = {styles.button}>
-                        <p style={{textAlign: 'center'}}>
-                            {username}
-                        </p>
-                        <p style={{textAlign: 'center'}}> 
-                            {followers + " Followers"}
-                        </p>
-                    </button>
-                    <img src={image1}/>
-                    <p style={{textAlign: 'center'}}>{cards.length + " Questions"}</p>
-                    <p>{currentQuiz.description}</p>
-        
-                    <button className="quiz-start-end-button" onClick = {() => handleStart()} style = {styles.button}>
-                        Start
-                    </button>
+            <Grid>
+                <Grid.Column width={12}>
+                    <Grid.Row>
+                        <div className="display-inline-block text-align-center">
+                            <h1 className="quiz-title">{currentQuiz.title}</h1>
+                            <button className="quiz-creator-follow" onClick={handleCreatorClick}>
+                                <img className="ui avatar image follow-button-image" src={profileObject && profileObject.profileImg} />
+                                <div>
+                                    <p> {username} </p>
+                                    <p> {followers + " Followers"} </p>
+                                </div>
+                            </button>
+                        </div>
+                    </Grid.Row>
 
-                    {displayLikeBtn()}
-                    {/*<button className="quiz-start-end-button" onClick = {() => handleLike(1)} style = {styles.button}>
-                        Like
-                    </button>
+                    <Grid.Row>
+                        <div className="display-inline-block text-align-center">
+                            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
+                                {displayLikeBtn()}
+                            </div>
+                        </div>
+                    </Grid.Row>
 
-                    <button className="quiz-start-end-button" onClick = {() => handleLike(2)} style = {styles.button}>
-                        Dislike
-                    </button>*/}
+                    <Grid.Row>
+                        <div className="display-inline-block text-align-center">
+                            <img className="quiz-picture" src={image1} />
+                            <br/>
+                            <br/>
+                            <p> {cards.length + " Questions"} </p>
+                            <p> {currentQuiz && currentQuiz.description} </p>
+                            <button className="ui button quiz-buttons" onClick={() => handleStart()}>
+                                Start
+                            </button>
+                        </div>
+                    </Grid.Row>
+                </Grid.Column>
 
-                    <table className="leaderboard-table">
-                        {scores.slice(0,5).map(displayTopScores)}
-                    </table>
-        
-                    <div>
-                        <button className="quizLeaderboard" style = {styles.button} onClick = {() => setShowLeaderBoardModal(true)}>
-                            LEADERBOARDS
-                        </button>
-                        <table>
-                            {scores.slice(0,5).map(displayTopScores)}
-                        </table>
-                        
-                    </div>
-                </div>
-                {isCreator &&
-                    <button className="quiz-start-end-button" onClick = {() => gotoEdit()} >
-                        Edit
-                    </button>
-                }
-                {isCreator &&
-                    <button className="quiz-start-end-button" onClick = {() => delTest()} >
-                        DelTest
-                    </button>
-                }
+                <Grid.Column width={4}>
+                    <Grid.Row>
+                        <div className="text-align-center">   
+                            {isCreator &&  
+                                <button className="ui button quiz-buttons" onClick={() => gotoEdit()} >
+                                    Edit
+                                </button>
+                            }
+
+                            {isCreator &&
+                                <button className="ui button quiz-buttons" onClick={() => delTest()} >
+                                    Delete
+                                </button>
+                            }
+                        </div>
+                    </Grid.Row>
+
+                    <Grid.Row>
+                        {user && 
+                            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                                <button class="ui labeled icon button" style={{ backgroundColor: 'var(--pink)', width: '60%' }} onClick={() => setCreateClicked(true)}>
+                                    <Dropdown
+                                        style={{ backgroundColor: 'var(--darkPink)' }}
+                                        className='button icon'
+                                        icon='plus'
+                                        floating
+                                        trigger={<></>}
+                                    >
+                                        <Dropdown.Menu>
+                                            <Dropdown.Header icon='clone outline icon' content='Quiz Collections' />
+                                            <Dropdown.Divider />
+                                            {
+                                                quizCollections && quizCollections.map((entry, index) => (
+                                                    <QuizCollectionEntry
+                                                        quizCollection={entry} key={index}
+                                                        addQuizToQuizCollection={addQuizToQuizCollection}
+                                                        removeQuizFromQuizCollection={removeQuizFromQuizCollection}
+                                                        refetchQuizCollectionsData={refetchQuizCollectionsData}
+                                                        currentQuiz={currentQuiz}
+                                                    />
+                                                ))
+                                            }
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+                                    Create
+                                </button>
+                            </div>
+                        }
+
+                        {createClicked && 
+                            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                                <Input 
+                                    action
+                                    name='name'
+                                    placeholder={"Enter Quiz Collection Name Here"}
+                                    autoFocus={true}
+                                    onChange={event => setQuizCollectionName(event.target.value)} 
+                                    inputtype='text'
+                                >
+                                    <input/>
+                                    {submitted && message}
+                                    <Button 
+                                        icon="check"
+                                        style={{ backgroundColor: 'var(--saveGreen)', width: "15%" }}
+                                        className='ui button icon'
+                                        onClick={createQuizCollection}
+                                    />
+                                    <Button 
+                                        icon="close"
+                                        style={{ backgroundColor: 'var(--cancelRed)', width: "15%" }}
+                                        className='ui button icon'
+                                        onMouseDown={() => setCreateClicked(false)}
+                                    />
+                                </Input>
+                            </div>
+                        }
+                    </Grid.Row>
+
+                    <Grid.Row>
+                        <div className="text-align-center">   
+                            <button className="ui button quiz-leaderboard" onClick = {() => setShowLeaderBoardModal(true)}>
+                                LEADERBOARD
+                            </button>
+                            <table class="ui small stackable table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Name</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {scores.slice(0,5).map(displayTopScores)}
+                                </tbody>
+                            </table>
+                        </div>
+                    </Grid.Row>
+                </Grid.Column>
+
                 {
-                    user && 
-                    <div>
-                    <Button.Group>
-                        <Dropdown
-                            style={{ backgroundColor: 'var(--darkPink)' }}
-                            className='button icon'
-                            icon='plus'
-                            floating
-                            trigger={<></>}
-                        >
-                            <Dropdown.Menu>
-                                <Dropdown.Header icon='clone outline icon' content='Quiz Collections' />
-                                <Dropdown.Divider />
-                                {
-                                    quizCollections && quizCollections.map((entry, index) => (
-                                        <QuizCollectionEntry
-                                            quizCollection={entry} key={index}
-                                            addQuizToQuizCollection={addQuizToQuizCollection}
-                                            removeQuizFromQuizCollection={removeQuizFromQuizCollection}
-                                            refetchQuizCollectionsData={refetchQuizCollectionsData}
-                                            currentQuiz={currentQuiz}
-                                        />
-                                    ))
-                                }
-                            </Dropdown.Menu>
-                        </Dropdown>
-                        <Button
-                            style={{ backgroundColor: 'var(--pink)' }}
-                            onClick={() => setCreateClicked(true)}
-                        >
-                            Create
-                        </Button>
-                    </Button.Group>
-                    </div>
+                    showLeaderBoardModal && (<LeaderBoardModal setShowLeaderBoardModal={setShowLeaderBoardModal} scores={scores} currentUser={user._id}/>)
                 }
-                {
-                    createClicked && 
-                    <div>
-                        <Input 
-                            action
-                            name='name'
-                            placeholder={"Enter Quiz Collection Name Here"}
-                            autoFocus={true}
-                            onChange={event => setQuizCollectionName(event.target.value)} 
-                            inputtype='text'
-                        >
-                        <input/>
-                        {submitted && message}
-                        <Button 
-                            icon="check"
-                            style={{ backgroundColor: 'var(--saveGreen)', width: "15%" }}
-                            className='ui button icon'
-                            onClick={createQuizCollection}
-                        />
-                        <Button 
-                            icon="close"
-                            style={{ backgroundColor: 'var(--cancelRed)', width: "15%" }}
-                            className='ui button icon'
-                            onMouseDown={() => setCreateClicked(false)}
-                        />
-                    </Input>
-                    </div>
-                }
-                {
-                    showLeaderBoardModal && (<LeaderBoardModal setShowLeaderBoardModal = {setShowLeaderBoardModal} scores = {scores} currentuser = {user._id}/>)
-                }
-            </div>
+            </Grid>
         );
 
-    }else{
-        
+    } else{
         return(
-            <QuizStart currentQuiz = {currentQuiz} author = {username} currentUser = {user} refetchQuizData = {refetchQuizData}></QuizStart>
+            <QuizStart currentQuiz={currentQuiz} author={username} currentUser={user} refetchQuizData={refetchQuizData}></QuizStart>
         );
-        
-       
     }
 
     //<Redirect to={{
