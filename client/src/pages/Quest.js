@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 import { useQuery } from '@apollo/react-hooks';
+import { Button } from 'semantic-ui-react';
 
 import * as queries from '../cache/queries';
 import { selectionSetMatchesResult } from '@apollo/react-hooks/node_modules/@apollo/client/cache/inmemory/helpers';
@@ -92,6 +93,12 @@ const Quest = () => {
         user && <div>
             <h2 className="quests">
                 Quests
+	    	<span className="arrow">
+	    	<Button.Group>
+	    		<Button color='#ffc0cb' icon='left chevron' />
+	    		<Button color='#ffc0cb' icon='right chevron' />
+	    	</Button.Group>
+	    	</span>
             </h2>
             <div className="quests-rectangle">
                     <br />
