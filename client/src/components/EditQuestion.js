@@ -1,5 +1,11 @@
-import React from 'react';
+import React, {useRef, useState, useEffect } from "react";
 import DrawComp from './DrawComp';
+
+
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import * as queries from '../cache/queries';
+import * as mutations from '../cache/mutations';
+
 
 function EditQuestion(props) {
     //tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}
@@ -7,6 +13,8 @@ function EditQuestion(props) {
     if(props.selectedCard!=-1){
         currentCard = props.tempQuiz.cards[props.selectedCard]
     }
+
+
 
     const handleQuesChange = event =>{
         let change = JSON.parse(JSON.stringify(props.tempQuiz));
@@ -55,6 +63,87 @@ function EditQuestion(props) {
         console.log(change)
     }
 
+    const [image, setImage] = useState("");
+    const [url, setUrl] = useState("");
+    const [testarr, setTestarr] = useState([])
+    const [uploadBlock, setUploadBlock] = useState(false)
+
+    const [CreateImage] = useMutation(mutations.CREATE_DRAWING);
+    
+        
+    const  addDrawingtoArr = async (url) =>{
+        let change = JSON.parse(JSON.stringify(props.tempQuiz));
+        const { data: newDrawing } =  await CreateImage({
+            variables: { 
+                image: url, 
+                rotation: 0, 
+                position: [0,0], 
+                sizein: [10, 10]
+            }
+        });
+
+        var returnedDrawing = {};
+        console.log(newDrawing)
+        if (newDrawing) { 
+            returnedDrawing = newDrawing.createDrawing;
+            //console.log(newDrawing);
+            //console.log(returnedDrawing);
+            change.cards[props.selectedCard].drawing.push(returnedDrawing._id);
+            console.log(change);
+            props.setTempQuiz(change);
+            
+        }
+    } 
+
+    const uploadImage = async () => {
+        
+        //const imagearr = JSON.parse(JSON.stringify(props.tempQuiz.cards[props.selectedCard].drawing));
+        const data = new FormData();
+        data.append("file", image);
+        data.append("upload_preset", "blossom");
+        data.append("cloud_name", "blossom-images");
+        await fetch("https://api.cloudinary.com/v1_1/blossom-images/image/upload", {
+            method: 'post',
+            body: data
+        })
+        .then(res => res.json())
+        .then(data => {
+            setUrl(data.url)
+            addDrawingtoArr(data.url)
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+        
+        //console.log(testarr)
+        console.log("image uploaded")
+        setUploadBlock(false)
+    }
+
+    const uploadBtn =()=>{
+        if(uploadBlock==false){
+            setUploadBlock(true)
+            uploadImage()
+        }
+        
+    }
+    //profile ? profile.quizzes : []
+    //console.log(currentCard.drawing)
+    const { data: drawingData, refetch: refetchDrawingData } = useQuery(queries.FIND_DRAWINGS_BY_IDS, {
+        variables: {
+            ids: currentCard ? currentCard.drawing : []
+        }
+    });
+
+    var drawingarr = [];
+   
+    if (drawingData) { 
+        console.log(drawingData)
+		drawingarr = drawingData.findDrawingsByIds;
+        console.log(drawingarr)
+    }
+
 
     const displayChoices = (choice, index) =>{
         //String.fromCharCode(c.charCodeAt(0) + 1);
@@ -92,14 +181,23 @@ function EditQuestion(props) {
         
     };
 
+    const displayImages = (drawing) =>{
+
+        return (<img src={drawing.img}/>)
+    }
+
     //console.log(currentCard)
     
     //var quesTxt = "props.currentCard.question"
+    
     if(currentCard){
         var quesTxt = currentCard.question
         return(
             <div>
+                <input type="file"  accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.files[0])}/>
+                <button onClick={uploadBtn}> Upload </button>
                 <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset} lastSave={currentCard.questionImg} save={handleDrawChange}></DrawComp>
+                {drawingarr.map(drawing => displayImages(drawing))}
                 <input type="text" value={quesTxt} onChange={(e) => handleQuesChange(e.target.value)}/>
                 <div>
                     <table>
