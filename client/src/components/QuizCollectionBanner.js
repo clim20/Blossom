@@ -126,17 +126,20 @@ const QuizCollectionBanner = (props) => {
         <Grid>
             <Grid.Row>
                 <Grid.Column width={6}>
-                    <img width='360px' height='200px'
-                        src={props.updatedQuizCollection && props.updatedQuizCollection.img}
-                        alt="quizCollection"
-                    />
-                    {
-                        props.editingMode &&
-                        <label htmlFor="upload-banner-image">
-                            <span className="dot" style={{ position: 'relative', float: 'right', opacity:'90%' }}/>
-                            <i className="pencil alternate icon" style={{ position: 'absolute', top: '12px', right: '10px' }}/>
+                    {!props.editingMode ?
+                        <img width='360px' height='200px'
+                            src={props.updatedQuizCollection && props.updatedQuizCollection.img}
+                            alt="quizCollection"
+                        />
+                        :
+                        <label htmlFor="upload-banner-image" className="hover-image" style={{ position: 'relative' }}>
+                            <img width='360px' height='200px'
+                                src={props.updatedQuizCollection && props.updatedQuizCollection.img} alt="quizCollection"
+                                style={{ cursor: 'pointer' }}
+                            />
+                            <i className="camera icon"/>
                             <input type="file" name="quizCollection" id="upload-banner-image" accept="image/png, image/jpeg"
-                                onChange={(e) => {setQuizCollectionImage(e.target.files[0])}}
+                                onChange={(e) => setQuizCollectionImage(e.target.files[0])}
                             />
                         </label>
                     }

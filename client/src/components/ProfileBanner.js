@@ -174,7 +174,7 @@ const ProfileBanner = ({ profile, user, refetchProfileData }) => {
                                             src={profile.profileImg} alt="creator profile"
                                             style={{ cursor: 'pointer' }}
                                         />
-                                        <i class="camera icon"/>
+                                        <i className="camera icon"/>
                                         <input type="file" name="profile" id="upload-profile-image" accept="image/png, image/jpeg"
                                             onChange={(e) => setProfileImage(e.target.files[0])}
                                         />

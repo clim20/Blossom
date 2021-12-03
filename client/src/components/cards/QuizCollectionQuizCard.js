@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Grid, Image } from 'semantic-ui-react';
+
 import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
@@ -15,7 +17,7 @@ function QuizCollectionQuizCard(props) {
     });
 
     var quizCreator = {};
-    if(data){
+    if (data) {
         quizCreator = data.findUserById;
     }
 
@@ -27,20 +29,18 @@ function QuizCollectionQuizCard(props) {
 
     var quiz = {};
     var quizHits = 0;
-    if(quizData){
+    if (quizData) {
         quiz = quizData.findQuizById;
         quizHits = props.quiz.quizHits !== 1 ? props.quiz.quizHits + ' Quiz Hits' : props.quiz.quizHits + ' Quiz Hit';
     }
 
     const handleClick = () => {
-        if(!props.editingMode) {
+        if (!props.editingMode) {
             history.push("/quiz/" + props.quiz._id);
         }
     }
 
-    const [updatedQuizzes, setUpdatedQuizzes] = useState({
-        quizzes: props.updatedQuizCollection.quizzes
-    });
+    const [updatedQuizzes, setUpdatedQuizzes] = useState(props.updatedQuizCollection.quizzes);
 
     const handleSave = (quizzes) => {
         props.setUpdatedQuizCollection({
@@ -57,83 +57,87 @@ function QuizCollectionQuizCard(props) {
     const removeQuizFromQuizCollection = async () => {
         await RemoveQuizFromQuizCollection({variables: { quizId: props.quiz._id, quizCollectionId: props.quizCollection._id }});
         const newQuizzes = props.updatedQuizCollection.quizzes.filter(q => q.toString() !== props.quiz._id.toString());
-        // setUpdatedQuizzes({
-        //     quizzes: newQuizzes
-        // });
+        setUpdatedQuizzes(newQuizzes);
         handleSave(newQuizzes);
     }
 
     const handleUpClick = () => {
-        console.log('HANDLE UP CLICK');
-        // console.log(updatedQuizzes.quizzes);
-        // var newQuizzes = [...updatedQuizzes.quizzes];
+        // console.log('HANDLE UP CLICK');
+        // console.log(updatedQuizzes);
+        // var newQuizzes = [...updatedQuizzes];
         // var temp;
         // if (props.index > 0 && props.index < newQuizzes.length) {
         //     temp = newQuizzes[props.index-1];
         //     newQuizzes.splice(props.index-1, 1);
         //     newQuizzes.splice(props.index, 0, temp);
-        //     // setUpdatedQuizzes({
-        //     //     quizzes: newQuizzes});
+        //     setUpdatedQuizzes(newQuizzes);
         //     console.log(newQuizzes);
-        //     console.log(updatedQuizzes.quizzes);
+        //     console.log(updatedQuizzes);
         // }
         // handleSave(newQuizzes);
     }
 
     const handleDownClick = () => {
-        console.log("HANDLE DOWN CLICK");
-        // console.log(updatedQuizzes.quizzes);
-        // var newQuizzes = [...updatedQuizzes.quizzes];
+        // console.log("HANDLE DOWN CLICK");
+        // console.log(updatedQuizzes);
+        // var newQuizzes = [...updatedQuizzes];
         // var temp;
         // if (props.index >= 0 && props.index < newQuizzes.length-1) {
         //     temp = newQuizzes[props.index];
         //     newQuizzes.splice(props.index, 1);
         //     newQuizzes.splice(props.index+1, 0, temp);
-        //     // setUpdatedQuizzes({
-        //     //     quizzes: newQuizzes});
+        //     setUpdatedQuizzes(newQuizzes);
         //     console.log(newQuizzes);
-        //     console.log(updatedQuizzes.quizzes);
+        //     console.log(updatedQuizzes);
         // }
         // handleSave(newQuizzes);
     }
 
     useEffect(() => {
-        console.log(updatedQuizzes.quizzes);
+        console.log(updatedQuizzes);
       }, [updatedQuizzes])
 
     return (
-        <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
-            <div className="image">
-                <img src={quiz && quiz.titleImg}
-                    alt="quiz"
-                />
-            </div>
-            <div className="content">
-                <div className="description card-text">
-                    <div style={{ fontWeight: 'bold' }}> {props.quiz.title} </div>
-                    <div> Created by {quizCreator.username} </div>
-                    <div> {quizHits} </div>
-                    <div> {quiz.description} </div>
+        <div>
+            <div className="ui fluid card" style={{ cursor: 'pointer', marginBottom: '15px' }} onClick={handleClick}>
+                <div className="content">
+                    <Grid verticalAlign="middle">
+                        <Grid.Column width={4} style={{ textAlign: 'center' }}>
+                            <Image src={quiz.titleImg}/>
+                        </Grid.Column>
+
+                        <Grid.Column width={10}>
+                            <div>
+                                <div style={{ fontWeight: 'bold' }}> {props.quiz.title} </div>
+                                <div> {quizHits} </div>
+                                <div> Created by {quizCreator.username} </div>
+                                <div> {quiz.description} </div>
+                            </div>
+                        </Grid.Column>    
+
+                        <Grid.Column width={2}>
+                            {/* {
+                                props.editingMode && 
+                                <i className="angle up icon" style={{ fontSize: '15pt', cursor: 'pointer' }}
+                                    onClick={handleUpClick}
+                                />
+                            }
+                            {
+                                props.editingMode && 
+                                <i className="angle down icon" style={{ fontSize: '15pt', cursor: 'pointer' }}
+                                    onClick={handleDownClick}
+                                />
+                            } */}
+                            {
+                                props.editingMode && 
+                                <i className="trash icon" style={{ fontSize: '15pt', cursor: 'pointer' }}
+                                    onClick={removeQuizFromQuizCollection}
+                                />
+                            }
+                        </Grid.Column>
+                    </Grid>
                 </div>
             </div>
-            {
-                props.editingMode && 
-                <i className="trash icon" style={{ fontSize: '15pt' }}
-                    onClick={removeQuizFromQuizCollection}
-                />
-            }
-            {/* {
-                props.editingMode && 
-                <i className="angle up icon" style={{  fontSize: '15pt' }}
-                    onClick={handleUpClick}
-                />
-            }
-            {
-                props.editingMode && 
-                <i className="angle down icon" style={{  fontSize: '15pt' }}
-                    onClick={handleDownClick}
-                />
-            } */}
         </div>
     );
 }

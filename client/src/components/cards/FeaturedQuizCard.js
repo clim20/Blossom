@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Image } from 'semantic-ui-react';
+
 import { useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
