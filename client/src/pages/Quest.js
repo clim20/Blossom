@@ -55,6 +55,14 @@ const Quest = () => {
     const [disabled4, setDisable4] = useState(false);
     const [disabled5, setDisable5] = useState(false);
     const [disabled6, setDisable6] = useState(false);
+	
+    const [disabled7, setDisable7] = useState(false);
+    const [disabled8, setDisable8] = useState(false);
+    const [disabled9, setDisable9] = useState(false);
+    const [disabled10, setDisable10] = useState(false);
+    const [disabled11, setDisable11] = useState(false);
+    const [disabled12, setDisable12] = useState(false);
+
 
     /*let count = 0;
     for (const obj of quizzes) {
@@ -87,6 +95,54 @@ const Quest = () => {
         if(followers > 99) {
             setDisable6(true);
         }
+	if(followers > 199) {
+	    setDisable12(true);
+	}
+    });
+	
+    useEffect(() => {
+	for(let i=0; i < quizzes.length; i++){
+	   if(quizzes[i].quizLikes > 4){
+	      setDisable7(true);
+	   }
+	   if(quizzes[i].quizLikes > 9){
+	      setDisable8(true);
+	   }
+	   if(quizzes[i].quizLikes > 49){
+	      setDisable9(true);
+	   }
+	   if(quizzes[i].quizLikes > 99){
+	      setDisable10(true);
+	   }
+	   if(quizzes[i].quizDislikes == 0){
+	      setDisable11(true);
+	   }else{
+	      setDisable11(false);
+	   }
+	}
+    });
+	
+    const[pageNumber, setPageNumber] = useState(1);
+    const handleBackArrow = () => {
+	if(pageNumber == 1){
+	}else{
+	   setPageNumber(1);
+	}
+    }
+    const handleForthArrow = () => {
+	if(pageNumber == 2){
+	}else{
+	   setPageNumber(2);
+	}
+    }
+    
+    const [firstPage, setFirstPage] = useState(false);
+    useEffect(()=> {
+	if(pageNumber == 1){
+	   setFirstPage(true);
+	}else{
+	   setFirstPage(false);
+	}
     });
 
     return (
@@ -95,12 +151,12 @@ const Quest = () => {
                 Quests
 	    	<span className="arrow">
 	    	<Button.Group>
-	    		<Button color='#ffc0cb' icon='left chevron' />
-	    		<Button color='#ffc0cb' icon='right chevron' />
+	    		<Button color='#ffc0cb' icon='left chevron' onClick={handleBackArrow} />
+	    		<Button color='#ffc0cb' icon='right chevron' onClick={handleForthArrow} />
 	    	</Button.Group>
 	    	</span>
             </h2>
-            <div className="quests-rectangle">
+	   {(firstPage) ? <div className="quests-rectangle">
                     <br />
                 <h2>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create your first platform!
@@ -138,6 +194,45 @@ const Quest = () => {
                     <span className="checkBox6">Incomplete</span>}
                 </h2>
             </div>
+	    :
+            <div className="quests-rectangle">
+                    <br />
+                <h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get 5 Likes!
+                    {(disabled7) ? <span className="completeBox7">Completed</span> :
+                    <span className="checkBox7">Incomplete</span>}
+                </h2>
+                    <br />
+                <h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get 10 Likes!
+                    {(disabled8) ? <span className="completeBox8">Completed</span> :
+                    <span className="checkBox8">Incomplete</span> }
+                </h2>
+                    <br />
+                <h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get 50 Likes!
+                    {(disabled9) ? <span className="completeBox9">Completed</span> :
+                    <span className="checkBox9">Incomplete</span>}
+                </h2>
+                    <br />
+                <h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get 100 Likes!
+                    {(disabled10) ? <span className="completeBox10">Completed</span> :
+                    <span className="checkBox10">Incomplete</span>}
+                </h2>
+                    <br />
+                <h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 0 Dislikes!
+                    {(disabled11) ? <span className="completeBox11">Completed</span> :
+                    <span className="checkBox11">Incomplete</span>}
+                </h2>
+                    <br />
+                <h2>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have 200 Followers!
+                    {(disabled12) ? <span className="completeBox12">Completed</span> :
+                    <span className="checkBox12">Incomplete</span>}
+                </h2>
+            </div> }
         </div>
     );
 }
