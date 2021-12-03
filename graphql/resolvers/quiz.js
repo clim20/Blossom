@@ -124,7 +124,7 @@ module.exports = {
             question: "Enter Question Here",
             choices: ["Enter Choices Here"],
             answer: 0,
-            answerExplanation: "Enter Explenation Here",
+            answerExplanation: "Enter Explanation Here",
             questionImg: "",
             answerImg: "",
             drawing: [],

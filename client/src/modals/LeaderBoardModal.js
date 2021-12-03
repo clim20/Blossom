@@ -5,14 +5,11 @@ import { Button, Modal } from 'semantic-ui-react';
 import * as queries from '../cache/queries';
 
 const LeaderBoardModal = (props) => {
-   
-    const displayTopScores = (arr, index) =>{
-        console.log(props.scores)
-        console.log(props.currentuser)
+    const displayTopScores = (arr, index) => {
         var name = "";
-        let score = arr.userScore
+        let score = arr.userScore;
         
-        const NameComp = (props) =>{
+        const NameComp = (props) => {
             const { data: playerData } = useQuery(queries.FIND_USER_BY_ID, {
                 variables: {
                     id: props.user
@@ -20,17 +17,17 @@ const LeaderBoardModal = (props) => {
             });
 
             var player = {};
-            name = ""
+            name = "";
             if (playerData) { 
 		        player = playerData.findUserById;
-                name = player.username
+                name = player.username;
             }
 
             return <td>{name}</td>
         }
        
         return(
-            <tr>
+            <tr key={index}>
                 <td>{index+1}</td>
                 <NameComp user={arr.user}></NameComp>
                 <td>{score}</td>
@@ -38,7 +35,7 @@ const LeaderBoardModal = (props) => {
         )
     };
 
-    return (
+    return(
         <Modal
         size="tiny"
         open={true}
@@ -46,7 +43,7 @@ const LeaderBoardModal = (props) => {
         >
             <Modal.Header>Leaderboard</Modal.Header>
             <Modal.Content className="creation-modal">
-                <table class="ui small stackable table">
+                <table className="ui small stackable table">
                     <thead>
                         <tr>
                             <th>Rank</th>
