@@ -57,7 +57,8 @@ const QuizQuesAns = (props) => {
                 ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
             };
             imagedata.src = imagechoice;
-        }else{
+        }else if(refs.current){
+           
             ctx.current  = refs.current.getContext("2d")
             ctx.current.scale(2, 2);
             ctx.current.fillStyle="white"
