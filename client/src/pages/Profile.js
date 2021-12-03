@@ -43,6 +43,10 @@ const Profile = () => {
         setActiveTab(name);
     }
 
+    if (!profileData) { 
+		return(<div>Loading or Not Found</div>)
+    }
+
     return (
         <div>
             <ProfileBanner profile={profile} user={user} refetchProfileData={refetchProfileData}/>

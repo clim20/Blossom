@@ -35,6 +35,9 @@ const Platform = () => {
         setActiveTab(name);
     }
 
+    if (!PlatformData) { 
+		return(<div>Loading or Not Found</div>)
+    }
     return (
         <div>
             <PlatformBanner platform={platform} user={user} refetchPlatformData={refetchPlatformData}/>

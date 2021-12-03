@@ -389,6 +389,11 @@ const Quiz = () =>{
         </div>
     ;
 
+    if (!quizData){
+        return(
+            <div>Quiz Loading or Not Found</div>
+        )
+    }
     if (redirect == false){
         //console.log(highestScores)
         return(

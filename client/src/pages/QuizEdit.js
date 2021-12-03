@@ -220,6 +220,7 @@ const QuizEdit = () => {
         return(
             <div>
                 QuizEdit Page
+                Access Denied
                 
             </div>
         );
