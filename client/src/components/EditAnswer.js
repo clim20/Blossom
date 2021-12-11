@@ -56,7 +56,7 @@ function EditAnswer(props) {
         var description = props.tempQuiz.description
         return(
             <div className="answer-card" style={{'border':'0'}}>
-                <textarea className="description" value={description} onChange={(e) => handleDesChange(e.target.value)}/>
+                <textarea className="quizdescription" value={description} onChange={(e) => handleDesChange(e.target.value)}/>
             </div>
             
         );
