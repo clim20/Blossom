@@ -224,10 +224,10 @@ function EditQuestion(props) {
     }else{
         return(
 
-            <div>
-                <img src={props.tempQuiz.titleImg}/>
-                <input type="file"  accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.files[0])}/>
-                <button onClick={uploadBtn}> Upload </button>
+            <div className="question-card">
+                <img src={props.tempQuiz.titleImg} style={{'display' : 'block', 'margin-left' : 'auto', 'margin-right' : 'auto', 'width' : '50%', 'maxHeight' : '100%', 'maxWidth' : '100%'}}/>
+                <input type="file"  accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.files[0])} style={{'position':'absolute', 'left' : '11%', 'top':'95%'}}/>
+                <button className="drawing_btn" onClick={uploadBtn} style={{'position':'absolute', 'left' : '0%', 'top':'94%'}}> Upload </button>
             </div>
         );
        

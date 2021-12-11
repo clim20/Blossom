@@ -206,10 +206,10 @@ const QuizEdit = () => {
                         <EditAnswer tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} mode={mode} lineWidth={lineWidth} penColor={penColor} reset ={resetCanvas}/>
                     </div>
                     <div>
-                        <button onClick = {() => handleSave()}>
+                        <button className = "save" onClick = {() => handleSave()}>
                             Save
                         </button>
-                        <button onClick = {() => handleCancel()}>
+                        <button className = "cancel" onClick = {() => handleCancel()}>
                             Cancel
                         </button>
                     </div>

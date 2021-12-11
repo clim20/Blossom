@@ -1,5 +1,5 @@
 .table-of-contents{
-    position: absolute;
+    position: fixed;
     top: 70px;
     left: 10px;
     width: 225px; 
@@ -54,4 +54,48 @@
     width: 100px; 
     height: 30px;
     font-size: small;
+}
+.question-card{
+    position: absolute;
+    top: 200px;
+    left: 20%;
+    width: 1000px; 
+    height: 500px;
+    border: 2px solid  black;
+}
+.answer-card{
+    position: absolute;
+    top: 720px;
+    left: 20%;
+    width: 1000px; 
+    height: 500px;
+    border: 2px solid  black;
+}
+.save{
+    position: absolute;
+    top: 1250px;
+    left: 80%;
+    background-Color: #00ff4c;
+    color: black;
+    border-radius: 2px;
+    width: 100px; 
+    height: 30px;
+    font-size: small;
+}
+.cancel{
+    position: absolute;
+    top: 1250px;
+    left: 74%;
+    background-Color: #ff0000;
+    color: black;
+    border-radius: 2px;
+    width: 100px; 
+    height: 30px;
+    font-size: small;
+}
+
+.description{
+    width: 1000px;
+    height: 500px;
+    
 }
