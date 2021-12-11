@@ -70,8 +70,8 @@ function EditQuestion(props) {
 
     const [CreateImage] = useMutation(mutations.CREATE_DRAWING);
     
-        
-    const  addDrawingtoArr = async (url) =>{
+     /*   
+    const  setTitleImg = async (url) =>{
         let change = JSON.parse(JSON.stringify(props.tempQuiz));
         const { data: newDrawing } =  await CreateImage({
             variables: { 
@@ -94,6 +94,13 @@ function EditQuestion(props) {
             
         }
     } 
+    */
+
+    const  setTitleImg = async (url) =>{
+        let change = JSON.parse(JSON.stringify(props.tempQuiz));
+        change.titleImg = url;
+        props.setTempQuiz(change);
+    }
 
     const uploadImage = async () => {
         
@@ -109,7 +116,7 @@ function EditQuestion(props) {
         .then(res => res.json())
         .then(data => {
             setUrl(data.url)
-            addDrawingtoArr(data.url)
+            setTitleImg(data.url)
         })
         .catch(err => {
             console.log(err);
@@ -194,10 +201,11 @@ function EditQuestion(props) {
         var quesTxt = currentCard.question
         return(
             <div>
-                <input type="file"  accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.files[0])}/>
-                <button onClick={uploadBtn}> Upload </button>
+                
+                
                 <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset} lastSave={currentCard.questionImg} save={handleDrawChange}></DrawComp>
-                {drawingarr.map(drawing => displayImages(drawing))}
+                {//drawingarr.map(drawing => displayImages(drawing))
+                }
                 <input type="text" value={quesTxt} onChange={(e) => handleQuesChange(e.target.value)}/>
                 <div>
                     <table>
@@ -215,7 +223,12 @@ function EditQuestion(props) {
         )
     }else{
         return(
-            <div>TitleImgPlaceHolder</div>
+
+            <div>
+                <img src={props.tempQuiz.titleImg}/>
+                <input type="file"  accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.files[0])}/>
+                <button onClick={uploadBtn}> Upload </button>
+            </div>
         );
        
     }
