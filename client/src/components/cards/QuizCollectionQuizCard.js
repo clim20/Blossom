@@ -61,38 +61,6 @@ function QuizCollectionQuizCard(props) {
         handleSave(newQuizzes);
     }
 
-    const handleUpClick = () => {
-        // console.log('HANDLE UP CLICK');
-        // console.log(updatedQuizzes);
-        // var newQuizzes = [...updatedQuizzes];
-        // var temp;
-        // if (props.index > 0 && props.index < newQuizzes.length) {
-        //     temp = newQuizzes[props.index-1];
-        //     newQuizzes.splice(props.index-1, 1);
-        //     newQuizzes.splice(props.index, 0, temp);
-        //     setUpdatedQuizzes(newQuizzes);
-        //     console.log(newQuizzes);
-        //     console.log(updatedQuizzes);
-        // }
-        // handleSave(newQuizzes);
-    }
-
-    const handleDownClick = () => {
-        // console.log("HANDLE DOWN CLICK");
-        // console.log(updatedQuizzes);
-        // var newQuizzes = [...updatedQuizzes];
-        // var temp;
-        // if (props.index >= 0 && props.index < newQuizzes.length-1) {
-        //     temp = newQuizzes[props.index];
-        //     newQuizzes.splice(props.index, 1);
-        //     newQuizzes.splice(props.index+1, 0, temp);
-        //     setUpdatedQuizzes(newQuizzes);
-        //     console.log(newQuizzes);
-        //     console.log(updatedQuizzes);
-        // }
-        // handleSave(newQuizzes);
-    }
-
     useEffect(() => {
         console.log(updatedQuizzes);
       }, [updatedQuizzes])
@@ -106,7 +74,7 @@ function QuizCollectionQuizCard(props) {
                             <Image src={quiz.titleImg}/>
                         </Grid.Column>
 
-                        <Grid.Column width={10}>
+                        <Grid.Column width={11}>
                             <div>
                                 <div style={{ fontWeight: 'bold' }}> {props.quiz.title} </div>
                                 <div> {quizHits} </div>
@@ -115,19 +83,7 @@ function QuizCollectionQuizCard(props) {
                             </div>
                         </Grid.Column>    
 
-                        <Grid.Column width={2}>
-                            {/* {
-                                props.editingMode && 
-                                <i className="angle up icon" style={{ fontSize: '15pt', cursor: 'pointer' }}
-                                    onClick={handleUpClick}
-                                />
-                            }
-                            {
-                                props.editingMode && 
-                                <i className="angle down icon" style={{ fontSize: '15pt', cursor: 'pointer' }}
-                                    onClick={handleDownClick}
-                                />
-                            } */}
+                        <Grid.Column width={1}>
                             {
                                 props.editingMode && 
                                 <i className="trash icon" style={{ fontSize: '15pt', cursor: 'pointer' }}

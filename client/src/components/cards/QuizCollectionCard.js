@@ -51,7 +51,7 @@ function QuizCollectionCard(props) {
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="image">
-                <img src={quizCollection && quizCollection.img} alt="quizCollection"/>
+                <img style={{ height: '180px' }} src={quizCollection && quizCollection.img} alt="quizCollection"/>
                 {
                     onQuizCollectionTab && props.editingMode && 
                     <i className="times icon" style={{ position: 'absolute', top: '8px', right: '15px', color: 'var(--cancelRed)', fontSize: '15pt' }}

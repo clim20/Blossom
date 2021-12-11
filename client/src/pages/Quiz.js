@@ -95,12 +95,12 @@ const Quiz = () => {
                 name = player.username;
             }
 
-            return <td>{name}</td>
+            return <td style={{ overflowWrap: 'anywhere' }}>{name}</td>
         }
 
         return(
             <tr key={index}>
-                <td>{index+1}</td>
+                <td style={{ overflowWrap: 'anywhere' }}>{index+1}</td>
                 <NameComp user={arr.user}></NameComp>
                 <td>{score}</td>
             </tr>
@@ -226,7 +226,7 @@ const Quiz = () => {
 
     const [enableLike, setEnableLike] = useState(true);
     const handleLike = (like) => {
-        let currentUser = user;
+        let currentUser = user ? user : { _id: '' };
         
         let existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
         //console.log(currentQuiz.scores[existingScore].liked);

@@ -168,6 +168,7 @@ const QuizCollectionBanner = (props) => {
                         </div>
                     }
                 </Grid.Column>
+                <Grid.Column width={2}/>
                 <Grid.Column width={4}>
                 {
                     props.user && isOwnQuizCollection && !props.editingMode &&

@@ -52,7 +52,7 @@ function QuizCard(props) {
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="image">
-                <img src={quiz && quiz.titleImg} alt="quiz"/>
+                <img style={{ height: '180px' }} src={quiz && quiz.titleImg} alt="quiz"/>
                 {
                     onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
                     <i className={starClass} onClick={handleStarClick}/>

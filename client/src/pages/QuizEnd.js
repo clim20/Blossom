@@ -221,7 +221,7 @@ const QuizEnd = (props) => {
 
     const [enableLike, setEnableLike] = useState(true);
     const handleLike = (like) => {
-        let currentUser = user;
+        let currentUser = user ? user : { _id: '' };
         
         let existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
         if (existingScore !== -1 && enableLike) {
