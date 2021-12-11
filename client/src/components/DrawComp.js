@@ -4,8 +4,8 @@ const styles = {
     canvas : {
         border:'1px solid #333',
         margin:'0px 0px',
-        top: 0,
-        left: 350,
+        width: '100%',
+        height: "100%"
         //position: 'absolute'
         
     },
@@ -16,14 +16,7 @@ const styles = {
         width:'400px',
        
     },
-/*
-    button : {
-        border:'0px',
-        margin:'1px',
-        height:'50px',
-        minWidth:'75px'
-    }
-    */
+
 }
 
 const DrawComp = (props) =>{
@@ -41,19 +34,19 @@ const DrawComp = (props) =>{
 
     useEffect(() =>{
         
-        refs.current.width = window.innerWidth * 2;
-        refs.current.height = window.innerHeight * 2;
-        refs.current.style.width = `${window.innerWidth}px`;
-        refs.current.style.height = `${window.innerHeight}px`;
-        //refs.current.style.width = `800 px`;
-        //refs.current.style.height = `600 px`;
+        refs.current.width = 996;
+        refs.current.height = 496;
+        refs.current.style.width = `996px`;
+        refs.current.style.height = `496px`;
+        //refs.current.style.width = `200 px`;
+        //refs.current.style.height = `200 px`;
 
         ctx.current  = refs.current.getContext("2d")
-        ctx.current.scale(2, 2);
+        ctx.current.scale(1, 1);
         ctx.current.lineCap = "round";
         
         ctx.current.fillStyle="white"
-        ctx.current.fillRect(0,0,400,400)
+        ctx.current.fillRect(0,0,996,496)
         ctx.current.lineWidth = props.lineWidth
         ctx.current.strokeStyle = props.penColor
 
@@ -121,7 +114,7 @@ const DrawComp = (props) =>{
         var canvas = refs.current
         var ctx = canvas.getContext('2d');
         ctx.fillStyle="white"
-        ctx.fillRect(0,0,400,400)
+        ctx.fillRect(0,0,996,496)
         ctx.lineWidth = 10
         ctx.strokeStyle = "#000000"
 
@@ -176,9 +169,9 @@ const DrawComp = (props) =>{
     */
 
     return(
-        <div style={styles.maindiv}>
-            <div style={{position: 'reletive'}}>
-                <canvas ref={refs} width="400px" height="400px" style={styles.canvas} 
+        <div>
+            <div>
+                <canvas ref={refs}  style={styles.canvas} 
                     
                     onMouseMove={(e)=>drawing(e)} 
                     onMouseDown={(e)=>penDown(e)} 
@@ -190,25 +183,18 @@ const DrawComp = (props) =>{
             </div>
             
             
-            <div>
+            <div className = 'drawing_bar' style={{'top' : '500px', 'left' : '0px'}}>
                 
-                <button onClick={()=>reset()} >Reset</button>
-                <button onClick={()=>reload()} >Reload</button>
-                <button  onClick={()=>save()}>Save Drawing</button>
+                <button className = "drawing_btn" onClick={()=>reset()} >Reset</button>
+                <button className = "drawing_btn" onClick={()=>reload()} >Reload</button>
+                <button className = "drawing_btn" onClick={()=>save()}>Save Drawing</button>
             </div>
             <div>
                 
             </div>
         </div>
     )
-    /*
-    <button onClick={(e)=>draw(e)} style={styles.btn, styles.button}>Draw</button>
-                <button onClick={(e)=>erase(e)} style={styles.btn, styles.button}>Erase</button>
-                <button onClick={(e)=>penSizeUp()} style={styles.btn, styles.button}>Pen Size +</button>
-                <button onClick={(e)=>penSizeDown()} style={styles.btn, styles.button}>Pen Size -</button>
-                
-                <input type = "color" id="brushcolor" name="brushcolor" onChange={(e)=>setColor(e)}></input>
-                */
+   
 }
 
 export default DrawComp;

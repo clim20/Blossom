@@ -200,14 +200,15 @@ function EditQuestion(props) {
     if(currentCard){
         var quesTxt = currentCard.question
         return(
-            <div>
+            <div className="answer-card" style={{'top':'900px'}}>
                 
                 
                 <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset} lastSave={currentCard.questionImg} save={handleDrawChange}></DrawComp>
                 {//drawingarr.map(drawing => displayImages(drawing))
                 }
-                <input type="text" value={quesTxt} onChange={(e) => handleQuesChange(e.target.value)}/>
-                <div>
+                
+                <div style={{'position':'absolute', 'top':'110%'}}>
+                    <input type="text" value={quesTxt} onChange={(e) => handleQuesChange(e.target.value)}/>
                     <table>
                         {currentCard.choices.map(displayChoices)}
                         <tr>

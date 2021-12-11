@@ -45,10 +45,13 @@ function EditAnswer(props) {
         var ansIndex = currentCard.answer
         var ansExplanation = currentCard.answerExplanation
         return(
-            <div>
+            <div className="question-card">
                 <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset} lastSave={currentCard.answerImg} save={handleDrawChange}></DrawComp>
-                {displayAnsChoice(ansIndex)}
-                <input type="text" value={ansExplanation} onChange={(e) => handleAnsChange(e.target.value)}/>
+                <div style={{'position': 'absolute', 'top' : '110%'}}>
+                    {displayAnsChoice(ansIndex)}
+                    <textarea className="quizdescription" value={ansExplanation} onChange={(e) => handleAnsChange(e.target.value)} style={{'height':'100px'}}/>
+                </div>
+                
                 
             </div>
         )

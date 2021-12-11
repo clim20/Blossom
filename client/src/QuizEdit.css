@@ -72,9 +72,9 @@
     border: 2px solid  black;
 }
 .save{
-    position: absolute;
-    top: 1250px;
-    left: 80%;
+    position: fixed;
+    top: 95%;
+    left: 90%;
     background-Color: #00ff4c;
     color: black;
     border-radius: 2px;
@@ -83,9 +83,9 @@
     font-size: small;
 }
 .cancel{
-    position: absolute;
-    top: 1250px;
-    left: 74%;
+    position: fixed;
+    top: 95%;
+    left: 84%;
     background-Color: #ff0000;
     color: black;
     border-radius: 2px;
