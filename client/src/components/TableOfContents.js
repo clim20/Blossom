@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 function TableOfContents(props) {
     //tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}
    
@@ -26,7 +27,7 @@ function TableOfContents(props) {
                 i++;
             }
         
-
+            props.setSelectedCard (props.selectedCard + 1)
             props.setTempQuiz(change);
         }
         
@@ -90,13 +91,17 @@ function TableOfContents(props) {
         if(props.selectedCard == index){
             return(
                 <tr>
-                    <button onClick = {() => handleCardSelection(index)} style={{"background-color": "#4CAF50"}}>{(index+2)+": "+card.question}</button>
+                    <div style={{ 'padding': '10px'}}>
+                        <button className = "table-of-contents-cards" onClick = {() => handleCardSelection(index)} style={{"background-color": "#4CAF50"}}>{(index+2)+": "+card.question}</button>
+                    </div>
                 </tr>
             );
         }else{
             return(
                 <tr>
-                    <button onClick = {() => handleCardSelection(index)}>{(index+2)+": "+card.question}</button>
+                    <div style={{ 'padding': '10px'}}>
+                        <button className = "table-of-contents-cards" onClick = {() => handleCardSelection(index)}>{(index+2)+": "+card.question}</button>
+                    </div>
                 </tr>
             );
         } 
@@ -106,13 +111,18 @@ function TableOfContents(props) {
         if(props.selectedCard == -1){
             return(
                 <tr>
-                    <button onClick = {() => handleCardSelection(-1)} style={{"background-color": "#4CAF50"}}>{"1: Title"}</button>
+                    <div style={{ 'padding': '10px'}}>
+                        <button className = "table-of-contents-cards" onClick = {() => handleCardSelection(-1)} style={{"background-color": "#4CAF50"}}>{"1: Title"}</button>
+                    </div>
+                    
                 </tr>
             );
         }else{
             return(
                 <tr>
-                    <button onClick = {() => handleCardSelection(-1)}>{"1: Title"}</button>
+                    <div style={{ 'padding': '10px'}}>
+                        <button className = "table-of-contents-cards" onClick = {() => handleCardSelection(-1)}>{"1: Title"}</button>
+                    </div>
                 </tr>
             );
         } 
@@ -124,25 +134,29 @@ function TableOfContents(props) {
     var cardsArr =props.tempQuiz.cards
     
     return(
-        <div>
-            <table>
-                <tr>
-                    <th>
-                        <button onClick = {() => handleAddCard()}>+</button>
+        <div className = "table-of-contents">
+            <table style = {{'width' : '100%'}}>
+                <tr style = {{'border': '1px solid black', 'backgroundColor': '#e7e7e7', 'padding': '0'}}>
+                    <th >
+                        <button className = "table-of-contents-selector" onClick = {() => handleAddCard()}>+</button>
                     </th>
                     <th>
-                        <button onClick = {() => handleDelCard()}>-</button>
+                        <button className = "table-of-contents-selector" onClick = {() => handleDelCard()}>-</button>
                     </th>
                     <th>
-                        <button onClick = {() => handleSwapCard(1)}>/\</button>
+                        <button className = "table-of-contents-selector" onClick = {() => handleSwapCard(1)}>/\</button>
                     </th>
                     <th>
-                        <button onClick = {() => handleSwapCard(0)}>\/</button>
+                        <button className = "table-of-contents-selector" onClick = {() => handleSwapCard(0)}>\/</button>
                     </th>
                 </tr>
-                {displayTitle()}
-                {cardsArr.map(displayCards)}
             </table>
+            <div style={{'width': '225px', 'height': '730px' ,'overflow':'auto'}}>
+                <table>
+                    {displayTitle()}
+                    {cardsArr.map(displayCards)}
+                </table>
+            </div>
                 
         </div>
     )

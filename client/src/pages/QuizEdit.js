@@ -191,16 +191,16 @@ const QuizEdit = () => {
         return (
             <div>
                 <TableOfContents tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} setSelectedCard = {setSelectedCard}/>
-
-                <div>
-                    <button onClick={(e)=>draw(e)} >Draw</button>
-                    <button onClick={(e)=>erase(e)} >Erase</button>
-                    <button onClick={(e)=>penSizeUp()} >Pen Size +</button>
-                    <button onClick={(e)=>penSizeDown()} >Pen Size -</button>
-                    <input type = "color" id="brushcolor" name="brushcolor" onChange={(e)=>setColor(e)}></input>
+                <input className = "titlebox" type="text" value={title} onChange={(e) => handleTitleChange(e.target.value)}/>
+                <div className="drawing_bar">
+                    <button className = "drawing_btn" onClick={(e)=>draw(e)} >Draw</button>
+                    <button className = "drawing_btn" onClick={(e)=>erase(e)} >Erase</button>
+                    <button className = "drawing_btn" onClick={(e)=>penSizeUp()} >Pen Size +</button>
+                    <button className = "drawing_btn" onClick={(e)=>penSizeDown()} >Pen Size -</button>
+                    <input style ={{"position": "relative", "top" : "6px"}}type = "color" id="brushcolor" name="brushcolor" onChange={(e)=>setColor(e)}></input>
                 </div>
                 <div>
-                    <input type="text" value={title} onChange={(e) => handleTitleChange(e.target.value)}/>
+                    
                     <div>
                         <EditQuestion tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} mode={mode} lineWidth={lineWidth} penColor={penColor} reset ={resetCanvas} />
                         <EditAnswer tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} mode={mode} lineWidth={lineWidth} penColor={penColor} reset ={resetCanvas}/>
