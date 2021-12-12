@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Button, Modal, Dropdown } from 'semantic-ui-react';
 
@@ -62,6 +62,17 @@ const AddQuizCollectionModal = (props) => {
             setQuizCollectionId(data.value);
         }
     }
+
+    useEffect(() => {
+        refetchQuizCollectionsData();
+        options = quizCollections.map((entry, index) => ({
+            key: index,
+            text: entry.name,
+            value: entry._id,
+            selected: false,
+        }));
+        setPlaceholder(options.length > 0 ? "Select A Quiz Collection To Add" : "No Quiz Collections Addable");
+    }, refetchQuizCollectionsData);
 
     return (
         <Modal

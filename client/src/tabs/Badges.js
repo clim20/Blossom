@@ -33,7 +33,7 @@ const Badges = (props) => {
     }
 
     var quizzes = [];
-    const { data: quizData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
+    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
         variables: {
             ids: profile.quizzes
         }
@@ -59,7 +59,8 @@ const Badges = (props) => {
 
         refetchProfileData();
         refetchBadgeData();
-    }, [badgesArr], refetchProfileData, refetchBadgeData);
+        refetchQuizData();
+    }, [badgesArr], refetchProfileData, refetchBadgeData, refetchQuizData);
 
     //QUIZ QUESTS
     useEffect(async () => {
@@ -92,7 +93,8 @@ const Badges = (props) => {
         }
         refetchProfileData();
         refetchBadgeData();
-    }, [profile.quizzes], refetchProfileData, refetchBadgeData);
+        refetchQuizData();
+    }, props.profile.quizzes, [profile.quizzes], [quizzes], refetchProfileData, refetchBadgeData, refetchQuizData);
 
     //FOLLOWER QUESTS
     useEffect(async () => {
@@ -114,8 +116,9 @@ const Badges = (props) => {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
         }
         refetchProfileData();
+        refetchQuizData();
         refetchBadgeData();
-    }, profile.followers, refetchProfileData, refetchBadgeData);
+    }, profile.followers, refetchProfileData, refetchBadgeData, refetchQuizData);
 	
     //LIKE & DISLIKE & HITS QUESTS
     var likeCount = 0;
@@ -186,7 +189,14 @@ const Badges = (props) => {
         }
         refetchProfileData();
         refetchBadgeData();
-    }, [profile.quizzes], [quizzes], refetchProfileData, refetchBadgeData);
+        refetchQuizData();
+    }, [profile.quizzes], [quizzes], refetchProfileData, refetchBadgeData, refetchQuizData);
+
+    useEffect(async () => {
+        refetchBadgeData();
+        refetchQuizData();
+        refetchProfileData();
+    }, [badges], refetchBadgeData);
 
     return (
         <Grid>
