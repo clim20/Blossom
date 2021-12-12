@@ -100,10 +100,7 @@ const Collaborators = (props) => {
     }
 
     const removeCollaborator = async (collaboratorId) => {
-        console.log(collaboratorId);
-        console.log(platform._id);
-        const { data: removeData } = await RemoveCollaborator({variables: { platformId: platform._id, userId: collaboratorId }});
-        console.log("collaborator removed");
+        await RemoveCollaborator({variables: { platformId: platform._id, userId: collaboratorId }});
         refetchPlatformData();        
     }
 

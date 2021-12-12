@@ -78,7 +78,7 @@ const ProfileQuizzes = (props) => {
     }, [user, profile, quizzes, refetchProfileData, refetchQuizzesData]);
 
     const [CreateQuiz] = useMutation(mutations.CREATE_QUIZ);
-    //const [DeleteQuiz = useMutation(mutations.)]
+
     const handleSubmit = async () => {
         const { data } = await CreateQuiz({
             variables: { 
@@ -90,7 +90,6 @@ const ProfileQuizzes = (props) => {
         var returnedQuiz = {};
         if (data) { 
             returnedQuiz = data.createQuiz;
-            console.log(returnedQuiz);
         }
 
         history.push("/quiz/edit/" + returnedQuiz._id);

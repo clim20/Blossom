@@ -72,7 +72,7 @@ const PlatformQuizzes = (props) => {
     }, [user, platform, quizzes, refetchPlatformData, refetchQuizzesData]);
 
     const [CreateQuiz] = useMutation(mutations.CREATE_QUIZ);
-    //const [DeleteQuiz = useMutation(mutations.)]
+
     const handleSubmit = async () => {
         const { data } = await CreateQuiz({
             variables: { 
@@ -84,7 +84,6 @@ const PlatformQuizzes = (props) => {
         var returnedQuiz = {};
         if (data) { 
             returnedQuiz = data.createQuiz;
-            console.log(returnedQuiz);
         }
     }
 

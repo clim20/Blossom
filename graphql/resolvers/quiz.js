@@ -4,6 +4,7 @@ const Quiz = require('../../models/Quiz');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const Platform = require('../../models/Platform');
+const QuizCollection = require('../../models/QuizCollection');
 
 module.exports = {
   Query: {
@@ -174,7 +175,7 @@ module.exports = {
       }
     },
     async deleteQuiz(_, { id }){
-      /* TODO: Quiz need to be removed from the collections that have them and their badges need to be deleted too*/
+      /* TODO: Quiz badges need to be deleted too*/
       const deletedQuiz = await Quiz.findOne({_id: new ObjectId(id)});
       
       if(deletedQuiz){
@@ -184,7 +185,16 @@ module.exports = {
         let profile = await Profile.findOne({user: creator})
         let profileQuiz = profile.quizzes.filter(quizId => deletedQuiz._id.toString() !== quizId.toString());
         
-        let updated = await Profile.updateOne({user: profile.user}, {quizzes: profileQuiz});   
+        await Profile.updateOne({user: profile.user}, {quizzes: profileQuiz});   
+
+        const quizCollections = await QuizCollection.find({quizzes: {$in: new ObjectId(id)}});
+        for (let i = 0; i < quizCollections.length; i++){
+          if (quizCollections[i]) {
+            let q = await QuizCollection.findOne({_id: quizCollections[i]._id })
+            let quizzes = q.quizzes.filter(i => i._id.toString() !== id.toString());
+            await QuizCollection.updateOne({_id: q._id}, {quizzes: quizzes});
+          }
+        }
       }
       const deleted = await Quiz.deleteOne({_id: id});
 
