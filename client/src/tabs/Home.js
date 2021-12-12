@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';
@@ -8,7 +8,7 @@ import QuizCards from '../components/cards/QuizCards';
 import QuizCollectionCards from '../components/cards/QuizCollectionCards';
 
 const Home = (props) => {
-    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: props.profile ? props.profile._id : ''
         }
@@ -19,7 +19,7 @@ const Home = (props) => {
 		profile = profileData.findProfileById;
     }
 
-    const { data: platformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
+    const { data: platformData, refetch: refetchPlatformData } = useQuery(queries.FIND_PLATFORM_BY_ID, {
         variables: {
             id: props.platform ? props.platform._id : ''
         }
@@ -33,7 +33,7 @@ const Home = (props) => {
     const quiz = profile ? profile.featuredQuiz : platform ? platform.featuredQuiz : '';
 
     var popularQuizzes = [];
-    const {data: popularQuizzesData} = useQuery(queries.GET_POPULAR_QUIIZZES_OF_ID, {
+    const {data: popularQuizzesData, refetch: refetchPopularQuizzesData } = useQuery(queries.GET_POPULAR_QUIIZZES_OF_ID, {
         variables: {
             id: profile ? profile._id : platform ? platform._id : ''
         }
@@ -43,7 +43,7 @@ const Home = (props) => {
     }
 
     var popularQuizCollections = [];
-    const {data: popularQuizCollectionsData} = useQuery(queries.GET_POPULAR_QUIZ_COLLECTIONS_OF_ID, {
+    const {data: popularQuizCollectionsData, refetch: refetchPopularQuizCollectionsData} = useQuery(queries.GET_POPULAR_QUIZ_COLLECTIONS_OF_ID, {
         variables: {
             id: profile ? profile._id : platform ? platform._id : ''
         }
@@ -51,6 +51,13 @@ const Home = (props) => {
     if(popularQuizCollectionsData) { 
         popularQuizCollections = popularQuizCollectionsData.getPopularQuizCollectionsOfId; 
     }
+
+    useEffect(() => {
+        refetchProfileData();
+        refetchPlatformData();
+        refetchPopularQuizzesData();
+        refetchPopularQuizCollectionsData();
+    }, quiz, [popularQuizzes], [popularQuizCollections], refetchProfileData, refetchPlatformData, refetchPopularQuizzesData, refetchPopularQuizCollectionsData);
 
     return (
         <div>
