@@ -22,20 +22,32 @@ const Badges = (props) => {
     }
 
     var badges = [];
-    const { data } = useQuery(queries.FIND_BADGES_BY_IDS, {
+    const { data: badgeData } = useQuery(queries.FIND_BADGES_BY_IDS, {
         variables: {
             ids: badgesArr
         }
     });
 
-    if (data) {
-        badges = data.findBadgesByIds;
+    if (badgeData) {
+        badges = badgeData.findBadgesByIds;
+    }
+
+    var quizzes = [];
+    const { data: quizData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
+        variables: {
+            ids: profile.quizzes
+        }
+    });
+
+    if (quizData) {
+        quizzes = quizData.findQuizzesByIds;
     }
 
     /* CHECK FOR QUEST BADGES */
     const [AddBadge] 			            = useMutation(mutations.ADD_BADGE);
     const [RemoveBadge] 			        = useMutation(mutations.REMOVE_BADGE);
 
+    //PLATFORM QUESTS
     useEffect(async () => {
         if(props.profile.platforms.length > 0){
             if(!badgesArr.includes("61a99288b145bce874363058")) {
@@ -48,6 +60,7 @@ const Badges = (props) => {
         refetchProfileData();
     }, [badgesArr], refetchProfileData);
 
+    //QUIZ QUESTS
     useEffect(async () => {
         if(props.profile.quizzes.length > 0){
             if(!badgesArr.includes("61b55900c8cd0cca85e1621a")){
@@ -79,37 +92,95 @@ const Badges = (props) => {
         refetchProfileData();
     }, [profile.quizzes], refetchProfileData);
 
-    //Has 100 Followers
-    // useEffect(()=> {
-    //     if(followers > 99) {
-    //         setDisable6(true);
-    //     }
-	// if(followers > 199) {
-	//     setDisable12(true);
-	// }
-    // });
+    //FOLLOWER QUESTS
+    useEffect(async () => {
+        if(profile.followerCount > 99) {
+            if(!badgesArr.includes("61b55f815bb2b98ef80dda37")){
+                await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55f815bb2b98ef80dda37" }});
+            }
+
+            if(profile.followerCount > 199) {
+                if(!badgesArr.includes("61b55f9f01fc5ba9f5039e04")){
+                    await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
+                }
+            }
+            else
+                await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
+        }
+        else {
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f815bb2b98ef80dda37" }});
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
+        }
+
+        refetchProfileData();
+    }, profile.followers, refetchProfileData);
 	
-    // useEffect(() => {
-	// for(let i=0; i < quizzes.length; i++){
-	//    if(quizzes[i].quizLikes > 4){
-	//       setDisable7(true);
-	//    }
-	//    if(quizzes[i].quizLikes > 9){
-	//       setDisable8(true);
-	//    }
-	//    if(quizzes[i].quizLikes > 49){
-	//       setDisable9(true);
-	//    }
-	//    if(quizzes[i].quizLikes > 99){
-	//       setDisable10(true);
-	//    }
-	//    if(quizzes[i].quizDislikes == 0){
-	//       setDisable11(true);
-	//    }else{
-	//       setDisable11(false);
-	//    }
-	// }
-    // });
+    //LIKE & DISLIKE & HITS QUESTS
+    var likeCount = 0;
+    var dislikeCount = false;
+    var quizHit = false;
+    useEffect(async () => {
+        for(let i=0; i < quizzes.length; i++){
+            if(quizzes[i].quizLikes > likeCount) {
+                likeCount = quizzes[i].quizLikes;
+            }
+            if(quizzes[i].quizDislikes === 0) {
+                dislikeCount = true;
+            }
+            if(quizzes[i].quizHits > 99){
+                quizHit = true;
+            }
+        }
+        if(likeCount > 4){
+            if(!badgesArr.includes("61b5690878085bba1e9df779")){
+                await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b5690878085bba1e9df779" }});
+            }
+        }
+        else
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b5690878085bba1e9df779" }});
+        
+        if(likeCount > 9){
+            if(!badgesArr.includes("61b569250c3c04ece4fdd074")){
+                await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b569250c3c04ece4fdd074" }});
+            }
+        }
+        else
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b569250c3c04ece4fdd074" }});
+        
+        if(likeCount > 49){
+            if(!badgesArr.includes("61b5693dd7c4e006196a7176")){
+                await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b5693dd7c4e006196a7176" }});
+            }
+        }
+        else
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b5693dd7c4e006196a7176" }});
+
+        if(likeCount > 99){
+            if(!badgesArr.includes("61b569554817760184b00c77")){
+                await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b569554817760184b00c77" }});
+            }
+        }
+        else
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b569554817760184b00c77" }});
+
+        if(dislikeCount){
+            if(!badgesArr.includes("61b569724e2fe778e20f6825")){
+                await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b569724e2fe778e20f6825" }});
+            }
+        }
+        else
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b569724e2fe778e20f6825" }});
+
+        if(quizHit){
+            if(!badgesArr.includes("61b572e8500ba72cc0722c69")){
+                await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
+            }
+        }
+        else
+            await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
+
+        refetchProfileData();
+    }, [profile.quizzes], refetchProfileData);
 
     return (
         <Grid>
