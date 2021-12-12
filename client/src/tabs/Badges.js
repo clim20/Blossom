@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 

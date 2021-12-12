@@ -1,6 +1,6 @@
 /* QUEST PAGE */
 
-.quests {
+  .quests {
     margin-top: 3rem;
     margin-left: 58px;
     font-size: 48px;
@@ -14,21 +14,26 @@
     height: 570px;
     background-color: var(--pink);
     font-size: 1.7rem;
-  }
-  
-  .checkBox1 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 410px;
+    display: table;
   }
 
-  .completeBox1 {
+  .quest-block {
+    text-align: justify;
+    display: table-row;
+  }
+
+  .quest-text {
+    display: table-cell;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .quest-button {
+    display: table-cell;
+    /* padding-right: 50px; */
+  }
+
+  .complete-box {
     width: 8rem;
     height: 3rem;
     border-radius: 5px;
@@ -37,10 +42,10 @@
     color: white;
     font-size: 23px;
     font-family: var(--font-family-puritan-regular);
-    margin-left: 410px;
+    display: table-cell;
   }
-  
-  .checkBox2 {
+
+  .incomplete-box {
     width: 8rem;
     height: 3rem;
     border-radius: 5px;
@@ -49,261 +54,9 @@
     color: white;
     font-size: 23px;
     font-family: var(--font-family-puritan-regular);
-    margin-left: 470px;
-  }
-
-  .completeBox2 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 474px;
+    display: table-cell;
   }
   
-  .checkBox3 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 520px;
-  }
-
-  .completeBox3 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 520px;
-  }
-  
-  .checkBox4 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 506px;
-  }
-
-  .completeBox4 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 508px;
-  }
-  
-  .checkBox5 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 285px;
-  }
-
-  .completeBox5 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 480px;
-  }
-  
-  .checkBox6 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 480px;
-  }
-
-  .completeBox6 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 480px;
-  }
-
-.arrow {
-    margin-left: 580px;
-}
-  
-.checkBox7 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 565px;
-  }
-
-  .completeBox7 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #008000 !important;
-    background-color: #32CD32 !important;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 565px;
-  }
-  
-  .checkBox8 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 550px;
-  }
-
-  .completeBox8 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 550px;
-  }
-  
-  .checkBox9 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 550px;
-  }
-
-  .completeBox9 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 550px;
-  }
-  
-  .checkBox10 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 535px;
-  }
-
-  .completeBox10 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 535px;
-  }
-  
-  .checkBox11 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 517px;
-  }
-
-  .completeBox11 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 517px;
-  }
-  
-  .checkBox12 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: #ff3333;
-    background-color: #ff98ac;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 470px;
-  }
-
-  .completeBox12 {
-    width: 8rem;
-    height: 3rem;
-    border-radius: 5px;
-    border-color: green;
-    background-color: #32CD32;
-    color: white;
-    font-size: 23px;
-    font-family: var(--font-family-puritan-regular);
-    margin-left: 470px;
+  .arrow {
+      margin-left: 580px;
   }
