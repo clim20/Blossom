@@ -13,14 +13,14 @@ const QuizQuesAns = (props) => {
 
     useEffect(() =>{
         console.log("here")
-        refs.current.width = window.innerWidth * 2;
-        refs.current.height = window.innerHeight * 2;
-        refs.current.style.width = `${window.innerWidth}px`;
-        refs.current.style.height = `${window.innerHeight}px`;
+        refs.current.width = 996;
+        refs.current.height = 496;
+        refs.current.style.width = `996px`;
+        refs.current.style.height =  `496px`;
         ctx.current  = refs.current.getContext("2d")
-        ctx.current.scale(2, 2);
+        ctx.current.scale(1, 1);
         ctx.current.fillStyle="white"
-        ctx.current.fillRect(0,0,400,400)
+        ctx.current.fillRect(0,0,996,496)
         
         
 
@@ -60,20 +60,22 @@ const QuizQuesAns = (props) => {
         }else if(refs.current){
            
             ctx.current  = refs.current.getContext("2d")
-            ctx.current.scale(2, 2);
+            ctx.current.scale(1, 1);
             ctx.current.fillStyle="white"
-            ctx.current.fillRect(0,0,400,400)
+            ctx.current.fillRect(0,0,996,496)
         }
     if(props.showAnswer == true){
 
         return( 
             <div>
                 <div style={{position: 'reletive'}}>
-                    <canvas ref={refs} width="400px" height="400px"></canvas>
+                    <canvas ref={refs} width="1000px" height="500px"></canvas>
                 </div>
                 <button onClick = {() => nextQuestion()}>
                     <h>Correct Answer: {String.fromCharCode('A'.charCodeAt(0)+props.currentQuestion.answer)}</h>
+                    <br></br>
                     <h>{props.score} pts</h>
+                    <br></br>
                     <p>{props.currentQuestion.answerExplanation}</p>
                 </button>
             </div>
@@ -82,7 +84,7 @@ const QuizQuesAns = (props) => {
         return (
             <div>
                 <div style={{position: 'reletive'}}>
-                    <canvas ref={refs} width="400px" height="400px"></canvas>
+                    <canvas ref={refs} width="1000px" height="500px"></canvas>
                 </div>
                 <p>{props.currentQuestion.question}</p>
                 <div>

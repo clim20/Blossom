@@ -43,18 +43,21 @@ const LeaderBoardModal = (props) => {
         >
             <Modal.Header>Leaderboard</Modal.Header>
             <Modal.Content className="creation-modal">
-                <table className="ui small stackable table">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {props.scores.map(displayTopScores)}
-                    </tbody>
-                </table>            
+                <div style={{'overflow' : 'auto'}}>
+                    <table className="ui small stackable table">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {props.scores.map(displayTopScores)}
+                        </tbody>
+                    </table>  
+                </div>
+                          
             </Modal.Content>
             <br/>
             <br/>
