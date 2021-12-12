@@ -46,7 +46,7 @@ const Quiz = () => {
         username = userObject.username;
     }
 
-    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: userObject.profileId
         }
@@ -112,6 +112,7 @@ const Quiz = () => {
     const delTest = async () =>{     
         await DelQuiz({variables: { id: quizId }});
         refetchQuizData();
+        //refetchProfileData();
         history.push("/profile/" + profileObject._id);    
     }
 

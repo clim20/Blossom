@@ -108,7 +108,7 @@ module.exports = {
       
       const retQuiz = new Quiz({
         _id:  new ObjectId(),
-        title: title,
+        title: 'title',
         description: "Add Description Here",
         titleImg: "https://d3ftabzjnxfdg6.cloudfront.net/app/uploads/2021/02/19-07-13_8644-BB-web-1024x585.jpg",  
         creator: user._id,
