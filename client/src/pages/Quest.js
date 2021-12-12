@@ -26,7 +26,7 @@ const Quest = () => {
 		userObject = userData.findUserById;
     }
 
-    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: userObject.profileId
         }
@@ -73,7 +73,8 @@ const Quest = () => {
         if(platform.length > 0){
             setDisable1(true);
         }
-    })
+        refetchProfileData();
+    }, [platform], refetchProfileData)
 
     //Made a Quiz
     useEffect(() => {
@@ -88,7 +89,8 @@ const Quest = () => {
                 setDisable4(true);
             }
         }
-    });
+        refetchProfileData();
+    }, [quizzes], refetchProfileData);
 
     //Has 100 Followers
     useEffect(()=> {
@@ -98,7 +100,8 @@ const Quest = () => {
         if(followers > 199) {
             setDisable12(true);
         }
-    });
+        refetchProfileData();
+    }, [followers], refetchProfileData);
 	
     useEffect(() => {
         for(let i=0; i < quizzesArr.length; i++){
@@ -121,29 +124,28 @@ const Quest = () => {
                 setDisable11(true);
             }
         }
-    });
+        refetchProfileData();
+    }, [quizzesArr], refetchProfileData);
 	
     const[pageNumber, setPageNumber] = useState(1);
     const handleBackArrow = () => {
-	if(pageNumber == 1){
-	}else{
-	   setPageNumber(1);
-	}
+        if(pageNumber !== 1) {
+            setPageNumber(1);
+        }
     }
     const handleForthArrow = () => {
-	if(pageNumber == 2){
-	}else{
-	   setPageNumber(2);
-	}
+        if(pageNumber !== 2){
+            setPageNumber(2);
+        }
     }
     
     const [firstPage, setFirstPage] = useState(false);
     useEffect(()=> {
-	if(pageNumber == 1){
-	   setFirstPage(true);
-	}else{
-	   setFirstPage(false);
-	}
+        if(pageNumber == 1){
+        setFirstPage(true);
+        }else{
+        setFirstPage(false);
+        }
     });
 
     return (
@@ -152,8 +154,8 @@ const Quest = () => {
                 Quests
 	    	<span className="arrow">
 	    	<Button.Group>
-	    		<Button color='light-grey' icon='left chevron' onClick={handleBackArrow} />
-	    		<Button color='light-grey' icon='right chevron' onClick={handleForthArrow} />
+	    		<Button icon='left chevron' onClick={handleBackArrow}/>
+	    		<Button icon='right chevron' onClick={handleForthArrow}/>
 	    	</Button.Group>
 	    	</span>
             </h2>

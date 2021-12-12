@@ -24,13 +24,14 @@
 
   .quest-text {
     display: table-cell;
+    width: 700px;
     padding-left: 50px;
     padding-right: 50px;
   }
 
   .quest-button {
     display: table-cell;
-    /* padding-right: 50px; */
+    padding-right: 50px;
   }
 
   .complete-box {
