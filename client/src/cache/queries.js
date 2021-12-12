@@ -395,6 +395,20 @@ export const FIND_QUIZ_COLLECTION_BY_IDS = gql`
     }
 `;
 
+export const FIND_ALL_QUIZ_COLLECTION_BY_IDS = gql`
+    query findAllQuizCollectionByIds($platformIds: [ID!]!, $ids: [ID!]!) {
+        findAllQuizCollectionByIds(platformIds: $platformIds, ids: $ids) {
+            _id 
+            name
+	        creator
+	        img
+	        description
+	        quizzes
+	        createdAt
+        }
+    }
+`;
+
 export const GET_POPULAR_QUIZ_COLLECTIONS_OF_ID = gql`
     query getPopularQuizCollectionsOfId($id: ID!) {
         getPopularQuizCollectionsOfId(id: $id) {

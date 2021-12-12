@@ -49,6 +49,30 @@ module.exports = {
       
       if (quizCollections) return quizCollections;
       return [];
+    }, //includes quizCollections of platforms involved in
+    async findAllQuizCollectionByIds(_, { platformIds, ids }) {
+      var quizCollections = [];
+      for(let i = 0; i < ids.length; i++) {
+        const quizCollection = await QuizCollection.findOne({_id: ids[i]});
+        if (quizCollection) {
+          quizCollections.push(quizCollection);
+        }
+      }
+
+      for(let i = 0; i < platformIds.length; i++) {
+        const platform = await Platform.findOne({_id: platformIds[i]});
+        if (platform) {
+          for(let i = 0; i < platform.quizCollections.length; i++) {
+            const qc = await QuizCollection.findOne({_id: platform.quizCollections[i]});
+            if (qc && !quizCollections.includes(qc)) {
+              quizCollections.push(qc);
+            }
+          }
+        }
+      }
+
+      if (quizCollections) return quizCollections;
+      return [];
     }
   },
   Mutation: {

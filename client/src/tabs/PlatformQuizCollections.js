@@ -39,8 +39,10 @@ const PlatformQuizCollections = (props) => {
     }
 
     var isOwner;
+    var isCollaborator;
     if(platform && user) {
         isOwner = platform.owner === user._id;
+        isCollaborator = platform.collaborators.includes(user._id);
     }
 
     const [showQuizCollectionRemovalModal, setShowQuizCollectionRemovalModal] = useState(false);
@@ -93,7 +95,7 @@ const PlatformQuizCollections = (props) => {
                     </div>
                 }
                 {
-                    isOwner && !editingMode &&
+                    (isOwner || isCollaborator) && !editingMode &&
                     <div>
                         <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => setShowAddQuizCollectionModal(true)}>
                             Add

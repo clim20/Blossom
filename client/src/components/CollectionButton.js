@@ -60,15 +60,16 @@ const CollectionButton = () => {
 		userProfile = userProfileData.findProfileById;
     }
 
-    const { data: quizCollectionsData, refetch: refetchQuizCollectionsData } = useQuery(queries.FIND_QUIZ_COLLECTION_BY_IDS, {
+    const { data: quizCollectionsData, refetch: refetchQuizCollectionsData } = useQuery(queries.FIND_ALL_QUIZ_COLLECTION_BY_IDS, {
         variables: {
+            platformIds: userProfile? userProfile.platforms : [],
             ids: userProfile ? userProfile.quizCollections : []
         }
     });
 
     var quizCollections;
     if (quizCollectionsData) { 
-        quizCollections = quizCollectionsData.findQuizCollectionByIds; 
+        quizCollections = quizCollectionsData.findAllQuizCollectionByIds; 
     }
 
     const [CreateQuizCollection] = useMutation(mutations.CREATE_QUIZ_COLLECTION);

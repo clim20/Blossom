@@ -211,6 +211,7 @@ module.exports = gql`
         getQuizCollections: [QuizCollection!]!
         findQuizCollectionById(id: ID!): QuizCollection!
         findQuizCollectionByIds(ids: [ID!]!): [QuizCollection!]!
+        findAllQuizCollectionByIds(platformIds: [ID!]!, ids: [ID!]!): [QuizCollection!]!
         getPopularQuizCollectionsOfId(id: ID!): [QuizCollection!]!
 
         getSearchResults(searchQuery: String!, filters: [String]!): [SearchResults!]!
