@@ -150,7 +150,7 @@ const PlatformBanner = ({ platform, user, refetchPlatformData }) => {
                             <img className="banner-header" style={{ cursor: 'pointer' }}
                                 src={platform.bannerImg} alt="banner"
                             />
-                            <i class="camera icon" style={{ top: '25%' }}/>
+                            <i className="camera icon" style={{ top: '25%' }}/>
                             <input type="file" name="banner" id="upload-banner-image" accept="image/png, image/jpeg"
                                 onChange={(e) => setBannerImage(e.target.files[0])}
                             />

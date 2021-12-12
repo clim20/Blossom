@@ -180,7 +180,7 @@ const Badges = (props) => {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
 
         refetchProfileData();
-    }, [profile.quizzes], refetchProfileData);
+    }, [profile.quizzes], [quizzes], refetchProfileData);
 
     return (
         <Grid>
