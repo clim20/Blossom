@@ -22,7 +22,7 @@ const Badges = (props) => {
     }
 
     var badges = [];
-    const { data: badgeData } = useQuery(queries.FIND_BADGES_BY_IDS, {
+    const { data: badgeData, refetch: refetchBadgeData } = useQuery(queries.FIND_BADGES_BY_IDS, {
         variables: {
             ids: badgesArr
         }
@@ -58,7 +58,8 @@ const Badges = (props) => {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61a99288b145bce874363058" }});
 
         refetchProfileData();
-    }, [badgesArr], refetchProfileData);
+        refetchBadgeData();
+    }, [badgesArr], refetchProfileData, refetchBadgeData);
 
     //QUIZ QUESTS
     useEffect(async () => {
@@ -90,7 +91,8 @@ const Badges = (props) => {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55afa18f9cca86c899ed9" }});
         }
         refetchProfileData();
-    }, [profile.quizzes], refetchProfileData);
+        refetchBadgeData();
+    }, [profile.quizzes], refetchProfileData, refetchBadgeData);
 
     //FOLLOWER QUESTS
     useEffect(async () => {
@@ -111,9 +113,9 @@ const Badges = (props) => {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f815bb2b98ef80dda37" }});
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
         }
-
         refetchProfileData();
-    }, profile.followers, refetchProfileData);
+        refetchBadgeData();
+    }, profile.followers, refetchProfileData, refetchBadgeData);
 	
     //LIKE & DISLIKE & HITS QUESTS
     var likeCount = 0;
@@ -168,19 +170,23 @@ const Badges = (props) => {
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b569724e2fe778e20f6825" }});
             }
         }
-        else
+        else {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b569724e2fe778e20f6825" }});
+            dislikeCount = false;
+        }
 
         if(quizHit){
             if(!badgesArr.includes("61b572e8500ba72cc0722c69")){
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
             }
         }
-        else
+        else {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
-
+            quizHit = false;
+        }
         refetchProfileData();
-    }, [profile.quizzes], [quizzes], refetchProfileData);
+        refetchBadgeData();
+    }, [profile.quizzes], [quizzes], refetchProfileData, refetchBadgeData);
 
     return (
         <Grid>
