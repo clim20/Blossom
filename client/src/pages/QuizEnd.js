@@ -143,7 +143,7 @@ const QuizEnd = (props) => {
             }
             scoreArr.push(insert);
         }
-        let currentUser = user;
+        let currentUser = user ? user : { _id: '' };
         let existingScore = scoreArr.findIndex(({ user }) => user === currentUser._id);
 
         if (existingScore != -1) {
@@ -231,7 +231,7 @@ const QuizEnd = (props) => {
     }
 
     const displayLikeBtn = () =>{
-        let currentUser = user;
+        let currentUser = user ? user : { _id: '' };
         let existingScore = -1;
         if (currentQuiz.scores) {
             existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);

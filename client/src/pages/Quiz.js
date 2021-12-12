@@ -143,7 +143,7 @@ const Quiz = () => {
             scoreArr.push(insert);
             //console.log(scoreArr)
         }
-        let currentUser = user;
+        let currentUser = user ? user : { _id: '' };
         //let tempQuizScores = temp.scores;
         let existingScore = scoreArr.findIndex(({ user }) => user === currentUser._id);
 
@@ -238,7 +238,7 @@ const Quiz = () => {
 
     const displayLikeBtn = () =>{
         //refetchQuizData();
-        let currentUser = user;
+        let currentUser = user ? user : { _id: '' };
         let existingScore = -1;
         if (currentQuiz.scores) {
             existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
