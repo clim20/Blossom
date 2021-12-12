@@ -14,9 +14,6 @@ const Quest = () => {
     const history = useHistory();
     const { user } = useContext(AuthContext);
 
-    const [AddBadge] 			            = useMutation(mutations.ADD_BADGE);
-    const [RemoveBadge] 			        = useMutation(mutations.REMOVE_BADGE);
-
     if (!user) {
         history.push("/");
     }
@@ -36,7 +33,7 @@ const Quest = () => {
 
     const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
-            id: profileId
+            id: userObject.profileId
         }
     });
 
@@ -76,16 +73,11 @@ const Quest = () => {
     }*/
 
     //Created a Platform
-    useEffect(async () => {
+    useEffect(() => {
         if(platform.length > 0){
             setDisable1(true);
-            //await AddBadge({variables: { profileId: profileId, badgeId: "61a99288b145bce874363058" }});
         }
-        else
-        {
-            //await RemoveBadge({variables: { profileId: profileId, badgeId: "61a99288b145bce874363058" }});
-        }
-    });
+    })
 
     //Made a Quiz
     useEffect(() => {

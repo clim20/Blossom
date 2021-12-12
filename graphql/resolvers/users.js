@@ -48,7 +48,7 @@ module.exports = {
   },
   Mutation: {
     async login(_, { username, email, profileImg }) {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email: email });
 
       // If user not found, register user
       if (!user) {
