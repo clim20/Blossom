@@ -60,7 +60,7 @@
 }
 
 .hover-image:hover {
-    opacity: 50%;
+    opacity: 0.9;
 }
 
 .camera.icon {
