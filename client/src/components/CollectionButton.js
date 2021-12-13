@@ -111,7 +111,7 @@ const CollectionButton = () => {
         </div>
     ;
 
-    const uniq = [...new Set(props.badges)];
+    const uniq = [...new Set(quizCollections)];
 
     return(
         <Grid.Row>
