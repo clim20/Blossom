@@ -37,14 +37,14 @@ const DrawComp = (props) =>{
         ctx.current.lineWidth = props.lineWidth
         ctx.current.strokeStyle = props.penColor
         
-        if(props.lastSave !== ""){
-            var imagedata = new Image();
+        if(props.lastSave != ""){
+            var imagedata = new Image;
             imagedata.onload = function(){
                 ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
             };
             imagedata.src = props.lastSave;
         }
-    });
+    },[]);
 
     const drawing = (e) => { //if the pen is down in the canvas, draw/erase
         if(pen === 'down') {
@@ -96,8 +96,8 @@ const DrawComp = (props) =>{
 
     const reload = () =>{
         reset()
-        if(props.lastSave !== ""){
-            var imagedata = new Image();
+        if(props.lastSave != ""){
+            var imagedata = new Image;
             imagedata.onload = function(){
                 ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
             };
