@@ -3,6 +3,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const Platform = require('../../models/Platform');
+const Quiz = require('../../models/Quiz');
 
 module.exports = {
   Query: {
@@ -215,6 +216,27 @@ module.exports = {
 
       if (updated) return platform;
       return platform;
-    }
+    },
+    async addQuizToPlatform(_, { quizId, platformId }) {
+      const quiz = await Quiz.findOne({_id: quizId}); 
+  
+      let quizzes = platform.quizzes;
+      quizzes.push(quizId);
+      const updated = await Platform.updateOne({_id: platformId}, {quizzes: quizzes});
+
+      if(updated) {
+        return quiz;
+      }
+      return quiz;
+    },
+    async removeQuizFromPlatform(_, { quizId, platformId }) {
+      const quiz = await Quiz.findOne({_id: quizId}); 
+  
+      let quizzes = Platform.quizzes.filter(q => q._id.toString() !== quizId.toString());
+      const updated = await Platform.updateOne({_id: platformId}, {quizzes: quizzes});
+
+      if(updated) return true;
+      return false;
+    },
   }
 };

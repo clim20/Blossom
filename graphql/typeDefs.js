@@ -263,6 +263,7 @@ module.exports = gql`
         removeDrawing(drawingId: ID!) : Boolean!
         updateDrawing(drawingId: ID!, image: String!, position: [Int!], rotation: Int!, sizein: [Int!]): Boolean!
 
-
+        addQuizToPlatform(quizId: ID!, platformId: ID!): Quiz!
+        removeQuizFromPlatform(quizId: ID!, platformId: ID!): Boolean!
     }
 `

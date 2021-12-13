@@ -358,3 +358,18 @@ export const UPDATE_BADGE = gql`
         updateBadge(badgeId: $badgeId, image: $image)
     }
 `;
+
+export const ADD_QUIZ_TO_PLATFORM = gql`
+    mutation AddQuizToPlatform($quizId: ID!, $platformId: ID!) {
+        addQuizToPlatform(quizId: $quizId, platformId: $platformId) {
+            _id
+            name
+        }
+    }
+`;
+
+export const REMOVE_QUIZ_FROM_PLATFORM = gql`
+    mutation RemoveQuizFromPlatform($quizId: ID!, $platformId: ID!) {
+        removeQuizFromPlatform(quizId: $quizId, platformId: $platformId)
+    }
+`;
