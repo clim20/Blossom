@@ -206,11 +206,6 @@ const QuizEnd = (props) => {
         }, 300);
     };
 
-    useEffect(() => {
-        console.log("useEffect called");
-        setMounted(true);
-    }, []);
-
     const [enableLike, setEnableLike] = useState(true);
     const handleLike = (like) => {
         let currentUser = user ? user : { _id: '' };
