@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 
 import QuizCards from '../components/cards/QuizCards';
 import AddQuizModal from '../modals/AddQuizModal.js';
+import QuizRemovalModal from '../modals/QuizRemovalModal.js';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -47,6 +48,8 @@ const PlatformQuizzes = (props) => {
     const [featuredQuiz, changeFeaturedQuiz] = useState(platform.featuredQuiz);
     const [editingMode, toggleEditingMode] = useState(false);
     const [showAddQuizModal, setShowAddQuizModal] = useState(false);
+    const [showQuizRemovalModal, setShowQuizRemovalModal] = useState(false);
+    const [quizName, setQuizName] = useState('');
   
     const handleCancel = () => {
         changeFeaturedQuiz(platform.featuredQuiz);
@@ -91,8 +94,10 @@ const PlatformQuizzes = (props) => {
     return (
         <Grid>
             <Grid.Column width={12}>
-                {quizzes && <QuizCards quizzes={quizzes} activeTab={props.activeTab} platform={platform} editingMode={editingMode} user={user}
-                                featuredQuiz={featuredQuiz} setFeaturedQuiz={changeFeaturedQuiz} refetchData={refetchPlatformData}/>
+                {quizzes && <QuizCards quizzes={quizzes} activeTab={"platformQuizzes"} platform={platform} editingMode={editingMode} user={user}
+                                featuredQuiz={featuredQuiz} setFeaturedQuiz={changeFeaturedQuiz} refetchData={refetchPlatformData} setQuizName={setQuizName}
+                                setShowQuizRemovalModal={setShowQuizRemovalModal}
+                                />
                 }
             </Grid.Column>
             <Grid.Column width={4}>
@@ -124,6 +129,10 @@ const PlatformQuizzes = (props) => {
                     </div>
                 }
             </Grid.Column>
+            {
+                showQuizRemovalModal && (<QuizRemovalModal setShowQuizRemovalModal={setShowQuizRemovalModal}
+                                                removeQuiz={removeQuiz} quizName={quizName}/>)
+            }
             {
                 showAddQuizModal && (<AddQuizModal platformQuizzes={quizzes} setShowAddQuizModal={setShowAddQuizModal}
                     addQuiz={addQuiz}/>)

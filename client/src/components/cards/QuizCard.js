@@ -46,13 +46,25 @@ function QuizCard(props) {
         props.refetchData();
     }
 
+    const handleXClick = () => {
+        props.setQuizName(quiz._id);
+        props.setShowQuizRemovalModal(true);
+    }
+
     const onQuizzesTab = props.activeTab === "quizzes";
+    const onPlatformQuizTab = props.activeTab === "platformQuizzes";
     const starClass = props.featuredQuiz === quiz._id ? 'star icon featured' : 'star icon unfeatured';
 
     return (
         <div className="item text-align-center cursor-pointer ui card" onClick={handleClick}>
             <div className="image">
                 <img style={{ height: '180px' }} src={quiz && quiz.titleImg} alt="quiz"/>
+                {
+                    onPlatformQuizTab && props.editingMode && 
+                    <i className="times icon" style={{ position: 'absolute', top: '8px', right: '5px', color: 'var(--cancelRed)', fontSize: '15pt' }}
+                        onClick={handleXClick}
+                    />
+                }
                 {
                     onQuizzesTab && props.editingMode && props.quiz.creator === props.user._id && 
                     <i className={starClass} onClick={handleStarClick}/>

@@ -16,6 +16,7 @@ const QuizCards = (props) => {
                             quiz={entry} key={index} user={props.user}
                             activeTab={props.activeTab} editingMode={props.editingMode}
                             featuredQuiz={props.featuredQuiz} setFeaturedQuiz={props.setFeaturedQuiz} 
+                            setQuizName={props.setQuizName} setShowQuizRemovalModal={props.setShowQuizRemovalModal}
                             refetchData={props.refetchData}
                         />
                     ))
