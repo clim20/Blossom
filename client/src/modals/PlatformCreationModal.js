@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { Button, Modal, Input } from 'semantic-ui-react';
 
 import { AuthContext } from '../context/auth';
 import * as mutations from '../cache/mutations';
 
 const PlatformCreationModal = (props) => {
-    const history = useHistory();
     const { user } = useContext(AuthContext);
     
     const [inputPlatformName, setInputPlatformName] = useState({ name: '' });
@@ -35,15 +34,12 @@ const PlatformCreationModal = (props) => {
             var returnedPlatform = {};
             if (data) { 
                 returnedPlatform = data.createPlatform;
-                console.log(returnedPlatform);
             }
 
             if (returnedPlatform.name === "") {
-                console.log("disable false");
                 setDisable(false);
                 // error message
             } else{
-                console.log("disable true");
                 setDisable(true);
 
                 setTimeout(() => {

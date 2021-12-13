@@ -13,6 +13,7 @@ const QuizCollection = () => {
     const { user } = useContext(AuthContext);
     const history = useHistory();
     const [editingMode, toggleEditingMode] = useState(false);
+    var quizCollection = {};
 
     const [updatedQuizCollection, setUpdatedQuizCollection] = useState({ 
         img: quizCollection ? quizCollection.img : "",
@@ -36,12 +37,11 @@ const QuizCollection = () => {
         })
     });
 
-    var quizCollection = {};
     if (quizCollectionData) { 
 		quizCollection = quizCollectionData.findQuizCollectionById;
     }
 
-    const { data: quizzesData, refetch: refetchQuizzesData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
+    const { data: quizzesData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
         variables: {
             ids: quizCollection ? quizCollection.quizzes : []
         }
@@ -54,7 +54,7 @@ const QuizCollection = () => {
 
     useEffect(() => {
         refetchQuizCollectionData();
-    }, [updatedQuizCollection]);
+    }, [updatedQuizCollection, refetchQuizCollectionData]);
 
     var [saveChanges] = useMutation(mutations.EDIT_QUIZ_COLLECTION, {
         variables: {

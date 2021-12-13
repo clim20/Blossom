@@ -60,7 +60,7 @@ const Badges = (props) => {
         refetchProfileData();
         refetchBadgeData();
         refetchQuizData();
-    }, [badgesArr], refetchProfileData, refetchBadgeData, refetchQuizData);
+    }, [badgesArr, refetchProfileData, refetchBadgeData, refetchQuizData]);
 
     //QUIZ QUESTS
     useEffect(async () => {
@@ -94,7 +94,7 @@ const Badges = (props) => {
         refetchProfileData();
         refetchBadgeData();
         refetchQuizData();
-    }, props.profile.quizzes, [profile.quizzes], [quizzes], refetchProfileData, refetchBadgeData, refetchQuizData);
+    }, [props.profile.quizzes, profile.quizzes, quizzes, refetchProfileData, refetchBadgeData, refetchQuizData]);
 
     //FOLLOWER QUESTS
     useEffect(async () => {
@@ -118,7 +118,7 @@ const Badges = (props) => {
         refetchProfileData();
         refetchQuizData();
         refetchBadgeData();
-    }, profile.followers, refetchProfileData, refetchBadgeData, refetchQuizData);
+    }, [profile.followers, refetchProfileData, refetchBadgeData, refetchQuizData]);
 	
     //LIKE & DISLIKE & HITS QUESTS
     var likeCount = 0;
@@ -196,7 +196,7 @@ const Badges = (props) => {
         refetchBadgeData();
         refetchQuizData();
         refetchProfileData();
-    }, [badges], refetchBadgeData);
+    }, [badges, refetchBadgeData]);
 
     return (
         <Grid>

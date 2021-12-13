@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, GridRow } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import * as queries from '../cache/queries';

@@ -28,7 +28,7 @@ module.exports = {
             results = [...results, ...quizCollections];
         } 
         
-        if (filters.length == 0) {
+        if (filters.length === 0) {
             results = [...users, ...platforms, ...quizzes, ...quizCollections].reverse().slice(0, 20);
         }
         

@@ -6,40 +6,27 @@ const styles = {
         margin:'0px 0px',
         width: '100%',
         height: "100%"
-        //position: 'absolute'
-        
     },
 
     maindiv : {
         padding:'10px',
         margin:'auto',
         width:'400px',
-       
     },
-
 }
 
 const DrawComp = (props) =>{
 
-
-    
-    
     const [pen, setPen] = useState('up');
     const [penCoords, setPenCoords] = useState([0,0]);
     const refs = useRef(null)
     const ctx = useRef(null)
     
-
-
-
-    useEffect(() =>{
-        
+    useEffect(() =>{     
         refs.current.width = 996;
         refs.current.height = 496;
         refs.current.style.width = `996px`;
         refs.current.style.height = `496px`;
-        //refs.current.style.width = `200 px`;
-        //refs.current.style.height = `200 px`;
 
         ctx.current  = refs.current.getContext("2d")
         ctx.current.scale(1, 1);
@@ -49,32 +36,19 @@ const DrawComp = (props) =>{
         ctx.current.fillRect(0,0,996,496)
         ctx.current.lineWidth = props.lineWidth
         ctx.current.strokeStyle = props.penColor
-
         
-        if(props.lastSave!=""){
-            
-            var imagedata = new Image;
+        if(props.lastSave !== ""){
+            var imagedata = new Image();
             imagedata.onload = function(){
                 ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
             };
             imagedata.src = props.lastSave;
-
-            //var imagedata = JSON.parse(props.lastSave)
-            //ctx.current.putImageData(imagedata,0,0)
         }
-
-        
-    }, []);
-    
-
-
-    
+    });
 
     const drawing = (e) => { //if the pen is down in the canvas, draw/erase
-        console.log(pen)
         if(pen === 'down') {
-            
-            ctx.current.beginPath()
+            ctx.current.beginPath();
             
             if(props.mode === 'draw') {
                 ctx.current.strokeStyle = props.penColor
@@ -103,7 +77,6 @@ const DrawComp = (props) =>{
     }
 
     const penUp =() =>{ //mouse is up on the canvas
-        
         setPen('up');
     }
 
@@ -117,24 +90,18 @@ const DrawComp = (props) =>{
         ctx.fillRect(0,0,996,496)
         ctx.lineWidth = 10
         ctx.strokeStyle = "#000000"
-
         //save()
 
     }
 
     const reload = () =>{
         reset()
-        if(props.lastSave!=""){
-            var imagedata = new Image;
+        if(props.lastSave !== ""){
+            var imagedata = new Image();
             imagedata.onload = function(){
                 ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
             };
             imagedata.src = props.lastSave;
-            /*
-            console.log("here");
-            var imagedata = JSON.parse(props.lastSave)
-            ctx.current.putImageData(imagedata,0,0)
-            */
         }
         //save()
         
@@ -142,49 +109,20 @@ const DrawComp = (props) =>{
 
     const save = async () =>{
         const image = refs.current.toDataURL('image/jpeg', .1);
-        console.log(image)
-        props.save(image)
-        /*
-        const image = refs.current.toDataURL('image/png');
-        const blob = await (await fetch(image)).blob();
-        const blobURL = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = blobURL;
-        link.download = "image.png";
-        link.click();
-        
-        var imagedata = ctx.current.getImageData(0,0,400,400);
-        console.log(JSON.stringify(imagedata))
-        props.save(JSON.stringify(imagedata))
-        */
-
+        props.save(image);
     }
-/*
-    load(){
-        var imagedata = JSON.parse(this.state.lastsave)
-        this.reset()
-        this.ctx.putImageData(imagedata,0,0)
-
-    }
-    */
 
     return(
         <div>
             <div>
                 <canvas ref={refs}  style={styles.canvas} 
-                    
                     onMouseMove={(e)=>drawing(e)} 
                     onMouseDown={(e)=>penDown(e)} 
                     onMouseUp={(e)=>penUp(e)}>
-                        
                 </canvas>
-                
-                
             </div>
             
-            
             <div className = 'drawing_bar' style={{'top' : '500px', 'left' : '0px'}}>
-                
                 <button className = "drawing_btn" onClick={()=>reset()} >Reset</button>
                 <button className = "drawing_btn" onClick={()=>reload()} >Reload</button>
                 <button className = "drawing_btn" onClick={()=>save()}>Save Drawing</button>

@@ -1,20 +1,15 @@
-import React, {useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import DrawComp from './DrawComp';
 
 
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import * as queries from '../cache/queries';
-import * as mutations from '../cache/mutations';
-
 
 function EditQuestion(props) {
-    //tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}
-    var currentCard = null
-    if(props.selectedCard!=-1){
+    var currentCard = null;
+    if(props.selectedCard !== -1){
         currentCard = props.tempQuiz.cards[props.selectedCard]
     }
-
-
 
     const handleQuesChange = event =>{
         let change = JSON.parse(JSON.stringify(props.tempQuiz));
@@ -35,10 +30,9 @@ function EditQuestion(props) {
     }
 
     const handleDelChoice = (index) =>{
-        
         let change = JSON.parse(JSON.stringify(props.tempQuiz));
         if(change.cards[props.selectedCard].choices.length > 1){
-            if(change.cards[props.selectedCard].answer == index){
+            if(change.cards[props.selectedCard].answer === index){
                 change.cards[props.selectedCard].answer = 0;
             }else if(change.cards[props.selectedCard].answer > index){
                 change.cards[props.selectedCard].answer = change.cards[props.selectedCard].answer - 1
@@ -46,7 +40,6 @@ function EditQuestion(props) {
             change.cards[props.selectedCard].choices.splice(index,1);
             props.setTempQuiz(change);
         }
-        
     }
 
     const handleAnsChange = (index) =>{
@@ -60,41 +53,11 @@ function EditQuestion(props) {
        
         change.cards[props.selectedCard].questionImg = drawing;
         props.setTempQuiz(change);
-        console.log(change)
     }
 
     const [image, setImage] = useState("");
     const [url, setUrl] = useState("");
-    const [testarr, setTestarr] = useState([])
     const [uploadBlock, setUploadBlock] = useState(false)
-
-    const [CreateImage] = useMutation(mutations.CREATE_DRAWING);
-    
-     /*   
-    const  setTitleImg = async (url) =>{
-        let change = JSON.parse(JSON.stringify(props.tempQuiz));
-        const { data: newDrawing } =  await CreateImage({
-            variables: { 
-                image: url, 
-                rotation: 0, 
-                position: [0,0], 
-                sizein: [10, 10]
-            }
-        });
-
-        var returnedDrawing = {};
-        console.log(newDrawing)
-        if (newDrawing) { 
-            returnedDrawing = newDrawing.createDrawing;
-            //console.log(newDrawing);
-            //console.log(returnedDrawing);
-            change.cards[props.selectedCard].drawing.push(returnedDrawing._id);
-            console.log(change);
-            props.setTempQuiz(change);
-            
-        }
-    } 
-    */
 
     const  setTitleImg = async (url) =>{
         let change = JSON.parse(JSON.stringify(props.tempQuiz));
@@ -103,8 +66,6 @@ function EditQuestion(props) {
     }
 
     const uploadImage = async () => {
-        
-        //const imagearr = JSON.parse(JSON.stringify(props.tempQuiz.cards[props.selectedCard].drawing));
         const data = new FormData();
         data.append("file", image);
         data.append("upload_preset", "blossom");
@@ -115,48 +76,33 @@ function EditQuestion(props) {
         })
         .then(res => res.json())
         .then(data => {
-            setUrl(data.url)
-            setTitleImg(data.url)
+            setUrl(data.url);
+            setTitleImg(data.url);
         })
         .catch(err => {
             console.log(err);
         })
 
-        
-        //console.log(testarr)
-        console.log("image uploaded")
         setUploadBlock(false)
     }
 
     const uploadBtn =()=>{
-        if(uploadBlock==false){
+        if(uploadBlock === false){
             setUploadBlock(true)
             uploadImage()
         }
-        
     }
-    //profile ? profile.quizzes : []
-    //console.log(currentCard.drawing)
-    const { data: drawingData, refetch: refetchDrawingData } = useQuery(queries.FIND_DRAWINGS_BY_IDS, {
+
+    const { data: drawingData } = useQuery(queries.FIND_DRAWINGS_BY_IDS, {
         variables: {
             ids: currentCard ? currentCard.drawing : []
         }
     });
 
-    var drawingarr = [];
-   
-    if (drawingData) { 
-        console.log(drawingData)
-		drawingarr = drawingData.findDrawingsByIds;
-        console.log(drawingarr)
-    }
-
-
     const displayChoices = (choice, index) =>{
-        //String.fromCharCode(c.charCodeAt(0) + 1);
         let x = 'A'
         x = String.fromCharCode(x.charCodeAt(0) + index);
-        if (props.tempQuiz.cards[props.selectedCard].answer == index){
+        if (props.tempQuiz.cards[props.selectedCard].answer === index){
             return(
                 <tr>
                     <th>
@@ -187,15 +133,6 @@ function EditQuestion(props) {
         )
         
     };
-
-    const displayImages = (drawing) =>{
-
-        return (<img src={drawing.img}/>)
-    }
-
-    //console.log(currentCard)
-    
-    //var quesTxt = "props.currentCard.question"
     
     if(currentCard){
         var quesTxt = currentCard.question
@@ -204,8 +141,6 @@ function EditQuestion(props) {
                 
                 
                 <DrawComp mode={props.mode} lineWidth={props.lineWidth} penColor={props.penColor} reset={props.reset} lastSave={currentCard.questionImg} save={handleDrawChange}></DrawComp>
-                {//drawingarr.map(drawing => displayImages(drawing))
-                }
                 
                 <div style={{'position':'absolute', 'top':'110%'}}>
                     <input type="text" value={quesTxt} onChange={(e) => handleQuesChange(e.target.value)}/>
@@ -218,15 +153,13 @@ function EditQuestion(props) {
                         </tr>
                     </table>
                 </div>
-                
-    
             </div>
         )
     }else{
         return(
 
             <div className="question-card">
-                <img src={props.tempQuiz.titleImg} style={{'display' : 'block', 'margin-left' : 'auto', 'margin-right' : 'auto', 'width' : '50%', 'maxHeight' : '100%', 'maxWidth' : '100%'}}/>
+                <img alt="question card" src={props.tempQuiz.titleImg} style={{'display' : 'block', 'margin-left' : 'auto', 'margin-right' : 'auto', 'width' : '50%', 'maxHeight' : '100%', 'maxWidth' : '100%'}}/>
                 <input type="file"  accept="image/png, image/jpeg" onChange={(e) => setImage(e.target.files[0])} style={{'position':'absolute', 'left' : '11%', 'top':'95%'}}/>
                 <button className="drawing_btn" onClick={uploadBtn} style={{'position':'absolute', 'left' : '0%', 'top':'94%'}}> Upload </button>
             </div>

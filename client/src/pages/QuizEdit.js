@@ -70,8 +70,6 @@ const QuizEdit = () => {
     }
 
     const handleSave = async () =>{
-        //console.log(JSON.parse(JSON.stringify(tempQuiz)));
-        console.log(tempQuiz.cards)
         var badgeArr = [];
         for(let i = 0; i < tempQuiz.badges.length; i++){
             let insert = {
@@ -79,9 +77,7 @@ const QuizEdit = () => {
                 "image": tempQuiz.badges[i].image
                 
             }
-            
             badgeArr.push(insert)
-            console.log(badgeArr)
         }
 
         var scoreArr = [];
@@ -92,10 +88,8 @@ const QuizEdit = () => {
                 "bestScore": tempQuiz.scores[i].bestScore,
                 "liked": tempQuiz.scores[i].liked
                 
-              }
-            
-              scoreArr.push(insert)
-            console.log(scoreArr)
+            }
+            scoreArr.push(insert)
         }
 
         var cardArr = [];
@@ -109,10 +103,8 @@ const QuizEdit = () => {
                 "questionImg": tempQuiz.cards[i].questionImg,
                 "answerImg": tempQuiz.cards[i].answerImg,
                 "drawing": tempQuiz.cards[i].drawing
-              }
-            
+              }        
             cardArr.push(insert)
-            console.log(cardArr)
         }
         const { data } = await UpdateQuiz({
             variables: { 
@@ -135,21 +127,15 @@ const QuizEdit = () => {
                   }
             }
         });
-        console.log(data)
-        
         
         var savingQuiz = {};
         if (data) { 
             savingQuiz = data.updateQuiz;
         }
 
-        console.log(savingQuiz);
-
         setTimeout(() => {
             refetchQuizData();
             history.push("/quiz/" + quizId);
-            //window.location.reload(false);
-            
         }, 300);
         
 
@@ -187,7 +173,7 @@ const QuizEdit = () => {
         setPenColor("#000000");
     }
 
-    if(initTemp == false && isCreator){
+    if(initTemp === false && isCreator){
         return (
             <div>
                 <TableOfContents tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz} setSelectedCard = {setSelectedCard}/>

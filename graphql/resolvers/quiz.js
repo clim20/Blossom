@@ -164,10 +164,7 @@ module.exports = {
         scores: updatedQuiz.scores,
         cards: updatedQuiz.cards,
       });
-      // console.log("-------")
-      // console.log(quiz)
-      // console.log("======")
-      // console.log(updated)
+
       if (updated) {
         return quiz;
       }else{
@@ -175,11 +172,9 @@ module.exports = {
       }
     },
     async deleteQuiz(_, { id }){
-      /* TODO: Quiz badges need to be deleted too*/
       const deletedQuiz = await Quiz.findOne({_id: new ObjectId(id)});
       
       if(deletedQuiz){
-        // console.log("deletedQuiz")
         const creator = deletedQuiz.creator;
 
         let profile = await Profile.findOne({user: creator})

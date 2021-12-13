@@ -71,22 +71,6 @@ const PlatformQuizzes = (props) => {
         refetchQuizzesData();
     }, [user, platform, quizzes, refetchPlatformData, refetchQuizzesData]);
 
-    const [CreateQuiz] = useMutation(mutations.CREATE_QUIZ);
-
-    const handleSubmit = async () => {
-        const { data } = await CreateQuiz({
-            variables: { 
-                owner: user._id, 
-                title: "test"
-            }
-        });
-
-        var returnedQuiz = {};
-        if (data) { 
-            returnedQuiz = data.createQuiz;
-        }
-    }
-
     return (
         <Grid>
             <Grid.Column width={12}>

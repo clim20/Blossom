@@ -2,12 +2,10 @@ import React from 'react';
 
 
 function TableOfContents(props) {
-    //tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}
-   
-    var cardsArr =props.tempQuiz.cards
+    var cardsArr = props.tempQuiz.cards
 
     const handleAddCard = () =>{
-        if(props.selectedCard!= -1){
+        if(props.selectedCard !== -1){
             let change = JSON.parse(JSON.stringify(props.tempQuiz));
             let ins = {
                 cardNum: 0,
@@ -33,11 +31,11 @@ function TableOfContents(props) {
         
     }
     const handleDelCard = () =>{
-        if(props.selectedCard!= -1){
+        if(props.selectedCard !== -1){
             let change = JSON.parse(JSON.stringify(props.tempQuiz));
             if(change.cards.length>1){
                 change.cards.splice(props.selectedCard,1);
-                if(change.cards.length == props.selectedCard){
+                if(change.cards.length === props.selectedCard){
                     props.setSelectedCard(props.selectedCard-1)
                 }else{
                     let i = props.selectedCard;
@@ -52,8 +50,8 @@ function TableOfContents(props) {
         }
     }
     const handleSwapCard = (direction) =>{
-        if(props.selectedCard!= -1){
-            if(direction == 0&&props.selectedCard<cardsArr.length-1){
+        if(props.selectedCard !== -1){
+            if(direction === 0 && props.selectedCard<cardsArr.length-1){
             
                 let change = JSON.parse(JSON.stringify(props.tempQuiz));
                 let temphold = change.cards[props.selectedCard]
@@ -65,7 +63,7 @@ function TableOfContents(props) {
                 props.setTempQuiz(change);
                 props.setSelectedCard(props.selectedCard+1)
     
-            }else if(direction == 1 && props.selectedCard > 0){
+            }else if(direction === 1 && props.selectedCard > 0){
                 let change = JSON.parse(JSON.stringify(props.tempQuiz));
                 let temphold = change.cards[props.selectedCard]
                 change.cards[props.selectedCard] = change.cards[props.selectedCard-1]
@@ -77,18 +75,14 @@ function TableOfContents(props) {
                 props.setSelectedCard(props.selectedCard-1)
             }
         }
-        
-        //let change = JSON.parse(JSON.stringify(props.tempQuiz));
-        //change.cards[props.selectedCard].answerExplanation = event;
-        //props.setTempQuiz(change);
     }
 
-    const handleCardSelection = index =>{
+    const handleCardSelection = index => {
         props.setSelectedCard(index);
     }
 
-    const displayCards = (card, index) =>{
-        if(props.selectedCard == index){
+    const displayCards = (card, index) => {
+        if (props.selectedCard === index) {
             return(
                 <tr>
                     <div style={{ 'padding': '10px'}}>
@@ -96,7 +90,7 @@ function TableOfContents(props) {
                     </div>
                 </tr>
             );
-        }else{
+        } else {
             return(
                 <tr>
                     <div style={{ 'padding': '10px'}}>
@@ -107,8 +101,8 @@ function TableOfContents(props) {
         } 
         
     }
-    const displayTitle = () =>{
-        if(props.selectedCard == -1){
+    const displayTitle = () => {
+        if (props.selectedCard === -1) {
             return(
                 <tr>
                     <div style={{ 'padding': '10px'}}>
@@ -127,11 +121,8 @@ function TableOfContents(props) {
             );
         } 
     }
-
     
-
-    
-    var cardsArr =props.tempQuiz.cards
+    cardsArr = props.tempQuiz.cards
     
     return(
         <div className = "table-of-contents">

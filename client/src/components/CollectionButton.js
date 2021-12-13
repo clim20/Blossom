@@ -38,17 +38,6 @@ const CollectionButton = () => {
 		userObject = userData.findUserById;
     }
 
-    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
-        variables: {
-            id: userObject.profileId
-        }
-    });
-
-    var profileObject = {};
-    if (profileData) { 
-		profileObject = profileData.findProfileById;
-    }
-
     const { data: userProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: user ? user.profileId : []

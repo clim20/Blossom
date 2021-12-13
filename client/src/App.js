@@ -23,7 +23,6 @@ import QuizEdit from './pages/QuizEdit';
 import QuizCollection from './pages/QuizCollection';
 import Update from './pages/Update';
 import Quest from './pages/Quest';
-import QuizStart from './pages/QuizStart';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');

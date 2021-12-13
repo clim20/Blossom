@@ -1,15 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import React, { useEffect, useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 
-import * as queries from '../cache/queries';
 import * as mutations from '../cache/mutations';
 
 import QuizQuesAns from '../components/QuizQuesAns'
 import QuizEnd from './QuizEnd';
 
 const QuizStart = (props) => {
-
-    //console.log(props.highestScores)
     let maxtime = 10
     const [questionNumber, setQuestionNumber] = useState(0);
     const [totalScore, setTotalScore] = useState(0);
@@ -32,12 +29,8 @@ const QuizStart = (props) => {
                 "image": temp.badges[i].image
                 
             }
-            
-            badgeArr.push(insert)
-            console.log(badgeArr)
+            badgeArr.push(insert);
         }
-
-        
 
         var scoreArr = [];
         for(let i = 0; i < temp.scores.length; i++){
@@ -46,22 +39,17 @@ const QuizStart = (props) => {
                 "userScore": temp.scores[i].userScore,
                 "bestScore": temp.scores[i].bestScore,
                 "liked": temp.scores[i].liked
-                
               }
-            
-              scoreArr.push(insert)
-            //console.log(scoreArr)
+              scoreArr.push(insert);
         }
 
-        //let tempQuizScores = temp.scores;
         let existingScore = scoreArr.findIndex(({ user }) => user === props.currentUser._id)
-        console.log(existingScore)
         let hitmodify = temp.quizHits
-        if (existingScore != -1){
+        if (existingScore !== -1) {
             if (scoreArr[existingScore].bestScore < totalScore){
                 scoreArr[existingScore].bestScore = totalScore;
             }
-        }else{
+        } else {
             hitmodify += 1;
             let i = 0;
             let foundspot = false;
@@ -78,7 +66,7 @@ const QuizStart = (props) => {
                 }
             }
 
-            if (foundspot==false){
+            if (foundspot==false) {
                 scoreArr.push(
                     {
                         "user": props.currentUser._id,
@@ -103,15 +91,8 @@ const QuizStart = (props) => {
                 "answerImg": temp.cards[i].answerImg,
                 "drawing": temp.cards[i].drawing
               }
-            
             cardArr.push(insert)
-            //console.log(cardArr)
         }
-        
-        
-        
-        
-        //console.log(props.currentQuiz._id)
         
         const { data } = await UpdateQuiz({
 
@@ -135,15 +116,11 @@ const QuizStart = (props) => {
                   }
             }
         });
-        
-        console.log(props.currentQuiz.score)
 
         var savingQuiz = {};
         if (data) { 
             savingQuiz = data.updateQuiz;
         }
-
-        console.log(savingQuiz);
 
         setTimeout(() => {
             props.refetchQuizData();
@@ -151,7 +128,6 @@ const QuizStart = (props) => {
     }
 
     const handleFinish = () =>{
-        console.log("finish called")
         setIsFinished(true);
         saveScore();
     }
@@ -197,7 +173,6 @@ const QuizStart = (props) => {
             return;
         }
         let interval = null;
-        //console.log(timer)
         if(timerActive){
             interval = setInterval(() =>{
                 setTimer(timer - 1);
@@ -210,21 +185,16 @@ const QuizStart = (props) => {
         return () => clearInterval(interval);
     }, [timerActive, timer]);
 
-    //console.log(showAnswer)
-    
-    if(questionNumber == props.currentQuiz.cards.length&&isFinished == false){
+    if(questionNumber === props.currentQuiz.cards.length&&isFinished === false){
         handleFinish();
         
     }
 
-    if(isFinished == true){
-        //saveScore();
-        //console.log(props.currentQuiz.cards.length)
+    if(isFinished === true){
         return( 
             <QuizEnd score = {totalScore} currentQuiz = {props.currentQuiz } numOfCorrect = {numOfCorrect}></QuizEnd>
         );
     }else{
-        //console.log(props.currentQuiz.cards.length)
         return (
             <div>
                 <br />

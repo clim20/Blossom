@@ -6,7 +6,6 @@ import { useQuery } from '@apollo/react-hooks';
 import * as queries from '../../cache/queries';
 
 const QuizCollectionSearchCard = (props) => {
-    console.log(props)
     const history = useHistory();
 
     const { data: quizCollectionData } = useQuery(queries.FIND_QUIZ_COLLECTION_BY_ID, {

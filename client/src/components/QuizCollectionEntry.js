@@ -1,9 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
-import { Button, Input, Dropdown, Icon } from 'semantic-ui-react';
-
-import * as queries from '../cache/queries';
+import React, { useState } from 'react';
+import { Dropdown } from 'semantic-ui-react';
 
 function QuizCollectionEntry(props) {
 
@@ -23,7 +19,6 @@ function QuizCollectionEntry(props) {
     const [hasQuiz, setHasQuiz] = useState(checkQuizStatus);
 
     const handleClick = () => {
-        console.log(props.quizCollection.name);
         if (!hasQuiz){
             props.addQuizToQuizCollection(props.quizCollection._id);
             setHasQuiz(true);

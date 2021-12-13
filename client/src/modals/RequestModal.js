@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { Modal } from 'semantic-ui-react'
 
 import RequestCard from '../components/cards/RequestCard';
 
-import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 
 const RequestModal = (props) => {

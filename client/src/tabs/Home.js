@@ -57,7 +57,7 @@ const Home = (props) => {
         refetchPlatformData();
         refetchPopularQuizzesData();
         refetchPopularQuizCollectionsData();
-    }, quiz, [popularQuizzes], [popularQuizCollections], refetchProfileData, refetchPlatformData, refetchPopularQuizzesData, refetchPopularQuizCollectionsData);
+    }, [quiz, popularQuizzes, popularQuizCollections, refetchProfileData, refetchPlatformData, refetchPopularQuizzesData, refetchPopularQuizCollectionsData]);
 
     return (
         <div>

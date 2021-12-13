@@ -12,7 +12,7 @@ const Home = () => {
     const { user } = useContext(AuthContext);
 
     var users = [];
-    const { data: usersData, refetch: usersRefetch } = useQuery(queries.FETCH_POPULAR_USERS);
+    const { data: usersData } = useQuery(queries.FETCH_POPULAR_USERS);
 	if(usersData) {
         users = usersData.getPopularUsers;
     }

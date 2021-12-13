@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 
 import { useParams, useHistory } from "react-router-dom";
@@ -138,7 +138,7 @@ const QuizEnd = (props) => {
         let currentUser = user ? user : { _id: '' };
         let existingScore = scoreArr.findIndex(({ user }) => user === currentUser._id);
 
-        if (existingScore != -1) {
+        if (existingScore !== -1) {
             scoreArr[existingScore].liked = like;
         }
 
@@ -160,17 +160,16 @@ const QuizEnd = (props) => {
         let tempquizLikes = temp.quizLikes;
         let tempquizDislikes = temp.quizDislikes;
         let prev = currentQuiz.scores[existingScore].liked;
-        console.log("prev = " + prev);
 
-        if (prev == 1) {
+        if (prev === 1) {
             tempquizLikes = tempquizLikes - 1;
-        } else if (prev == 2) {
+        } else if (prev === 2) {
             tempquizDislikes = tempquizDislikes - 1;
         }
 
-        if (like == 1) {
+        if (like === 1) {
             tempquizLikes = tempquizLikes + 1;
-        } else if (like == 2) {
+        } else if (like === 2) {
             tempquizDislikes = tempquizDislikes + 1;
         }
         
@@ -194,11 +193,6 @@ const QuizEnd = (props) => {
                 }
             }
         });
-        
-        var savingQuiz = {};
-        if (data) { 
-            savingQuiz = data.updateQuiz;
-        }
 
         setTimeout(() => {
             setEnableLike(true);
@@ -224,7 +218,7 @@ const QuizEnd = (props) => {
             existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
         }
         
-        if (enableLike == false || existingScore == -1) {
+        if (enableLike === false || existingScore === -1) {
             return(
                 <div>
                     <div className="ui labeled button" style={{ marginRight: '15px' }}>
@@ -240,7 +234,7 @@ const QuizEnd = (props) => {
             )
         }
 
-        if (enableLike && existingScore != -1) {
+        if (enableLike && existingScore !== -1) {
             if (currentQuiz.scores[existingScore].liked === 1) {
                 return(
                     <div>
@@ -256,7 +250,7 @@ const QuizEnd = (props) => {
                     </div>
                 )
                 
-            } else if (currentQuiz.scores[existingScore].liked == 2) {
+            } else if (currentQuiz.scores[existingScore].liked === 2) {
                 return(
                     <div>
                         <div className="ui labeled button" style={{ marginRight: '15px' }}>
@@ -295,7 +289,7 @@ const QuizEnd = (props) => {
                     <div className="display-inline-block text-align-center">
                         <h1 className="quiz-title">{currentQuiz.title}</h1>
                         <button className="quiz-creator-follow" onClick={handleCreatorClick}>
-                            <img className="ui avatar image follow-button-image" src={profileObject && profileObject.profileImg} />
+                            <img className="ui avatar image follow-button-image" alt="creator" src={profileObject && profileObject.profileImg} />
                             <div>
                                 <p> {username} </p>
                                 <p> {followers + " Followers"} </p>
@@ -303,7 +297,7 @@ const QuizEnd = (props) => {
                         </button>
                         {platformObject && platformObject._id && 
                             <button className="quiz-platform-follow" onClick={handlePlatformClick}>
-                                <img className="ui avatar image follow-button-image" src={platformObject && platformObject.platformImg} />
+                                <img className="ui avatar image follow-button-image" alt="platform" src={platformObject && platformObject.platformImg} />
                                 <div>
                                     <p> {platformObject.name} </p>
                                     <p> {platformObject.followerCount + " Followers"} </p>
@@ -324,7 +318,7 @@ const QuizEnd = (props) => {
                 <Grid.Row>
                     <div className="display-inline-block text-align-center">
                         <div style={{textAlign: 'center'}}>
-                            <img className="quiz-picture" src={currentQuiz.titleImg} />
+                            <img className="quiz-picture" alt="quiz" src={currentQuiz.titleImg} />
                             <br/>
                             <br/>
                             <header> Congratulations </header>

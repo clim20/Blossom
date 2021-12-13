@@ -1,18 +1,10 @@
-//import React, { useContext, useState } from 'react';
-import React, {useRef, useState, useEffect } from "react";
-//import { useMutation, useQuery } from '@apollo/react-hooks';
-
+import React, {useRef, useEffect } from "react";
 
 const QuizQuesAns = (props) => {
-
-
-    const refs = useRef(null)
-    const ctx = useRef(null)
-    
-    
+    const refs = useRef(null);
+    const ctx = useRef(null);
 
     useEffect(() =>{
-        console.log("here")
         refs.current.width = 996;
         refs.current.height = 496;
         refs.current.style.width = `996px`;
@@ -21,10 +13,6 @@ const QuizQuesAns = (props) => {
         ctx.current.scale(1, 1);
         ctx.current.fillStyle="white"
         ctx.current.fillRect(0,0,996,496)
-        
-        
-
-        
     }, []);
 
     const nextQuestion = () =>{
@@ -34,9 +22,8 @@ const QuizQuesAns = (props) => {
 
     const createQuestion = (choice, index) =>{
         return(
-            <button onClick = {() => answerQuestion(index==props.currentQuestion.answer)}>{choice}</button>
+            <button onClick = {() => answerQuestion(index === props.currentQuestion.answer)}>{choice}</button>
         );
-        
     };
 
     const answerQuestion = (isCorrect) =>{
@@ -44,28 +31,26 @@ const QuizQuesAns = (props) => {
         props.handleAnswerOptionsClick(isCorrect)
     };
 
-    
     var imagechoice = "";
-        if(props.showAnswer == true){
+        if (props.showAnswer === true) {
             imagechoice = props.currentQuestion.answerImg;
-        }else{
+        } else {
             imagechoice = props.currentQuestion.questionImg;
         }
-        if(imagechoice!=""){
-            var imagedata = new Image;
-            imagedata.onload = function(){
+        if (imagechoice !== ""){
+            var imagedata = new Image();
+            imagedata.onload = function() {
                 ctx.current.drawImage(imagedata,0,0); // Or at whatever offset you like
             };
             imagedata.src = imagechoice;
-        }else if(refs.current){
-           
+        } else if (refs.current) {
             ctx.current  = refs.current.getContext("2d")
             ctx.current.scale(1, 1);
             ctx.current.fillStyle="white"
             ctx.current.fillRect(0,0,996,496)
         }
-    if(props.showAnswer == true){
 
+    if (props.showAnswer === true) {
         return( 
             <div>
                 <div style={{position: 'reletive'}}>

@@ -2,9 +2,8 @@ import React from 'react';
 import DrawComp from './DrawComp';
 
 function EditAnswer(props) {
-    //tempQuiz = {tempQuiz} selectedCard = {selectedCard} setTempQuiz = {setTempQuiz}
     var currentCard = null
-    if(props.selectedCard!=-1){
+    if(props.selectedCard !== -1){
         currentCard = props.tempQuiz.cards[props.selectedCard]
     }
 
@@ -28,19 +27,13 @@ function EditAnswer(props) {
         props.setTempQuiz(change);
     }
 
-
     const handleDrawChange = drawing =>{
         let change = JSON.parse(JSON.stringify(props.tempQuiz));
        
         change.cards[props.selectedCard].answerImg = drawing;
         props.setTempQuiz(change);
-        console.log(change)
     }
     
-
-    //console.log(currentCard)
-    
-    //var quesTxt = "props.currentCard.question"
     if(currentCard){
         var ansIndex = currentCard.answer
         var ansExplanation = currentCard.answerExplanation
@@ -51,8 +44,6 @@ function EditAnswer(props) {
                     {displayAnsChoice(ansIndex)}
                     <textarea className="quizdescription" value={ansExplanation} onChange={(e) => handleAnsChange(e.target.value)} style={{'height':'100px'}}/>
                 </div>
-                
-                
             </div>
         )
     }else{
@@ -61,10 +52,8 @@ function EditAnswer(props) {
             <div className="answer-card" style={{'border':'0'}}>
                 <textarea className="quizdescription" value={description} onChange={(e) => handleDesChange(e.target.value)}/>
             </div>
-            
         );
     }
-    
 }
 
 export default EditAnswer;

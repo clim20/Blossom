@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Grid, Image } from 'semantic-ui-react';
 
 import { useHistory } from 'react-router-dom';
@@ -60,10 +60,6 @@ function QuizCollectionQuizCard(props) {
         setUpdatedQuizzes(newQuizzes);
         handleSave(newQuizzes);
     }
-
-    useEffect(() => {
-        console.log(updatedQuizzes);
-      }, [updatedQuizzes])
 
     return (
         <div>

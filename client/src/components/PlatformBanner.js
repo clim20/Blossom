@@ -19,17 +19,6 @@ const PlatformBanner = ({ platform, user, refetchPlatformData }) => {
     });
 
     // User's own User and Profile
-    const { data: userData } = useQuery(queries.FIND_USER_BY_ID, {
-        variables: {
-            id: platform ? platform.owner : ''
-        }
-    });
-
-    var userObject = {};
-    if (userData) { 
-		userObject = userData.findUserById;
-    }
-
     const { data: userProfileData, refetch: refetchUserProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: user ? user.profileId : ''

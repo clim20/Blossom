@@ -1,7 +1,4 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-
-import * as queries from '../../cache/queries';
 
 const BadgeCard = (props) => {
     
@@ -11,7 +8,7 @@ const BadgeCard = (props) => {
                 <div className="description card-text">
                     <img 
                         src={props.badge && props.badge.image}
-                        alt="badge image"
+                        alt="badge"
                         width="200"
                         height="150"
                     />

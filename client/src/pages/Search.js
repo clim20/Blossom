@@ -40,6 +40,7 @@ const Search = ({ searchQuery }) => {
                             else if (entry.__typename === 'Platform') return <PlatformSearchCard platform={entry._id} key={index}/>
                             else if (entry.__typename === 'Quiz') return <FeaturedQuizCard quiz={entry._id} key={index}/>
                             else if (entry.__typename === 'QuizCollection') return <QuizCollectionSearchCard quizCollection={entry._id} key={index}/>
+                            return <></>
                         })
                     }
                     {(!results || results.length === 0) && !loading && searchQuery && <div> No results were found for "{searchQuery}". Please try another search. </div>}

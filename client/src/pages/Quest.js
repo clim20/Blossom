@@ -74,7 +74,7 @@ const Quest = () => {
             setDisable1(true);
         }
         refetchProfileData();
-    }, [platform], refetchProfileData)
+    }, [platform, refetchProfileData]);
 
     //Made a Quiz
     useEffect(() => {
@@ -90,7 +90,7 @@ const Quest = () => {
             }
         }
         refetchProfileData();
-    }, [quizzes], refetchProfileData);
+    }, [quizzes, refetchProfileData]);
 
     //Has 100 Followers
     useEffect(()=> {
@@ -101,7 +101,7 @@ const Quest = () => {
             setDisable12(true);
         }
         refetchProfileData();
-    }, [followers], refetchProfileData);
+    }, [followers, refetchProfileData]);
 	
     useEffect(() => {
         for(let i=0; i < quizzesArr.length; i++){
@@ -120,12 +120,12 @@ const Quest = () => {
             if(quizzesArr[i].quizLikes > 99){
                 setDisable10(true);
             }
-            if(quizzesArr[i].quizDislikes == 0){
+            if(quizzesArr[i].quizDislikes === 0){
                 setDisable11(true);
             }
         }
         refetchProfileData();
-    }, [quizzesArr], refetchProfileData);
+    }, [quizzesArr, refetchProfileData]);
 	
     const[pageNumber, setPageNumber] = useState(1);
     const handleBackArrow = () => {
@@ -141,12 +141,12 @@ const Quest = () => {
     
     const [firstPage, setFirstPage] = useState(false);
     useEffect(()=> {
-        if(pageNumber == 1){
+        if(pageNumber === 1){
         setFirstPage(true);
         }else{
         setFirstPage(false);
         }
-    });
+    }, [pageNumber]);
 
     return (
         user && <div>

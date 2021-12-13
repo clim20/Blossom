@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { useParams, useHistory } from "react-router-dom";
-import { Button, Input, Dropdown, Icon, Grid } from 'semantic-ui-react';
+import { useQuery } from '@apollo/react-hooks';
+import { Grid } from 'semantic-ui-react';
 
-import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
-import * as mutations from '../cache/mutations';
 
 const QuizCollectionBanner = (props) => {
     const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
@@ -118,7 +115,7 @@ const QuizCollectionBanner = (props) => {
 
     useEffect(() => {
         props.refetchQuizCollectionData();
-    }, [props.user, props.updatedQuizCollection, props.refetchQuizCollectionData]);
+    }, [props, props.user, props.updatedQuizCollection, props.refetchQuizCollectionData]);
 
     const isOwnQuizCollection = props.quizCollection && props.user && props.quizCollection.creator === props.user._id;
 

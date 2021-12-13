@@ -14,7 +14,6 @@ const QuizCollectionDeletionModal = (props) => {
     var quizCollection = {};
     if (quizCollectionData) { 
 		quizCollection = quizCollectionData.findQuizCollectionById;
-        console.log(quizCollection);
     }
 
     const handleRemoval = async () => {

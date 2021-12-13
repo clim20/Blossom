@@ -46,7 +46,7 @@ const Quiz = () => {
         username = userObject.username;
     }
 
-    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: userObject.profileId
         }
@@ -129,7 +129,6 @@ const Quiz = () => {
             }
             
             badgeArr.push(insert);
-            console.log(badgeArr);
         }
 
         var scoreArr = [];
@@ -142,18 +141,14 @@ const Quiz = () => {
             }
             
             scoreArr.push(insert);
-            //console.log(scoreArr)
         }
         let currentUser = user ? user : { _id: '' };
-        //let tempQuizScores = temp.scores;
         let existingScore = scoreArr.findIndex(({ user }) => user === currentUser._id);
 
-        console.log(existingScore);
-        if (existingScore != -1) {
+        if (existingScore !== -1) {
             scoreArr[existingScore].liked = like;
         }
 
-        console.log(scoreArr);
         var cardArr = [];
         for (let i = 0; i < temp.cards.length; i++) {
             let insert = {
@@ -168,26 +163,23 @@ const Quiz = () => {
               }
             
             cardArr.push(insert);
-            //console.log(cardArr)
         }
         
         let tempquizLikes = temp.quizLikes;
         let tempquizDislikes = temp.quizDislikes;
         let prev = currentQuiz.scores[existingScore].liked;
-        console.log("prev = " + prev);
 
-        if (prev == 1) {
+        if (prev === 1) {
             tempquizLikes = tempquizLikes - 1;
-        } else if (prev == 2) {
+        } else if (prev === 2) {
             tempquizDislikes = tempquizDislikes - 1;
         }
 
-        if (like == 1) {
+        if (like === 1) {
             tempquizLikes = tempquizLikes + 1;
-        } else if (like == 2) {
+        } else if (like === 2) {
             tempquizDislikes = tempquizDislikes + 1;
         }
-        //console.log(props.currentQuiz._id);
         
         const { data } = await UpdateQuiz({
             variables: { 
@@ -210,14 +202,10 @@ const Quiz = () => {
             }
         });
         
-        //console.log(currentQuiz.score);
-
         var savingQuiz = {};
         if (data) { 
             savingQuiz = data.updateQuiz;
         }
-
-        console.log(savingQuiz);
 
         setTimeout(() => {
             setEnableLike(true);
@@ -230,7 +218,6 @@ const Quiz = () => {
         let currentUser = user ? user : { _id: '' };
         
         let existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
-        //console.log(currentQuiz.scores[existingScore].liked);
         if (existingScore !== -1 && enableLike) {
             setEnableLike(false);
             saveLike(like);
@@ -245,7 +232,7 @@ const Quiz = () => {
             existingScore = currentQuiz.scores.findIndex(({ user }) => user === currentUser._id);
         }
         
-        if (enableLike == false || existingScore == -1) {
+        if (enableLike === false || existingScore === -1) {
             return(
                 <div>
                     <div className="ui labeled button" style={{ marginRight: '15px' }}>
@@ -261,7 +248,7 @@ const Quiz = () => {
             )
         }
 
-        if (enableLike && existingScore != -1) {
+        if (enableLike && existingScore !== -1) {
             if (currentQuiz.scores[existingScore].liked === 1) {
                 return(
                     <div>
@@ -277,7 +264,7 @@ const Quiz = () => {
                     </div>
                 )
                 
-            } else if (currentQuiz.scores[existingScore].liked == 2) {
+            } else if (currentQuiz.scores[existingScore].liked === 2) {
                 return(
                     <div>
                         <div className="ui labeled button" style={{ marginRight: '15px' }}>
@@ -315,8 +302,7 @@ const Quiz = () => {
         )
     }
 
-    if (redirect == false){
-        //console.log(highestScores)
+    if (redirect === false){
         return(
             <Grid>
                 <Grid.Column width={12}>
@@ -324,9 +310,9 @@ const Quiz = () => {
                         <div className="display-inline-block text-align-center">
                             <h1 className="quiz-title">{currentQuiz.title}</h1>
                             <button className="quiz-creator-follow" onClick={handleCreatorClick}>
-                                <img className="ui avatar image follow-button-image" src={profileObject && profileObject.profileImg} />
+                                <img className="ui avatar image follow-button-image" alt="creator" src={profileObject && profileObject.profileImg} />
                                 <div>
-                                    <p> {username} </p>
+                                    <p style={{ overflowWrap: 'anywhere', height: '25px' }}> {username} </p>
                                     <p> {followers + " Followers"} </p>
                                 </div>
                             </button>
@@ -343,7 +329,7 @@ const Quiz = () => {
 
                     <Grid.Row>
                         <div className="display-inline-block text-align-center">
-                            <img className="quiz-picture" src={currentQuiz.titleImg} />
+                            <img className="quiz-picture" alt="quiz" src={currentQuiz.titleImg} />
                             <br/>
                             <br/>
                             <p> {cards.length + " Questions"} </p>

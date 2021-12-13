@@ -8,7 +8,7 @@ import * as queries from '../cache/queries';
 const AddQuizCollectionModal = (props) => {
     const { user } = useContext(AuthContext);
 
-    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: user.profileId
         }
