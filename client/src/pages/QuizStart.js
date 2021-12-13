@@ -201,7 +201,7 @@ const QuizStart = (props) => {
         handleFinish();
         
     }
-    console.log(isFinished)
+    
     if(isFinished === true){
         return( 
             
