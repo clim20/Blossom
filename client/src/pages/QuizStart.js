@@ -20,6 +20,7 @@ const QuizStart = (props) => {
     const [UpdateQuiz] = useMutation(mutations.UPDATE_QUIZ);
    
     const saveScore = async () =>{
+        
         if(props.currentUser){
             let temp = JSON.parse(JSON.stringify(props.currentQuiz));
         
@@ -32,7 +33,7 @@ const QuizStart = (props) => {
                 }
                 badgeArr.push(insert);
             }
-
+            console.log("here")
             var scoreArr = [];
             for(let i = 0; i < temp.scores.length; i++){
                 let insert = {
@@ -43,18 +44,21 @@ const QuizStart = (props) => {
                 }
                 scoreArr.push(insert);
             }
+            console.log("here2")
 
             let existingScore = scoreArr.findIndex(({ user }) => user === props.currentUser._id)
             let hitmodify = temp.quizHits
-            if (existingScore !== -1) {
+            if (existingScore != -1) {
+                
                 if (scoreArr[existingScore].bestScore < totalScore){
                     scoreArr[existingScore].bestScore = totalScore;
                 }
             } else {
+                console.log("here3")
                 hitmodify += 1;
                 let i = 0;
                 let foundspot = false;
-                while (foundspot === false&&i<scoreArr.length) {
+                while (foundspot == false&&i<scoreArr.length) {
                     if (totalScore>scoreArr[i].userScore) {
                         scoreArr.splice(i, 0, 
                             {
@@ -65,6 +69,7 @@ const QuizStart = (props) => {
                             });
                         foundspot = true
                     }
+                    i++
                 }
 
                 if (foundspot === false) {
@@ -77,6 +82,7 @@ const QuizStart = (props) => {
                         }
                     )
                 }
+                console.log("here4")
             }
 
             var cardArr = [];
@@ -121,16 +127,20 @@ const QuizStart = (props) => {
             if (data) { 
                 savingQuiz = data.updateQuiz;
             }
-
+            
             setTimeout(() => {
                 props.refetchQuizData();
             }, 300);
         }
+        console.log("here")
         
     }
 
     const handleFinish = () =>{
         setIsFinished(true);
+
+        console.log(isFinished)
+
         saveScore();
     }
 
@@ -191,9 +201,10 @@ const QuizStart = (props) => {
         handleFinish();
         
     }
-
+    console.log(isFinished)
     if(isFinished === true){
         return( 
+            
             <QuizEnd score = {totalScore} currentQuiz = {props.currentQuiz } numOfCorrect = {numOfCorrect}></QuizEnd>
         );
     }else{
