@@ -5,10 +5,10 @@ import { Button, Modal, Dropdown } from 'semantic-ui-react';
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
 
-const AddQuizCollectionModal = (props) => {
+const AddQuizModal = (props) => {
     const { user } = useContext(AuthContext);
 
-    const { data: profileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
+    const { data: profileData, refetch: refetchProfileData } = useQuery(queries.FIND_PROFILE_BY_ID, {
         variables: {
             id: user.profileId
         }
@@ -19,69 +19,69 @@ const AddQuizCollectionModal = (props) => {
         profile = profileData.findProfileById;
     }
 
-    const { data: quizCollectionsData, refetch: refetchQuizCollectionsData } = useQuery(queries.FIND_QUIZ_COLLECTION_BY_IDS, {
+    const { data: quizData, refetch: refetchQuizData } = useQuery(queries.FIND_QUIZZES_BY_IDS, {
         variables: {
-            ids: profile ? profile.quizCollections : []
+            ids: profile ? profile.quizzes : []
         }
     });
 
-    var quizCollections;
+    var quizzes = [];
     var options =  [];
-    if(quizCollectionsData) { 
-        quizCollections = quizCollectionsData.findQuizCollectionByIds; 
-        if(props.platformQuizCollections){
-            for(let i = 0; i < props.platformQuizCollections.length; i++){
-                quizCollections = quizCollections.filter(quizCollection => quizCollection._id.toString() !== props.platformQuizCollections[i]._id.toString());
+    if(quizData) { 
+        quizzes = quizData.findQuizzesByIds; 
+        if(props.platformQuizzes){
+            for(let i = 0; i < props.platformQuizzes.length; i++){
+                quizzes = quizzes.filter(quiz => quiz._id.toString() !== props.platformQuizzes[i]._id.toString());
             }
         }
 
-        options = quizCollections.map((entry, index) => ({
+        options = quizzes.map((entry, index) => ({
             key: index,
-            text: entry.name,
+            text: entry.title,
             value: entry._id,
             selected: false,
         }));
     }
 
-    const [placeholder, setPlaceholder] = useState(options.length > 0 ? "Select A Quiz Collection To Add" : "No Quiz Collections Addable");
-    const [quizCollectionId, setQuizCollectionId] = useState({});
+    const [placeholder, setPlaceholder] = useState(options.length > 0 ? "Select A Quiz To Add" : "No Quiz Addable");
+    const [quizId, setQuizId] = useState({});
     
     const handleSubmit = async () => {
         if (options.length !== 0){
-            setPlaceholder("Select A Quiz Collection To Add");
-            props.addQuizCollection(quizCollectionId);
+            setPlaceholder("Select A Quiz To Add");
+            props.addQuiz(quizId);
         }
         if (options.length === 1){
-            setPlaceholder("No Quiz Collections Addable");
+            setPlaceholder("No Quiz Addable");
         }
     }
 
     const handleDropdownClick = async (e, data) => {
-        console.log(quizCollections);
+        console.log(quizzes);
         if(e.target.innerText) {
             setPlaceholder(e.target.innerText);
-            setQuizCollectionId(data.value);
+            setQuizId(data.value);
         }
     }
 
     // useEffect(() => {
-    //     refetchQuizCollectionsData();
-    //     options = quizCollections.map((entry, index) => ({
+    //     refetchQuizData();
+    //     options = quizzes.map((entry, index) => ({
     //         key: index,
     //         text: entry.name,
     //         value: entry._id,
     //         selected: false,
     //     }));
-    //     setPlaceholder(options.length > 0 ? "Select A Quiz Collection To Add" : "No Quiz Collections Addable");
-    // }, refetchQuizCollectionsData);
+    //     setPlaceholder(options.length > 0 ? "Select A Quiz To Add" : "No Quiz Addable");
+    // }, [refetchQuizData]);
 
     return (
         <Modal
         size="tiny"
         open={true}
         >
-            <i aria-hidden="true" class="close icon modal-close" onClick={() => props.setShowAddQuizCollectionModal(false)}/>
-            <Modal.Header>ADD QUIZ COLLECTION</Modal.Header>
+            <i aria-hidden="true" class="close icon modal-close" onClick={() => props.setShowAddQuizModal(false)}/>
+            <Modal.Header>ADD QUIZ</Modal.Header>
             <Modal.Content className="creation-modal">
                 <span>
                     {}
@@ -105,7 +105,7 @@ const AddQuizCollectionModal = (props) => {
                 {'\xa0\xa0\xa0\xa0\xa0\xa0\xa0'}
                 <Button
                     className="cancel-modal-button"
-                    onClick={() => props.setShowAddQuizCollectionModal(false)}
+                    onClick={() => props.setShowAddQuizModal(false)}
                 >
                     Cancel
                 </Button>
@@ -114,4 +114,4 @@ const AddQuizCollectionModal = (props) => {
         </Modal>
     );
 }
-export default AddQuizCollectionModal;
+export default AddQuizModal;

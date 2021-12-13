@@ -219,7 +219,8 @@ module.exports = {
     },
     async addQuizToPlatform(_, { quizId, platformId }) {
       const quiz = await Quiz.findOne({_id: quizId}); 
-  
+      const platform = await Platform.findOne({_id: platformId});
+
       let quizzes = platform.quizzes;
       quizzes.push(quizId);
       const updated = await Platform.updateOne({_id: platformId}, {quizzes: quizzes});

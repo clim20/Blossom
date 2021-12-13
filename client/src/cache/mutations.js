@@ -363,7 +363,6 @@ export const ADD_QUIZ_TO_PLATFORM = gql`
     mutation AddQuizToPlatform($quizId: ID!, $platformId: ID!) {
         addQuizToPlatform(quizId: $quizId, platformId: $platformId) {
             _id
-            name
         }
     }
 `;

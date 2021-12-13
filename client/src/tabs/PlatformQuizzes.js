@@ -4,6 +4,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 import { useParams } from 'react-router-dom';
 
 import QuizCards from '../components/cards/QuizCards';
+import AddQuizModal from '../modals/AddQuizModal.js';
 
 import { AuthContext } from '../context/auth';
 import * as queries from '../cache/queries';
@@ -37,12 +38,15 @@ const PlatformQuizzes = (props) => {
     }
 
     var isOwner;
+    var isCollaborator;
     if(platform && user) {
         isOwner = platform.owner === user._id;
+        isCollaborator = platform.collaborators.includes(user._id);
     }
 
     const [featuredQuiz, changeFeaturedQuiz] = useState(platform.featuredQuiz);
     const [editingMode, toggleEditingMode] = useState(false);
+    const [showAddQuizModal, setShowAddQuizModal] = useState(false);
   
     const handleCancel = () => {
         changeFeaturedQuiz(platform.featuredQuiz);
@@ -88,9 +92,11 @@ const PlatformQuizzes = (props) => {
                     </div>
                 }
                 {
-                    isOwner && !editingMode &&
+                    (isOwner || isCollaborator) && !editingMode &&
                     <div>
-                        <button className="ui button edit-button" style={{ float: 'right', visibility: 'hidden' }}/>
+                        <button className="ui button edit-button" style={{ float: 'right' }} onClick={() => setShowAddQuizModal(true)}>
+                            Add
+                        </button>  
                     </div>
                 }
                 {
@@ -105,6 +111,10 @@ const PlatformQuizzes = (props) => {
                     </div>
                 }
             </Grid.Column>
+            {
+                showAddQuizModal && (<AddQuizModal platformQuizzes={quizzes} setShowAddQuizModal={setShowAddQuizModal}
+                    addQuiz={addQuiz}/>)
+            }
         </Grid>
     );
 }
