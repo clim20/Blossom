@@ -23,7 +23,6 @@ const QuizEnd = (props) => {
         }
     });
 
-    const [mounted, setMounted] = useState(false);
     var userObject = {};
     var username = "";
     if (userData) { 
@@ -99,13 +98,6 @@ const QuizEnd = (props) => {
             if (playerData) { 
 		        player = playerData.findUserById;
                 name = player.username;
-                if (index <= 2){
-                    console.log(mounted);
-                    if(mounted && player._id === user._id){
-                        setMounted(false);
-                        alert("Congratulations on receiving rank " + (index+1) + " on the leaderboard for this quiz! You have received a badge, hopefully you can hold on to it");
-                    }
-                }
             }
             return <td>{name}</td>
         }
