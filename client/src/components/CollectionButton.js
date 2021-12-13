@@ -111,6 +111,8 @@ const CollectionButton = () => {
         </div>
     ;
 
+    const uniq = [...new Set(props.badges)];
+
     return(
         <Grid.Row>
             {user && 
@@ -127,7 +129,7 @@ const CollectionButton = () => {
                                 <Dropdown.Header icon='clone outline' content='Quiz Collections' />
                                 <Dropdown.Divider />
                                 {
-                                    quizCollections && new Set(quizCollections).map((entry, index) => (
+                                    quizCollections && uniq.map((entry, index) => (
                                         <QuizCollectionEntry
                                             quizCollection={entry} key={index}
                                             addQuizToQuizCollection={addQuizToQuizCollection}
