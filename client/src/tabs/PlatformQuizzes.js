@@ -70,6 +70,19 @@ const PlatformQuizzes = (props) => {
         changeFeaturedQuiz(featuredQuiz);
     }
 
+    const [RemoveQuiz] = useMutation(mutations.REMOVE_QUIZ_FROM_PLATFORM);
+    const [AddQuiz] = useMutation(mutations.ADD_QUIZ_TO_PLATFORM);
+
+    const removeQuiz = async (quizId) => {
+        await RemoveQuiz({variables: { platformId: platform._id, quizId: quizId }});
+        refetchPlatformData();        
+    }
+
+    const addQuiz = async (quizId) => {
+        await AddQuiz({variables: { platformId: platform._id, quizId: quizId }});
+        refetchPlatformData();  
+    }
+
     useEffect(() => {
         refetchPlatformData();
         refetchQuizzesData();

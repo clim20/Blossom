@@ -231,9 +231,9 @@ module.exports = {
       return quiz;
     },
     async removeQuizFromPlatform(_, { quizId, platformId }) {
-      const quiz = await Quiz.findOne({_id: quizId}); 
-  
-      let quizzes = Platform.quizzes.filter(q => q._id.toString() !== quizId.toString());
+      const platform = await Platform.findOne({_id: platformId});
+
+      let quizzes = platform.quizzes.filter(q => q._id.toString() !== quizId.toString());
       const updated = await Platform.updateOne({_id: platformId}, {quizzes: quizzes});
 
       if(updated) return true;
