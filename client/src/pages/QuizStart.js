@@ -33,7 +33,7 @@ const QuizStart = (props) => {
                 }
                 badgeArr.push(insert);
             }
-            console.log("here")
+            
             var scoreArr = [];
             for(let i = 0; i < temp.scores.length; i++){
                 let insert = {
@@ -44,7 +44,7 @@ const QuizStart = (props) => {
                 }
                 scoreArr.push(insert);
             }
-            console.log("here2")
+            
 
             let existingScore = scoreArr.findIndex(({ user }) => user === props.currentUser._id)
             let hitmodify = temp.quizHits
@@ -54,7 +54,7 @@ const QuizStart = (props) => {
                     scoreArr[existingScore].bestScore = totalScore;
                 }
             } else {
-                console.log("here3")
+                
                 hitmodify += 1;
                 let i = 0;
                 let foundspot = false;
@@ -82,7 +82,7 @@ const QuizStart = (props) => {
                         }
                     )
                 }
-                console.log("here4")
+                
             }
 
             var cardArr = [];
