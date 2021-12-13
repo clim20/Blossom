@@ -60,7 +60,7 @@ const Badges = (props) => {
         refetchProfileData();
         refetchBadgeData();
         refetchQuizData();
-    }, [badgesArr, refetchProfileData, refetchBadgeData, refetchQuizData]);
+    }, [badgesArr, refetchProfileData, refetchBadgeData, refetchQuizData, AddBadge, RemoveBadge, props.profile._id, props.profile.platforms.length]);
 
     //QUIZ QUESTS
     useEffect(async () => {
@@ -94,7 +94,7 @@ const Badges = (props) => {
         refetchProfileData();
         refetchBadgeData();
         refetchQuizData();
-    }, [props.profile.quizzes, profile.quizzes, quizzes, refetchProfileData, refetchBadgeData, refetchQuizData]);
+    }, [props.profile.quizzes, profile.quizzes, quizzes, refetchProfileData, refetchBadgeData, refetchQuizData, AddBadge, RemoveBadge, badgesArr, props.profile._id]);
 
     //FOLLOWER QUESTS
     useEffect(async () => {
@@ -118,7 +118,7 @@ const Badges = (props) => {
         refetchProfileData();
         refetchQuizData();
         refetchBadgeData();
-    }, [profile.followers, refetchProfileData, refetchBadgeData, refetchQuizData]);
+    }, [profile.followers, refetchProfileData, refetchBadgeData, refetchQuizData, AddBadge, RemoveBadge, badgesArr, profile.followerCount]);
 	
     //LIKE & DISLIKE & HITS QUESTS
     var likeCount = 0;
@@ -190,13 +190,13 @@ const Badges = (props) => {
         refetchProfileData();
         refetchBadgeData();
         refetchQuizData();
-    }, [profile.quizzes], [quizzes], refetchProfileData, refetchBadgeData, refetchQuizData);
+    }, [profile.quizzes, quizzes, refetchProfileData, refetchBadgeData, refetchQuizData]);
 
     useEffect(async () => {
         refetchBadgeData();
         refetchQuizData();
         refetchProfileData();
-    }, [badges, refetchBadgeData]);
+    }, [badges, refetchBadgeData, refetchProfileData, refetchQuizData]);
 
     return (
         <Grid>

@@ -20,111 +20,113 @@ const QuizStart = (props) => {
     const [UpdateQuiz] = useMutation(mutations.UPDATE_QUIZ);
    
     const saveScore = async () =>{
-        let temp = JSON.parse(JSON.stringify(props.currentQuiz));
+        if(props.currentUser){
+            let temp = JSON.parse(JSON.stringify(props.currentQuiz));
         
-        var badgeArr = [];
-        for(let i = 0; i < temp.badges.length; i++){
-            let insert = {
-                "rank": temp.badges[i].rank,
-                "image": temp.badges[i].image
-                
+            var badgeArr = [];
+            for(let i = 0; i < temp.badges.length; i++){
+                let insert = {
+                    "rank": temp.badges[i].rank,
+                    "image": temp.badges[i].image
+                    
+                }
+                badgeArr.push(insert);
             }
-            badgeArr.push(insert);
-        }
 
-        var scoreArr = [];
-        for(let i = 0; i < temp.scores.length; i++){
-            let insert = {
-                "user": temp.scores[i].user,
-                "userScore": temp.scores[i].userScore,
-                "bestScore": temp.scores[i].bestScore,
-                "liked": temp.scores[i].liked
-              }
-              scoreArr.push(insert);
-        }
-
-        let existingScore = scoreArr.findIndex(({ user }) => user === props.currentUser._id)
-        let hitmodify = temp.quizHits
-        if (existingScore !== -1) {
-            if (scoreArr[existingScore].bestScore < totalScore){
-                scoreArr[existingScore].bestScore = totalScore;
+            var scoreArr = [];
+            for(let i = 0; i < temp.scores.length; i++){
+                let insert = {
+                    "user": temp.scores[i].user,
+                    "userScore": temp.scores[i].userScore,
+                    "bestScore": temp.scores[i].bestScore,
+                    "liked": temp.scores[i].liked
+                }
+                scoreArr.push(insert);
             }
-        } else {
-            hitmodify += 1;
-            let i = 0;
-            let foundspot = false;
-            while(foundspot==false&&i<scoreArr.length){
-                if(totalScore>scoreArr[i].userScore){
-                    scoreArr.splice(i, 0, 
+
+            let existingScore = scoreArr.findIndex(({ user }) => user === props.currentUser._id)
+            let hitmodify = temp.quizHits
+            if (existingScore !== -1) {
+                if (scoreArr[existingScore].bestScore < totalScore){
+                    scoreArr[existingScore].bestScore = totalScore;
+                }
+            } else {
+                hitmodify += 1;
+                let i = 0;
+                let foundspot = false;
+                while (foundspot === false&&i<scoreArr.length) {
+                    if (totalScore>scoreArr[i].userScore) {
+                        scoreArr.splice(i, 0, 
+                            {
+                                "user": props.currentUser._id,
+                                "userScore": totalScore,
+                                "bestScore": totalScore,
+                                "liked": 0
+                            });
+                        foundspot = true
+                    }
+                }
+
+                if (foundspot === false) {
+                    scoreArr.push(
                         {
                             "user": props.currentUser._id,
                             "userScore": totalScore,
                             "bestScore": totalScore,
                             "liked": 0
-                        });
-                    foundspot = true
+                        }
+                    )
                 }
             }
 
-            if (foundspot==false) {
-                scoreArr.push(
-                    {
-                        "user": props.currentUser._id,
-                        "userScore": totalScore,
-                        "bestScore": totalScore,
-                        "liked": 0
-                    }
-                )
+            var cardArr = [];
+            for(let i = 0; i < temp.cards.length; i++){
+                let insert = {
+                    "cardNum": temp.cards[i].cardNum,
+                    "question": temp.cards[i].question,
+                    "choices": temp.cards[i].choices,
+                    "answer": temp.cards[i].answer,
+                    "answerExplanation": temp.cards[i].answerExplanation,
+                    "questionImg": temp.cards[i].questionImg,
+                    "answerImg": temp.cards[i].answerImg,
+                    "drawing": temp.cards[i].drawing
+                }
+                cardArr.push(insert)
             }
-        }
+            
+            const { data } = await UpdateQuiz({
 
-        console.log(scoreArr)
-        var cardArr = [];
-        for(let i = 0; i < temp.cards.length; i++){
-            let insert = {
-                "cardNum": temp.cards[i].cardNum,
-                "question": temp.cards[i].question,
-                "choices": temp.cards[i].choices,
-                "answer": temp.cards[i].answer,
-                "answerExplanation": temp.cards[i].answerExplanation,
-                "questionImg": temp.cards[i].questionImg,
-                "answerImg": temp.cards[i].answerImg,
-                "drawing": temp.cards[i].drawing
-              }
-            cardArr.push(insert)
+                variables: { 
+                    quizId: temp._id, 
+                    updatedQuiz: {
+                    
+                        "_id": temp._id,
+                        "title": temp.title,
+                        "description": temp.description,
+                        "titleImg": temp.titleImg,
+                        "creator":  temp.creator,
+                        "platformId": temp.platformId,
+                        "quizHits": hitmodify,
+                        "quizLikes": temp.quizLikes,
+                        "quizDislikes": temp.quizDislikes,
+                        "badges": badgeArr,
+                        "scores": scoreArr,
+                        "cards": cardArr,
+                        "createdAt": temp.createdAt
+                    }
+                }
+            });
+
+            var savingQuiz = {};
+            if (data) { 
+                savingQuiz = data.updateQuiz;
+            }
+
+            setTimeout(() => {
+                props.refetchQuizData();
+            }, 300);
         }
         
-        const { data } = await UpdateQuiz({
-
-            variables: { 
-                quizId: temp._id, 
-                updatedQuiz: {
-                   
-                    "_id": temp._id,
-                    "title": temp.title,
-                    "description": temp.description,
-                    "titleImg": temp.titleImg,
-                    "creator":  temp.creator,
-                    "platformId": temp.platformId,
-                    "quizHits": hitmodify,
-                    "quizLikes": temp.quizLikes,
-                    "quizDislikes": temp.quizDislikes,
-                    "badges": badgeArr,
-                    "scores": scoreArr,
-                    "cards": cardArr,
-                    "createdAt": temp.createdAt
-                  }
-            }
-        });
-
-        var savingQuiz = {};
-        if (data) { 
-            savingQuiz = data.updateQuiz;
-        }
-
-        setTimeout(() => {
-            props.refetchQuizData();
-        }, 300);
     }
 
     const handleFinish = () =>{
@@ -185,7 +187,7 @@ const QuizStart = (props) => {
         return () => clearInterval(interval);
     }, [timerActive, timer]);
 
-    if(questionNumber === props.currentQuiz.cards.length&&isFinished === false){
+    if(questionNumber >= props.currentQuiz.cards.length&&isFinished === false){
         handleFinish();
         
     }
