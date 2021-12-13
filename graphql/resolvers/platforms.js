@@ -199,6 +199,22 @@ module.exports = {
       let list2 = profile.platforms.filter(_id => _id.toString() !== new ObjectId(platformId).toString());
       const updated2 = await Profile.updateOne({_id: profile._id}, {platforms: list2});
       
+      //remove quizzes belonging to the person leaving
+      var quizzes = [];
+      for (let i = 0; i < platform.quizzes.length; i++) {
+          const quiz = await Quiz.findOne({_id: platform.quizzes[i]});
+          if (quiz) {
+              quizzes.push(quiz);
+          }
+      }
+
+      for (let i = 0; i < quizzes.length; i++) {
+        if(quizzes[i].creator.toString() === user._id.toString()) {
+          let list3 = platform.quizzes.filter(_id => _id.toString() !== quizzes[i]._id.toString());
+          await Platform.updateOne({_id: platform._id}, {quizzes: list3});
+        }
+      }
+
       if(updated & updated2){
         return platform;
       }

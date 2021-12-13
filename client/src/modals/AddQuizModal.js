@@ -57,7 +57,6 @@ const AddQuizModal = (props) => {
     }
 
     const handleDropdownClick = async (e, data) => {
-        console.log(quizzes);
         if(e.target.innerText) {
             setPlaceholder(e.target.innerText);
             setQuizId(data.value);
