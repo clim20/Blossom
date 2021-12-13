@@ -53,8 +53,8 @@ const QuizStart = (props) => {
             hitmodify += 1;
             let i = 0;
             let foundspot = false;
-            while(foundspot==false&&i<scoreArr.length){
-                if(totalScore>scoreArr[i].userScore){
+            while (foundspot === false&&i<scoreArr.length) {
+                if (totalScore>scoreArr[i].userScore) {
                     scoreArr.splice(i, 0, 
                         {
                             "user": props.currentUser._id,
@@ -66,7 +66,7 @@ const QuizStart = (props) => {
                 }
             }
 
-            if (foundspot==false) {
+            if (foundspot === false) {
                 scoreArr.push(
                     {
                         "user": props.currentUser._id,
@@ -78,7 +78,6 @@ const QuizStart = (props) => {
             }
         }
 
-        console.log(scoreArr)
         var cardArr = [];
         for(let i = 0; i < temp.cards.length; i++){
             let insert = {
