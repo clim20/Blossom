@@ -51,7 +51,10 @@ function EditAnswer(props) {
         return(
             <div className="answer-card" style={{'border':'0'}}>
                 <textarea className="quizdescription" value={description} onChange={(e) => handleDesChange(e.target.value)}/>
+                <div style={{'height' : '30px'}}>
+                </div>
             </div>
+            
         );
     }
 }

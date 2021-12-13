@@ -152,7 +152,10 @@ function EditQuestion(props) {
                             </th>
                         </tr>
                     </table>
+                    <div style={{'height' : '30px'}}>
+                    </div>
                 </div>
+                
             </div>
         )
     }else{

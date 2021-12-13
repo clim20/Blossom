@@ -121,7 +121,7 @@ const QuizEdit = () => {
                     "quizLikes": tempQuiz.quizLikes,
                     "quizDislikes": tempQuiz.quizDislikes,
                     "badges": badgeArr,
-                    "scores": scoreArr,
+                    "scores": [],
                     "cards": cardArr,
                     "createdAt": tempQuiz.createdAt
                   }
