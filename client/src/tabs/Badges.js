@@ -46,9 +46,9 @@ const Badges = (props) => {
     /* CHECK FOR QUEST BADGES */
     const [AddBadge] 			            = useMutation(mutations.ADD_BADGE);
     const [RemoveBadge] 			        = useMutation(mutations.REMOVE_BADGE);
-
+    
+    //PLATFORM QUESTS
     useEffect(async () => {
-        console.log("useEffect called");
         if(props.profile.platforms.length > 0){
             if(!badgesArr.includes("61a99288b145bce874363058")) {
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61a99288b145bce874363058" }});
@@ -57,6 +57,13 @@ const Badges = (props) => {
         else
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61a99288b145bce874363058" }});
 
+        refetchProfileData();
+        refetchBadgeData();
+        refetchQuizData();
+    }, [badgesArr, refetchProfileData, refetchBadgeData, refetchQuizData, AddBadge, RemoveBadge, props.profile._id, props.profile.platforms.length]);
+
+    //QUIZ QUESTS
+    useEffect(async () => {
         if(props.profile.quizzes.length > 0){
             if(!badgesArr.includes("61b55900c8cd0cca85e1621a")){
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55900c8cd0cca85e1621a" }});
@@ -64,7 +71,7 @@ const Badges = (props) => {
         }
         else
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55900c8cd0cca85e1621a" }});
-    
+
         if(props.profile.quizzes.length > 4) {
             if(!badgesArr.includes("61b55ae4cb79dfd7f231dae9")){
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55ae4cb79dfd7f231dae9" }});
@@ -72,7 +79,7 @@ const Badges = (props) => {
         }
         else
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55ae4cb79dfd7f231dae9" }});
-    
+
         if(props.profile.quizzes.length > 9) {
             if(!badgesArr.includes("61b55afa18f9cca86c899ed9")){
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55afa18f9cca86c899ed9" }});
@@ -80,7 +87,14 @@ const Badges = (props) => {
         }
         else
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55afa18f9cca86c899ed9" }});
+       
+        refetchProfileData();
+        refetchBadgeData();
+        refetchQuizData();
+    }, [quizzes, refetchProfileData, refetchBadgeData, refetchQuizData, badgesArr]);
 
+    //FOLLOWER QUESTS
+    useEffect(async () => {
         if(profile.followerCount > 99) {
             if(!badgesArr.includes("61b55f815bb2b98ef80dda37")){
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55f815bb2b98ef80dda37" }});
@@ -88,7 +102,7 @@ const Badges = (props) => {
         }
         else
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f815bb2b98ef80dda37" }});
-    
+
         if(profile.followerCount > 199) {
             if(!badgesArr.includes("61b55f9f01fc5ba9f5039e04")){
                 await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
@@ -97,6 +111,14 @@ const Badges = (props) => {
         else
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
 
+        refetchProfileData();
+        refetchQuizData();
+        refetchBadgeData();
+    }, [profile.followers, refetchProfileData, refetchBadgeData, refetchQuizData, AddBadge, RemoveBadge, badgesArr, profile.followerCount]);
+	
+
+    //LIKE & DISLIKE & HITS QUESTS
+    useEffect(async () => {
         var likeCount = 0;
         var dislikeCount = false;
         var quizHit = false;
@@ -107,11 +129,9 @@ const Badges = (props) => {
             }
             if(quizzes[i].quizDislikes === 0) {
                 dislikeCount = true;
-                break;
             }
             if(quizzes[i].quizHits > 99){
                 quizHit = true;
-                break;
             }
         }
 
@@ -166,157 +186,16 @@ const Badges = (props) => {
             await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
             quizHit = false;
         }
-    }, []);
-    
-    //PLATFORM QUESTS
-    // useEffect(async () => {
-    //     if(props.profile.platforms.length > 0){
-    //         if(!badgesArr.includes("61a99288b145bce874363058")) {
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61a99288b145bce874363058" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61a99288b145bce874363058" }});
-
-    //     refetchProfileData();
-    //     refetchBadgeData();
-    //     refetchQuizData();
-    // }, [badgesArr, refetchProfileData, refetchBadgeData, refetchQuizData, AddBadge, RemoveBadge, props.profile._id, props.profile.platforms.length]);
-
-    //QUIZ QUESTS
-    // useEffect(async () => {
-    //     if(props.profile.quizzes.length > 0){
-    //         if(!badgesArr.includes("61b55900c8cd0cca85e1621a")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55900c8cd0cca85e1621a" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55900c8cd0cca85e1621a" }});
-
-    //     if(props.profile.quizzes.length > 4) {
-    //         if(!badgesArr.includes("61b55ae4cb79dfd7f231dae9")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55ae4cb79dfd7f231dae9" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55ae4cb79dfd7f231dae9" }});
-
-    //     if(props.profile.quizzes.length > 9) {
-    //         if(!badgesArr.includes("61b55afa18f9cca86c899ed9")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55afa18f9cca86c899ed9" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55afa18f9cca86c899ed9" }});
-       
-    //     refetchProfileData();
-    //     refetchBadgeData();
-    //     refetchQuizData();
-    // }, [quizzes, refetchProfileData, refetchBadgeData, refetchQuizData, badgesArr]);
-
-    //FOLLOWER QUESTS
-    // useEffect(async () => {
-    //     if(profile.followerCount > 99) {
-    //         if(!badgesArr.includes("61b55f815bb2b98ef80dda37")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55f815bb2b98ef80dda37" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f815bb2b98ef80dda37" }});
-
-    //     if(profile.followerCount > 199) {
-    //         if(!badgesArr.includes("61b55f9f01fc5ba9f5039e04")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b55f9f01fc5ba9f5039e04" }});
-
-    //     refetchProfileData();
-    //     refetchQuizData();
-    //     refetchBadgeData();
-    // }, [profile.followers, refetchProfileData, refetchBadgeData, refetchQuizData, AddBadge, RemoveBadge, badgesArr, profile.followerCount]);
-	
-
-    //LIKE & DISLIKE & HITS QUESTS
-    // useEffect(async () => {
-    //     var likeCount = 0;
-    //     var dislikeCount = false;
-    //     var quizHit = false;
-
-    //     for(let i=0; i < quizzes.length; i++){
-    //         if(quizzes[i].quizLikes > likeCount) {
-    //             likeCount = quizzes[i].quizLikes;
-    //         }
-    //         if(quizzes[i].quizDislikes === 0) {
-    //             dislikeCount = true;
-    //         }
-    //         if(quizzes[i].quizHits > 99){
-    //             quizHit = true;
-    //         }
-    //     }
-
-    //     if(likeCount > 4){
-    //         if(!badgesArr.includes("61b5690878085bba1e9df779")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b5690878085bba1e9df779" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b5690878085bba1e9df779" }});
-        
-    //     if(likeCount > 9){
-    //         if(!badgesArr.includes("61b569250c3c04ece4fdd074")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b569250c3c04ece4fdd074" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b569250c3c04ece4fdd074" }});
-        
-    //     if(likeCount > 49){
-    //         if(!badgesArr.includes("61b5693dd7c4e006196a7176")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b5693dd7c4e006196a7176" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b5693dd7c4e006196a7176" }});
-
-    //     if(likeCount > 99){
-    //         if(!badgesArr.includes("61b569554817760184b00c77")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b569554817760184b00c77" }});
-    //         }
-    //     }
-    //     else
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b569554817760184b00c77" }});
-
-    //     if(dislikeCount){
-    //         if(!badgesArr.includes("61b569724e2fe778e20f6825")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b569724e2fe778e20f6825" }});
-    //         }
-    //     }
-    //     else {
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b569724e2fe778e20f6825" }});
-    //         dislikeCount = false;
-    //     }
-
-    //     if(quizHit){
-    //         if(!badgesArr.includes("61b572e8500ba72cc0722c69")){
-    //             await AddBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
-    //         }
-    //     }
-    //     else {
-    //         await RemoveBadge({variables: { profileId: props.profile._id, badgeId: "61b572e8500ba72cc0722c69" }});
-    //         quizHit = false;
-    //     }
-    //     refetchProfileData();
-    //     refetchBadgeData();
-    //     refetchQuizData();
-    // }, [profile.quizzes, quizzes, refetchProfileData, refetchBadgeData, refetchQuizData]);
+        refetchProfileData();
+        refetchBadgeData();
+        refetchQuizData();
+    }, [profile.quizzes, quizzes, refetchProfileData, refetchBadgeData, refetchQuizData]);
 
     useEffect(async () => {
         refetchBadgeData();
         refetchQuizData();
         refetchProfileData();
-    }, [badges, refetchBadgeData, refetchProfileData, refetchQuizData]);
+    }, [badges, badgesArr, refetchBadgeData, refetchProfileData, refetchQuizData]);
 
     return (
         <Grid>

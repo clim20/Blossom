@@ -29,7 +29,7 @@ module.exports = {
         
         if (badges) return badges;
         return [];
-      },
+    },
   },
   Mutation: {
     async createBadge(_, { quiz, rank, image, description }) {
