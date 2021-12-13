@@ -3,7 +3,11 @@
     top: 70px;
     left: 10px;
     width: 225px; 
+<<<<<<< Updated upstream
     height: 600px;
+=======
+    height: 720px;
+>>>>>>> Stashed changes
     border: 1px solid black;
 }
 .table-of-contents-selector{

@@ -142,7 +142,7 @@ function TableOfContents(props) {
                     </th>
                 </tr>
             </table>
-            <div style={{'width': '225px', 'height': '560px' ,'overflow':'auto'}}>
+            <div style={{'width': '225px', 'height': '680px' ,'overflow':'auto'}}>
                 <table>
                     {displayTitle()}
                     {cardsArr.map(displayCards)}
