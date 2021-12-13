@@ -127,7 +127,7 @@ const CollectionButton = () => {
                                 <Dropdown.Header icon='clone outline' content='Quiz Collections' />
                                 <Dropdown.Divider />
                                 {
-                                    quizCollections && Set(quizCollections).map((entry, index) => (
+                                    quizCollections && new Set(quizCollections).map((entry, index) => (
                                         <QuizCollectionEntry
                                             quizCollection={entry} key={index}
                                             addQuizToQuizCollection={addQuizToQuizCollection}
